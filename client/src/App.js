@@ -20,12 +20,11 @@ function App() {
       <Routes>
           <Route path="/" element={<AdminNavbar />} />
           <Route path="/appointment" element={<Appointment />} />
-<<<<<<< HEAD
           <Route path="/update/:id" element={<Appointment />} />
-=======
           <Route path="/addContact" element={<AddEdit />} />
           <Route path="/update/:id" element={<AddEdit />} />
->>>>>>> parent of 9a6cdf1 (Part 2)
+          <Route path="/addContact" element={<AddEdit />} />
+          <Route path="/update/:id" element={<AddEdit />} />
           <Route path="/view/:id" element={<View />} />
           <Route path='/profile' element={<MyProfile />} />
           <Route path='/admin/appointment' element={<PendingAppointment />} />

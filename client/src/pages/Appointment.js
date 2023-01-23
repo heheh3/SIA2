@@ -53,26 +53,19 @@ const Appointment = () => {
       }
     }
 
-    const handleChange = (event) => {
-      const {name, value} = event.target;
-      setState({...state, [name]: value});
 
-<<<<<<< HEAD
 const handleChange = (event) => {
   const {name, value} = event.target;
   setState({b_time, b_procedure, b_note, [name]: value});
 }
 
-// const handleChangeDate = (date) => {
-//   setSelectedDate(date);
-//   console.log(selectedDate)
+const handleChangeDate = (date) => {
+  setSelectedDate(date);
+  console.log(selectedDate)
   
 
-// }
-=======
-   
 }
->>>>>>> parent of 9a6cdf1 (Part 2)
+
 
   return (
     
@@ -113,18 +106,11 @@ const handleChange = (event) => {
                   minDate={minDate}
                   filterDate={date => date.getDay() !== 0}
                   placeholderText="Select a date"
-<<<<<<< HEAD
-           
- 
-                />
-               
-                </div>
-=======
->>>>>>> parent of 9a6cdf1 (Part 2)
-           
-  
+                  isClearable
+                  value='02-11-2023'
                 />
                 </div>
+           
             
               </div>
 
