@@ -174,7 +174,7 @@ input[type="submit"]:hover{
     text-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 
-.login__title__description{
-    margin-top: -10px;
+.login__description{
+    text-align: center;
 }
 

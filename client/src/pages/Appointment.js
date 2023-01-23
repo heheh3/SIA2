@@ -67,12 +67,12 @@ const handleChange = (event) => {
   setState({b_time, b_procedure, b_note, [name]: value});
 }
 
-const handleChangeDate = (date) => {
-  setSelectedDate(date);
-  console.log(selectedDate)
+// const handleChangeDate = (date) => {
+//   setSelectedDate(date);
+//   console.log(selectedDate)
   
 
-}
+// }
 
   return (
     
@@ -110,12 +110,12 @@ const handleChangeDate = (date) => {
                   id='b_date'
                   name='b_date'
                   selected={selectedDate}
-                  onChange={handleChangeDate}
+                  onChange={date => setSelectedDate(date)}
                   minDate={minDate}
                   filterDate={date => date.getDay() !== 0}
                   placeholderText="Select a date"
-                  isClearable
-                  value='02-11-2023'
+           
+ 
                 />
                
                 </div>

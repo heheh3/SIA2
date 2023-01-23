@@ -8,6 +8,7 @@ import google from "../img/google-icon.png";
 const HomeLogin = () => {
   return (
     <div>
+      <body>
         <div className='sign-in'>
           <div className="sign-in-container">
               <div className="sign-in-header">
@@ -23,7 +24,7 @@ const HomeLogin = () => {
                           <img className="twitter" src={twitter} />
                       </div>
                   </div>
-                  <form >
+                  <form className='login-form'>
                       <input type="text" name="email"  placeholder="Email"/>
                       <input type="password" name="password" placeholder="Password"/>
                       <button type="submit">Login</button>
@@ -49,7 +50,9 @@ const HomeLogin = () => {
               </div>
           </div>
         </div>
+        </body>
     </div>
+    
   )
 }
 
