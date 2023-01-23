@@ -2,7 +2,10 @@ import React, { useState, useEffect } from 'react';
 import {useNavigate, useParams, Link } from "react-router-dom"
 import "../css/Appointment.css";
 import Navbar from './Navbar';
+<<<<<<< HEAD
 import Navbar from './Navbar';
+=======
+>>>>>>> parent of 9a6cdf1 (Part 2)
 import { FaLocationArrow } from "react-icons/fa";
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
@@ -63,9 +66,12 @@ const Appointment = () => {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> parent of 39d2fe0 (4)
+=======
+>>>>>>> parent of 9a6cdf1 (Part 2)
 =======
 >>>>>>> parent of 9a6cdf1 (Part 2)
 =======
