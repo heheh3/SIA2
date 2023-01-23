@@ -65,7 +65,10 @@ const handleChangeDate = (date) => {
   
 
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of 39d2fe0 (4)
 
   return (
     
@@ -102,7 +105,7 @@ const handleChangeDate = (date) => {
                   id='b_date'
                   name='b_date'
                   selected={selectedDate}
-                  onChange={date => setSelectedDate(date)}
+                  onChange={handleChangeDate}
                   minDate={minDate}
                   filterDate={date => date.getDay() !== 0}
                   placeholderText="Select a date"

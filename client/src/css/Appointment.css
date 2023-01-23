@@ -151,3 +151,17 @@ input[type="submit"]:hover{
     background-color: rgba(255, 255, 255, 0.8);
 }
 
+<<<<<<< HEAD
+=======
+.login__title{
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    font-weight: 800;
+    text-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.login__title__description{
+    margin-top: -10px;
+}
+
+>>>>>>> parent of 39d2fe0 (4)

@@ -2,6 +2,7 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
+import AddEdit from './pages/AddEdit';
 import View from './pages/View';
 import Appointment from './pages/Appointment';
 import MyProfile from './pages/MyProfile';
@@ -20,6 +21,7 @@ function App() {
       <Routes>
           <Route path="/" element={<AdminNavbar />} />
           <Route path="/appointment" element={<Appointment />} />
+          <Route path="/addContact" element={<AddEdit />} />
           <Route path="/update/:id" element={<Appointment />} />
           <Route path="/addContact" element={<AddEdit />} />
           <Route path="/update/:id" element={<AddEdit />} />
