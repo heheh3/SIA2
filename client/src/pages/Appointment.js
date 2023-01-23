@@ -60,9 +60,12 @@ const Appointment = () => {
    
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> parent of 39d2fe0 (4)
+=======
+>>>>>>> parent of 9a6cdf1 (Part 2)
 
   return (
     
@@ -104,10 +107,13 @@ const Appointment = () => {
                   filterDate={date => date.getDay() !== 0}
                   placeholderText="Select a date"
 <<<<<<< HEAD
+<<<<<<< HEAD
                   isClearable
                   value='02-11-2023'
                 />
                 </div>
+=======
+>>>>>>> parent of 9a6cdf1 (Part 2)
 =======
 >>>>>>> parent of 9a6cdf1 (Part 2)
            
