@@ -3,7 +3,10 @@ import {useNavigate, useParams, Link } from "react-router-dom"
 import "../css/Appointment.css";
 import Navbar from './Navbar';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import Navbar from './Navbar';
+=======
+>>>>>>> parent of 9a6cdf1 (Part 2)
 =======
 >>>>>>> parent of 9a6cdf1 (Part 2)
 import { FaLocationArrow } from "react-icons/fa";
@@ -67,9 +70,12 @@ const Appointment = () => {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> parent of 39d2fe0 (4)
+=======
+>>>>>>> parent of 9a6cdf1 (Part 2)
 =======
 >>>>>>> parent of 9a6cdf1 (Part 2)
 =======
