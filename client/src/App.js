@@ -22,12 +22,6 @@ function App() {
           <Route path="/" element={<AdminNavbar />} />
           <Route path="/appointment" element={<Appointment />} />
           <Route path="/addContact" element={<AddEdit />} />
-
-          <Route path="/update/:id" element={<Appointment />} />
-          <Route path="/addContact" element={<AddEdit />} />
-          <Route path="/update/:id" element={<AddEdit />} />
-          <Route path="/addContact" element={<AddEdit />} />
-
           <Route path="/update/:id" element={<AddEdit />} />
           <Route path="/view/:id" element={<View />} />
           <Route path='/profile' element={<MyProfile />} />

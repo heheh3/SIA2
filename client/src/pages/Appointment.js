@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {useNavigate, useParams, Link } from "react-router-dom"
 import "../css/Appointment.css";
 import Navbar from './Navbar';
+import Navbar from './Navbar';
 import { FaLocationArrow } from "react-icons/fa";
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
@@ -109,23 +110,11 @@ const Appointment = () => {
                   minDate={minDate}
                   filterDate={date => date.getDay() !== 0}
                   placeholderText="Select a date"
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                   isClearable
                   value='02-11-2023'
                 />
                 </div>
-=======
->>>>>>> parent of 9a6cdf1 (Part 2)
-=======
->>>>>>> parent of 9a6cdf1 (Part 2)
-=======
->>>>>>> parent of 9a6cdf1 (Part 2)
            
-  
-                />
-                </div>
             
               </div>
 
