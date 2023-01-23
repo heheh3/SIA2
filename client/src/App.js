@@ -22,10 +22,13 @@ function App() {
           <Route path="/" element={<AdminNavbar />} />
           <Route path="/appointment" element={<Appointment />} />
           <Route path="/addContact" element={<AddEdit />} />
+<<<<<<< HEAD
           <Route path="/update/:id" element={<Appointment />} />
           <Route path="/addContact" element={<AddEdit />} />
           <Route path="/update/:id" element={<AddEdit />} />
           <Route path="/addContact" element={<AddEdit />} />
+=======
+>>>>>>> parent of 9a6cdf1 (Part 2)
           <Route path="/update/:id" element={<AddEdit />} />
           <Route path="/view/:id" element={<View />} />
           <Route path='/profile' element={<MyProfile />} />
