@@ -61,9 +61,12 @@ const Appointment = () => {
 }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> parent of 39d2fe0 (4)
+=======
+>>>>>>> parent of 9a6cdf1 (Part 2)
 =======
 >>>>>>> parent of 9a6cdf1 (Part 2)
 
@@ -108,10 +111,13 @@ const Appointment = () => {
                   placeholderText="Select a date"
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                   isClearable
                   value='02-11-2023'
                 />
                 </div>
+=======
+>>>>>>> parent of 9a6cdf1 (Part 2)
 =======
 >>>>>>> parent of 9a6cdf1 (Part 2)
 =======
