@@ -110,11 +110,10 @@ const Appointment = () => {
                   minDate={minDate}
                   filterDate={date => date.getDay() !== 0}
                   placeholderText="Select a date"
-                  isClearable
-                  value='02-11-2023'
+           
+  
                 />
                 </div>
-           
             
               </div>
 
