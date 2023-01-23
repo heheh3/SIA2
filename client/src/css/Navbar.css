@@ -92,23 +92,6 @@ nav ul li a.active{
     border-radius: 15px;
 }
 
-.btn__login{
-    background-color: var(--white);
-    color: var(--blue-blue-dark);
-    border-radius: 15px;
-    padding: 1rem 2rem;
-    margin: 1rem;
-    font-weight: 800;
-    border-style: none;
-    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-}
-
-.btn__login:hover{
-    background: rgba(255, 255, 255, 0.9);
-    color: var(--blue-blue-dark);
-    border-radius: 15px;
-}
-
 @media (min-width:1024px){
     nav ul{
         display: flex;

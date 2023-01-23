@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {useNavigate, useParams, Link } from "react-router-dom"
 import "../css/Appointment.css";
-import PatientNavbar from './PatientNavbar';
+import Navbar from './Navbar';
 import { FaLocationArrow } from "react-icons/fa";
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
@@ -23,7 +23,7 @@ const Appointment = () => {
   const {b_date, b_time, b_procedure, b_note} = state;
   const navigate = useNavigate();
 
-  const [selectedDate, setSelectedDate] = useState('');
+  const [selectedDate, setSelectedDate] = useState(null);
   const minDate = new Date();
   minDate.setDate(minDate.getDate() + 2);
 
@@ -31,15 +31,8 @@ const Appointment = () => {
     e.preventDefault();
     if (!b_date || !b_time || !b_procedure){
         toast.error("Please provide value into each input field");
-      
-        console.log(b_time)
-        console.log(b_procedure)
-        console.log(b_note)
-        const notes = true;
-        const message = notes ? '' : 'No Note Added';
-
     } else{
-        axios
+          axios
             .post("http://localhost:5000/appointment/post", {
             b_date,
             b_time,
@@ -49,9 +42,8 @@ const Appointment = () => {
         .then(()=>{
             setState({b_date: "", b_time: "", b_procedure: "", b_note: ""});
         })
-        // .catch((err) => toast.error("Booking Date Not Found"))
-         .catch((err) => toast.error(err.response.data) );
-       
+        .catch((err) => toast.error("Booking Date Not Found"))
+        //  .catch((err) => toast.error(err.response.data));
 
         toast.success("Appointment Added Successfully");
       
@@ -61,7 +53,11 @@ const Appointment = () => {
       }
     }
 
+    const handleChange = (event) => {
+      const {name, value} = event.target;
+      setState({...state, [name]: value});
 
+<<<<<<< HEAD
 const handleChange = (event) => {
   const {name, value} = event.target;
   setState({b_time, b_procedure, b_note, [name]: value});
@@ -73,12 +69,16 @@ const handleChange = (event) => {
   
 
 // }
+=======
+   
+}
+>>>>>>> parent of 9a6cdf1 (Part 2)
 
   return (
     
     <div>
       <header>
-        <PatientNavbar />  
+        <Navbar />  
       </header>
 
       <body>
@@ -89,7 +89,6 @@ const handleChange = (event) => {
             <p className='intro__description2'>We have implemented a number of safety measures
                       to ensure not <br/> only dental health but also the safety
                       of both our patients and team.</p>
-                      <p className='intro__description2'><strong>Contact Number: </strong> (+63)9123456789 &nbsp; <strong>Email:</strong> toothfully@gmail.com</p>
             <div className='intro__location'>
                 <a href=''><FaLocationArrow /> Sampaguita St., Mintal 8000, Davao City, Philippines</a>  
             </div>
@@ -114,12 +113,18 @@ const handleChange = (event) => {
                   minDate={minDate}
                   filterDate={date => date.getDay() !== 0}
                   placeholderText="Select a date"
+<<<<<<< HEAD
            
  
                 />
                
                 </div>
+=======
+>>>>>>> parent of 9a6cdf1 (Part 2)
            
+  
+                />
+                </div>
             
               </div>
 

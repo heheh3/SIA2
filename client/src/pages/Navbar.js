@@ -12,11 +12,13 @@ export default function Navbar() {
                 <h2 className='title__name'>TOOTHFULLY YOURS</h2>
             </div>
             <ul>
-                <li><NavLink to="/">HOME</NavLink></li>
-                <li><NavLink to="/about">ABOUT US</NavLink></li>
+                <li><NavLink to="/appointment">HOME</NavLink></li>
+                <li><NavLink to="/">ABOUT US</NavLink></li>
+                <li><NavLink to="/profile">MY PROFILE</NavLink></li>
+                <li><NavLink to="/">REMINDER</NavLink></li>
             </ul>
             <ul>
-                <li><button className='btn__login'>LOGIN/SIGN-UP</button></li>
+                <li><button className='btn__logout'>LOGOUT</button></li>
             </ul>
         </nav> 
     </header>

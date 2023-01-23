@@ -7,11 +7,6 @@
     --blue-darker-teal: #38B1B1;
     --blue-light-teal: #80E7E1;
     --blue-lighter-teal: #E0F9F8;
-} 
-
-body{
-    width: 100%;
-   
 }
 
 
@@ -20,7 +15,7 @@ body{
     margin: 1rem auto;
     font-size: 0.9em;
     font-family: sans-serif;
-    max-width: 90%;
+    max-width: 800px;
     box-shadow: 0 0 20px rgba(0,0,0,0.15);
 }
 
@@ -41,9 +36,9 @@ body{
     border-bottom: 1px solid #dddddd;
 }
 
-/* .styled-table tbody tr:nth-of-type(even){
+.styled-table tbody tr:nth-of-type(even){
     background-color: var(--blue-lighter-teal);
-} */
+}
 
 
 .styled-table tbody tr:last-of-type{
@@ -78,4 +73,4 @@ body{
 .btn-contact{
     background-color: #e82764;
     margin-bottom: 10px;
-} 
+}

@@ -1,40 +1,70 @@
-import React from 'react'
-import "../css/Appointment.css";
-import Navbar from './Navbar'
-import { FaLocationArrow } from "react-icons/fa";
-import imgHome from "../img/image home.png";
+// import React, {useState, useEffect} from 'react';
+// import {Link} from 'react-router-dom';
+// import "../css/Home.css";
+// import {toast} from "react-toastify";
+// import axios from "axios";
 
 
-const Home = () => {
-  return (
-    <div>
-        <header>
-            <Navbar/>
-        </header>
-        <body>
-        <main>
-        
-          <div className='home intro'>
-            <h3 className='intro__title'>TOOTHFULLY YOURS</h3>
-            <h1 className='intro__description'> We&apos;re open and <br/>welcoming<br/>patients.</h1>
-            <p className='intro__description2'>We have implemented a number of safety measures
-                      to ensure not <br/> only dental health but also the safety
-                      of both our patients and team.</p>
-            <p className='intro__description2'><strong>Contact Number: </strong> (+63)9123456789 &nbsp; <strong>Email:</strong> toothfully@gmail.com</p>
-                      
-            <div className='intro__location'>
-                <a href=''><FaLocationArrow /> Sampaguita St., Mintal 8000, Davao City, Philippines</a>  
-            </div>
-          </div>  
-          <div className='home' >
-            <div className='home__img'>
-                <img src={imgHome} alt="Image Home"/>
-            </div>
-            </div>    
-        </main>
-        </body>
-    </div>
-  )
-}
+// const Home = () => {
+//     const [data, setData] = useState([]);
+//     const loadData = async () => {
+//         const response = await axios.get("http://localhost:5000/api/get");
+//         setData(response.data)
+//     }
 
-export default Home
+//     useEffect(() =>{
+//         loadData();
+//     }, [])
+
+//     const deleteContact = (id) =>{
+//         if(window.confirm("Are you sure you want to delete that contact? ")){
+
+//             axios.delete(`http://localhost:5000/api/remove/${id}`)
+//             toast.success("Contact Deleted Successfully!")
+//             setTimeout(() => loadData(), 500)
+//         }
+//     }
+//     return (
+//         <div style={{marginTop: "150px"}}>
+//             <Link to="/addContact">
+//                 <button className='btn btn-contact'>Add Contact</button>
+//             </Link>
+            
+//             <table className="styled-table">
+//                 <thead>
+//                     <tr>
+//                         <th style={{textAlign:"center"}}>No.</th>
+//                         <th style={{textAlign:"center"}}>Name</th>
+//                         <th style={{textAlign:"center"}}>Email</th>
+//                         <th style={{textAlign:"center"}}>Contact</th>
+//                         <th style={{textAlign:"center"}}>Action</th>
+//                     </tr>
+//                 </thead>
+//                 <tbody>
+//                     {data.map((item, index) =>{
+//                         return(
+//                             <tr key={item.id}>
+//                                 <th scope="row">{index+1}</th>
+//                                 <td>{item.name}</td>
+//                                 <td>{item.email}</td>
+//                                 <td>{item.contact}</td>
+//                                 <td>
+//                                     <Link to={`/update/${item.id}`}>
+//                                     <button className='btn btn-edit'>Edit</button>
+//                                     </Link>
+//                                     <button className='btn btn-delete' onClick={()=> deleteContact(item.id)}>Delete</button>
+//                                     <Link to={`/view/${item.id}`}>
+//                                     <button className='btn btn-view'>View</button>
+//                                     </Link>
+//                                 </td>
+//                             </tr>
+//                         )
+//                     })}
+//                 </tbody>
+
+//             </table>
+//         </div>
+//     )
+// }
+
+// export default Home

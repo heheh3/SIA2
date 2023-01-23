@@ -19,18 +19,13 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 // BOOKING BACKEND CRUD
 app.post("/appointment/post", (req,res)=>{ 
-    // const [b_date, b_time, b_procedure, b_note] = req.body;
-    console.log(req.body.b_date)
-    console.log(req.body.b_time)
-    console.log(req.body.b_procedure)
-    console.log(req.body.b_note)
-
-//     const sqlInsert = "INSERT INTO booking_db (b_date, b_time, b_procedure, b_note) VALUES (?, ?, ?, ?)";
-//     db.query(sqlInsert, [b_date, b_time, b_procedure, b_note], (err, result) =>{
-//         if (error){
-//             console.log(error);
-//         };
-//     });
+    const [b_date, b_time, b_procedure, b_note] = req.body;
+    const sqlInsert = "INSERT INTO booking_db (b_date, b_time, b_procedure, b_note) VALUES (?, ?, ?, ?)";
+    db.query(sqlInsert, [b_date, b_time, b_procedure, b_note], (err, result) =>{
+        if (error){
+            console.log(error);
+        };
+    });
 });
 
 

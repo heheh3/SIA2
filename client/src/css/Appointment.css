@@ -22,7 +22,7 @@ body{
 
 main{
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     margin-top: 2.5rem;
 
 }
@@ -35,19 +35,6 @@ main{
     
 }
 
-.home__img{
-    width: 100%;
-    margin: auto;
-}
-
-.home__img img{
-    width: 100%;
-    position: relative;
-    z-index: -1;
-}
-
-
-
 .intro{
     background-color: white;
     flex-direction: column;
@@ -55,8 +42,6 @@ main{
     text-align: left;
     padding: 1rem;
     gap: 1rem;
-
-
 
 }
 
@@ -69,7 +54,6 @@ main{
     color: var(--blue-darker-teal);
     font-size: 5.5rem;
     line-height: 1.1;
-
  
 }
 
@@ -167,6 +151,7 @@ input[type="submit"]:hover{
     background-color: rgba(255, 255, 255, 0.8);
 }
 
+<<<<<<< HEAD
 .login__title{
     margin-bottom: 1rem;
     font-size: 2rem;
@@ -177,4 +162,6 @@ input[type="submit"]:hover{
 .login__description{
     text-align: center;
 }
+=======
+>>>>>>> parent of 9a6cdf1 (Part 2)
 
