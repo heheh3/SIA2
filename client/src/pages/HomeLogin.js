@@ -1,5 +1,5 @@
 import React from 'react'
-import "../css/HomeLogin.css";
+
 import fb from "../img/facebook-icon.png";
 import twitter from "../img/twitter-icon.png";
 import google from "../img/google-icon.png";
