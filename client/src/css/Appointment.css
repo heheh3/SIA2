@@ -22,7 +22,7 @@ body{
 
 main{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     margin-top: 2.5rem;
 
 }
@@ -35,6 +35,19 @@ main{
     
 }
 
+.home__img{
+    width: 100%;
+    margin: auto;
+}
+
+.home__img img{
+    width: 100%;
+    position: relative;
+    z-index: -1;
+}
+
+
+
 .intro{
     background-color: white;
     flex-direction: column;
@@ -42,6 +55,8 @@ main{
     text-align: left;
     padding: 1rem;
     gap: 1rem;
+
+
 
 }
 
@@ -54,6 +69,7 @@ main{
     color: var(--blue-darker-teal);
     font-size: 5.5rem;
     line-height: 1.1;
+
  
 }
 
@@ -151,4 +167,14 @@ input[type="submit"]:hover{
     background-color: rgba(255, 255, 255, 0.8);
 }
 
+.login__title{
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    font-weight: 800;
+    text-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.login__title__description{
+    margin-top: -10px;
+}
 

@@ -1,11 +1,11 @@
 import React from 'react'
-import Navbar from './Navbar'
+import PatientNavbar from './PatientNavbar'
 
 
 const MyProfile = () => {
   return (
     <div>
-        <Navbar />
+        <PatientNavbar />
     </div>
   )
 }
