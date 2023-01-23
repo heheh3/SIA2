@@ -1,14 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {useNavigate, useParams, Link } from "react-router-dom"
 import "../css/Appointment.css";
-import Navbar from './Navbar';
-<<<<<<< HEAD
-<<<<<<< HEAD
-import Navbar from './Navbar';
-=======
->>>>>>> parent of 9a6cdf1 (Part 2)
-=======
->>>>>>> parent of 9a6cdf1 (Part 2)
+import PatientNavbar from './PatientNavbar';
 import { FaLocationArrow } from "react-icons/fa";
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
@@ -30,7 +23,7 @@ const Appointment = () => {
   const {b_date, b_time, b_procedure, b_note} = state;
   const navigate = useNavigate();
 
-  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedDate, setSelectedDate] = useState('');
   const minDate = new Date();
   minDate.setDate(minDate.getDate() + 2);
 
@@ -38,8 +31,15 @@ const Appointment = () => {
     e.preventDefault();
     if (!b_date || !b_time || !b_procedure){
         toast.error("Please provide value into each input field");
+      
+        console.log(b_time)
+        console.log(b_procedure)
+        console.log(b_note)
+        const notes = true;
+        const message = notes ? '' : 'No Note Added';
+
     } else{
-          axios
+        axios
             .post("http://localhost:5000/appointment/post", {
             b_date,
             b_time,
@@ -49,8 +49,9 @@ const Appointment = () => {
         .then(()=>{
             setState({b_date: "", b_time: "", b_procedure: "", b_note: ""});
         })
-        .catch((err) => toast.error("Booking Date Not Found"))
-        //  .catch((err) => toast.error(err.response.data));
+        // .catch((err) => toast.error("Booking Date Not Found"))
+         .catch((err) => toast.error(err.response.data) );
+       
 
         toast.success("Appointment Added Successfully");
       
@@ -60,34 +61,24 @@ const Appointment = () => {
       }
     }
 
-    const handleChange = (event) => {
-      const {name, value} = event.target;
-      setState({...state, [name]: value});
 
-   
+const handleChange = (event) => {
+  const {name, value} = event.target;
+  setState({b_time, b_procedure, b_note, [name]: value});
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
->>>>>>> parent of 39d2fe0 (4)
-=======
->>>>>>> parent of 9a6cdf1 (Part 2)
-=======
->>>>>>> parent of 9a6cdf1 (Part 2)
-=======
->>>>>>> parent of 9a6cdf1 (Part 2)
-=======
->>>>>>> parent of 9a6cdf1 (Part 2)
+const handleChangeDate = (date) => {
+  setSelectedDate(date);
+  console.log(selectedDate)
+  
+
+}
 
   return (
     
     <div>
       <header>
-        <Navbar />  
+        <PatientNavbar />  
       </header>
 
       <body>
@@ -98,6 +89,7 @@ const Appointment = () => {
             <p className='intro__description2'>We have implemented a number of safety measures
                       to ensure not <br/> only dental health but also the safety
                       of both our patients and team.</p>
+                      <p className='intro__description2'><strong>Contact Number: </strong> (+63)9123456789 &nbsp; <strong>Email:</strong> toothfully@gmail.com</p>
             <div className='intro__location'>
                 <a href=''><FaLocationArrow /> Sampaguita St., Mintal 8000, Davao City, Philippines</a>  
             </div>
@@ -118,14 +110,16 @@ const Appointment = () => {
                   id='b_date'
                   name='b_date'
                   selected={selectedDate}
-                  onChange={date => setSelectedDate(date)}
+                  onChange={handleChangeDate}
                   minDate={minDate}
                   filterDate={date => date.getDay() !== 0}
                   placeholderText="Select a date"
-           
-  
+                  isClearable
+                  value='02-11-2023'
                 />
+               
                 </div>
+           
             
               </div>
 

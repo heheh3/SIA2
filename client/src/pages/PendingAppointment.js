@@ -24,7 +24,7 @@ const PendingAppointment = () => {
         <header>
             <AdminNavbar />
         </header>
-        <body>
+        <body className='pending_body'>
             <table className='styled-table'>
                 <thead>
                     <tr>
@@ -56,7 +56,7 @@ const PendingAppointment = () => {
                                         <button className='btn btn-edit'>Edit</button>
                                     </Link>
                                     <button className='btn btn-complete'>Completed</button>
-                                    <Link to={`/vuew/${item.id}`}>
+                                    <Link to={`/view/${item.id}`}>
                                         <button className='btn btn-view'>View</button>
                                     </Link>
                                 </td>
