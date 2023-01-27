@@ -12,6 +12,7 @@ import Home from './pages/Home';
 import AboutUs from './pages/AboutUs';
 import AboutUsMain from './pages/AboutUsMain';
 import HomeLogin from './pages/HomeLogin';
+import UpdateAppointment from './pages/UpdateAppointment';
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
           <Route path="/admin" element={<AdminNavbar />} />
           <Route path="/appointment" element={<Appointment />} />
           <Route path="/addContact" element={<AddEdit />} />
-          <Route path="/update/:id" element={<Appointment />} />
+          <Route path="/update/:id" element={<UpdateAppointment />} />
           <Route path="/view/:id" element={<View />} />
           <Route path='/profile' element={<MyProfile />} />
           <Route path='/admin/appointment' element={<PendingAppointment />} />

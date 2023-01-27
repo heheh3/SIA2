@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import {useNavigate, useParams, Link } from "react-router-dom"
 import "../css/Appointment.css";
-import PatientNavbar from './PatientNavbar';
 import { FaLocationArrow } from "react-icons/fa";
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import {toast} from "react-toastify";
+import AdminNavbar from './AdminNavbar';
 
 const initialState = {
   b_date: "",
@@ -18,9 +18,17 @@ const initialState = {
 
 
 
-const Appointment = () => {
+const UpdateAppointment = () => {
   const [state, setState] = useState(initialState);
   const {b_status, b_time, b_procedure, b_note} = state;
+
+  const {patientID} = useParams()
+
+  useEffect (() => {
+
+    axios.get(`http://localhost:5000/appointment/get/${patientID}`)
+    .then((resp) => setState({...resp.data[0]}))
+  }, [patientID])
 
   const navigate = useNavigate();
   const [b_date, setSelectedDate] = useState('');
@@ -37,7 +45,6 @@ const Appointment = () => {
             b_time,
             b_procedure,
             b_note,
-            b_status
         })
         .then(()=>{
             setState({b_date: "", b_time: "", b_procedure: "", b_note: ""});
@@ -54,7 +61,7 @@ const Appointment = () => {
 
 const handleChange = (event) => {
   const {name, value} = event.target;
-  setState({b_time, b_procedure, b_note, [name]: value});
+  setState({b_time, b_procedure, b_note, b_status, [name]: value});
 }
 
 const handleChangeDate = (date) => {
@@ -67,29 +74,13 @@ const handleChangeDate = (date) => {
     
     <div>
       <header>
-        <PatientNavbar />  
+        <AdminNavbar />  
       </header>
 
       <body>
         <main>
-          <div className='home intro'>
-            <h3 className='intro__title'>TOOTHFULLY YOURS</h3>
-            <h1 className='intro__description'> We&apos;re open and <br/>welcoming<br/>patients.</h1>
-            <p className='intro__description2'>We have implemented a number of safety measures
-                      to ensure not <br/> only dental health but also the safety
-                      of both our patients and team.</p>
-                      <p className='intro__description2'><strong>Contact Number: </strong> (+63)9123456789 &nbsp; <strong>Email:</strong> toothfully@gmail.com</p>
-            <div className='intro__location'>
-                <a href=''><FaLocationArrow /> Sampaguita St., Mintal 8000, Davao City, Philippines</a>  
-            </div>
-          </div>  
-          <div className='home appointmentCard'>
-            <h3 className='book__title'>BOOK AN APPOINTMENT</h3>
-            <p>As soon as you as you contact our expert team, 
-                we will get back to you <br /> as soon as possibe! Book
-                an appointment at the comfort of your home and <br/>
-                we'll take care of the rest!
-            </p>
+          <div className='update appointmentCard'>
+            <h3 className='book__title'>UPDATE AN APPOINTMENT</h3>
 
             <form onSubmit={handleSubmit} >
               <div className='book__row'>
@@ -147,13 +138,27 @@ const handleChangeDate = (date) => {
                 </select>
               </div>
 
+
               <div className='book__row'>
                 <label htmlFor='note'>NOTES: </label>
                 <textarea for="note" id="b_note" name="b_note" value={b_note || "" }  onChange={handleChange} placeholder='Add some notes... (optional)' />
  
               </div> 
 
-              <input type="submit" value="Book" />
+              <div className='book__row'>
+                <label htmlFor='procedure'>STATUS: </label>
+                <select id="b_status" name="b_status"  value={b_status || "" }  onChange={handleChange} >
+                        <option value="" disabled selected>Select your option</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Completed">Completed</option>
+                        <option value="Rescheduled">Rescheduled</option>
+                        <option value="Pending">Pending</option>
+                    
+                        
+                </select>
+              </div>
+
+              <input type="submit" value="UPDATE" />
  
             </form>
           </div>
@@ -164,4 +169,4 @@ const handleChangeDate = (date) => {
   )
 }
 
-export default Appointment
+export default UpdateAppointment

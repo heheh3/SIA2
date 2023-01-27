@@ -64,12 +64,12 @@ body{
 }
 
 .btn-edit{
-    background-color: var(--blue-darker-teal);
+    background-color: var(--blue-light-teal);
     
 }
 
-.btn-complete{
-    background-color: var(--blue-light-teal);
+.btn-delete{
+    background-color: var(--blue-darker-teal);
 }
 .btn-view{
     background-color: #e7e7e7;
