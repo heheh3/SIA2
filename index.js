@@ -30,7 +30,7 @@ app.post("/appointment/post", (req,res)=>{
 
     const d = new Date(b_date);
     const n = moment(d).day();
-    const dayofweek = {0:"Sun", 1:"Mon", 2:"Tue", 3:"Wed", 4:"Thur", 5:"Fri", 6:"Sat"}  ;
+    const dayofweek = {0:"Sun ", 1:"Mon", 2:"Tue", 3:"Wed", 4:"Thu", 5:"Fri", 6:"Sat"}  ;
 
     let day = Object.values(dayofweek)
     const v = day[n] + ', ' + moment(d).format('MMM DD, YYYY'); 
@@ -48,7 +48,7 @@ app.post("/appointment/post", (req,res)=>{
 
 
 app.get("/appointment/get", (req, res) =>{
-    const sqlGet = "SELECT * FROM booking_db";
+    const sqlGet = "SELECT * FROM booking_db ORDER BY STR_TO_DATE(b_date,'%a, %b %d, %Y') ASC , STR_TO_DATE(b_time, '%h:%i%p') ASC;";
     db.query(sqlGet, (error, result)=>{
         res.send(result);
     });
