@@ -68,7 +68,7 @@ app.delete("/appointment/delete/:patientID", (req,res)=>{
     });
 });
 
-app.get("/appointment/get/:patientID", (req, res) =>{
+app.get("/admin/appointment/get/:patientID", (req, res) =>{
     const {patientID} = req.params
     const sqlGet = "SELECT * FROM booking_db where patientID = ?";
     db.query(sqlGet, patientID ,(error, result)=>{
@@ -77,10 +77,11 @@ app.get("/appointment/get/:patientID", (req, res) =>{
         }
         res.send(result);
 
+
     });
 });
 
-app.put("/appointment/put/:patientID", (req, res) =>{
+app.put("/admin/appointment/update/:patientID", (req, res) =>{
     const b_date = req.body.b_date;
     const b_time = req.body.b_time;
     const b_procedure = req.body.b_procedure;

@@ -13,7 +13,7 @@ const initialState = {
   b_time: "",
   b_procedure: "",
   b_note: "",
-  b_status: "Pending"
+  b_status: ""
 };
 
 
@@ -101,7 +101,7 @@ const handleChangeDate = (date) => {
                   selected={b_date}
                   onChange={handleChangeDate}
                   minDate={minDate}
-                  dateFormat="MM-dd-yyyy"
+                  dateFormat="MMM-dd-yyyy"
                   filterDate={date => date.getDay() !== 0}
                   placeholderText="Select a date"
                   value={b_date || ""}     
@@ -115,7 +115,7 @@ const handleChangeDate = (date) => {
 
             <div className='book__row'> 
                 <label htmlFor='time'>TIME: </label>
-                <select name="b_time" id="b_time" value={b_time || ""} onChange={handleChange}  >
+                <select name="b_time" id="b_time" value={b_time || ""} onChange={handleChange} onse >
                         <option value="" disabled selected>Select your option</option>
                         <option value="8:00AM">08:00 AM</option>
                         <option value="9:00AM">09:00 AM</option>

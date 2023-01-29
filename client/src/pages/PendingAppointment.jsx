@@ -53,7 +53,7 @@ const PendingAppointment = () => {
                         return(
                             <tr key={item.patientID}>
                                 <th scope='row'>{index+1}</th>
-                                <td>{item.appointID}</td>
+                                <td>{item.patientID}</td>
                                 <td>{item.p_name}</td>
                                 <td>{item.b_date}</td>
                                 <td>{item.b_time}</td>
@@ -64,7 +64,7 @@ const PendingAppointment = () => {
                                     <Link to={`/view/${item.patientID}`}>
                                         <button className='btn btn-view'>View</button>
                                     </Link>
-                                    <Link to={`/update/${item.patientID}`}>
+                                    <Link to={`/admin/appointment/update/${item.patientID}`}>
                                         <button className='btn btn-edit'>Edit</button>
                                     </Link>
                                     <button className='btn btn-delete' onClick={() => deleteAppointment(item.patientID)}>Delete</button>

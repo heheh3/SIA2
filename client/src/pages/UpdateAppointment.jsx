@@ -13,7 +13,7 @@ const initialState = {
   b_time: "",
   b_procedure: "",
   b_note: "",
-  b_status: "Pending"
+  b_status: ""
 };
 
 
@@ -22,12 +22,12 @@ const UpdateAppointment = () => {
   const [state, setState] = useState(initialState);
   const {b_status, b_time, b_procedure, b_note} = state;
 
-  const {patientID} = useParams()
+  const {patientID} = useParams();
 
   useEffect (() => {
 
-    axios.get(`http://localhost:5000/appointment/get/${patientID}`)
-    .then((resp) => setState({...resp.data[0]}))
+    axios.get(`http://localhost:5000/admin/appointment/get/${patientID}`)
+    .then((resp) => setState({...resp.data[0] }))
   }, [patientID])
 
   const navigate = useNavigate();
@@ -40,23 +40,24 @@ const UpdateAppointment = () => {
     if (!b_date || !b_time || !b_procedure){
         toast.error("Please provide value into each input field");
     } else{
-        axios.post("http://localhost:5000/appointment/post", {
-            b_date,
-            b_time,
-            b_procedure,
-            b_note,
-        })
-        .then(()=>{
-            setState({b_date: "", b_time: "", b_procedure: "", b_note: ""});
-        }).catch((err) => toast.error(err.response.data) );
- 
-        toast.success("Appointment Added Successfully");
-      
-      
+        axios
+        .put(`http://localhost:5000/admin/appointment/update/${patientID}`, {
+          b_date,
+          b_time,
+          b_procedure,
+          b_note,
+          b_status
+    })
+    .then(()=>{
+      setState({b_date: "", b_time: "", b_procedure: "", b_note: "", b_status: ""});
+    })
+     .catch((err) => toast.error(err.response.data));
+    toast.success("Appointment Updated Successfully");
+    }
 
     setTimeout(()=> navigate("/appointment"),500)
       }
-    }
+    
 
 
 const handleChange = (event) => {
@@ -69,6 +70,9 @@ const handleChangeDate = (date) => {
   setSelectedDate(date);
 
 }
+
+
+
 
   return (
     
@@ -96,6 +100,7 @@ const handleChangeDate = (date) => {
                   filterDate={date => date.getDay() !== 0}
                   placeholderText="Select a date"
                   value={b_date || ""}     
+                  
             
                 />
                
@@ -153,6 +158,7 @@ const handleChangeDate = (date) => {
                         <option value="Completed">Completed</option>
                         <option value="Rescheduled">Rescheduled</option>
                         <option value="Pending">Pending</option>
+                        <option value="Canceled">Cancelled</option>
                     
                         
                 </select>

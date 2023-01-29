@@ -13,6 +13,7 @@ import AboutUs from './pages/AboutUs';
 import AboutUsMain from './pages/AboutUsMain';
 import HomeLogin from './pages/HomeLogin';
 import UpdateAppointment from './pages/UpdateAppointment';
+import Allergies from './pages/Allergies';
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
           <Route path="/admin" element={<AdminNavbar />} />
           <Route path="/appointment" element={<Appointment />} />
           <Route path="/addContact" element={<AddEdit />} />
-          <Route path="/update/:id" element={<UpdateAppointment />} />
+          <Route path="/admin/appointment/update/:id" element={<UpdateAppointment />} />
           <Route path="/view/:id" element={<View />} />
           <Route path='/profile' element={<MyProfile />} />
           <Route path='/admin/appointment' element={<PendingAppointment />} />
@@ -31,6 +32,7 @@ function App() {
           <Route path='/about' element={<AboutUsMain />} />
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<HomeLogin />} />
+          <Route path='/allergies' element={<Allergies />} />
         
       </Routes>
       </div>

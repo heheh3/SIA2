@@ -130,6 +130,10 @@ select, textarea{
     color: var(--gray);
 }
 
+textarea{
+    resize: none;
+}
+
 input[type="text"]{
     width: 100%;
     height: 50px;
