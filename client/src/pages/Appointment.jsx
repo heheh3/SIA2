@@ -96,7 +96,6 @@ const handleChange = (event) => {
                   name='b_date'
                   selected={b_date}
                   onChange={b_date => handleChange({ target: { value: b_date, name: 'b_date' } })}
-
                   minDate={minDate}
                   dateFormat="MMM-dd-yyyy"
                   filterDate={date => date.getDay() !== 0}

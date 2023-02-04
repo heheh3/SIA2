@@ -6,6 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import {toast} from "react-toastify";
 import AdminNavbar from './AdminNavbar';
+import { parseISO, format } from 'date-fns';
 
 const initialState = {
   b_date: "",
@@ -29,8 +30,19 @@ const UpdateAppointment = () => {
   useEffect (() => {
 
     axios.get(`http://localhost:5000/admin/appointment/get/${id}`)
-    .then((resp) => setState({...resp.data[0]})).catch((err) =>  toast.error(err.response.data))
+    .then(response => {
+      const { b_date, b_time, b_procedure, b_note, b_status } = response.data[0];
+      const isoDateString = format(new Date(b_date), 'yyyy-MM-dd');
+      const parsedDate = parseISO(isoDateString);
+
+      setState({b_date: parsedDate, b_time: b_time, b_procedure: b_procedure, b_note: b_note, b_status: b_status}); 
+    }).catch(error => {
+      console.error(error);
+    });
+      
   }, [id])
+
+
 
   const handleSubmit = (e) =>{
     e.preventDefault();
@@ -65,14 +77,6 @@ const handleChange = (event) => {
   setState({...state, [name]: value});
   
 }
-
-console.log(`patient id ${id}`);
-console.log(b_date);
-console.log(b_time);
-console.log(b_note);
-console.log(b_status);
-
-
 
 
   return (
@@ -160,7 +164,7 @@ console.log(b_status);
                         <option value="Completed">Completed</option>
                         <option value="Rescheduled">Rescheduled</option>
                         <option value="Pending">Pending</option>
-                        <option value="Canceled">Cancelled</option>
+                        <option value="Cancelled">Cancelled</option>
                     
                         
                 </select>
