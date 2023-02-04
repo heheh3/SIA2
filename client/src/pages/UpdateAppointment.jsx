@@ -169,9 +169,12 @@ const handleChange = (event) => {
                         
                 </select>
               </div>
-
-              <input type="submit" value="UPDATE" />
- 
+        
+                <input type="submit" value="UPDATE" />
+                <Link to={'/admin/appointment'}>
+                  <button className='btn btn-back'>BACK</button>
+                </Link>
+         
             </form>
           </div>
         </main>

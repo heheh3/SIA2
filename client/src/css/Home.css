@@ -79,3 +79,20 @@ body{
     background-color: #e82764;
     margin-bottom: 10px;
 } 
+
+.btn-back{
+    width: 100%;
+    border: none;
+    color: var(--blue-dark-teal);
+    background-color: var(--white);
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 0.75rem;
+
+}
+
+.btn-back:hover{
+    background-color: rgba(255, 255, 255, 0.8);
+}

@@ -62,7 +62,11 @@ const PendingAppointment = () => {
                                 <td>{item.b_time}</td>
                                 <td>{item.b_procedure}</td>
                                 <td>{item.b_note}</td>
-                                <td style={{color: "Blue"}}>{item.b_status}</td>
+                                <td><span  style={
+                                    {backgroundColor: item.b_status == "In Progress" ? 'orange' : '' ||   item.b_status == "Pending" ? 'blue': '' ||
+                                            item.b_status == "Cancelled" ? 'red': '' ||  item.b_status == "Rescheduled" ? 'violet': '' ||  
+                                            item.b_status == "Completed" ? 'green': '', padding: '5px 10px', color: 'white', borderRadius: '10px', fontSize: '0.8rem', letterSpacing: "1.5px",}
+                                    }>{item.b_status}</span></td>
                                 <td>
                                     <Link to={`/view/${item.patientID}`}>
                                         <button className='btn btn-view'>View</button>

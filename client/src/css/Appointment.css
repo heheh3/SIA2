@@ -169,6 +169,7 @@ input[type="submit"]{
     font-weight: bold;
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    width: 100%
 
 }
 
@@ -187,4 +188,3 @@ input[type="submit"]:hover{
 .login__title__description{
     margin-top: -10px;
 }
-
