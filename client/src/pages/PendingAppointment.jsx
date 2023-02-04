@@ -15,6 +15,7 @@ const PendingAppointment = () => {
         setData(response.data);  
     }
     
+    
 
 
     useEffect(()=>{
@@ -26,8 +27,10 @@ const PendingAppointment = () => {
             axios.delete(`http://localhost:5000/appointment/delete/${id}`);
             toast.success("Appointment Deleted Successfully!");
             setTimeout(()=> loadData(), 500);
+       
         }
     }
+
     return (
     <div>
         <header>
@@ -68,6 +71,7 @@ const PendingAppointment = () => {
                                         <button className='btn btn-edit'>Edit</button>
                                     </Link>
                                     <button className='btn btn-delete' onClick={() => deleteAppointment(item.patientID)}>Delete</button>
+                                    
                                     
                                 </td>
                             </tr>

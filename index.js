@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const mysql = require("mysql2");
 const moment = require('moment');
+const {parseISO, format} = require('date-fns');
 
 
 
@@ -27,17 +28,11 @@ app.post("/appointment/post", (req,res)=>{
     const b_note = req.body.b_note;
     const b_status = "Pending";
 
+    const date = parseISO(b_date);
+    const formattedDate = format(date, 'EEE, MMM dd, yyyy');
 
-    const d = new Date(b_date);
-    const n = moment(d).day();
-    const dayofweek = {0:"Sun ", 1:"Mon", 2:"Tue", 3:"Wed", 4:"Thu", 5:"Fri", 6:"Sat"}  ;
-
-    let day = Object.values(dayofweek)
-    const v = day[n] + ', ' + moment(d).format('MMM DD, YYYY'); 
-    console.log(v)
-   
-   const sqlInsert = "INSERT INTO booking_db (b_date, b_time, b_procedure, b_note, b_status) VALUES (?, ?, ?, ?, ?)";
-    db.query(sqlInsert, [v, b_time, b_procedure, b_note, b_status], (err, result) =>{
+    const sqlInsert = "INSERT INTO booking_db (b_date, b_time, b_procedure, b_note, b_status) VALUES (?, ?, ?, ?, ?)";
+    db.query(sqlInsert, [formattedDate, b_time, b_procedure, b_note, b_status], (err, result) =>{
         if (err){
             console.log(err);
         }else {
@@ -49,6 +44,7 @@ app.post("/appointment/post", (req,res)=>{
 
 app.get("/appointment/get", (req, res) =>{
     const sqlGet = "SELECT * FROM booking_db ORDER BY STR_TO_DATE(b_date,'%a, %b %d, %Y') ASC , STR_TO_DATE(b_time, '%h:%i%p') ASC;";
+
     db.query(sqlGet, (error, result)=>{
         res.send(result);
     });
@@ -69,29 +65,35 @@ app.delete("/appointment/delete/:patientID", (req,res)=>{
 });
 
 app.get("/admin/appointment/get/:patientID", (req, res) =>{
-    const {patientID} = req.params
+    const { patientID } = req.params;
     const sqlGet = "SELECT * FROM booking_db where patientID = ?";
     db.query(sqlGet, patientID ,(error, result)=>{
         if(error){
             console.log(error)
         }
         res.send(result);
+   
 
 
     });
 });
 
 app.put("/admin/appointment/update/:patientID", (req, res) =>{
+    const {patientID} = req.params;
+
     const b_date = req.body.b_date;
     const b_time = req.body.b_time;
     const b_procedure = req.body.b_procedure;
     const b_note = req.body.b_note;
     const b_status = req.body.b_status;
 
-    const {patientID} = req.params
+    const d = new Date(b_date);
+    const v =  moment(d).format('ddd, MMM DD, YYYY'); 
 
+
+   
     const sqlUpdate = "UPDATE booking_db SET b_date = ?, b_time = ?, b_procedure = ?, b_note = ?, b_status = ? WHERE patientID = ?";
-    db.query(sqlUpdate, [b_date, b_time, b_procedure, b_note, b_status, patientID] ,(error, result)=>{
+    db.query(sqlUpdate, [v, b_time, b_procedure, b_note, b_status, patientID] ,(error, result)=>{
         if(error){
             console.log(error)
         }
@@ -99,14 +101,6 @@ app.put("/admin/appointment/update/:patientID", (req, res) =>{
 
     });
 });
-
-
-
-
-
-
-
-
 
 app.listen(5000, () =>{
     console.log("Server is running on port 5000");

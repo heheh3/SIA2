@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {useNavigate, useParams, Link } from "react-router-dom"
-import "../css/Appointment.css";
-import { FaLocationArrow } from "react-icons/fa";
+import "../css/Appointment.css";  
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
@@ -20,28 +19,26 @@ const initialState = {
 
 const UpdateAppointment = () => {
   const [state, setState] = useState(initialState);
-  const {b_status, b_time, b_procedure, b_note} = state;
-
-  const {patientID} = useParams();
-
-  useEffect (() => {
-
-    axios.get(`http://localhost:5000/admin/appointment/get/${patientID}`)
-    .then((resp) => setState({...resp.data[0] }))
-  }, [patientID])
-
+  const {b_date, b_time, b_procedure, b_note, b_status} = state;
+  const {id} = useParams();
   const navigate = useNavigate();
-  const [b_date, setSelectedDate] = useState('');
   const minDate = new Date();
   minDate.setDate(minDate.getDate() + 2);
 
+
+  useEffect (() => {
+
+    axios.get(`http://localhost:5000/admin/appointment/get/${id}`)
+    .then((resp) => setState({...resp.data[0]})).catch((err) =>  toast.error(err.response.data))
+  }, [id])
+
   const handleSubmit = (e) =>{
     e.preventDefault();
-    if (!b_date || !b_time || !b_procedure){
+    if (!b_date || !b_time || !b_procedure || !b_status){
         toast.error("Please provide value into each input field");
+
     } else{
-        axios
-        .put(`http://localhost:5000/admin/appointment/update/${patientID}`, {
+        axios.put(`http://localhost:5000/admin/appointment/update/${id}`, {
           b_date,
           b_time,
           b_procedure,
@@ -50,26 +47,30 @@ const UpdateAppointment = () => {
     })
     .then(()=>{
       setState({b_date: "", b_time: "", b_procedure: "", b_note: "", b_status: ""});
+  
+    
     })
      .catch((err) => toast.error(err.response.data));
     toast.success("Appointment Updated Successfully");
-    }
+   
 
-    setTimeout(()=> navigate("/appointment"),500)
+    setTimeout(()=> navigate("/admin/appointment"),500)
       }
-    
+  }
+
 
 
 const handleChange = (event) => {
   const {name, value} = event.target;
-  setState({b_time, b_procedure, b_note, b_status, [name]: value});
+  setState({...state, [name]: value});
+  
 }
 
-const handleChangeDate = (date) => {
-
-  setSelectedDate(date);
-
-}
+console.log(`patient id ${id}`);
+console.log(b_date);
+console.log(b_time);
+console.log(b_note);
+console.log(b_status);
 
 
 
@@ -94,12 +95,13 @@ const handleChangeDate = (date) => {
                   id='b_date'
                   name='b_date'
                   selected={b_date}
-                  onChange={handleChangeDate}
+                  onChange={b_date => handleChange({ target: { value: b_date, name: 'b_date' } })}
                   minDate={minDate}
                   dateFormat="MM-dd-yyyy"
                   filterDate={date => date.getDay() !== 0}
                   placeholderText="Select a date"
-                  value={b_date || ""}     
+                  value={b_date  || ""}     
+               
                   
             
                 />

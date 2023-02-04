@@ -8,6 +8,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import {toast} from "react-toastify";
 
+
+
 const initialState = {
   b_date: "",
   b_time: "",
@@ -20,10 +22,10 @@ const initialState = {
 
 const Appointment = () => {
   const [state, setState] = useState(initialState);
-  const {b_status, b_time, b_procedure, b_note} = state;
+  const {b_date, b_status, b_time, b_procedure, b_note} = state;
 
   const navigate = useNavigate();
-  const [b_date, setSelectedDate] = useState('');
+  // const [b_date, setSelectedDate] = useState("")
   const minDate = new Date();
   minDate.setDate(minDate.getDate() + 2);
 
@@ -47,20 +49,14 @@ const Appointment = () => {
       
       
 
-    setTimeout(()=> navigate("/appointment"),500)
+        setTimeout(()=> navigate("/appointment"), 300)
       }
     }
 
 
 const handleChange = (event) => {
   const {name, value} = event.target;
-  setState({b_time, b_procedure, b_note, [name]: value});
-}
-
-const handleChangeDate = (date) => {
-
-  setSelectedDate(date);
-
+  setState({...state, [name]: value});
 }
 
   return (
@@ -99,7 +95,8 @@ const handleChangeDate = (date) => {
                   id='b_date'
                   name='b_date'
                   selected={b_date}
-                  onChange={handleChangeDate}
+                  onChange={b_date => handleChange({ target: { value: b_date, name: 'b_date' } })}
+
                   minDate={minDate}
                   dateFormat="MMM-dd-yyyy"
                   filterDate={date => date.getDay() !== 0}
