@@ -15,7 +15,7 @@ export default function PatientNavbar() {
                 <li><NavLink to="/appointment">HOME</NavLink></li>
                 <li><NavLink to="/aboutUs">ABOUT US</NavLink></li>
                 <li><NavLink to="/profile">MY PROFILE</NavLink></li>
-                <li><NavLink to="/">REMINDER</NavLink></li>
+                <li><NavLink to="/reminder">REMINDER</NavLink></li>
             </ul>
             <ul>
                 <li><button className='btn__logout'>LOGOUT</button></li>

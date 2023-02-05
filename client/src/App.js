@@ -14,6 +14,7 @@ import AboutUsMain from './pages/AboutUsMain';
 import HomeLogin from './pages/HomeLogin';
 import UpdateAppointment from './pages/UpdateAppointment';
 import Allergies from './pages/Allergies';
+import ReminderAppointment from './pages/ReminderAppointment';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<HomeLogin />} />
           <Route path='/allergies' element={<Allergies />} />
+          <Route path='/reminder' element={<ReminderAppointment />} />
         
       </Routes>
       </div>

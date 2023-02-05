@@ -1,0 +1,155 @@
+:root{
+    --white: #ffffff;
+    --gray: #5A5A5A;
+    --white-contrast: #E5EDED;
+    --blue-dark-teal: #1EBEB6;
+    --blue-darker-teal: #38B1B1;
+    --blue-light-teal: #50fcf3;
+    --blue-lighter-teal: #E0F9F8;
+} 
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+ 
+}
+
+
+.reminder{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -25px;
+}
+
+.reminder__col{
+    width: 50%;
+    
+  
+}
+
+.reminder__image{
+    width: 80%;
+}
+
+.color{
+    color: var(--blue-dark-teal);
+}
+
+.reminder-title{
+    font-size: 2.6rem;
+    letter-spacing: 3px;
+    font-weight: 1000;
+    text-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+
+
+}
+
+.reminder-title--description{
+    color: var(--blue-darker-teal);
+    margin: 1rem;
+    font-size: 1.1rem;
+}
+.reminder-date-time{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: var(--white-contrast);
+    padding: 1rem;
+    width: 90%;
+    margin: 0 auto;
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.date-time-icon, .date-time-data{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    height: 100%;
+    font-size: 1.25rem;
+    /* text-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; */
+
+}
+
+.date-time-data{
+    padding: 1rem 0;
+    
+   
+}
+
+
+.reminder__data{
+    padding: 1rem;
+    color: var(--blue-darker-teal);
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.move-right{
+    margin-right: -5%;
+}
+
+.move-left{
+    margin-left: -5%;
+}
+
+
+.reminder-cancel-resched{
+    margin: 1.25rem;
+
+}
+
+.reminder-header{
+    display: block;
+    background-color: var(--blue-darker-teal);
+    height: 2rem;
+    width: 90%;
+    margin: 0 auto; 
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    border-top-right-radius: 30px;
+    border-top-left-radius: 30px;
+
+   
+}
+
+
+.btn-ap{
+    border: none;
+    padding: 0.5rem 2rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 15px;
+    font-size: 1rem;
+    margin: 4px 2px;    
+    cursor: pointer;
+    color: white;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    font-weight: bold;
+    letter-spacing: 2px;
+
+}
+
+.cancel{
+    background-color: rgb(204, 96, 96);
+    margin-left: 1rem;
+}
+
+.resched{
+    background-color: rgb(90, 189, 90);
+}
+
+.cancel:hover{
+    background-color: rgba(204, 96, 96, 70%);
+}
+
+.resched:hover{
+    background-color: rgba(90, 189, 90, 70%);
+}
+
