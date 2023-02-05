@@ -119,6 +119,7 @@ const handleChange = (event) => {
                 <label htmlFor='time'>TIME: </label>
                 <select name="b_time" id="b_time" value={b_time || ""} onChange={handleChange}  >
                         <option value="" disabled selected>Select your option</option>
+                        <option value="8:00AM">08:00 AM</option>
                         <option value="9:00AM">09:00 AM</option>
                         <option value="10:00AM">10:00 AM</option>
                         <option value="11:00AM">11:00 AM</option>
