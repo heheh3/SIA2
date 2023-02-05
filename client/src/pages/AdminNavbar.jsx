@@ -13,7 +13,7 @@ export default function AdminNavbar() {
             <ul>
                 <li><NavLink to="/admin/appointment">APPOINTMENT</NavLink></li>
                 <li><NavLink to="/">TRANSACTION</NavLink></li>
-                <li><NavLink to="/">EMPLOYEE</NavLink></li>
+                <li><NavLink to="/admin/employee">EMPLOYEE</NavLink></li>
                 <li><NavLink to="/">PATIENT</NavLink></li>
             </ul>
             <ul>

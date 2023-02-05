@@ -68,11 +68,9 @@ const PendingAppointment = () => {
                                             item.b_status == "Completed" ? 'green': '', padding: '5px 10px', color: 'white', borderRadius: '10px', fontSize: '0.8rem', letterSpacing: "1.5px",}
                                     }>{item.b_status}</span></td>
                                 <td>
-                                    <Link to={`/view/${item.patientID}`}>
-                                        <button className='btn btn-view'>View</button>
-                                    </Link>
+                                   
                                     <Link to={`/admin/appointment/update/${item.patientID}`}>
-                                        <button className='btn btn-edit'>Edit</button>
+                                        <button className='btn btn-view'>View/Edit</button>
                                     </Link>
                                     <button className='btn btn-delete' onClick={() => deleteAppointment(item.patientID)}>Delete</button>
                                     

@@ -89,7 +89,7 @@ const handleChange = (event) => {
       <body>
         <main>
           <div className='update appointmentCard'>
-            <h3 className='book__title'>UPDATE AN APPOINTMENT</h3>
+            <h3 className='book__title'>UPDATE/ VIEW AN APPOINTMENT</h3>
 
             <form onSubmit={handleSubmit} >
               <div className='book__row'>
