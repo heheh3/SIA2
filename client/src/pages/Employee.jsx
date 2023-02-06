@@ -7,6 +7,9 @@ const Employee = () => {
         <header>
             <AdminNavbar />
         </header>
+        <main>
+          
+        </main>
     </div>
   )
 }

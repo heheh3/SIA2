@@ -94,6 +94,7 @@ const handleChange = (event) => {
                 <DatePicker
                   id='b_date'
                   name='b_date'
+                  className='datepicker__style'
                   selected={b_date}
                   onChange={b_date => handleChange({ target: { value: b_date, name: 'b_date' } })}
                   minDate={minDate}
@@ -150,7 +151,7 @@ const handleChange = (event) => {
  
               </div> 
 
-              <input type="submit" value="Book" />
+              <input type="submit" className='book-button' value="Book" />
  
             </form>
           </div>

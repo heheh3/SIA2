@@ -91,7 +91,15 @@ body{
     margin-bottom: 10px;
 } 
 
-.btn-back{
+.button-a{
+    width: 48%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+a .btn-back{
+    height: 50px;
     width: 100%;
     border: none;
     color: var(--blue-dark-teal);
@@ -107,3 +115,10 @@ body{
 .btn-back:hover{
     background-color: rgba(255, 255, 255, 0.8);
 }
+
+
+.btn-update{
+
+    width: 48%;
+}
+

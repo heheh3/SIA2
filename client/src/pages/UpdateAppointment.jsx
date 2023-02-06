@@ -91,7 +91,7 @@ const handleChange = (event) => {
           <div className='update appointmentCard'>
             <h3 className='book__title'>UPDATE/ VIEW AN APPOINTMENT</h3>
 
-            <form onSubmit={handleSubmit} >
+            <form onSubmit={handleSubmit} style={{display: 'relative'}}>
               <div className='book__row'>
                 <label htmlFor='date'>DATE: </label>
                 <div className='date__container'>
@@ -99,6 +99,7 @@ const handleChange = (event) => {
                   id='b_date'
                   name='b_date'
                   selected={b_date}
+                  className='datepicker__style'
                   onChange={b_date => handleChange({ target: { value: b_date, name: 'b_date' } })}
                   minDate={minDate}
                   dateFormat="MM-dd-yyyy"
@@ -170,11 +171,14 @@ const handleChange = (event) => {
                         
                 </select>
               </div>
-        
-                <input type="submit" value="UPDATE" />
-                <Link to={'/admin/appointment'}>
-                  <button className='btn btn-back'>BACK</button>
+
+              <div className='back__update-buttons'>
+                <input type="submit" value="UPDATE" className='btn-update' />
+                <Link to={'/admin/appointment'} className="button-a">
+                  <button className='btn-back'>BACK</button>
                 </Link>
+              </div>
+           
          
             </form>
           </div>
