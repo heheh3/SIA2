@@ -10,12 +10,12 @@ import { toast } from 'react-toastify';
 
 const PendingAppointment = () => {
     const [data, setData] = useState([]);
+    const [searchValue, setSearchValue] = useState('');
+
     const loadData = async () =>{
         const response = await axios.get("http://localhost:5000/appointment/get");
         setData(response.data);  
     }
-    
-    
 
 
     useEffect(()=>{
@@ -31,12 +31,19 @@ const PendingAppointment = () => {
         }
     }
 
+    const handleInputChange = (event) => {
+        setSearchValue(event.target.value);
+      };
+
     return (
     <div>
         <header>
             <AdminNavbar />
         </header>
         <body className='pending_body'>
+            <div className='search__bar-container'>
+                <input type="text" className='search__bar' value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder="Search Here..."/>
+            </div>
             <table className='styled-table'>
                 <thead>
                     <tr>
@@ -52,7 +59,13 @@ const PendingAppointment = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {data.map((item, index)=>{
+                    {data.filter((item) =>{
+                        return searchValue.toLowerCase() === '' || item.b_date.toLowerCase().includes(searchValue) 
+                            || item.b_note.toLowerCase().includes(searchValue) || item.b_time.toLowerCase().includes(searchValue) 
+                            || item.b_procedure.toLowerCase().includes(searchValue) || item.patientID.toString().includes(searchValue) 
+                            || item.b_status.toLowerCase().includes(searchValue) 
+                            
+                    }).map((item, index)=>{
                         return(
                             <tr key={item.patientID}>
                                 <th scope='row'>{index+1}</th>

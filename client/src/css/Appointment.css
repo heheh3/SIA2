@@ -207,3 +207,21 @@ input[type="submit"]:hover{
     width: 100%;
 }
 
+.search__bar-container{
+    margin: 0 auto;
+    width: 20%;
+    margin-top: 10px;
+    display: flex;
+
+
+
+   
+}
+
+.search__bar{
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--blue-darker-teal);
+    outline: none;
+    background-color: var(--white-contrast);
+}
+
