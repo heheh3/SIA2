@@ -147,6 +147,7 @@ input[type="text"]{
 
 .datepicker__style{
     padding-left: 15px;
+    margin: 10px 0;
 }
 
 a{
@@ -180,6 +181,7 @@ input[type="submit"]{
 
 .book-button{
      width: 100%;
+     margin: 10px 0;
 }
 
 input[type="submit"]:hover{
@@ -208,20 +210,31 @@ input[type="submit"]:hover{
 }
 
 .search__bar-container{
-    margin: 0 auto;
     width: 20%;
-    margin-top: 10px;
+    margin-top: 20px;
+    margin-right: 10%;
     display: flex;
-
-
-
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    padding: 0 0.7rem;
+    background-color: var(--white-contrast);
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    
    
 }
 
-.search__bar{
-    padding: 0.5rem 1rem;
-    border: 1px solid var(--blue-darker-teal);
+.search__bar, .search__bar-icon{
     outline: none;
+    border: none;
     background-color: var(--white-contrast);
+
+
 }
+.search__bar-icon{
+   width: 60px;
+   color: var(--gray);
+   
+}
+
 
