@@ -1,15 +1,107 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react';
+import {useParams, Link} from "react-router-dom";
 import AdminNavbar from './AdminNavbar'
+import { FaSearch, FaPlusCircle  } from "react-icons/fa";
+import '../css/Home.css';
+import { toast } from 'react-toastify';
+import axios from 'axios';
+
+
+
 
 const Employee = () => {
+  const [data, setData] = useState([]);
+  const [searchValue, setSearchValue] = useState('');
+
+  const loadData = async () =>{
+    const response = await axios.get("http://localhost:5000/employee/get");
+    setData(response.data);  
+  };
+
+  useEffect(()=>{
+    loadData();
+  }, []);
+
+  const deleteAppointment = (id)=>{
+    if(window.confirm("Are you sure you wanted to delete this employee?")){
+        axios.delete(`http://localhost:5000/employee/delete/${id}`);
+        toast.success("Appointment Deleted Successfully!");
+        setTimeout(()=> loadData(), 500);
+   
+    }
+}
+
+
   return (
     <div>
         <header>
             <AdminNavbar />
         </header>
-        <main>
-          
-        </main>
+        <body className='pending_body'>
+          <div className='pending_body-flex'>
+            <div className='employee__header'>
+                  <div className='add__ebutton'>
+                      <Link to="/admin/employee/add">
+                        <button className='add__ebutton-style'><span>ADD EMPLOYEE</span> <FaPlusCircle className="add-icon"/></button>
+                      </Link>
+                     
+                  </div>
+                  <div className='search__bar-container'>
+                      <input type='text' className='search__bar' value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder="Search Here..."/>
+                      <span className='search__bar-icon'><FaSearch className="bar-icon"/></span>
+                  </div>
+                </div>
+                <table className='styled-table'>
+                    <thead>
+                        <tr>
+                            <th style={{textAlign: "center"}}>No.</th>
+                            <th style={{textAlign: "center"}}>Employee ID</th>
+                            <th style={{textAlign: "center"}}>Name</th>
+                            <th style={{textAlign: "center"}}>Email</th>
+                            <th style={{textAlign: "center"}}>Conctact</th>
+                            <th style={{textAlign: "center"}}>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {data.filter((item) =>{
+                            return searchValue.toLowerCase() === '' || item.b_date.toLowerCase().includes(searchValue) 
+                                || item.b_note.toLowerCase().includes(searchValue) || item.b_time.toLowerCase().includes(searchValue) 
+                                || item.b_procedure.toLowerCase().includes(searchValue) || item.patientID.toString().includes(searchValue) 
+                                || item.b_status.toLowerCase().includes(searchValue) 
+                                
+                        }).map((item, index)=>{
+                            return(
+                                <tr key={item.patientID}>
+                                    <th scope='row'>{index+1}</th>
+                                    <td>{item.patientID}</td>
+                                    <td>{item.p_name}</td>
+                                    <td>{item.b_date}</td>
+                                    <td>{item.b_time}</td>
+                                    <td>{item.b_procedure}</td>
+                                    <td>{item.b_note}</td>
+                                    <td><span  style={
+                                        {backgroundColor: item.b_status == "In Progress" ? 'orange' : '' ||   item.b_status == "Pending" ? 'blue': '' ||
+                                                item.b_status == "Cancelled" ? 'red': '' ||  item.b_status == "Rescheduled" ? 'violet': '' ||  
+                                                item.b_status == "Completed" ? 'green': '', padding: '5px 10px', color: 'white', borderRadius: '10px', fontSize: '0.8rem', letterSpacing: "1.5px",}
+                                        }>{item.b_status}</span></td>
+                                    <td>
+                                    
+                                        <Link to={'/admin/employee'}>
+                                            <button className='btn btn-view'>View/Edit</button>
+                                        </Link>
+                                        <button className='btn btn-delete' onClick={() => deleteAppointment(item.patientID)}>Delete</button>
+                                        
+                                        
+                                    </td>
+                                </tr>
+                                
+                            )
+                        })}
+                    </tbody>
+                    
+                </table> 
+          </div>
+        </body>
     </div>
   )
 }

@@ -16,6 +16,7 @@ import UpdateAppointment from './pages/UpdateAppointment';
 import Allergies from './pages/Allergies';
 import ReminderAppointment from './pages/ReminderAppointment';
 import Employee from './pages/Employee';
+import Employee_Add from './pages/Employee_Add';
 
 function App() {
   return (
@@ -23,20 +24,25 @@ function App() {
     <div className='App'>
     <ToastContainer position='top-center' />
       <Routes>
+         
           <Route path="/admin" element={<AdminNavbar />} />
-          <Route path="/appointment" element={<Appointment />} />
           <Route path="/admin/employee" element={<Employee />} />
           <Route path="/admin/appointment/update/:id" element={<UpdateAppointment />} />
-          <Route path="/view/:id" element={<View />} />
-          <Route path='/profile' element={<MyProfile />} />
           <Route path='/admin/appointment' element={<PendingAppointment />} />
+
+          <Route path='/admin/employee/add' element={<Employee_Add />} />
+
+
+          <Route path="/appointment" element={<Appointment />} />
           <Route path='/aboutUs' element={<AboutUs />} />
-          <Route path='/about' element={<AboutUsMain />} />
-          <Route path='/' element={<Home />} />
-          <Route path='/login' element={<HomeLogin />} />
-          <Route path='/allergies' element={<Allergies />} />
+          <Route path='/profile' element={<MyProfile />} />
           <Route path='/reminder' element={<ReminderAppointment />} />
-        
+
+          <Route path='/' element={<Home />} />
+          <Route path='/about' element={<AboutUsMain />} />
+
+          <Route path='/login' element={<HomeLogin />} />
+          <Route path='/allergies' element={<Allergies />} /> 
       </Routes>
       </div>
     </BrowserRouter>

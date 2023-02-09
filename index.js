@@ -102,6 +102,32 @@ app.put("/admin/appointment/update/:patientID", (req, res) =>{
     });
 });
 
+
+//  EMPLOYEE BACKEND CRUD
+
+app.get("/employee/get", (req, res) =>{
+    const sqlGet = "SELECT * FROM employee_db"
+
+    db.query(sqlGet, (error, result)=>{
+        res.send(result);
+    });
+});
+
+
+app.delete("/employee/delete/:employeeID", (req,res)=>{ 
+    const {employeeID} = req.params
+   
+    const sqlRemove = "DELETE FROM employee_db where patientID = ?";
+    db.query(sqlRemove, employeeID, (err, result) =>{
+        if (err){
+            console.log(err);
+        }else {
+            res.send(result);
+        }
+    });
+});
+
+
 app.listen(5000, () =>{
     console.log("Server is running on port 5000");
 })
