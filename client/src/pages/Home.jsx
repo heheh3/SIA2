@@ -12,7 +12,7 @@ const Home = () => {
             <Navbar/>
         </header>
         <body>
-        <main>
+        <main className='display--flex'>
         
           <div className='home intro'>
             <h3 className='intro__title'>TOOTHFULLY YOURS</h3>

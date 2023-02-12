@@ -21,10 +21,13 @@ body{
 }
 
 main{
-    display: flex;
-    justify-content: center;
     margin-top: 2.5rem;
 
+}
+
+.display--flex{
+    display: flex;
+    justify-content: center;
 }
 
 .home{

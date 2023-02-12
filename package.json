@@ -12,7 +12,8 @@
     "nodemon": "^2.0.20",
     "react-bootstrap-validation": "^0.1.11",
     "react-datepicker": "^4.8.0",
-    "react-icons": "^4.7.1"
+    "react-icons": "^4.7.1",
+    "react-multi-date-picker": "^3.3.4"
   },
   "scripts": {
     "server": "nodemon index.js"

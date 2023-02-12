@@ -113,11 +113,34 @@ app.get("/employee/get", (req, res) =>{
     });
 });
 
+app.post("/employee/post", (req,res)=>{ 
+    const e_name = req.body.e_name;
+    const e_email = req.body.e_email;
+    const e_contact = req.body.e_contact;
+    const e_address = req.body.e_address;
+    const e_birthdate = req.body.e_birthdate;
+    const e_gender = req.body.e_gender;
+
+    const date = parseISO(e_birthdate);
+    const formattedDate = format(date, 'EEE, MMM dd, yyyy');
+
+    const sqlInsert = "INSERT INTO employee_db (e_name, e_email, e_contact, e_address, e_birthdate, e_gender) VALUES (?, ?, ?, ?, ?, ?)";
+    db.query(sqlInsert, [e_name, e_email, e_contact, e_address, formattedDate, e_gender], (err, result) =>{
+        if (err){
+            console.log(err);
+        }else {
+            res.send("Values Added")
+        }
+    });
+});
+
+
 
 app.delete("/employee/delete/:employeeID", (req,res)=>{ 
-    const {employeeID} = req.params
+    const {employeeID} = req.params;
+    console.log(employeeID)
    
-    const sqlRemove = "DELETE FROM employee_db where patientID = ?";
+    const sqlRemove = "DELETE FROM employee_db where employeeID = ?";
     db.query(sqlRemove, employeeID, (err, result) =>{
         if (err){
             console.log(err);

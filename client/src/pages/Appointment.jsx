@@ -67,7 +67,7 @@ const handleChange = (event) => {
       </header>
 
       <body>
-        <main>
+        <main className='display--flex'>
           <div className='home intro'>
             <h3 className='intro__title'>TOOTHFULLY YOURS</h3>
             <h1 className='intro__description'> We&apos;re open and <br/>welcoming<br/>patients.</h1>
@@ -112,7 +112,7 @@ const handleChange = (event) => {
 
             <div className='book__row'> 
                 <label htmlFor='time'>TIME: </label>
-                <select name="b_time" id="b_time" value={b_time || ""} onChange={handleChange} onse >
+                <select name="b_time" id="b_time" value={b_time || ""} onChange={handleChange} >
                         <option value="" disabled selected>Select your option</option>
                         <option value="8:00AM">08:00 AM</option>
                         <option value="9:00AM">09:00 AM</option>
