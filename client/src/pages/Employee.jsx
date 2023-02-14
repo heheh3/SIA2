@@ -83,7 +83,7 @@ const Employee = () => {
                                     <td>{item.e_gender}</td>
                                     <td>
                                     
-                                        <Link to={'/admin/employee'}>
+                                        <Link to={`/admin/employee/update/${item.employeeID}`}>
                                             <button className='btn btn-view'>View/Edit</button>
                                         </Link>
                                         <button className='btn btn-delete' onClick={() => deleteAppointment(item.employeeID)}>Delete</button>

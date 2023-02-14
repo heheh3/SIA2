@@ -3,7 +3,7 @@ import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 
-import View from './pages/View';
+
 import Appointment from './pages/Appointment';
 import MyProfile from './pages/MyProfile';
 import PendingAppointment from './pages/PendingAppointment';
@@ -17,6 +17,7 @@ import Allergies from './pages/Allergies';
 import ReminderAppointment from './pages/ReminderAppointment';
 import Employee from './pages/Employee';
 import Employee_Add from './pages/Employee_Add';
+import Employee_Update from './pages/Employee_Update';
 
 function App() {
   return (
@@ -31,7 +32,7 @@ function App() {
           <Route path='/admin/appointment' element={<PendingAppointment />} />
 
           <Route path='/admin/employee/add' element={<Employee_Add />} />
-
+          <Route path='/admin/employee/update/:id' element={<Employee_Update />} />
 
           <Route path="/appointment" element={<Appointment />} />
           <Route path='/aboutUs' element={<AboutUs />} />

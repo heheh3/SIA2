@@ -150,6 +150,45 @@ app.delete("/employee/delete/:employeeID", (req,res)=>{
     });
 });
 
+app.get("/admin/employee/get/:employeeID", (req, res) =>{
+    const { employeeID } = req.params;
+    const sqlGet = "SELECT * FROM employee_db where employeeID = ?";
+    db.query(sqlGet, employeeID ,(error, result)=>{
+        if(error){
+            console.log(error)
+        }
+        res.send(result);
+   
+
+
+    });
+});
+
+app.put("/admin/employee/update/:employeeID", (req, res) =>{
+    const {employeeID} = req.params;
+
+    const e_name = req.body.e_name;
+    const e_email = req.body.e_email;
+    const e_contact = req.body.e_contact;
+    const e_address = req.body.e_address;
+    const e_birthdate = req.body.e_birthdate;
+    const e_gender = req.body.e_gender;
+
+    const date = parseISO(e_birthdate);
+    const formattedDate = format(date, 'EEE, MMM dd, yyyy');
+
+   
+    const sqlUpdate = "UPDATE employee_db SET e_name = ?, e_email = ?, e_contact = ?, e_address = ?, e_birthdate = ?, e_gender = ? WHERE employeeID = ?";
+    db.query(sqlUpdate, [e_name, e_email, e_contact, e_address, formattedDate, e_gender, employeeID] ,(error, result)=>{
+        if(error){
+            console.log(error)
+        }
+        res.send(result);
+
+    });
+});
+
+
 
 app.listen(5000, () =>{
     console.log("Server is running on port 5000");
