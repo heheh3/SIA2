@@ -16,8 +16,8 @@ import UpdateAppointment from './pages/UpdateAppointment';
 import Allergies from './pages/Allergies';
 import ReminderAppointment from './pages/ReminderAppointment';
 import Employee from './pages/Employee';
-import Employee_Add from './pages/Employee_Add';
-import Employee_Update from './pages/Employee_Update';
+import EmployeeAdd from './pages/EmployeeAdd';
+import EmployeeUpdate from './pages/EmployeeUpdate';
 import Completed from './pages/Completed';
 
 function App() {
@@ -32,8 +32,8 @@ function App() {
           <Route path="/admin/appointment/update/:id" element={<UpdateAppointment />} />
           <Route path='/admin/appointment' element={<PendingAppointment />} />
 
-          <Route path='/admin/employee/add' element={<Employee_Add />} />
-          <Route path='/admin/employee/update/:id' element={<Employee_Update />} />
+          <Route path='/admin/employee/add' element={<EmployeeAdd />} />
+          <Route path='/admin/employee/update/:id' element={<EmployeeUpdate />} />
 
           <Route path='/admin/completed' element={<Completed />} />
 

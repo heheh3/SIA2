@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { FaSearch  } from "react-icons/fa";
-import {useParams, Link} from "react-router-dom";
+import {Link} from "react-router-dom";
 import axios from 'axios';
 import AdminNavbar from './AdminNavbar';
 import '../css/Home.css';
@@ -78,9 +78,9 @@ const Completed = () => {
                                     <td>{item.b_procedure}</td>
                                     <td>{item.b_note}</td>
                                     <td><span  style={
-                                        {backgroundColor: item.b_status == "In Progress" ? 'orange' : '' ||   item.b_status == "Pending" ? 'blue': '' ||
-                                                item.b_status == "Cancelled" ? 'red': '' ||  item.b_status == "Rescheduled" ? 'violet': '' ||  
-                                                item.b_status == "Completed" ? 'green': '', padding: '5px 10px', color: 'white', borderRadius: '10px', fontSize: '0.8rem', letterSpacing: "1.5px",}
+                                        {backgroundColor: item.b_status === "In Progress" ? 'orange' : '' ||   item.b_status === "Pending" ? 'blue': '' ||
+                                                item.b_status === "Cancelled" ? 'red': '' ||  item.b_status === "Rescheduled" ? 'violet': '' ||  
+                                                item.b_status === "Completed" ? 'green': '', padding: '5px 10px', color: 'white', borderRadius: '10px', fontSize: '0.8rem', letterSpacing: "1.5px",}
                                         }>{item.b_status}</span></td>
                                     <td>
                                     

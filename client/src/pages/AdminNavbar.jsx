@@ -7,7 +7,7 @@ export default function AdminNavbar() {
     <header>
         <nav>
             <div className='title'>
-                <img className='title__logo' src={logo} alt="React Image" />
+                <img className='title__logo' src={logo} alt="title" />
                 <h2 className='title__name'>TOOTHFULLY YOURS</h2>
             </div>
             <ul>

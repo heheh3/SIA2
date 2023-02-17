@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import {useNavigate, useParams, Link } from "react-router-dom"
+import React, { useState } from 'react';
+import {useNavigate, Link } from "react-router-dom"
 import AdminNavbar from './AdminNavbar'
 import '../css/Home.css';
 import DatePicker from 'react-datepicker';
 import axios from "axios";
 import {toast} from "react-toastify";
-import { parseISO, format } from 'date-fns';
-
 
 const initialState = {
   e_name: "",
@@ -17,31 +15,10 @@ const initialState = {
   e_gender: ""
 }
 
-const Employee_Update = () => {
+const EmployeeAdd = () => {
     const [state, setState] = useState(initialState);
     const {e_name, e_email, e_contact, e_address, e_birthdate, e_gender} = state
     const navigate = useNavigate();
-    const {id} = useParams();
-    
-    
-
-    
-  useEffect (() => {
-
-    axios.get(`http://localhost:5000/admin/employee/get/${id}`)
-    .then(response => {
-      const {e_name, e_email, e_contact, e_address, e_birthdate, e_gender} = response.data[0];
-      const isoDateString = format(new Date(e_birthdate), 'yyyy-MM-dd');
-      const parsedDate = parseISO(isoDateString);
-
-      setState({e_name: e_name, e_email: e_email, e_contact: e_contact, e_address: e_address , e_birthdate: parsedDate, e_gender: e_gender}); 
-    }).catch(error => {
-      console.error(error);
-    });
-      
-  }, [id])
-
-
 
     const handleSubmit = (e) =>{
       e.preventDefault();
@@ -49,7 +26,7 @@ const Employee_Update = () => {
           toast.error("Please provide value into each input field");
    
       } else{
-          axios.put(`http://localhost:5000/admin/employee/update/${id}`, {
+          axios.post("http://localhost:5000/employee/post", {
               e_name,
               e_email,
               e_contact,
@@ -61,7 +38,7 @@ const Employee_Update = () => {
               setState({e_name: "", e_email: "", e_contact: "", e_address: "",e_birthdate:"", e_gender:""  });
           }).catch((err) => toast.error(err.response.data) );
    
-          toast.success("Employee Updated Successfully");
+          toast.success("Employee Added Successfully");
         
         
   
@@ -149,6 +126,10 @@ const Employee_Update = () => {
                       placeholderText="mm/dd/yyyy"
                       showYearPicker
                       value={e_birthdate || ""}  
+                      
+               
+                      
+            
                   />
                
                   </div>
@@ -165,8 +146,8 @@ const Employee_Update = () => {
 
                 </div>
 
-                <input type="submit" className='book-button' value="UPDATE" />
-             
+                <input type="submit" className='book-button' value="SAVE" />
+               
                  
               </form>
             </div>
@@ -179,4 +160,4 @@ const Employee_Update = () => {
   )
 }
 
-export default Employee_Update
+export default EmployeeAdd
