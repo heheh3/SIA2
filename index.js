@@ -192,6 +192,37 @@ app.put("/admin/employee/update/:employeeID", (req, res) =>{
     });
 });
 
+// REGISTER CRUD
+
+app.get("/users/get", (req, res) =>{
+    const sqlGet = "SELECT * FROM users_db"
+
+    db.query(sqlGet, (error, result)=>{
+        res.send(result);
+    });
+});
+
+app.post("/users/post", (req,res)=>{ 
+    const p_username = req.body.p_username;
+    const p_email = req.body.p_email;
+    const p_password = req.body.p_password;
+    const p_fullname = req.body.p_fullname;
+    const p_contact = req.body.p_contact;
+    const p_birthdate = req.body.p_birthdate;
+
+    const date = parseISO(p_birthdate);
+    const formattedDate = format(date, 'EEE, MMM dd, yyyy');
+
+    const sqlInsert = "INSERT INTO users_db (p_username, p_email, p_password, p_fullname, p_contact, p_birthdate) VALUES (?, ?, ?, ?, ?, ?)";
+    db.query(sqlInsert, [p_username, p_email, p_password, p_fullname, p_contact, formattedDate], (err, result) =>{
+        if (err){
+            console.log(err);
+        }else {
+            res.send("Values Added")
+        }
+    });
+});
+
 
 
 app.listen(5000, () =>{

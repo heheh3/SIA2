@@ -1,0 +1,116 @@
+.login{
+    height: 100vh;
+    background-color: rgb(111, 183, 183);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.card{
+        width: 50%;
+        display: flex;
+        background-color: white;
+        border-radius: 10px;
+        min-height: 600px;
+        overflow: hidden;
+}
+        
+.login__left{
+    flex: 1;
+    background: linear-gradient(rgba(34, 122, 122, 0.529),rgba(0, 0, 0, 0.413)), url("https://images.pexels.com/photos/6502627/pexels-photo-6502627.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+    background-size: cover;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    color: white;
+}            
+
+.login__left-title{
+    text-align: left;
+    font-weight: 600;
+    font-size: 45px;
+    line-height: 65px;
+    color: white;
+    
+}
+            
+.login__left-title2{
+    text-align: left;
+    font-weight: 300;
+    font-size: 30px;
+    line-height: 5px;
+}
+
+.login__left-span{
+    text-align: left;
+    font-weight: 300;
+    font-size: 14px;
+}
+
+.login__left-description{
+    text-align: left;
+    font-weight: 100;
+    line-height: 30px;
+}
+
+button.register-button{
+    width: 50%;
+    padding: 10px;
+    border: none;
+    background-color: white;
+    color: rgb(26, 109, 109);
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+}
+     
+
+
+.book-login{
+    width: 50%;
+    padding: 10px;
+    border: none;
+    background-color: white;
+    color: rgb(26, 109, 109);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.login__right{
+    flex: 1;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    justify-content: center;
+}
+
+.login__right-title{
+    color: rgb(26, 109, 109);
+}
+
+.login__form{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+                
+input[type="email"].login__form-email , input[type="password"].login__form-password{
+    border: none;
+    border-bottom: 1px solid lightgray;
+    padding: 20px 10px;
+                
+}
+                
+input[type="submit"].book-login{
+    width: 50%;
+    padding: 10px;
+    border: none;
+    background-color: rgb(72, 128, 129);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+            
+ }

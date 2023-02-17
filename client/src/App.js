@@ -11,7 +11,7 @@ import AdminNavbar from './pages/AdminNavbar';
 import Home from './pages/Home';
 import AboutUs from './pages/AboutUs';
 import AboutUsMain from './pages/AboutUsMain';
-import HomeLogin from './pages/HomeLogin';
+import Login from './pages/Login';
 import UpdateAppointment from './pages/UpdateAppointment';
 import Allergies from './pages/Allergies';
 import ReminderAppointment from './pages/ReminderAppointment';
@@ -19,6 +19,7 @@ import Employee from './pages/Employee';
 import EmployeeAdd from './pages/EmployeeAdd';
 import EmployeeUpdate from './pages/EmployeeUpdate';
 import Completed from './pages/Completed';
+import Register from './pages/Register';
 
 function App() {
   return (
@@ -46,7 +47,8 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/about' element={<AboutUsMain />} />
 
-          <Route path='/login' element={<HomeLogin />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
           <Route path='/allergies' element={<Allergies />} /> 
       </Routes>
       </div>

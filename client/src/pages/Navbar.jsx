@@ -1,7 +1,7 @@
 import React from 'react';
 import "../css/Navbar.css";
 import logo from "../img/logo.png";
-import {NavLink} from "react-router-dom";
+import {NavLink, Link} from "react-router-dom";
 
 export default function Navbar() {
   return (
@@ -16,7 +16,9 @@ export default function Navbar() {
                 <li><NavLink to="/about">ABOUT US</NavLink></li>
             </ul>
             <ul>
-                <li><button className='btn__login'>LOGIN/SIGN-UP</button></li>
+                <Link to={'/login'}>
+                    <li><button className='btn__login'>LOGIN/SIGN-UP</button></li>
+                </Link>
             </ul>
         </nav> 
     </header>

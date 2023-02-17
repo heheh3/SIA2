@@ -1,0 +1,110 @@
+.register{
+    height: 100vh;
+    background-color: rgb(111, 183, 183);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.register__card{
+    width: 50%;
+    display: flex;
+    flex-direction: row-reverse;
+    background-color: white;
+    border-radius: 10px;
+    min-height: 600px;
+    overflow: hidden;
+}
+
+.register__left{
+    flex: 1;
+    background: linear-gradient(rgba(34, 122, 122, 0.529),rgba(0, 0, 0, 0.413)), url("https://images.pexels.com/photos/3845843/pexels-photo-3845843.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+    background-size: cover;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    color: white;
+}
+
+.register__left-title{
+    font-size: 50px;
+    line-height: 65px;
+    color: white;
+    text-align: left;
+    font-weight: 200px;
+}
+
+.register__left-title2{
+    font-size: 20px;
+    line-height: 5px;
+    text-align: left;
+    font-weight: 200px;
+}
+
+.register__left-description{
+    text-align: left;
+    font-weight: 200px;
+    line-height: 30px;
+}
+
+.register_span{
+    font-size: 14px;
+    text-align: left;
+}
+
+button.login-button{
+    width: 50%;
+    padding: 10px;
+    border: none;
+    background-color: white;
+    color: rgb(26, 109, 109);
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+}
+
+.register__right{
+    flex: 1;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    justify-content: center;
+}
+
+.register__right-title{
+    color: rgb(26, 109, 109);
+}
+            
+form.register-form{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+                
+input[type="text"].register-username ,
+input[type="text"].register-fullname, 
+input[type="email"].register-email , 
+input[type="password"].register-password,
+input[type="text"].register-phone,
+input[type="date"].register-birthdate
+{
+    border: none;
+    border-bottom: 1px solid lightgray;
+    padding: 20px 10px;
+    outline: none;
+    border-radius: none;
+}
+
+input[type="submit"].book-register{
+    width: 50%;
+    padding: 10px;
+    border: none;
+    background-color: rgb(72, 128, 129);
+    color: white;
+    font-weight: 300;
+    cursor: pointer;
+                    
+}
+      
