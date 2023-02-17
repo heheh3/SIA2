@@ -18,6 +18,7 @@ import ReminderAppointment from './pages/ReminderAppointment';
 import Employee from './pages/Employee';
 import Employee_Add from './pages/Employee_Add';
 import Employee_Update from './pages/Employee_Update';
+import Completed from './pages/Completed';
 
 function App() {
   return (
@@ -33,6 +34,9 @@ function App() {
 
           <Route path='/admin/employee/add' element={<Employee_Add />} />
           <Route path='/admin/employee/update/:id' element={<Employee_Update />} />
+
+          <Route path='/admin/completed' element={<Completed />} />
+
 
           <Route path="/appointment" element={<Appointment />} />
           <Route path='/aboutUs' element={<AboutUs />} />

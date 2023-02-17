@@ -12,7 +12,7 @@ export default function AdminNavbar() {
             </div>
             <ul>
                 <li><NavLink to="/admin/appointment">APPOINTMENT</NavLink></li>
-                <li><NavLink to="/">TRANSACTION</NavLink></li>
+                <li><NavLink to="/admin/completed">TRANSACTION</NavLink></li>
                 <li><NavLink to="/admin/employee">EMPLOYEE</NavLink></li>
                 <li><NavLink to="/">PATIENT</NavLink></li>
             </ul>

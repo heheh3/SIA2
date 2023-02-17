@@ -22,6 +22,8 @@ const Employee_Update = () => {
     const {e_name, e_email, e_contact, e_address, e_birthdate, e_gender} = state
     const navigate = useNavigate();
     const {id} = useParams();
+    
+    
 
     
   useEffect (() => {

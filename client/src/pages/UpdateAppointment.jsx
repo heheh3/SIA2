@@ -22,6 +22,10 @@ const UpdateAppointment = () => {
   const [state, setState] = useState(initialState);
   const {b_date, b_time, b_procedure, b_note, b_status} = state;
   const {id} = useParams();
+
+  console.log(id)
+
+
   const navigate = useNavigate();
   const minDate = new Date();
   minDate.setDate(minDate.getDate() + 2);
@@ -55,21 +59,22 @@ const UpdateAppointment = () => {
           b_time,
           b_procedure,
           b_note,
-          b_status
-    })
-    .then(()=>{
-      setState({b_date: "", b_time: "", b_procedure: "", b_note: "", b_status: ""});
-  
-    
-    })
-     .catch((err) => toast.error(err.response.data));
-    toast.success("Appointment Updated Successfully");
-   
+          b_status,  
+      })
+      
+        .then(()=>{
+          setState({b_date: "", b_time: "", b_procedure: "", b_note: "", b_status: ""});
+      
+        
+        })
+        .catch((err) => toast.error(err.response.data));
+        toast.success("Appointment Updated Successfully");
+      
 
-    setTimeout(()=> navigate("/admin/appointment"),500)
+        setTimeout(()=> navigate("/admin/appointment"),500)
       }
-  }
-
+    }
+  
 
 
 const handleChange = (event) => {
@@ -87,7 +92,7 @@ const handleChange = (event) => {
       </header>
 
       <body>
-        <main>
+        <main className='display--flex'>
           <div className='update appointmentCard'>
             <h3 className='book__title'>UPDATE/ VIEW AN APPOINTMENT</h3>
 
@@ -188,5 +193,6 @@ const handleChange = (event) => {
     </div>
   )
 }
+
 
 export default UpdateAppointment

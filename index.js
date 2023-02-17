@@ -43,7 +43,7 @@ app.post("/appointment/post", (req,res)=>{
 
 
 app.get("/appointment/get", (req, res) =>{
-    const sqlGet = "SELECT * FROM booking_db ORDER BY STR_TO_DATE(b_date,'%a, %b %d, %Y') ASC , STR_TO_DATE(b_time, '%h:%i%p') ASC;";
+    const sqlGet = "SELECT * FROM booking_db WHERE NOT b_status = 'Completed' ORDER BY STR_TO_DATE(b_date,'%a, %b %d, %Y') ASC , STR_TO_DATE(b_time, '%h:%i%p') ASC";
 
     db.query(sqlGet, (error, result)=>{
         res.send(result);
@@ -90,8 +90,6 @@ app.put("/admin/appointment/update/:patientID", (req, res) =>{
     const d = new Date(b_date);
     const v =  moment(d).format('ddd, MMM DD, YYYY'); 
 
-
-   
     const sqlUpdate = "UPDATE booking_db SET b_date = ?, b_time = ?, b_procedure = ?, b_note = ?, b_status = ? WHERE patientID = ?";
     db.query(sqlUpdate, [v, b_time, b_procedure, b_note, b_status, patientID] ,(error, result)=>{
         if(error){
@@ -99,6 +97,12 @@ app.put("/admin/appointment/update/:patientID", (req, res) =>{
         }
         res.send(result);
 
+    });
+});
+
+app.get("/appointment/completed/get", (req, res) =>{
+    const sqlGet = "SELECT * FROM booking_db WHERE b_status = 'Completed' ORDER BY STR_TO_DATE(b_date,'%a, %b %d, %Y') ASC , STR_TO_DATE(b_time, '%h:%i%p') ASC";    db.query(sqlGet, (error, result)=>{
+        res.send(result);
     });
 });
 
