@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from "../img/logo.png";
-import {NavLink} from "react-router-dom";
+import {NavLink, Link} from "react-router-dom";
 
 export default function AdminNavbar() {
   return (
@@ -14,10 +14,12 @@ export default function AdminNavbar() {
                 <li><NavLink to="/admin/appointment">APPOINTMENT</NavLink></li>
                 <li><NavLink to="/admin/completed">TRANSACTION</NavLink></li>
                 <li><NavLink to="/admin/employee">EMPLOYEE</NavLink></li>
-                <li><NavLink to="/">PATIENT</NavLink></li>
+                <li><NavLink to="/admin/patient">PATIENT</NavLink></li>
             </ul>
             <ul>
-                <li><button className='btn__logout'>LOGOUT</button></li>
+                <Link to="/">
+                    <li><button className='btn__logout'>LOGOUT</button></li>
+                </Link>
             </ul>
         </nav>
     </header>

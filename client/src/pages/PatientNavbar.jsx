@@ -1,7 +1,7 @@
 import React from 'react';
 import "../css/Navbar.css";
 import logo from "../img/logo.png";
-import {NavLink} from "react-router-dom";
+import {NavLink, Link} from "react-router-dom";
 
 export default function PatientNavbar() {
   return (
@@ -18,7 +18,10 @@ export default function PatientNavbar() {
                 <li><NavLink to="/reminder">REMINDER</NavLink></li>
             </ul>
             <ul>
-                <li><button className='btn__logout'>LOGOUT</button></li>
+                <Link to="/">
+                    <li><button className='btn__logout'>LOGOUT</button></li>
+                </Link>
+                
             </ul>
         </nav> 
     </header>

@@ -7,9 +7,6 @@ import '../css/Home.css';
 import { toast } from 'react-toastify';
 
 
-
-
-
 const PatientTable = () => {
     const [data, setData] = useState([]);
     const [searchValue, setSearchValue] = useState('');
@@ -25,7 +22,7 @@ const PatientTable = () => {
     }, [])
 
     const deleteAppointment = (id)=>{
-        if(window.confirm("Are you sure you wanted to delete this appointment?")){
+        if(window.confirm("Are you sure you wanted to delete this user?")){
             axios.delete(`http://localhost:5000/users/delete/${id}`);
             toast.success("Appointment Deleted Successfully!");
             setTimeout(()=> loadData(), 500);
@@ -33,9 +30,7 @@ const PatientTable = () => {
         }
     }
 
-
-
-    return (
+ return (
     <div>
         <header>
             <AdminNavbar />
@@ -50,46 +45,36 @@ const PatientTable = () => {
                     <thead>
                         <tr>
                             <th style={{textAlign: "center"}}>No.</th>
-                            <th style={{textAlign: "center"}}>Appointment ID</th>
+                            <th style={{textAlign: "center"}}>Patient ID</th>
+                            <th style={{textAlign: "center"}}>Username</th>
+                            <th style={{textAlign: "center"}}>Email</th>
                             <th style={{textAlign: "center"}}>Name</th>
-                            <th style={{textAlign: "center"}}>Date</th>
-                            <th style={{textAlign: "center"}}>Time</th>
-                            <th style={{textAlign: "center"}}>Procedure</th>
-                            <th style={{textAlign: "center"}}>Note</th>
-                            <th style={{textAlign: "center"}}>Status</th>
+                            <th style={{textAlign: "center"}}>Contact</th>
                             <th style={{textAlign: "center"}}>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {data.filter((item) =>{
-                            return searchValue.toLowerCase() === '' || item.b_date.toLowerCase().includes(searchValue) 
-                                || item.b_note.toLowerCase().includes(searchValue) || item.b_time.toLowerCase().includes(searchValue) 
-                                || item.b_procedure.toLowerCase().includes(searchValue) || item.patientID.toString().includes(searchValue) 
-                                || item.b_status.toLowerCase().includes(searchValue) 
+                            return searchValue.toLowerCase() === '' || item.p_username.toLowerCase().includes(searchValue) 
+                                || item.p_email.toLowerCase().includes(searchValue) || item.p_contact.toLowerCase().includes(searchValue) 
+                                || item.p_fullname.toLowerCase().includes(searchValue) || item.user_id.toString().includes(searchValue) 
+            
                                 
                         }).map((item, index)=>{
                             return(
-                                <tr key={item.patientID}>
+                                <tr key={item.user_id}>
                                     <th scope='row'>{index+1}</th>
-                                    <td>{item.patientID}</td>
-                                    <td>{item.p_name}</td>
-                                    <td>{item.b_date}</td>
-                                    <td>{item.b_time}</td>
-                                    <td>{item.b_procedure}</td>
-                                    <td>{item.b_note}</td>
-                                    <td><span  style={
-                                        {backgroundColor: item.b_status === "In Progress" ? 'orange' : '' ||   item.b_status === "Pending" ? 'blue': '' ||
-                                                item.b_status === "Cancelled" ? 'red': '' ||  item.b_status === "Rescheduled" ? 'violet': '' ||  
-                                                item.b_status === "Completed" ? 'green': '', padding: '5px 10px', color: 'white', borderRadius: '10px', fontSize: '0.8rem', letterSpacing: "1.5px",}
-                                        }>{item.b_status}</span></td>
+                                    <td>{item.user_id}</td>
+                                    <td>{item.p_username}</td>
+                                    <td>{item.p_email}</td>
+                                    <td>{item.p_fullname}</td>
+                                    <td>{item.p_contact}</td>
                                     <td>
-                                    
-                                        <Link to={`/admin/appointment/update/${item.patientID}`}>
+                                        <Link to={`/admin/user/update/${item.user_id}`}>
                                             <button className='btn btn-view'>View/Edit</button>
                                         </Link>
-                                        <button className='btn btn-delete' onClick={() => deleteAppointment(item.patientID)}>Delete</button>
-                                        
-                                        
+                                        <button className='btn btn-delete' onClick={() => deleteAppointment(item.user_id)}>Delete</button>
+
                                     </td>
                                 </tr>
                                 

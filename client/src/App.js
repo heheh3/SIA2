@@ -20,6 +20,7 @@ import EmployeeAdd from './pages/EmployeeAdd';
 import EmployeeUpdate from './pages/EmployeeUpdate';
 import Completed from './pages/Completed';
 import Register from './pages/Register';
+import PatientTable from './pages/PatientTable';
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
 
           <Route path='/admin/completed' element={<Completed />} />
 
+          <Route path='/admin/patient' element={<PatientTable />} />
 
           <Route path="/appointment" element={<Appointment />} />
           <Route path='/aboutUs' element={<AboutUs />} />
