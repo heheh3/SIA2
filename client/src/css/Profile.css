@@ -17,6 +17,112 @@
 .profile__container{
     height: 65vh;
     border: 1px solid rgba(114, 111, 111, 0.4);
-    border-top: none;
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    padding-top: 1rem;
+
+}
+
+.profileSettings__form{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.profileSettings__row{
+    display: flex;
+    width: 100%;
+    padding: 0 3rem;
+}
+
+.profileSettings__row--col{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 1rem;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.8rem;
+
+}
+
+input[type="text"].patient__input,
+input[type="email"].patient__input,
+input[type="date"].patient__input
+{
+    width: 100%;
+    height: 50px;
+    padding: 25px 10px;
+    outline: none;
+    color: rgb(114, 111, 111);
+    border-radius: 5px;
+    border: 1px solid rgba(114, 111, 111, 0.2);
+    outline: none;
+   
+}
+
+
+input[type="text"].patient__input.username__style{
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    
+
+
+}
+
+input[type="text"].patient__input::placeholder,
+input[type="email"].patient__input::placeholder,
+input[type="date"].patient__input::placeholder{
+    color:rgba(114, 111, 111, 0.4);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+
+
+input[type="submit"].profile-update{
+    width: 50%;
+    color: var(--white);
+    background-color: var(--blue-darker-teal);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="submit"].profile-update:hover{
+    width: 50%;
+    color: var(--white);
+    background-color: rgba(56, 177, 177, 0.8);
+    border-radius: 5px;
+}
+
+
+.label__input{
+    color: rgb(114, 111, 111);
+}
+
+.username__input--container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+
+.faAt-container {
+    color: rgb(114, 111, 111);
+    border-radius: 5px;
+    border: 1px solid rgba(114, 111, 111, 0.2);
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    padding: 14px 0 12px 0;
+    background-color: rgba(114, 111, 111, 0.2);
+    width: 20%;
+    height: 50px;
+    
+}
+
+
+svg.faAt-icon{
+    width: 20px;
+    height: 20px;
+    
 }
