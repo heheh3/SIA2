@@ -5,7 +5,6 @@ import './App.css';
 
 
 import Appointment from './pages/Appointment';
-import MyProfile from './pages/MyProfile';
 import PendingAppointment from './pages/PendingAppointment';
 import AdminNavbar from './pages/AdminNavbar';
 import Home from './pages/Home';
@@ -21,6 +20,9 @@ import EmployeeUpdate from './pages/EmployeeUpdate';
 import Completed from './pages/Completed';
 import Register from './pages/Register';
 import PatientTable from './pages/PatientTable';
+import ProfileSettings from './pages/ProfileSettings';
+import MedicalHistory from './pages/MedicalHistory';
+import AppointmentHistory from './pages/AppointmentHistory';
 
 function App() {
   return (
@@ -43,7 +45,12 @@ function App() {
 
           <Route path="/appointment" element={<Appointment />} />
           <Route path='/aboutUs' element={<AboutUs />} />
-          <Route path='/profile' element={<MyProfile />} />
+          
+          <Route path='/profile' element={<ProfileSettings />} />
+          <Route path='/profile/profile-settings' element={<ProfileSettings />} />
+          <Route path='/profile/medical-history' element={<MedicalHistory />} />
+          <Route path='/profile/appointment-history' element={<AppointmentHistory />} />
+
           <Route path='/reminder' element={<ReminderAppointment />} />
 
           <Route path='/' element={<Home />} />
