@@ -1,3 +1,13 @@
+:root{
+    --white: #ffffff;
+    --gray: #706c6c;
+    --white-contrast: #E5EDED;
+    --blue-dark-teal: #1EBEB6;
+    --blue-darker-teal: #38B1B1;
+    --blue-light-teal: #50fcf3;
+    --blue-lighter-teal: #E0F9F8;
+} 
+
 .register{
     height: 100vh;
     background-color: rgb(111, 183, 183);
@@ -74,6 +84,7 @@ button.login-button{
 }
 
 .register__right-title{
+    margin-bottom: -17%;
     color: rgb(26, 109, 109);
 }
             
@@ -94,10 +105,16 @@ input[type="date"].register-birthdate
     border-bottom: 1px solid lightgray;
     padding: 20px 10px;
     outline: none;
-    border-radius: none;
+    border-radius: 0;
+    max-width: 200px;
+
 }
 
-input[type="submit"].book-register{
+input[type="text"].register-username, input[type="text"].register-phone {
+    margin-left: 20px;
+}
+
+.book-register{
     width: 50%;
     padding: 10px;
     border: none;
@@ -107,4 +124,66 @@ input[type="submit"].book-register{
     cursor: pointer;
                     
 }
+
+.book-register:hover{
+
+    background-color: rgba(72, 128, 129, 0.7);
+ 
+                    
+}
+
+.register-form__row{
+    display: flex;
+    flex-direction: column;
+}
+
+.register-form-name{
+    text-align: left;
+    color: rgb(26, 109, 109);
+    margin-right: 15px;
+}
+
+.register-form__input{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+
+}
+.offscreen {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+ 
+  }
+
+.Intructions{
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 10px;
+    font-size: 0.85rem;
+}
       
+.hide{
+    display: none;
+}
+
+.valid{
+   display: inline-block;
+   color: var(--blue-darker-teal);
+}
+
+.icon-times{
+    color: red;
+}
+
+.icon-add{
+    color: green;
+   
+}
