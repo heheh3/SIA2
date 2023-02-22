@@ -23,7 +23,11 @@ const Register = () => {
     const [state, setState] = useState(initialState);
     const {p_username, p_email, p_password, p_fullname, p_contact, p_birthdate} = state;
 
+
+
     const navigate = useNavigate();
+
+    const [err, setErr] = useState(null)
 
     const handleSubmit = (e) =>{
         e.preventDefault();
@@ -40,7 +44,7 @@ const Register = () => {
             })
             .then(()=>{
                 setState({p_username: "", p_email: "", p_password: "", p_fullname: "", p_contact: "", p_birthdate: "" });
-            }).catch((err) => toast.error(err.response.data) );
+            }).catch((err) => setErr(err.response.data) );
      
             toast.success("Registered Successfully");
           
@@ -56,8 +60,6 @@ const Register = () => {
           }
           
     
-
-
     return (
         <div className="register">
             <div className="register__card">
@@ -137,6 +139,7 @@ const Register = () => {
                             onChange={handleChange} 
                         /> 
 
+                        {err && err}            
 
                     
                         <input type="submit" className='book-register' value="Register" />      
