@@ -199,3 +199,11 @@ input[type="text"].register-username, input[type="text"].register-phone {
     color: green;
    
 }
+
+.errmsg{
+    background-color: var(--blue-darker-teal);
+    padding: 10px;
+    color: var(--white);
+    border-radius: 10px;
+
+}

@@ -1,12 +1,11 @@
 import express from "express";
-import {} from "../controller/post.js"
+import {users_delete, users_get, users_getUser} from "../controller/users.js"
 
 const router = express.Router()
 
-router.get("", (req,res)=>{
-    res.send("it works!")
-})
-
+router.get("/users/get", users_get);
+router.get("/admin/patient/get/:user_id", users_getUser);
+router.delete("/users/delete/:user_id", users_delete);
 
 
 export default router 

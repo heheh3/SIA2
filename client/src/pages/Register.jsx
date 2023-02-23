@@ -129,8 +129,7 @@ const Register = () => {
         if (!p_username || !p_email || !p_password || !p_fullname || !p_contact || !p_birthdate){
             toast.error("Please provide value into each input field");
         }else{
-            try{
-            const response =  axios.post("http://localhost:5000/users/post", {
+            const response =  axios.post("http://localhost:5000/register", {
                 p_username,
                 p_email,
                 p_password,
@@ -141,30 +140,31 @@ const Register = () => {
             }).then(()=>{
                 setState({p_username: "", p_email: "", p_password: "", p_fullname: "", p_contact: "", p_birthdate: "" });
                 setSuccess(true);
-                toast.success("Registered Successfully");
-            })
-            
-            }  catch(err){
-                // if (!err.response){
-                //     setErrMsg("No Server Response")
-                // } else if (err.response?.errno == 23000){
-                //     setErrMsg("Username Taken")
-                // } else{
-                //     setErrMsg("Registration Failed")
-                // }
-                console.log(err)
-                setErrMsg("Hello")
+                toast.success("Registered Successfully");   
+                setTimeout(()=> navigate("/login"), 500)
+            }).catch((err) =>{
+                 if (!err.response){
+                    setErrMsg("No Server Response")
+                } else if (err.response?.status == 409 ){
+                    setErrMsg("Username Taken!")
+                } else{
+                    setErrMsg("Email is Already Exists!")
+                }
+                // toast.success(err)    
+                // setErrMsg("Username Already Exists")
                 errRef.current.focus()
 
+        })
+            
+          
+       
 
             }
             
-  
-               
-                // setTimeout(()=> navigate("/register"), 500)
-    }   
-
         }
+               
+              
+   
 
         const handleChange = (event) => {
             const {name, value} = event.target;

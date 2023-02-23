@@ -14,7 +14,7 @@ export const register = (req, res) =>{
     
 
     //CHECK IF USER EXISTS
-    const q = "SELECT * FROM users_db WHERE p_username = p_username";
+    const q = "SELECT * FROM users_db WHERE p_username = ?";
     db.query(q, [p_username], (err, data)=>{
         if(err) return res.status(500).json(err)
         if(data.length) return res.status(409).json("User Already Exists!")
@@ -25,7 +25,10 @@ export const register = (req, res) =>{
             const salt = bcrypt.genSaltSync(10);
             const hashedPassword = bcrypt.hashSync(p_password, salt)
             const date = parseISO(p_birthdate);
+            console.log(date)
             const formattedDate = format(date, 'EEE, MMM dd, yyyy');
+            console.log(p_birthdate)
+            console.log(formattedDate)
 
             const sqlInsert = "INSERT INTO users_db (p_username, p_email, p_password, p_fullname, p_contact, p_birthdate) VALUES (?, ?, ?, ?, ?, ?)";
             db.query(sqlInsert, [p_username, p_email, hashedPassword, p_fullname, p_contact, formattedDate], (err, result) =>{
@@ -44,8 +47,12 @@ export const register = (req, res) =>{
 }
 
 
+
+
+
 export const login = (req, res) =>{
 
+    
 
 }
 
