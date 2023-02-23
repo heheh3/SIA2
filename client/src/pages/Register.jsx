@@ -8,13 +8,14 @@ import DatePicker from 'react-datepicker';
 import { parseISO, format } from 'date-fns';
 import {faCheck, faTimes, faInfoCircle, faC} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Login from './Login';
 
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
 const FULLNAME_REGEX = /(^[A-Za-z]{3,16})([ ]{0,1})([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})/
 const PHONE_REGEX = /^(09|\+639)\d{9}$/
-const DATE_REGEX = /((0?[13578]|10|12)(-|\/)((0[0-9])|([12])([0-9]?)|(3[01]?))(-|\/)((\d{4})|(\d{2}))|(0?[2469]|11)(-|\/)((0[0-9])|([12])([0-9]?)|(3[0]?))(-|\/)((\d{4})))/
+const DATE_REGEX = /((0?[13578]|10|12)(-|\/)((0[0-9])|([12])([0-9]?)|(3[01]?))(-|\/)((\d{4})|(\d{2}))|(0?[2469]|11)(-|\/)((0[0-9])|([12])([0-9]?)|(3[0]?))(-|\/)((\d{2,4})))/
 
 const initialState = {
     p_username: "",
@@ -60,7 +61,7 @@ const Register = () => {
     const [matchFocus, setMatchFocus]  = useState(false)
 
     const [errMsg, setErrMsg]  = useState("")
-    const [success, setSuccessw]  = useState(false)
+    const [success, setSuccess]  = useState(false)
 
     const userRef = useRef();
     const errRef = useRef();
@@ -115,10 +116,6 @@ const Register = () => {
 
 
 
-
-
-
-
     useEffect(()=>{
         setErrMsg('')
     }, [p_username, p_password, matchPwd]);
@@ -128,27 +125,45 @@ const Register = () => {
 
     const handleSubmit = (e) =>{
         e.preventDefault();
-        // if (!p_username || !p_email || !p_password || !p_fullname || !p_contact || !p_birthdate){
-        //     toast.error("Please provide value into each input field");
-        // } else{
-        //     axios.post("http://localhost:5000/users/post", {
-        //         p_username,
-        //         p_email,
-        //         p_password,
-        //         p_fullname,
-        //         p_contact,
-        //         p_birthdate
-        //     })
-        //     .then(()=>{
-        //         setState({p_username: "", p_email: "", p_password: "", p_fullname: "", p_contact: "", p_birthdate: "" });
-        //     }).catch((err) => setErr(err.response.data) );
-     
-        //     toast.success("Registered Successfully");
-          
-          
-    
-        //     setTimeout(()=> navigate("/login"), 500)
-        //   }
+
+        if (!p_username || !p_email || !p_password || !p_fullname || !p_contact || !p_birthdate){
+            toast.error("Please provide value into each input field");
+        }else{
+            try{
+            const response =  axios.post("http://localhost:5000/users/post", {
+                p_username,
+                p_email,
+                p_password,
+                p_fullname,
+                p_contact,
+                p_birthdate
+            
+            }).then(()=>{
+                setState({p_username: "", p_email: "", p_password: "", p_fullname: "", p_contact: "", p_birthdate: "" });
+                setSuccess(true);
+                toast.success("Registered Successfully");
+            })
+            
+            }  catch(err){
+                // if (!err.response){
+                //     setErrMsg("No Server Response")
+                // } else if (err.response?.errno == 23000){
+                //     setErrMsg("Username Taken")
+                // } else{
+                //     setErrMsg("Registration Failed")
+                // }
+                console.log(err)
+                setErrMsg("Hello")
+                errRef.current.focus()
+
+
+            }
+            
+  
+               
+                // setTimeout(()=> navigate("/register"), 500)
+    }   
+
         }
 
         const handleChange = (event) => {
@@ -158,7 +173,7 @@ const Register = () => {
           
     
     return (
-        
+     
         <section className="register">
             <div className="register__card">
                 <div className="register__left">
@@ -181,14 +196,14 @@ const Register = () => {
                         <div className='register-form__row'>
                             <div className='register-form__input'>
                               
-                            <label className='register-form-name' htmlFor='p_username'>Username: </label>
+                            <label className='register-form-name' htmlFor='p_username'>Username:
                                 <span className={validName ? "valid" : "hide"}>
                                     <FontAwesomeIcon icon={faCheck }  className="icon-add"/>
                                 </span>
                                 <span className={validName || !p_username ? "hide" : "Invalid"}>
                                     <FontAwesomeIcon className='icon-times' icon={faTimes} />
                                 </span>
-                         
+                            </label>
                             <input
                                 className='register-username' 
                                 type="text" 
@@ -203,7 +218,7 @@ const Register = () => {
                                 aria-describedby = "uidnode"
                                 onFocus={() => setUserFocus(true)}
                                 onBlur={() => setUserFocus(false)}
-                                required
+                                 
                             />
                             </div>
                    
@@ -219,14 +234,14 @@ const Register = () => {
                         <div className='register-form__row'>
                             <div className='register-form__input'>
                               
-                            <label className='register-form-name' htmlFor='p_email'>Email: </label>
+                            <label className='register-form-name' htmlFor='p_email'>Email: 
                                 <span className={validEmail ? "valid" : "hide"}>
                                     <FontAwesomeIcon icon={faCheck }  className="icon-add"/>
                                 </span>
                                 <span className={validEmail || !p_email ? "hide" : "Invalid"}>
                                     <FontAwesomeIcon className='icon-times' icon={faTimes} />
                                 </span>
-
+                            </label>
                             <input 
                                 className='register-email'
                                 type="email" 
@@ -239,7 +254,7 @@ const Register = () => {
                                 aria-describedby = "uidnode"
                                 onFocus={() => setEmailFocus(true)}
                                 onBlur={() => setEmailFocus(false)}
-                                required
+                                 
                             /> 
                          
                             </div>
@@ -255,13 +270,14 @@ const Register = () => {
                         <div className='register-form__row'>
                             <div className='register-form__input'>
                               
-                            <label className='register-form-name' htmlFor='p_password'>Password: </label>
+                            <label className='register-form-name' htmlFor='p_password'>Password: 
                                 <span className={validPwd ? "valid" : "hide"}>
                                     <FontAwesomeIcon icon={faCheck }  className="icon-add"/>
                                 </span>
                                 <span className={validPwd || !p_password ? "hide" : "Invalid"}>
                                     <FontAwesomeIcon className='icon-times' icon={faTimes} />
                                 </span>
+                            </label>
 
                             <input 
                                 className='register-password'
@@ -275,7 +291,7 @@ const Register = () => {
                                 aria-describedby = "uidnode"
                                 onFocus={() => setPwdFocus(true)}
                                 onBlur={() => setPwdFocus(false)}
-                                required
+                                 
                             /> 
                          
                             </div>
@@ -292,14 +308,14 @@ const Register = () => {
                         <div className='register-form__row'>
                             <div className='register-form__input'>
                               
-                            <label className='register-form-name' htmlFor='p_password'>Confirm Password: </label>
+                            <label className='register-form-name' htmlFor='p_password'>Confirm Password: 
                                 <span className={validMatch && matchPwd ? "valid" : "hide"}>
                                     <FontAwesomeIcon icon={faCheck }  className="icon-add"/>
                                 </span>
                                 <span className={validMatch || !matchPwd ? "hide" : "Invalid"}>
                                     <FontAwesomeIcon className='icon-times' icon={faTimes} />
                                 </span>
-
+                            </label>
                             <input 
                                 className='register-password'
                                 type="password" 
@@ -312,7 +328,7 @@ const Register = () => {
                                 aria-describedby = "confirmnote"
                                 onFocus={() => setMatchFocus(true)}
                                 onBlur={() => setMatchFocus(false)}
-                                required
+                                 
                             /> 
                          
                             </div>
@@ -327,7 +343,7 @@ const Register = () => {
                         <div className='register-form__row'>
                             <div className='register-form__input'>
                               
-                            <label className='register-form-name' htmlFor='p_fullname'>Enter Your Full Name: </label>
+                            <label className='register-form-name' htmlFor='p_fullname'>Enter Your Full Name: 
                             <span className={validFullName ? "valid" : "hide"}>
                                     <FontAwesomeIcon icon={faCheck }  className="icon-add"/>
                                 </span>
@@ -335,7 +351,7 @@ const Register = () => {
                                     <FontAwesomeIcon className='icon-times' icon={faTimes} />
                                 </span>
 
-
+                            </label>
                             <input 
                                 className='register-fullname'
                                 type="text" 
@@ -348,7 +364,7 @@ const Register = () => {
                                 aria-describedby = "uidnote"
                                 onFocus={() => setFullNameFocus(true)}
                                 onBlur={() => setFullNameFocus(false)}
-                                required
+                                 
                                  
                             />
           
@@ -364,7 +380,7 @@ const Register = () => {
                         <div className='register-form__row'>
                             <div className='register-form__input'>
                               
-                            <label className='register-form-name' htmlFor='p_contact'>Phone Number: </label>
+                            <label className='register-form-name' htmlFor='p_contact'>Phone Number: 
                             <span className={validPhone ? "valid" : "hide"}>
                                     <FontAwesomeIcon icon={faCheck }  className="icon-add"/>
                                 </span>
@@ -372,7 +388,7 @@ const Register = () => {
                                     <FontAwesomeIcon className='icon-times' icon={faTimes} />
                                 </span>
 
-
+                            </label>
                             <input 
                                 className='register-phone'
                                 type="text" 
@@ -385,7 +401,7 @@ const Register = () => {
                                 aria-describedby = "uidnote"
                                 onFocus={() => setPhoneFocus(true)}
                                 onBlur={() => setPhoneFocus(false)}
-                                required
+                                 
                                  
                             />
           
@@ -402,14 +418,14 @@ const Register = () => {
                         <div className='register-form__row'>
                             <div className='register-form__input'>
                               
-                            <label className='register-form-name' htmlFor='p_birthdate'>Birth Date: </label>
+                            <label className='register-form-name' htmlFor='p_birthdate'>Birth Date: 
                             <span className={valiDate ? "valid" : "hide"}>
                                     <FontAwesomeIcon icon={faCheck }  className="icon-add"/>
                                 </span>
                                 <span className={valiDate || !p_birthdate ? "hide" : "Invalid"}>
                                     <FontAwesomeIcon className='icon-times' icon={faTimes} />
                                 </span>
-
+                            </label>
 
                             <input 
                                 className='register-birthdate'
@@ -423,7 +439,7 @@ const Register = () => {
                                 aria-describedby = "uidnote"
                                 onFocus={() => setDateFocus(true)}
                                 onBlur={() => setDateFocus(false)}
-                                required
+                                 
                                  
                             />
           
@@ -436,25 +452,19 @@ const Register = () => {
                             </p>
                         </div>
                      
-                     
-                     
-                     
-                     
-                     
-
-                 
-                
                   
                         {err && err}            
 
-                        <button className='book-register' disabled={!validName || !validPwd || !validMatch ? true : false}>Sign Up</button>
+                
+                            <button className='book-register'>Sign Up</button>
+              
 
                     
                     </form>
                 </div>
             </div>
         </section>
-
+          
     )
 }
 

@@ -7,7 +7,7 @@ const LOGIN_URL = '/auth'
 
 const Login = () => {
 
-    const {setAuth} = useContext(AuthContext)
+    // const {setAuth} = useContext(AuthContext)
 
     const userRef = useRef();
     const errRef = useRef();
@@ -37,12 +37,12 @@ const Login = () => {
                 withCredentials: true
             });
 
-            const accessToken = response?.data?.accessToken;
-            const roles = response?.data?.roles;
-            setAuth({p_email, p_password, roles, accessToken})
-            setEmail('')
-            setPassword('')
-            setSucess(true)
+            // const accessToken = response?.data?.accessToken;
+            // const roles = response?.data?.roles;
+            // setAuth({p_email, p_password, roles, accessToken})
+            // setEmail('')
+            // setPassword('')
+            // setSucess(true)
         }catch{
             // if(!err?.response){
             //     setErrMsg("No Server Response")

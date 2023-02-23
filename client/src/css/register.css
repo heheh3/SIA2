@@ -16,12 +16,12 @@
     justify-content: center;
 }
 .register__card{
-    width: 50%;
+    width: 60%;
     display: flex;
     flex-direction: row-reverse;
     background-color: white;
     border-radius: 10px;
-    min-height: 600px;
+    max-height: 700px;
     overflow: hidden;
 }
 
@@ -79,19 +79,22 @@ button.login-button{
     padding: 50px;
     display: flex;
     flex-direction: column;
-    gap: 50px;
+    gap: 10px;
     justify-content: center;
+    position: relative;
+ 
+
 }
 
 .register__right-title{
-    margin-bottom: -17%;
+
     color: rgb(26, 109, 109);
 }
             
 form.register-form{
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 20px;
 }
                 
 input[type="text"].register-username ,
@@ -106,7 +109,8 @@ input[type="date"].register-birthdate
     padding: 20px 10px;
     outline: none;
     border-radius: 0;
-    max-width: 200px;
+    width: 200px;   
+
 
 }
 
@@ -132,21 +136,27 @@ input[type="text"].register-username, input[type="text"].register-phone {
                     
 }
 
+
 .register-form__row{
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .register-form-name{
     text-align: left;
     color: rgb(26, 109, 109);
     margin-right: 15px;
+    font-size: 1rem;
 }
 
 .register-form__input{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
+
 
 
 }
@@ -168,6 +178,8 @@ input[type="text"].register-username, input[type="text"].register-phone {
     padding: 10px;
     margin-top: 10px;
     font-size: 0.85rem;
+    width: 100%;
+ 
 }
       
 .hide{
