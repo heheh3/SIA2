@@ -24,6 +24,7 @@ import ProfileSettings from './pages/ProfileSettings';
 import MedicalHistory from './pages/MedicalHistory';
 import AppointmentHistory from './pages/AppointmentHistory';
 import UpdatePatient from './pages/UpdatePatient';
+import Walkin from './pages/Walkin';
 
 function App() {
   return (
@@ -43,8 +44,10 @@ function App() {
           <Route path='/admin/completed' element={<Completed />} />
 
           <Route path='/admin/user' element={<PatientTable />} />
-          <Route path='/admin/user/update/:id' element={<UpdatePatient />} />
+          <Route path='/allergies' element={<Allergies />} /> 
 
+
+          <Route path='/admin/walk-in' element={<Walkin />} /> 
 
           <Route path="/appointment" element={<Appointment />} />
           <Route path='/aboutUs' element={<AboutUs />} />

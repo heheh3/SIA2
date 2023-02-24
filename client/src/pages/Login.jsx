@@ -1,17 +1,17 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 import { Link, useNavigate } from "react-router-dom"
 import "../css/login.css";
 import { AuthContext } from "../context/authContext";
 
-
-
-
 const Login = () => {
+
+    
     const [inputs, setInputs] = useState({
         p_username: "",
         p_password: "",
       });
       const [err, setErr] = useState(null);
+      const errRef = useRef();
     
       const navigate = useNavigate()
     
@@ -19,16 +19,25 @@ const Login = () => {
         setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
       };
       const { login } = useContext(AuthContext);
-    
+
+    // Username: admin 
+    // Password: Admin123@
+
       const handleLogin = async (e) => {
         e.preventDefault();
         try {
           await login(inputs);
-            setTimeout(()=> navigate("/appointment/"), 500)
+            if(inputs.p_username === "admin"){
+              setTimeout(()=> navigate("/admin/appointment"), 500)
+            } else{
+              setTimeout(()=> navigate("/appointment/"), 500)
+            } 
+           
    
 
         } catch (err) {
           setErr(err.response.data);
+          errRef.current.focus()
       
         
         }
@@ -75,7 +84,10 @@ const Login = () => {
                             
                         />
                         
-                        {err && err}
+                         <p ref={errRef} className={err && err ? "errorStyle" : "offscreen"} aria-live="assertive">  {err && err }</p>
+              
+                
+                      
                         <input type="submit" className='book-login' value="Login" />
 
                     </form>

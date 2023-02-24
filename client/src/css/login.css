@@ -1,3 +1,14 @@
+:root{
+    --white: #ffffff;
+    --gray: #706c6c;
+    --white-contrast: #E5EDED;
+    --blue-dark-teal: #1EBEB6;
+    --blue-darker-teal: #38B1B1;
+    --blue-light-teal: #50fcf3;
+    --blue-lighter-teal: #E0F9F8;
+} 
+
+
 .login{
     height: 100vh;
     background-color: rgb(111, 183, 183);
@@ -130,4 +141,12 @@ input[type="submit"].book-login{
  input[type="submit"].book-login:hover{
     background-color: rgba(72, 128, 129, 0.8);
             
+ }
+
+.errorStyle{
+    color: var(--white);
+    background-color: var(--blue-darker-teal);
+    padding: 10px;
+    border-radius: 5px
+
  }

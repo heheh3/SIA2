@@ -123,6 +123,7 @@ nav ul li a.active{
     margin-right: 5px;
     width: 30px;
     height: 30px;
+    color: white;
 }
 
 @media (min-width: 1150px){

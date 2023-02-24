@@ -4,7 +4,7 @@ import { db } from "../connection.js";
 
 
 export const users_get = (req, res) =>{
-    const sqlGet = "SELECT * FROM users_db"
+    const sqlGet = "SELECT * FROM users_db where NOT p_username = 'admin' "
 
     db.query(sqlGet, (error, result)=>{
         res.send(result);
