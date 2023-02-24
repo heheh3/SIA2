@@ -42,7 +42,8 @@ function App() {
           <Route path='/admin/employee/update/:id' element={<EmployeeUpdate />} />
 
           <Route path='/admin/completed' element={<Completed />} />
-
+          <Route path='/admin/user/update/:id' element={<UpdatePatient />} />
+          
           <Route path='/admin/user' element={<PatientTable />} />
           <Route path='/allergies' element={<Allergies />} /> 
 

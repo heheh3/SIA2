@@ -60,6 +60,23 @@ const ProfileSettings = () => {
         setTimeout(()=> navigate("/profile/profile-settings"),500)
       }
     }
+
+    
+  // useEffect (() => {
+
+  //   axios.get(`http://localhost:5000/admin/patient/get/${id}`)
+  //   .then(response => {
+  //     const { b_date, b_time, b_procedure, b_note, b_status } = response.data[0];
+  //     const isoDateString = format(new Date(b_date), 'yyyy-MM-dd');
+  //     const parsedDate = parseISO(isoDateString);
+
+  //     setState({b_date: parsedDate, b_time: b_time, b_procedure: b_procedure, b_note: b_note, b_status: b_status}); 
+  //   }).catch(error => {
+  //     console.error(error);
+  //   });
+      
+  // }, [id])
+
   
 
 

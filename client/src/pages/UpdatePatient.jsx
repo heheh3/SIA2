@@ -64,7 +64,7 @@ const UpdatePatient = () => {
           p_contact,
           p_birthdate,  
       }).then(()=>{
-        setState({p_username: "", p_email: "", p_fullname: "", p_contact: "", p_birthdate: ""});
+        setState({user_id: null, p_username: "", p_email: "", p_fullname: "", p_contact: "", p_birthdate: ""});
         toast.success("Profile Settings Updated Successfully");
         toast.success(p_fullname);
       
