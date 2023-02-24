@@ -57,14 +57,25 @@
 button.register-button{
     width: 50%;
     padding: 10px;
-    border: none;
-    background-color: white;
-    color: rgb(26, 109, 109);
-    font-weight: 700;
+    color: white;
+    font-weight: 500;
     cursor: pointer;
     display: flex;
     justify-content: center;
+    background-color: transparent;
+    border: 1px solid white;
+   
 }
+
+button.register-button:hover{
+    background-color: white;
+    color: rgb(26, 109, 109);
+    border: 1px solid rgb(26, 109, 109);
+    font-weight: 700;
+}
+  
+ 
+
      
 
 
@@ -97,11 +108,12 @@ button.register-button{
     gap: 30px;
 }
                 
-input[type="email"].login__form-email , input[type="password"].login__form-password{
+input[type="text"].login__form-username , input[type="password"].login__form-password{
     border: none;
     border-bottom: 1px solid lightgray;
     padding: 20px 10px;
-                
+    border-radius: 0;
+    outline: none;
 }
                 
 input[type="submit"].book-login{
@@ -112,5 +124,10 @@ input[type="submit"].book-login{
     color: white;
     font-weight: bold;
     cursor: pointer;
+            
+ }
+
+ input[type="submit"].book-login:hover{
+    background-color: rgba(72, 128, 129, 0.8);
             
  }

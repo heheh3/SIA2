@@ -1,72 +1,41 @@
-import React, { useRef ,useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from "react-router-dom"
-import "../css/login.css"
-import AuthContext from '../js/authContext';
-import axios from "axios";
-const LOGIN_URL = '/auth'
+import "../css/login.css";
+import { AuthContext } from "../context/authContext";
+
+
+
 
 const Login = () => {
-
-    // const {setAuth} = useContext(AuthContext)
-
-    const userRef = useRef();
-    const errRef = useRef();
-
-    const[p_email, setEmail] = useState('')
-    const[p_password, setPassword] = useState('')
-
-    const[errMsg, setErrMsg] = useState('')
-    const[success, setSucess] = useState(false)
-
-    useEffect(()=>{
-        userRef.current.focus()
-    }, [])
-
-
-    useEffect(()=>{
-        setErrMsg('')
-    }, [p_email, p_password])
-
-    const handleSubmit = async(e) =>{
+    const [inputs, setInputs] = useState({
+        p_username: "",
+        p_password: "",
+      });
+      const [err, setErr] = useState(null);
+    
+      const navigate = useNavigate()
+    
+      const handleChange = (e) => {
+        setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+      };
+      const { login } = useContext(AuthContext);
+    
+      const handleLogin = async (e) => {
         e.preventDefault();
+        try {
+          await login(inputs);
+            setTimeout(()=> navigate("/appointment/"), 500)
+   
 
-        try{
-            const response = await axios.post(LOGIN_URL, JSON.stringify({p_email, p_password}),
-            {
-                headers: {'Content-Type': 'application/json'},
-                withCredentials: true
-            });
-
-            // const accessToken = response?.data?.accessToken;
-            // const roles = response?.data?.roles;
-            // setAuth({p_email, p_password, roles, accessToken})
-            // setEmail('')
-            // setPassword('')
-            // setSucess(true)
-        }catch{
-            // if(!err?.response){
-            //     setErrMsg("No Server Response")
-            // }else if(err.response?.status === 400){
-            //     setErrMsg("Missing Username or Password")
-
-            // }else if(err.response?.status === 401){
-            //     setErrMsg("Unauthorized")
-            // }else{
-            //     setErrMsg("Login Failed")
-            // }
-            errRef.current.focus();
-        }
+        } catch (err) {
+          setErr(err.response.data);
       
-    }
-
-    return (
-        <>
-            {success ? (
-                <section>
-                    <h1>Hello</h1>
-                </section>
-            ) : (
         
+        }
+      };
+    
+    return (
+   
         <div className="login">
             <div className="card">
                 <div className="login__left">
@@ -84,18 +53,15 @@ const Login = () => {
                 </div>
                 <div className="login__right">
                     <h1 className='login__right-title'>Login</h1>
-                    <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-                    <form onSubmit={handleSubmit} className='login__form'>
+                    <form onSubmit={handleLogin} className='login__form'>
                         <input 
-                            className='login__form-email' 
-                            type="email"
-                            ref={userRef}
+                            className='login__form-username' 
+                            type="text"
                             autoComplete="off" 
-                            onChange={(e) => setEmail(e.target.value)}
-                            placeholder="Email" 
-                            id="p_email"
-                            name = "p_email"
-                            value={p_email} 
+                            onChange={handleChange}
+                            placeholder="Username" 
+                            id="p_username"
+                            name = "p_username"
                             required 
                         />
                         <input 
@@ -103,21 +69,19 @@ const Login = () => {
                             type="password" 
                             placeholder="Password" 
                             name = "p_password" 
-                            onChange={(e) => setPassword(e.target.value)}
+                            onChange={handleChange}
                             id="p_password"
-                            value={p_password} 
                             required  
                             
                         />
                         
+                        {err && err}
                         <input type="submit" className='book-login' value="Login" />
 
                     </form>
                 </div>
             </div>
         </div>
-        )}
-            </>
     )
     
 }

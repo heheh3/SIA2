@@ -1,5 +1,6 @@
 import {parseISO, format} from 'date-fns';
 import { db } from "../connection.js";
+import moment from 'moment'
 
 export const appointment_post = (req, res) =>{
     const b_date = req.body.b_date;

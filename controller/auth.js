@@ -1,6 +1,7 @@
 import { db } from "../connection.js";
 import bcrypt from "bcrypt";
 import {parseISO, format} from 'date-fns';
+import jwt from "jsonwebtoken";
 
 
 export const register = (req, res) =>{
@@ -40,10 +41,6 @@ export const register = (req, res) =>{
     })
 
 
-
-    
-
-
 }
 
 
@@ -52,10 +49,34 @@ export const register = (req, res) =>{
 
 export const login = (req, res) =>{
 
+    const p_username = req.body.p_username;
+
+
+    const q = "SELECT * FROM users_db WHERE p_username = ?";
+    db.query(q, [p_username], (err, data)=>{
+        if(err) return res.status(500).json(err);
+        if(data.length === 0 ) return res.status(404).json("User Not Found!");
+
+        const checkPassword = bcrypt.compareSync(req.body.p_password, data[0].p_password);
+
+        if (!checkPassword) return res.status(400).json("Wrong Password!");
+
+        const token = jwt.sign({user_id:data[0].user_id}, "secretkey");
+
+        const { p_password, ...others } = data[0];
+
+        res.cookie("accessToken", token, {
+            httpOnly: true,
+        }).status(200).json(others);
+
     
-
+    })
 }
 
-export const logout = (req, res) =>{
-
-}
+export const logout = (req, res) => {
+    res.clearCookie("accessToken",{
+      secure:true,
+      sameSite:"none"
+    }).status(200).json("User has been logged out.")
+  };
+  

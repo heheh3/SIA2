@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import {useNavigate, useParams, Link } from "react-router-dom"
+import React, { useState, useEffect, useRef, useContext } from 'react';
+import {useNavigate, useParams } from "react-router-dom"
 import ProfileNavbar from './ProfileNavbar'
 import PatientNavbar from './PatientNavbar'
 import "../css/Profile.css";
@@ -7,9 +7,10 @@ import { FaAt  } from "react-icons/fa";
 import axios from "axios";
 import {toast} from "react-toastify";
 import { parseISO, format } from 'date-fns';
+import { AuthContext } from "../context/authContext";
+
 
 const initialState = {
-  user_id: "",
   p_username: "",
   p_email: "",
   p_fullname: "",
@@ -19,32 +20,24 @@ const initialState = {
 
 
 
+
 const ProfileSettings = () => {
   const [state, setState] = useState(initialState);
-  const {user_id, p_username, p_email, p_fullname , p_contact, p_birthdate} = state;
+  const {p_username, p_email, p_fullname , p_contact, p_birthdate} = state;
   const {id} = useParams();
 
   const navigate = useNavigate();
 
-  useEffect (() => {
-
-    axios.get(`http://localhost:5000/admin/patient/get/${id}`)
-    .then(response => {
-      const {user_id, p_username, p_email, p_fullname, p_contact, p_birthdate } = response.data[0];
-      const isoDateString = format(new Date(p_birthdate), 'yyyy-MM-dd');
-      const parsedDate = parseISO(isoDateString);
-
-      setState({user_id: user_id, p_username: p_username, p_email: p_email, p_fullname: p_fullname, p_contact: p_contact, p_birthdate: parsedDate}); 
-    }).catch(error => {
-      console.error(error);
-    });
-      
-  }, [id])
+  const { currentUser } = useContext(AuthContext);
 
   const handleSubmit = (e) =>{
     e.preventDefault();
     if (!p_username || !p_email || !p_fullname || !p_contact || !p_birthdate ){
+        
         toast.error("Please provide value into each input field");
+        toast.error(p_username )
+        console.log(p_username)
+        console.log(p_email)
 
     } else{
         axios.put(`http://localhost:5000/admin/patient/update/${id}`, {
@@ -100,7 +93,8 @@ const handleChange = (event) => {
                           className='patient__input' 
                           placeholder='' 
                           onChange={handleChange}
-                          value={user_id || ""} 
+                          value={currentUser.user_id} 
+                  
                           disabled 
                           />
 
@@ -113,7 +107,7 @@ const handleChange = (event) => {
                           className='patient__input' 
                           onChange={handleChange}
                           placeholder='Enter your Full Name ...' 
-                          value={p_fullname || ""} 
+                          value={p_fullname || "" || currentUser.p_fullname} 
 
                           />
                       </div>
@@ -130,7 +124,7 @@ const handleChange = (event) => {
                             className='patient__input username__style' 
                             onChange={handleChange}
                             placeholder='Enter your Username ...' 
-                            value={p_username || ""} 
+                            value={p_username || "" || currentUser.p_username} 
                           />
               
                         </div>
@@ -144,7 +138,7 @@ const handleChange = (event) => {
                           className='patient__input' 
                           onChange={handleChange}
                           placeholder='Enter your Email ...' 
-                          value={p_email || ""} 
+                          value={p_email || "" || currentUser.p_email} 
 
                             />
                       </div>
@@ -158,7 +152,7 @@ const handleChange = (event) => {
                           className='patient__input' 
                           onChange={handleChange}
                           placeholder='Enter your Contact Number ...' 
-                          value={p_contact || ""} 
+                          value={p_contact || "" || currentUser.p_contact} 
 
                         />
                       </div>
@@ -173,7 +167,7 @@ const handleChange = (event) => {
                           ref={ref}  
                           onFocus={() => (ref.current.type = "date")}
                           onBlur={() => (ref.current.type = "date")}            
-                          value={p_birthdate || ""} 
+                          value={p_birthdate || "" || currentUser.p_birthdate} 
 
                               />
                       </div>

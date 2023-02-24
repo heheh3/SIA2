@@ -111,7 +111,21 @@ nav ul li a.active{
     border-radius: 15px;
 }
 
-@media (min-width:1024px){
+.username__navbar{
+    border-bottom:  1px solid white;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-right: 20px;
+
+}
+
+.User-Icon{
+    margin-right: 5px;
+    width: 30px;
+    height: 30px;
+}
+
+@media (min-width: 1150px){
     nav ul{
         display: flex;
 

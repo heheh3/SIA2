@@ -23,6 +23,7 @@ import PatientTable from './pages/PatientTable';
 import ProfileSettings from './pages/ProfileSettings';
 import MedicalHistory from './pages/MedicalHistory';
 import AppointmentHistory from './pages/AppointmentHistory';
+import UpdatePatient from './pages/UpdatePatient';
 
 function App() {
   return (
@@ -41,7 +42,9 @@ function App() {
 
           <Route path='/admin/completed' element={<Completed />} />
 
-          <Route path='/admin/patient' element={<PatientTable />} />
+          <Route path='/admin/user' element={<PatientTable />} />
+          <Route path='/admin/user/update/:id' element={<UpdatePatient />} />
+
 
           <Route path="/appointment" element={<Appointment />} />
           <Route path='/aboutUs' element={<AboutUs />} />

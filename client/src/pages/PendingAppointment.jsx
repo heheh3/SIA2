@@ -72,7 +72,7 @@ const PendingAppointment = () => {
                                 <tr key={item.patientID}>
                                     <th scope='row'>{index+1}</th>
                                     <td>{item.patientID}</td>
-                                    <td>{item.p_name}</td>
+                                    <td>{item.p_fullname}</td>
                                     <td>{item.b_date}</td>
                                     <td>{item.b_time}</td>
                                     <td>{item.b_procedure}</td>

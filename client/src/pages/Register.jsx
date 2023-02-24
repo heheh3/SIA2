@@ -1,21 +1,18 @@
-import React, {useRef, useState, useEffect, useContext } from 'react';
-import {useNavigate, useParams, Link } from "react-router-dom"
+import React, {useRef, useState, useEffect } from 'react';
+import {useNavigate, Link } from "react-router-dom"
 import "../css/register.css";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import {toast} from "react-toastify";
-import DatePicker from 'react-datepicker';
-import { parseISO, format } from 'date-fns';
-import {faCheck, faTimes, faInfoCircle, faC} from '@fortawesome/free-solid-svg-icons';
+import {faCheck, faTimes, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Login from './Login';
 
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-const EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
-const FULLNAME_REGEX = /(^[A-Za-z]{3,16})([ ]{0,1})([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})/
-const PHONE_REGEX = /^(09|\+639)\d{9}$/
-const DATE_REGEX = /((0?[13578]|10|12)(-|\/)((0[0-9])|([12])([0-9]?)|(3[01]?))(-|\/)((\d{4})|(\d{2}))|(0?[2469]|11)(-|\/)((0[0-9])|([12])([0-9]?)|(3[0]?))(-|\/)((\d{2,4})))/
+const EMAIL_REGEX = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
+const FULLNAME_REGEX = /(^[A-Za-z]{3,16})([ ]{0,1})([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})/;
+const PHONE_REGEX = /^(09|\+639)\d{9}$/;
+const DATE_REGEX = /((0?[13578]|10|12)(-|\/)((0[0-9])|([12])([0-9]?)|(3[01]?))(-|\/)((\d{4})|(\d{2}))|(0?[2469]|11)(-|\/)((0[0-9])|([12])([0-9]?)|(3[0]?))(-|\/)((\d{2,4})))/;
 
 const initialState = {
     p_username: "",
@@ -34,13 +31,9 @@ const Register = () => {
     const [state, setState] = useState(initialState);
     const {p_username, p_email, p_password, p_fullname, p_contact, p_birthdate} = state;
 
-
-    
-    const [user, setUser] = useState('')
     const [validName, setValidName]  = useState(false)
     const [userFocus, setUserFocus]  = useState(false)
 
-    const [pwd, setPwd] = useState('')
     const [validPwd, setValidPwd]  = useState(false)
     const [pwdFocus, setPwdFocus]  = useState(false)
     
@@ -61,7 +54,6 @@ const Register = () => {
     const [matchFocus, setMatchFocus]  = useState(false)
 
     const [errMsg, setErrMsg]  = useState("")
-    const [success, setSuccess]  = useState(false)
 
     const userRef = useRef();
     const errRef = useRef();
@@ -80,7 +72,6 @@ const Register = () => {
     useEffect(()=>{
         const result = PWD_REGEX.test(p_password)
         console.log(result);
-        console.log(p_username);
         setValidPwd(result);
         const match = p_password === matchPwd;
         setValidMatch(match)
@@ -121,15 +112,13 @@ const Register = () => {
     }, [p_username, p_password, matchPwd]);
     const navigate = useNavigate();
 
-    const [err, setErr] = useState(null)
-
     const handleSubmit = (e) =>{
         e.preventDefault();
 
         if (!p_username || !p_email || !p_password || !p_fullname || !p_contact || !p_birthdate){
             toast.error("Please provide value into each input field");
         }else{
-            const response =  axios.post("http://localhost:5000/register", {
+            axios.post("http://localhost:5000/register", {
                 p_username,
                 p_email,
                 p_password,
@@ -139,39 +128,26 @@ const Register = () => {
             
             }).then(()=>{
                 setState({p_username: "", p_email: "", p_password: "", p_fullname: "", p_contact: "", p_birthdate: "" });
-                setSuccess(true);
                 toast.success("Registered Successfully");   
                 setTimeout(()=> navigate("/login"), 500)
             }).catch((err) =>{
                  if (!err.response){
                     setErrMsg("No Server Response")
-                } else if (err.response?.status == 409 ){
+                } else if (err.response?.status === 409 ){
                     setErrMsg("Username Taken!")
                 } else{
                     setErrMsg("Email is Already Exists!")
                 }
-                // toast.success(err)    
-                // setErrMsg("Username Already Exists")
                 errRef.current.focus()
 
         })
-            
-          
-       
-
             }
             
         }
-               
-              
-   
-
         const handleChange = (event) => {
             const {name, value} = event.target;
             setState({...state, [name]: value});
           }
-          
-    
     return (
      
         <section className="register">
@@ -451,15 +427,7 @@ const Register = () => {
                                 <FontAwesomeIcon icon={faInfoCircle} /> Date Must be Valid!<br />
                             </p>
                         </div>
-                     
-                  
-                        {err && err}            
-
-                
                             <button className='book-register'>Sign Up</button>
-              
-
-                    
                     </form>
                 </div>
             </div>
