@@ -54,9 +54,9 @@ function App() {
           <Route path='/aboutUs' element={<AboutUs />} />
           
           <Route path='/profile' element={<ProfileSettings />} />
-          <Route path='/profile/profile-settings' element={<ProfileSettings />} />
-          <Route path='/profile/medical-history' element={<MedicalHistory />} />
-          <Route path='/profile/appointment-history' element={<AppointmentHistory />} />
+          <Route path='/profile/profile-settings/:id' element={<ProfileSettings />} />
+          <Route path='/profile/medical-history/:id' element={<MedicalHistory />} />
+          <Route path='/profile/appointment-history/:id' element={<AppointmentHistory />} />
 
           <Route path='/reminder' element={<ReminderAppointment />} />
 

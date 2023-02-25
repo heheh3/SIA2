@@ -34,10 +34,10 @@ const UpdatePatient = () => {
     axios.get(`http://localhost:5000/admin/patient/get/${id}`)
     .then(response => {
       const {user_id, p_username, p_email, p_fullname, p_contact, p_birthdate } = response.data[0];
-      const isoDateString = format(new Date(p_birthdate), 'yyyy-MM-dd');
-      const parsedDate = parseISO(isoDateString);
+      const isoDateString = format(new Date(p_birthdate), 'MM/dd/yyyy');
+      // const parsedDate = parseISO(isoDateString);
 
-      setState({user_id: user_id,p_username: p_username, p_email: p_email, p_fullname: p_fullname, p_contact: p_contact, p_birthdate: parsedDate}); 
+      setState({user_id: user_id,p_username: p_username, p_email: p_email, p_fullname: p_fullname, p_contact: p_contact, p_birthdate: isoDateString}); 
     }).catch(error => {
       console.error(error);
     });

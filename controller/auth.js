@@ -27,7 +27,7 @@ export const register = (req, res) =>{
             const hashedPassword = bcrypt.hashSync(p_password, salt)
             const date = parseISO(p_birthdate);
             console.log(date)
-            const formattedDate = format(date, 'EEE, MMM dd, yyyy');
+            const formattedDate = format(date, 'MM/dd/yyyy');
             console.log(p_birthdate)
             console.log(formattedDate)
 

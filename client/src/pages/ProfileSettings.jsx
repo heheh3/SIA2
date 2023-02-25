@@ -6,7 +6,7 @@ import "../css/Profile.css";
 import { FaAt  } from "react-icons/fa";
 import axios from "axios";
 import {toast} from "react-toastify";
-import { parseISO, format } from 'date-fns';
+import {format } from 'date-fns';
 import { AuthContext } from "../context/authContext";
 
 
@@ -50,33 +50,32 @@ const ProfileSettings = () => {
       
         .then(()=>{
           setState({p_username: "", p_email: "", p_fullname: "", p_contact: "", p_birthdate: ""});
-      
+          toast.success("Profile Settings Updated Successfully");
+          setTimeout(()=> navigate(`/profile/profile-settings/${currentUser.user_id}`),10000)
         
         })
         .catch((err) => toast.error(err.response.data));
-        toast.success("Profile Settings Updated Successfully");
-      
-
-        setTimeout(()=> navigate("/profile/profile-settings"),500)
+        
       }
     }
 
     
-  // useEffect (() => {
+    useEffect (() => {
 
-  //   axios.get(`http://localhost:5000/admin/patient/get/${id}`)
-  //   .then(response => {
-  //     const { b_date, b_time, b_procedure, b_note, b_status } = response.data[0];
-  //     const isoDateString = format(new Date(b_date), 'yyyy-MM-dd');
-  //     const parsedDate = parseISO(isoDateString);
-
-  //     setState({b_date: parsedDate, b_time: b_time, b_procedure: b_procedure, b_note: b_note, b_status: b_status}); 
-  //   }).catch(error => {
-  //     console.error(error);
-  //   });
-      
-  // }, [id])
-
+      axios.get(`http://localhost:5000/admin/patient/get/${currentUser.user_id}`)
+      .then(response => {
+        const {user_id, p_username, p_email, p_fullname, p_contact, p_birthdate } = response.data[0];
+        const isoDateString = format(new Date(p_birthdate), 'MM/dd/yyyy');
+        console.log(p_birthdate)
+        
+  
+        setState({user_id: user_id,p_username: p_username, p_email: p_email, p_fullname: p_fullname, p_contact: p_contact, p_birthdate: isoDateString}); 
+      }).catch(error => {
+        console.error(error);
+      });
+        
+    }, [currentUser.user_id])
+  
   
 
 
@@ -182,8 +181,8 @@ const handleChange = (event) => {
                           onChange={handleChange}
                           placeholder='mm/dd/yyyy'
                           ref={ref}  
-                          onFocus={() => (ref.current.type = "date")}
-                          onBlur={() => (ref.current.type = "date")}            
+                          onFocus ={() => (ref.current.type = "date")}
+                          onBlur={() => (currentUser.p_birthdate)}     
                           value={p_birthdate || "" || currentUser.p_birthdate} 
 
                               />
