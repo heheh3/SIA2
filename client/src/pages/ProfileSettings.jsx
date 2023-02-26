@@ -6,7 +6,7 @@ import "../css/Profile.css";
 import { FaAt  } from "react-icons/fa";
 import axios from "axios";
 import {toast} from "react-toastify";
-import {format } from 'date-fns';
+import {parseISO, format } from 'date-fns';
 import { AuthContext } from "../context/authContext";
 
 
@@ -27,8 +27,8 @@ const ProfileSettings = () => {
   const {id} = useParams();
 
   const navigate = useNavigate();
-
   const { currentUser } = useContext(AuthContext);
+
 
   const handleSubmit = (e) =>{
     e.preventDefault();
@@ -59,15 +59,12 @@ const ProfileSettings = () => {
       }
     }
 
-    
     useEffect (() => {
 
       axios.get(`http://localhost:5000/admin/patient/get/${currentUser.user_id}`)
       .then(response => {
         const {user_id, p_username, p_email, p_fullname, p_contact, p_birthdate } = response.data[0];
         const isoDateString = format(new Date(p_birthdate), 'MM/dd/yyyy');
-        console.log(p_birthdate)
-        
   
         setState({user_id: user_id,p_username: p_username, p_email: p_email, p_fullname: p_fullname, p_contact: p_contact, p_birthdate: isoDateString}); 
       }).catch(error => {
@@ -76,8 +73,6 @@ const ProfileSettings = () => {
         
     }, [currentUser.user_id])
   
-  
-
 
 const handleChange = (event) => {
   const {name, value} = event.target;
@@ -179,10 +174,11 @@ const handleChange = (event) => {
                           id='p_birthdate'
                           className='patient__input' 
                           onChange={handleChange}
+                          dateFormat="MM-dd-yyyy"
                           placeholder='mm/dd/yyyy'
                           ref={ref}  
                           onFocus ={() => (ref.current.type = "date")}
-                          onBlur={() => (currentUser.p_birthdate)}     
+                          onBlur={() => (ref.current.type = "date")}     
                           value={p_birthdate || "" || currentUser.p_birthdate} 
 
                               />

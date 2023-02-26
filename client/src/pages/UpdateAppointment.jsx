@@ -37,7 +37,10 @@ const UpdateAppointment = () => {
     .then(response => {
       const { b_date, b_time, b_procedure, b_note, b_status } = response.data[0];
       const isoDateString = format(new Date(b_date), 'yyyy-MM-dd');
-        const parsedDate = parseISO(isoDateString);
+      const parsedDate = parseISO(isoDateString);
+
+      console.log(isoDateString)
+      console.log("parse:" + parsedDate)
 
       setState({b_date: parsedDate, b_time: b_time, b_procedure: b_procedure, b_note: b_note, b_status: b_status}); 
     }).catch(error => {
