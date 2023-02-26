@@ -38,4 +38,9 @@
 
 }
 
+.ProfileNavbar__list a.PNList.inactive{
+    padding-bottom: none;
+
+}
+
 
