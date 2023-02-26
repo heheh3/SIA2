@@ -18,7 +18,7 @@ export default function PatientNavbar() {
                 <ul>
                     <li><NavLink to="/appointment">HOME</NavLink></li>
                     <li><NavLink to="/aboutUs">ABOUT US</NavLink></li>
-                    <li><NavLink className='PNList active' to={`/profile/profile-settings/${currentUser.user_id}`}>MY PROFILE</NavLink></li>
+                    <li><NavLink className='PNList' to={`/profile/profile-settings/${currentUser.user_id}`}>MY PROFILE</NavLink></li>
                     <li><NavLink to="/reminder">REMINDER</NavLink></li>
                 </ul>
                 <ul>
