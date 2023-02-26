@@ -126,6 +126,7 @@ nav ul li a.active{
     color: white;
 }
 
+
 @media (min-width: 1150px){
     nav ul{
         display: flex;

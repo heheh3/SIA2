@@ -67,14 +67,14 @@ const UpdateAppointment = () => {
       
         .then(()=>{
           setState({b_date: "", b_time: "", b_procedure: "", b_note: "", b_status: ""});
+          toast.success("Appointment Updated Successfully");
+          setTimeout(()=> navigate("/admin/appointment"),500)
+          
       
         
         })
         .catch((err) => toast.error(err.response.data));
-        toast.success("Appointment Updated Successfully");
-      
-
-        setTimeout(()=> navigate("/admin/appointment"),500)
+        
       }
     }
   

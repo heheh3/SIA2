@@ -15,10 +15,10 @@ const router = express.Router()
 
 router.post("/appointment/post", appointment_post);
 router.get("/appointment/get", appointment_get);
-router.delete("/appointment/delete/:patientID", appointment_delete);
+router.delete("/appointment/delete/:a_ID", appointment_delete);
 
-router.get("/admin/appointment/get/:patientID", appointment_getUser);
-router.put("/admin/appointment/update/:patientID", appointment_updateUser);
+router.get("/admin/appointment/get/:a_ID", appointment_getUser);
+router.put("/admin/appointment/update/:a_ID", appointment_updateUser);
 
 router.get("/appointment/completed/get", appointment_getCompleted);
 

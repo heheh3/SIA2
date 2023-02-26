@@ -53,7 +53,6 @@ function App() {
           <Route path="/appointment" element={<Appointment />} />
           <Route path='/aboutUs' element={<AboutUs />} />
           
-          <Route path='/profile' element={<ProfileSettings />} />
           <Route path='/profile/profile-settings/:id' element={<ProfileSettings />} />
           <Route path='/profile/medical-history/:id' element={<MedicalHistory />} />
           <Route path='/profile/appointment-history/:id' element={<AppointmentHistory />} />

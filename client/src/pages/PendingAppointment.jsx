@@ -1,14 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { FaSearch  } from "react-icons/fa";
 import {Link} from "react-router-dom";
 import axios from 'axios';
 import AdminNavbar from './AdminNavbar';
 import '../css/Home.css';
 import { toast } from 'react-toastify';
-
-
-
-
 
 const PendingAppointment = () => {
     const [data, setData] = useState([]);
@@ -69,10 +65,10 @@ const PendingAppointment = () => {
                                 
                         }).map((item, index)=>{
                             return(
-                                <tr key={item.patientID}>
+                                <tr key={item.a_ID}>
                                     <th scope='row'>{index+1}</th>
+                                    <td>{item.a_ID}</td>
                                     <td>{item.patientID}</td>
-                                    <td>{item.p_fullname}</td>
                                     <td>{item.b_date}</td>
                                     <td>{item.b_time}</td>
                                     <td>{item.b_procedure}</td>
@@ -84,10 +80,10 @@ const PendingAppointment = () => {
                                         }>{item.b_status}</span></td>
                                     <td>
                                     
-                                        <Link to={`/admin/appointment/update/${item.patientID}`}>
+                                        <Link to={`/admin/appointment/update/${item.a_ID}`}>
                                             <button className='btn btn-view'>View/Edit</button>
                                         </Link>
-                                        <button className='btn btn-delete' onClick={() => deleteAppointment(item.patientID)}>Delete</button>
+                                        <button className='btn btn-delete' onClick={() => deleteAppointment(item.a_ID)}>Delete</button>
                                         
                                         
                                     </td>

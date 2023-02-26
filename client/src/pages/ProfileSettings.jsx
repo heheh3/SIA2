@@ -26,8 +26,9 @@ const ProfileSettings = () => {
   const {p_username, p_email, p_fullname , p_contact, p_birthdate} = state;
   const {id} = useParams();
 
-  const navigate = useNavigate();
   const { currentUser } = useContext(AuthContext);
+  
+ 
 
 
   const handleSubmit = (e) =>{
@@ -35,9 +36,7 @@ const ProfileSettings = () => {
     if (!p_username || !p_email || !p_fullname || !p_contact || !p_birthdate ){
         
         toast.error("Please provide value into each input field");
-        toast.error(p_username )
-        console.log(p_username)
-        console.log(p_email)
+      
 
     } else{
         axios.put(`http://localhost:5000/admin/patient/update/${id}`, {
@@ -51,7 +50,8 @@ const ProfileSettings = () => {
         .then(()=>{
           setState({p_username: "", p_email: "", p_fullname: "", p_contact: "", p_birthdate: ""});
           toast.success("Profile Settings Updated Successfully");
-          setTimeout(()=> navigate(`/profile/profile-settings/${currentUser.user_id}`),10000)
+          window.location.reload(false);
+        
         
         })
         .catch((err) => toast.error(err.response.data));
@@ -118,7 +118,7 @@ const handleChange = (event) => {
                           className='patient__input' 
                           onChange={handleChange}
                           placeholder='Enter your Full Name ...' 
-                          value={p_fullname || "" || currentUser.p_fullname} 
+                          value={p_fullname || ""} 
 
                           />
                       </div>
@@ -135,7 +135,8 @@ const handleChange = (event) => {
                             className='patient__input username__style' 
                             onChange={handleChange}
                             placeholder='Enter your Username ...' 
-                            value={p_username || "" || currentUser.p_username} 
+                            value={p_username || ""} 
+                            disabled
                           />
               
                         </div>
@@ -149,7 +150,7 @@ const handleChange = (event) => {
                           className='patient__input' 
                           onChange={handleChange}
                           placeholder='Enter your Email ...' 
-                          value={p_email || "" || currentUser.p_email} 
+                          value={p_email || ""} 
 
                             />
                       </div>
@@ -163,7 +164,7 @@ const handleChange = (event) => {
                           className='patient__input' 
                           onChange={handleChange}
                           placeholder='Enter your Contact Number ...' 
-                          value={p_contact || "" || currentUser.p_contact} 
+                          value={p_contact || ""} 
 
                         />
                       </div>
@@ -179,7 +180,7 @@ const handleChange = (event) => {
                           ref={ref}  
                           onFocus ={() => (ref.current.type = "date")}
                           onBlur={() => (ref.current.type = "date")}     
-                          value={p_birthdate || "" || currentUser.p_birthdate} 
+                          value={p_birthdate || ""} 
 
                               />
                       </div>
