@@ -74,7 +74,7 @@ const Completed = () => {
                                 <tr key={item.a_ID}>
                                     <th scope='row'>{index+1}</th>
                                     <td>{item.a_ID}</td>
-                                    <td>{item.patientID}</td>
+                                    <td>{item.p_fullname}</td>
                                     <td>{item.b_date}</td>
                                     <td>{item.b_time}</td>
                                     <td>{item.b_procedure}</td>

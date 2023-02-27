@@ -68,7 +68,7 @@ const PendingAppointment = () => {
                                 <tr key={item.a_ID}>
                                     <th scope='row'>{index+1}</th>
                                     <td>{item.a_ID}</td>
-                                    <td>{item.patientID}</td>
+                                    <td>{item.p_fullname}</td>
                                     <td>{item.b_date}</td>
                                     <td>{item.b_time}</td>
                                     <td>{item.b_procedure}</td>
@@ -76,7 +76,7 @@ const PendingAppointment = () => {
                                     <td><span  style={
                                         {backgroundColor: item.b_status === "In Progress" ? 'orange' : '' ||   item.b_status === "Pending" ? 'blue': '' ||
                                                 item.b_status === "Cancelled" ? 'red': '' ||  item.b_status === "Rescheduled" ? 'violet': '' ||  
-                                                item.b_status === "Completed" ? 'green': '', padding: '5px 10px', color: 'white', borderRadius: '10px', fontSize: '0.8rem', letterSpacing: "1.5px",}
+                                                item.b_status === "Completed" ? 'green': '' || item.b_status === "Walk-In" ? 'gray': '', padding: '5px 10px', color: 'white', borderRadius: '10px', fontSize: '0.8rem', letterSpacing: "1.5px",}
                                         }>{item.b_status}</span></td>
                                     <td>
                                     

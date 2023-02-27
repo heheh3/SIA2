@@ -29,7 +29,7 @@ export const appointment_post = (req, res) =>{
 }
 
 export const appointment_get = (req, res) =>{
-    const sqlGet = "SELECT * FROM booking_db WHERE NOT b_status = 'Completed' ORDER BY STR_TO_DATE(b_date,'%a, %b %d, %Y') ASC , STR_TO_DATE(b_time, '%h:%i%p') ASC";
+    const sqlGet = "SELECT * FROM booking_db as b JOIN users_db as u ON b.patientId = u.user_id WHERE NOT b_status = 'Completed' ORDER BY STR_TO_DATE(b_date,'%a, %b %d, %Y') ASC , STR_TO_DATE(b_time, '%h:%i%p') ASC";
 
     db.query(sqlGet, (error, result)=>{
         res.send(result);
@@ -83,7 +83,7 @@ export const appointment_updateUser = (req, res) =>{
 }
 
 export const appointment_getCompleted = (req, res) =>{
-    const sqlGet = "SELECT * FROM booking_db WHERE b_status = 'Completed' ORDER BY STR_TO_DATE(b_date,'%a, %b %d, %Y') ASC , STR_TO_DATE(b_time, '%h:%i%p') ASC";    
+    const sqlGet = "SELECT * FROM booking_db as b JOIN users_db as u ON b.patientId = u.user_id WHERE b_status = 'Completed' ORDER BY STR_TO_DATE(b_date,'%a, %b %d, %Y') ASC , STR_TO_DATE(b_time, '%h:%i%p') ASC";
     db.query(sqlGet, (error, result)=>{
         res.send(result);
     });
