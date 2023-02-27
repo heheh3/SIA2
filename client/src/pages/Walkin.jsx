@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import {useNavigate, useParams, Link } from "react-router-dom"
 import "../css/Appointment.css";
 import AdminNavbar from './AdminNavbar';
@@ -7,7 +7,6 @@ import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import {toast} from "react-toastify";
-import { parseISO, format } from 'date-fns';
 
 
 
@@ -21,9 +20,9 @@ const initialState = {
 
 
 
-const Walkin = () => {
+const Walkin = () => {  
   const [state, setState] = useState(initialState);
-  const {b_date, b_status, b_time, b_procedure, b_note} = state;
+  const { b_date, b_status, b_time, b_procedure, b_note} = state;
 
   const navigate = useNavigate();
   // const [b_date, setSelectedDate] = useState("")
@@ -34,6 +33,7 @@ const Walkin = () => {
     e.preventDefault();
     if (!b_date || !b_time || !b_procedure){
         toast.error("Please provide value into each input field");
+
     } else{
         axios.post("http://localhost:5000/appointment/post", {
             b_date,
@@ -43,13 +43,10 @@ const Walkin = () => {
             b_status
         })
         .then(()=>{
-            setState({b_date: "", b_time: "", b_procedure: "", b_note: ""});
+            setState({  b_date: "", b_time: "", b_procedure: "", b_note: ""})
+            toast.success("Appointment Added Successfully");
         }).catch((err) => toast.error(err.response.data) );
  
-        toast.success("Appointment Added Successfully");
-      
-      
-
         setTimeout(()=> navigate("/appointment"), 300)
       }
     }
@@ -91,9 +88,21 @@ const handleChange = (event) => {
             </p>
 
             <form onSubmit={handleSubmit} >
+              <div className='book-row'>
+                    <input 
+                      type='number' 
+                      name='p_fullname' 
+                      id='p_fullname'
+                      value
+                      hidden
+                    />
+                  </div>
+
               <div className='book__row'>
                 <label htmlFor='date'>DATE: </label>
                 <div className='date__container'>
+
+      
                 <DatePicker
                   id='b_date'
                   name='b_date'

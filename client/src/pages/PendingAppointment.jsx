@@ -48,6 +48,7 @@ const PendingAppointment = () => {
                             <th style={{textAlign: "center"}}>No.</th>
                             <th style={{textAlign: "center"}}>Appointment ID</th>
                             <th style={{textAlign: "center"}}>Name</th>
+                            <th style={{textAlign: "center"}}>Contact</th>
                             <th style={{textAlign: "center"}}>Date</th>
                             <th style={{textAlign: "center"}}>Time</th>
                             <th style={{textAlign: "center"}}>Procedure</th>
@@ -69,6 +70,7 @@ const PendingAppointment = () => {
                                     <th scope='row'>{index+1}</th>
                                     <td>{item.a_ID}</td>
                                     <td>{item.p_fullname}</td>
+                                    <td>{item.p_contact}</td>
                                     <td>{item.b_date}</td>
                                     <td>{item.b_time}</td>
                                     <td>{item.b_procedure}</td>
