@@ -1,5 +1,5 @@
-import React, { useState, useContext } from 'react';
-import {useNavigate, useParams, Link } from "react-router-dom"
+import React, { useState, useContext, useEffect } from 'react';
+import {useNavigate } from "react-router-dom"
 import "../css/Appointment.css";
 import PatientNavbar from './PatientNavbar';
 import { FaLocationArrow } from "react-icons/fa";
@@ -8,6 +8,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import {toast} from "react-toastify";
 import { AuthContext } from "../context/authContext";
+import { parseISO, format } from 'date-fns';
+
 
 
 
@@ -26,17 +28,42 @@ const Appointment = () => {
   const [patientID, setPatientID] = useState(currentUser.user_id);
   const [state, setState] = useState(initialState);
   const { b_date, b_status, b_time, b_procedure, b_note} = state;
+  const [taken, setTaken] = useState(false)
 
   const navigate = useNavigate();
-  // const [b_date, setSelectedDate] = useState("")
+
   const minDate = new Date();
   minDate.setDate(minDate.getDate() + 2);
 
+
+
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:5000/appointment/date-time')
+      .then(response => {
+        response.data.forEach(item => {
+          const isoDateString = format(new Date(item.b_date), 'yyyy-MM-dd');
+          const parsedDate = parseISO(isoDateString);
+          setData({b_date: parsedDate, b_time: item.b_time})
+        });
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }, []);
+
+
+
+
   const handleSubmit = (e) =>{
     e.preventDefault();
-    if (!b_date || !b_time || !b_procedure || !patientID){
+    if (!b_date || b_time || !b_procedure || !patientID){
         toast.error("Please provide value into each input field");
-        toast.error(patientID)
+        toast.error(b_time)
+        toast.error(b_date)
+        console.log(b_date)
+        console.log(b_time)
     } else{
         axios.post("http://localhost:5000/appointment/post", {
             patientID,
@@ -55,11 +82,10 @@ const Appointment = () => {
       }
     }
 
-
-const handleChange = (event) => {
-  const {name, value} = event.target;
-  setState({...state, [name]: value});
-}
+  const handleChange = (event) => {
+    const {name, value} = event.target;
+    setState({...state, [name]: value});
+  }
 
   return (
     
@@ -69,8 +95,6 @@ const handleChange = (event) => {
       </header>
 
       <body>
-  
-        {/* <div>{setState({b_procedure})}</div> */}
         <main className='display--flex'>
           <div className='home intro'>
             <h3 className='intro__title'>TOOTHFULLY YOURS</h3>
@@ -112,12 +136,16 @@ const handleChange = (event) => {
                   name='b_date'
                   className='datepicker__style'
                   selected={b_date}
-                  onChange={b_date => handleChange({ target: { value: b_date, name: 'b_date' } })}
+                  onChange={b_date => handleChange({ 
+                    target: { value: b_date, name: 'b_date' }
+                    
+                  })}
                   minDate={minDate}
                   dateFormat="MMM-dd-yyyy"
                   filterDate={date => date.getDay() !== 0}
                   placeholderText="Select a date"
-                  value={b_date || ""}     
+                  value={b_date || ""}
+              
             
                 />
                
@@ -130,14 +158,14 @@ const handleChange = (event) => {
                 <label htmlFor='time'>TIME: </label>
                 <select name="b_time" id="b_time" value={b_time || ""} onChange={handleChange} >
                         <option value="" disabled selected>Select your option</option>
-                        <option value="8:00AM">08:00 AM</option>
-                        <option value="9:00AM">09:00 AM</option>
-                        <option value="10:00AM">10:00 AM</option>
-                        <option value="11:00AM">11:00 AM</option>
-                        <option value="1:00PM">01:00 PM</option>
-                        <option value="2:00PM">02:00 PM</option>
-                        <option value="3:00PM">03:00 PM</option>				
-                        <option value="4:00PM">04:00 PM</option>
+                        <option value="8:00AM" disabled={taken} >08:00 AM</option>
+                        <option value="9:00AM" disabled={taken}>09:00 AM</option>
+                        <option value="10:00AM" disabled={taken}>10:00 AM</option>
+                        <option value="11:00AM" disabled={taken}>11:00 AM</option>
+                        <option value="1:00PM" disabled={taken} >01:00 PM</option>
+                        <option value="2:00PM" disabled={taken}>02:00 PM</option>
+                        <option value="3:00PM" disabled={taken}>03:00 PM</option>				
+                        <option value="4:00PM" disabled={taken}>04:00 PM</option>
                     </select>
 
               </div>

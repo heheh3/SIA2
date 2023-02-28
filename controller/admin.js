@@ -88,3 +88,10 @@ export const appointment_getCompleted = (req, res) =>{
         res.send(result);
     });
 }
+
+export const appointment_getDateTime = (req, res) =>{
+    const sqlGet = "SELECT b_date, b_time FROM booking_db";
+    db.query(sqlGet, (error, result)=>{
+        res.send(result);
+    });
+}
