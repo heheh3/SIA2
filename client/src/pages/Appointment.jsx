@@ -69,10 +69,9 @@ const Appointment = () => {
 
   const handleSubmit = (e) =>{
     e.preventDefault();
-    if (!b_date || b_time || !b_procedure || !patientID){
+    if (!b_date || !b_time || !b_procedure || !patientID){
         toast.error("Please provide value into each input field");
-        toast.error(b_time)
-        toast.error(b_date)
+
        
     } else{
         axios.post("http://localhost:5000/appointment/post", {
@@ -88,7 +87,7 @@ const Appointment = () => {
             toast.success("Appointment Added Successfully");
         }).catch((err) => toast.error(err.response.data) );
  
-        setTimeout(()=> navigate("/appointment"), 300)
+        setTimeout(()=> navigate("/reminder"), 300)
       }
     }
 

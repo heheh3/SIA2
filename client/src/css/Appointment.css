@@ -166,7 +166,11 @@ textarea::placeholder{
 
 option{
     padding: 7px;
-    background-color: var(--white-contrast);
+    background-color: var(--white);
+}
+
+option:disabled{
+    background-color: rgba(77, 61, 61, 0.24);
 }
 
 input[type="submit"]{
