@@ -11,8 +11,6 @@ import { AuthContext } from "../context/authContext";
 import { parseISO, format } from 'date-fns';
 
 
-
-
 const initialState = {
   b_date: "",
   b_time: "",
@@ -29,6 +27,8 @@ const Appointment = () => {
   const [state, setState] = useState(initialState);
   const { b_date, b_status, b_time, b_procedure, b_note} = state;
   const [taken, setTaken] = useState(false)
+  const [dateTime, setDateTime] = useState([])
+  const [time, setTime] = useState([])
 
   const navigate = useNavigate();
 
@@ -36,16 +36,15 @@ const Appointment = () => {
   minDate.setDate(minDate.getDate() + 2);
 
 
-
-  const [data, setData] = useState([]);
-
   useEffect(() => {
     axios.get('http://localhost:5000/appointment/date-time')
       .then(response => {
         response.data.forEach(item => {
           const isoDateString = format(new Date(item.b_date), 'yyyy-MM-dd');
           const parsedDate = parseISO(isoDateString);
-          setData({b_date: parsedDate, b_time: item.b_time})
+          setDateTime(prevArray => [...prevArray, {b_date: parsedDate, b_time: item.b_time}]);
+          
+       
         });
       })
       .catch(error => {
@@ -55,6 +54,18 @@ const Appointment = () => {
 
 
 
+  useEffect(() => {
+    setTime(new Array())
+    dateTime.forEach(item => {
+      if(JSON.stringify(b_date) === JSON.stringify(item.b_date)){
+        setTime(prevArray => [...prevArray, item.b_time]);
+       
+      }else{
+        console.log("No Reserved Date")
+      }
+    });
+  }, [state, dateTime]);
+
 
   const handleSubmit = (e) =>{
     e.preventDefault();
@@ -62,8 +73,7 @@ const Appointment = () => {
         toast.error("Please provide value into each input field");
         toast.error(b_time)
         toast.error(b_date)
-        console.log(b_date)
-        console.log(b_time)
+       
     } else{
         axios.post("http://localhost:5000/appointment/post", {
             patientID,
@@ -85,6 +95,7 @@ const Appointment = () => {
   const handleChange = (event) => {
     const {name, value} = event.target;
     setState({...state, [name]: value});
+  
   }
 
   return (
@@ -114,6 +125,7 @@ const Appointment = () => {
                 an appointment at the comfort of your home and <br/>
                 we'll take care of the rest!
             </p>
+
 
             <form onSubmit={handleSubmit} >
               <div className='book-row'>
@@ -158,14 +170,14 @@ const Appointment = () => {
                 <label htmlFor='time'>TIME: </label>
                 <select name="b_time" id="b_time" value={b_time || ""} onChange={handleChange} >
                         <option value="" disabled selected>Select your option</option>
-                        <option value="8:00AM" disabled={taken} >08:00 AM</option>
-                        <option value="9:00AM" disabled={taken}>09:00 AM</option>
-                        <option value="10:00AM" disabled={taken}>10:00 AM</option>
-                        <option value="11:00AM" disabled={taken}>11:00 AM</option>
-                        <option value="1:00PM" disabled={taken} >01:00 PM</option>
-                        <option value="2:00PM" disabled={taken}>02:00 PM</option>
-                        <option value="3:00PM" disabled={taken}>03:00 PM</option>				
-                        <option value="4:00PM" disabled={taken}>04:00 PM</option>
+                        <option value="8:00AM" disabled={time.includes('8:00AM')} >08:00 AM</option>
+                        <option value="9:00AM" disabled={time.includes('9:00AM')}>09:00 AM</option>
+                        <option value="10:00AM" disabled={time.includes('10:00AM')}>10:00 AM</option>
+                        <option value="11:00AM" disabled={time.includes('11:00AM')}>11:00 AM</option>
+                        <option value="1:00PM" disabled={time.includes('1:00PM')} >01:00 PM</option>
+                        <option value="2:00PM" disabled={time.includes('2:00PM')}>02:00 PM</option>
+                        <option value="3:00PM" disabled={time.includes('3:00PM')}>03:00 PM</option>				
+                        <option value="4:00PM" disabled={time.includes('4:00PM')}>04:00 PM</option>
                     </select>
 
               </div>
@@ -198,6 +210,7 @@ const Appointment = () => {
               <input type="submit" className='book-button' value="Book" />
  
             </form>
+   
           </div>
    
         </main>
