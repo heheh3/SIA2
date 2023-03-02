@@ -7,7 +7,8 @@ import
         appointment_getUser,
         appointment_updateUser,
         appointment_getCompleted,
-        appointment_getDateTime
+        appointment_getDateTime,
+        appointment_getCompletedHistory
     } 
 from "../controller/admin.js";
 
@@ -22,5 +23,6 @@ router.get("/admin/appointment/get/:a_ID", appointment_getUser);
 router.put("/admin/appointment/update/:a_ID", appointment_updateUser);
 
 router.get("/appointment/completed/get", appointment_getCompleted);
+router.get("/appointment/completed/get/:user_id", appointment_getCompletedHistory);
 router.get("/appointment/date-time", appointment_getDateTime)
 export default router

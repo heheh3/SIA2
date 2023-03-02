@@ -246,3 +246,78 @@ input[type="text"].e_information, input[type="email"].e_information, input[type=
 .margin--10{
     margin-top: 10px;
 }
+
+.profile__container{
+    width: 100%;
+    overflow: hidden;
+}
+
+
+.styled-table-history{
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem auto;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    max-width: 90%;
+    box-shadow: 0 0 20px rgba(0,0,0,0.15);
+}
+
+
+.styled-table-history thead tr{
+    background-color:var(--blue-dark-teal);
+    color: #ffffff;
+    text-align: left;
+
+
+}
+
+
+.styled-table-history th,
+.styled-table-history td{
+    padding: 10px 12px;
+}
+
+.styled-table-history tbody tr{
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table-history tbody tr:last-of-type{
+    border-bottom: 2px solid var(--gray);
+}
+
+
+.search__bar-container-history{
+    width: 20%;
+    margin-top: 20px;
+    margin-right: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    padding: 0 0.7rem;
+    background-color: var(--white-contrast);
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    
+   
+}
+
+
+.profile__container::-webkit-scrollbar {
+    width: 10px;
+}
+  
+  /* Track */
+.profile__container::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+   
+  /* Handle */
+.profile__container::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+  
+  /* Handle on hover */
+.profile__container::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}

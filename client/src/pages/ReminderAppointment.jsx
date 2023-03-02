@@ -4,25 +4,17 @@ import time from "../img/image 17.png";
 import date from "../img/image 18.png";
 import "../css/Reminder.css";
 import React, { useState, useEffect, useContext } from 'react';
-import {useNavigate} from "react-router-dom"
+import {useNavigate, Link} from "react-router-dom"
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
-import {toast} from "react-toastify";
-import { parseISO, format } from 'date-fns';
 import { AuthContext } from "../context/authContext";
 
 
-const initialState = {
-  b_date: "",
-  b_time: "",
-};
-
-
-
 const ReminderAppointment = () => {
-  const [state, setState] = useState(initialState);
-  const {b_date, b_time} = state;
+  const [data, setData] = useState(null);
   const { currentUser } = useContext(AuthContext);
+  const [showForm, setShowForm] = useState(false);
+
 
   const navigate = useNavigate();
   const minDate = new Date();
@@ -35,18 +27,46 @@ const ReminderAppointment = () => {
     axios.get(`http://localhost:5000/admin/appointment/get/${currentUser.user_id}`)
     .then(response => {
       const { b_date, b_time } = response.data[0];
-      const isoDateString = format(new Date(b_date), 'yyyy-MM-dd');
-      const parsedDate = parseISO(isoDateString);
+      setData({b_date: b_date, b_time: b_time})
 
-      console.log(isoDateString)
-      console.log("parse:" + parsedDate)
-
-      setState({b_date: parsedDate, b_time: b_time}); 
     }).catch(error => {
       console.error(error);
     });
       
   }, [currentUser.user_id])
+
+
+  
+  // const handleSubmit = (e) =>{
+  //   e.preventDefault();
+  //   if (!b_date || !b_time || !b_procedure || !b_status){
+  //       toast.error("Please provide value into each input field");
+
+  //   } else{
+  //       axios.put(`http://localhost:5000/admin/appointment/update/${id}`, {
+  //         b_date,
+  //         b_time,
+  //         b_procedure,
+  //         b_note,
+  //         b_status,  
+  //     })
+      
+  //       .then(()=>{
+  //         setState({b_date: "", b_time: "", b_procedure: "", b_note: "", b_status: ""});
+  //         toast.success("Appointment Updated Successfully");
+  //         setTimeout(()=> navigate("/admin/appointment"),500)
+          
+      
+        
+  //       })
+  //       .catch((err) => toast.error(err.response.data));
+        
+        
+  //     }
+  //     setShowForm(false);
+
+  //   }
+  
 
 
   return (
@@ -67,19 +87,24 @@ const ReminderAppointment = () => {
                 <h1 className='reminder-title color'>APPOINTMENT REMINDER</h1>
                 <p className='reminder-title--description darkcolor'>This is a reminder that you have an appointment <br/> schedule for this time and date</p>
                 <span className='reminder-header'></span>
+                {data && (
                 <div className='reminder-date-time'>
                   <div className='date-time-icon'>
                     <img className='reminder__icon' src={date} alt="React Image" />    
                     
-                    <div className='reminder__data'>{}</div>
+                    <div className='reminder__data'>{data.b_date}</div>
                   </div>
                   <div className='date-time-data'>
                   <img className='reminder__icon' src={time} alt="React Image" />                
-                    <div className='reminder__data'>{}</div>
+                    <div className='reminder__data'>{data.b_time}</div>
                   </div>
                 </div>
+                )}
                 <div className='reminder-cancel-resched'>
-                    <button className='btn-ap resched'>Reschedule</button>
+                  <Link to={`appointment/reshedule/${currentUser.user_id}`}>
+                    <button className='btn-ap resched' onClick={() => setShowForm(true)}>Reschedule</button>
+                  </Link>
+                  
                     <button className='btn-ap cancel'>Cancel</button>
                 </div>
               </div>
