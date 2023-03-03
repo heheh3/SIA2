@@ -15,8 +15,6 @@ const ReminderAppointment = () => {
   const { currentUser } = useContext(AuthContext);
   const [showForm, setShowForm] = useState(false);
 
-
-  const navigate = useNavigate();
   const minDate = new Date();
   minDate.setDate(minDate.getDate() + 2);
 
@@ -24,7 +22,7 @@ const ReminderAppointment = () => {
 
   useEffect (() => {
 
-    axios.get(`http://localhost:5000/admin/appointment/get/${currentUser.user_id}`)
+    axios.get(`http://localhost:5000/appointment/completed/get/${currentUser.user_id}`)
     .then(response => {
       const { b_date, b_time } = response.data[0];
       setData({b_date: b_date, b_time: b_time})
@@ -36,37 +34,7 @@ const ReminderAppointment = () => {
   }, [currentUser.user_id])
 
 
-  
-  // const handleSubmit = (e) =>{
-  //   e.preventDefault();
-  //   if (!b_date || !b_time || !b_procedure || !b_status){
-  //       toast.error("Please provide value into each input field");
 
-  //   } else{
-  //       axios.put(`http://localhost:5000/admin/appointment/update/${id}`, {
-  //         b_date,
-  //         b_time,
-  //         b_procedure,
-  //         b_note,
-  //         b_status,  
-  //     })
-      
-  //       .then(()=>{
-  //         setState({b_date: "", b_time: "", b_procedure: "", b_note: "", b_status: ""});
-  //         toast.success("Appointment Updated Successfully");
-  //         setTimeout(()=> navigate("/admin/appointment"),500)
-          
-      
-        
-  //       })
-  //       .catch((err) => toast.error(err.response.data));
-        
-        
-  //     }
-  //     setShowForm(false);
-
-  //   }
-  
 
 
   return (

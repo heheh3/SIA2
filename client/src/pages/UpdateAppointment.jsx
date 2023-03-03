@@ -180,6 +180,20 @@ const handleChange = (event) => {
                         
                 </select>
               </div>
+              <div className='book__row'>
+                <label htmlFor='payment'>PAYMENT: </label>
+                <select id="b_status" name="b_status"  value={b_status || "" }  onChange={handleChange} >
+                        <option value="" disabled selected>Select your option</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Completed">Completed</option>
+                        <option value="Rescheduled">Rescheduled</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Cancelled">Cancelled</option>
+                        <option value="Walk-In">Walk-In</option>
+                    
+                        
+                </select>
+              </div>
 
               <div className='back__update-buttons'>
                 <input type="submit" value="UPDATE" className='btn-update' />
