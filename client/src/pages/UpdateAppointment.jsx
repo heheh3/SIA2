@@ -13,14 +13,15 @@ const initialState = {
   b_time: "",
   b_procedure: "",
   b_note: "",
-  b_status: ""
+  b_status: "",
+  b_paymentStatus: ""
 };
 
 
 
 const UpdateAppointment = () => {
   const [state, setState] = useState(initialState);
-  const {b_date, b_time, b_procedure, b_note, b_status} = state;
+  const {b_date, b_time, b_procedure, b_note, b_status, b_paymentStatus} = state;
   const {id} = useParams();
 
   console.log(id)
@@ -35,14 +36,14 @@ const UpdateAppointment = () => {
 
     axios.get(`http://localhost:5000/admin/appointment/get/${id}`)
     .then(response => {
-      const { b_date, b_time, b_procedure, b_note, b_status } = response.data[0];
+      const { b_date, b_time, b_procedure, b_note, b_status, b_paymentStatus } = response.data[0];
       const isoDateString = format(new Date(b_date), 'yyyy-MM-dd');
       const parsedDate = parseISO(isoDateString);
 
       console.log(isoDateString)
       console.log("parse:" + parsedDate)
 
-      setState({b_date: parsedDate, b_time: b_time, b_procedure: b_procedure, b_note: b_note, b_status: b_status}); 
+      setState({b_date: parsedDate, b_time: b_time, b_procedure: b_procedure, b_note: b_note, b_status: b_status, b_paymentStatus: b_paymentStatus}); 
     }).catch(error => {
       console.error(error);
     });
@@ -63,10 +64,11 @@ const UpdateAppointment = () => {
           b_procedure,
           b_note,
           b_status,  
+          b_paymentStatus
       })
       
         .then(()=>{
-          setState({b_date: "", b_time: "", b_procedure: "", b_note: "", b_status: ""});
+          setState({b_date: "", b_time: "", b_procedure: "", b_note: "", b_status: "", b_paymentStatus: ""});
           toast.success("Appointment Updated Successfully");
           setTimeout(()=> navigate("/admin/appointment"),500)
           
@@ -176,20 +178,16 @@ const handleChange = (event) => {
                         <option value="Pending">Pending</option>
                         <option value="Cancelled">Cancelled</option>
                         <option value="Walk-In">Walk-In</option>
-                    
-                        
                 </select>
               </div>
+
               <div className='book__row'>
                 <label htmlFor='payment'>PAYMENT: </label>
-                <select id="b_status" name="b_status"  value={b_status || "" }  onChange={handleChange} >
+                <select id="b_paymentStatus" name="b_paymentStatus"  value={b_paymentStatus || "" }  onChange={handleChange} >
                         <option value="" disabled selected>Select your option</option>
-                        <option value="In Progress">In Progress</option>
-                        <option value="Completed">Completed</option>
-                        <option value="Rescheduled">Rescheduled</option>
-                        <option value="Pending">Pending</option>
-                        <option value="Cancelled">Cancelled</option>
-                        <option value="Walk-In">Walk-In</option>
+                        <option value="EMI">EMI</option>
+                        <option value="Fully-Paid">Fully-Paid</option>
+                        <option value="Not-Paid">Not-Paid</option>
                     
                         
                 </select>

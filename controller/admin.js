@@ -10,14 +10,15 @@ export const appointment_post = (req, res) =>{
     const b_procedure = req.body.b_procedure;
     const b_note = req.body.b_note;
     const b_status = "Pending";
+    const b_paymentStatus = "Not-Paid";
     console.log(patientID)
 
 
     const date = parseISO(b_date);
     const formattedDate = format(date, 'EEE, MMM dd, yyyy');
 
-    const sqlInsert = "INSERT INTO booking_db (patientID, b_date, b_time, b_procedure, b_note, b_status) VALUES (?, ?, ?, ?, ?, ?)";
-    db.query(sqlInsert, [patientID, formattedDate, b_time, b_procedure, b_note, b_status], (err, result) =>{
+    const sqlInsert = "INSERT INTO booking_db (patientID, b_date, b_time, b_procedure, b_note, b_status, b_paymentStatus) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    db.query(sqlInsert, [patientID, formattedDate, b_time, b_procedure, b_note, b_status, b_paymentStatus], (err, result) =>{
         if (err){
             console.log(err);
         }else {
@@ -69,12 +70,14 @@ export const appointment_updateUser = (req, res) =>{
     const b_procedure = req.body.b_procedure;
     const b_note = req.body.b_note;
     const b_status = req.body.b_status;
+    const b_paymentStatus = req.body.b_paymentStatus;
+    
 
     const d = new Date(b_date);
     const v =  moment(d).format('ddd, MMM DD, YYYY'); 
 
-    const sqlUpdate = "UPDATE booking_db SET b_date = ?, b_time = ?, b_procedure = ?, b_note = ?, b_status = ? WHERE a_ID = ?";
-    db.query(sqlUpdate, [v, b_time, b_procedure, b_note, b_status, a_ID] ,(error, result)=>{
+    const sqlUpdate = "UPDATE booking_db SET b_date = ?, b_time = ?, b_procedure = ?, b_note = ?, b_status = ?, b_paymentStatus = ? WHERE a_ID = ?";
+    db.query(sqlUpdate, [v, b_time, b_procedure, b_note, b_status, b_paymentStatus, a_ID] ,(error, result)=>{
         if(error){
             console.log(error)
         }

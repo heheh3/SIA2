@@ -58,6 +58,7 @@ const PatientTable = () => {
                             return searchValue.toLowerCase() === '' || item.p_username.toLowerCase().includes(searchValue) 
                                 || item.p_email.toLowerCase().includes(searchValue) || item.p_contact.toLowerCase().includes(searchValue) 
                                 || item.p_fullname.toLowerCase().includes(searchValue) || item.user_id.toString().includes(searchValue) 
+                       
             
                                 
                         }).map((item, index)=>{

@@ -54,6 +54,7 @@ const PendingAppointment = () => {
                             <th style={{textAlign: "center"}}>Procedure</th>
                             <th style={{textAlign: "center"}}>Note</th>
                             <th style={{textAlign: "center"}}>Status</th>
+                            <th style={{textAlign: "center"}}>Payment Status</th>
                             <th style={{textAlign: "center"}}>Action</th>
                         </tr>
                     </thead>
@@ -62,7 +63,7 @@ const PendingAppointment = () => {
                             return searchValue.toLowerCase() === '' || item.b_date.toLowerCase().includes(searchValue) 
                                 || item.b_note.toLowerCase().includes(searchValue) || item.b_time.toLowerCase().includes(searchValue) 
                                 || item.b_procedure.toLowerCase().includes(searchValue) || item.patientID.toString().includes(searchValue) 
-                                || item.b_status.toLowerCase().includes(searchValue) 
+                                || item.b_status.toLowerCase().includes(searchValue) || item.b_paymentStatus.toLowerCase().includes(searchValue)
                                 
                         }).map((item, index)=>{
                             return(
@@ -79,8 +80,16 @@ const PendingAppointment = () => {
                                         {backgroundColor: item.b_status === "In Progress" ? 'orange' : '' ||   item.b_status === "Pending" ? 'blue': '' ||
                                                 item.b_status === "Cancelled" ? 'red': '' ||  item.b_status === "Rescheduled" ? 'violet': '' ||  
                                                 item.b_status === "Completed" ? 'green': '' || item.b_status === "Walk-In" ? 'gray': '', padding: '5px 10px', color: 'white', borderRadius: '10px', fontSize: '0.8rem', letterSpacing: "1.5px",}
-                                        }>{item.b_status}</span></td>
+                                        }>{item.b_status}</span>
+                                    </td>
+                                    <td><span  style={
+                                        {backgroundColor: item.b_paymentStatus === "Not-Paid" ? 'red' : '' ||   item.b_paymentStatus === "Fully-Paid" ? 'green': '' ||
+                                                item.b_paymentStatus === "EMI" ? 'pink': '' , padding: '5px 10px', color: 'white', borderRadius: '10px', fontSize: '0.8rem', letterSpacing: "1.5px",}
+                                        }>{item.b_paymentStatus}</span>
+                                    </td>
                                     <td>
+
+                                    
                                     
                                         <Link to={`/admin/appointment/update/${item.a_ID}`}>
                                             <button className='btn btn-view'>View/Edit</button>
