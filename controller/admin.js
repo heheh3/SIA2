@@ -98,9 +98,19 @@ export const appointment_getDateTime = (req, res) =>{
         res.send(result);
     });
 }
-export const appointment_getCompletedHistory = (req, res) =>{
+
+export const appointment_getPending = (req, res) =>{
     const { user_id } = req.params;
     const sqlGet = "SELECT * FROM booking_db as b JOIN users_db as u ON b.patientId = u.user_id WHERE (b.b_status = 'Pending' OR b.b_status = 'Rescheduled') AND u.user_id = ? ORDER BY STR_TO_DATE(b_date,'%a, %b %d, %Y') ASC , STR_TO_DATE(b_time, '%h:%i%p') ASC";
+    db.query(sqlGet, user_id, (error, result)=>{
+        res.send(result);
+    });
+}
+
+
+export const appointment_getCompletedHistory = (req, res) =>{
+    const { user_id } = req.params;
+    const sqlGet = "SELECT * FROM booking_db as b JOIN users_db as u ON b.patientId = u.user_id WHERE b.b_status = 'Completed' AND u.user_id = ? ORDER BY STR_TO_DATE(b_date,'%a, %b %d, %Y') ASC , STR_TO_DATE(b_time, '%h:%i%p') ASC";
     db.query(sqlGet, user_id, (error, result)=>{
         res.send(result);
     });

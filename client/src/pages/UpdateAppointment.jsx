@@ -23,6 +23,8 @@ const UpdateAppointment = () => {
   const [state, setState] = useState(initialState);
   const {b_date, b_time, b_procedure, b_note, b_status, b_paymentStatus} = state;
   const {id} = useParams();
+  const [dateTime, setDateTime] = useState([])
+  const [time, setTime] = useState([])
 
   console.log(id)
 
@@ -30,6 +32,38 @@ const UpdateAppointment = () => {
   const navigate = useNavigate();
   const minDate = new Date();
   minDate.setDate(minDate.getDate() + 2);
+
+
+  
+  useEffect(() => {
+    axios.get('http://localhost:5000/appointment/date-time')
+      .then(response => {
+        response.data.forEach(item => {
+          const isoDateString = format(new Date(item.b_date), 'yyyy-MM-dd');
+          const parsedDate = parseISO(isoDateString);
+          setDateTime(prevArray => [...prevArray, {b_date: parsedDate, b_time: item.b_time}]);
+          
+       
+        });
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }, []);
+
+
+
+  useEffect(() => {
+    setTime(new Array())
+    dateTime.forEach(item => {
+      if(JSON.stringify(b_date) === JSON.stringify(item.b_date)){
+        setTime(prevArray => [...prevArray, item.b_time]);
+       
+      }else{
+        console.log("No Reserved Date")
+      }
+    });
+  }, [state, dateTime]);
 
 
   useEffect (() => {
@@ -49,6 +83,8 @@ const UpdateAppointment = () => {
     });
       
   }, [id])
+
+
 
 
 
@@ -128,16 +164,16 @@ const handleChange = (event) => {
 
             <div className='book__row'> 
                 <label htmlFor='time'>TIME: </label>
-                <select name="b_time" id="b_time" value={b_time || ""} onChange={handleChange}  >
+                <select name="b_time" id="b_time" value={b_time || ""} onChange={handleChange} >
                         <option value="" disabled selected>Select your option</option>
-                        <option value="8:00AM">08:00 AM</option>
-                        <option value="9:00AM">09:00 AM</option>
-                        <option value="10:00AM">10:00 AM</option>
-                        <option value="11:00AM">11:00 AM</option>
-                        <option value="1:00PM">01:00 PM</option>
-                        <option value="2:00PM">02:00 PM</option>
-                        <option value="3:00PM">03:00 PM</option>				
-                        <option value="4:00PM">04:00 PM</option>
+                        <option value="8:00AM" disabled={time.includes('8:00AM')} >08:00 AM</option>
+                        <option value="9:00AM" disabled={time.includes('9:00AM')}>09:00 AM</option>
+                        <option value="10:00AM" disabled={time.includes('10:00AM')}>10:00 AM</option>
+                        <option value="11:00AM" disabled={time.includes('11:00AM')}>11:00 AM</option>
+                        <option value="1:00PM" disabled={time.includes('1:00PM')} >01:00 PM</option>
+                        <option value="2:00PM" disabled={time.includes('2:00PM')}>02:00 PM</option>
+                        <option value="3:00PM" disabled={time.includes('3:00PM')}>03:00 PM</option>				
+                        <option value="4:00PM" disabled={time.includes('4:00PM')}>04:00 PM</option>
                     </select>
 
               </div>

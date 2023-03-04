@@ -26,6 +26,7 @@ import AppointmentHistory from './pages/AppointmentHistory';
 import UpdatePatient from './pages/UpdatePatient';
 import Walkin from './pages/Walkin';
 
+
 function App() {
   return (
     <BrowserRouter>

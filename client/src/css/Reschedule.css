@@ -1,0 +1,106 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+* {
+    box-sizing: border-box;
+}
+
+:root{
+    --white: #ffffff;
+    --gray: #706c6c;
+    --white-contrast: #E5EDED;
+    --blue-dark-teal: #1EBEB6;
+    --blue-darker-teal: #38B1B1;
+    --blue-light-teal: #50fcf3;
+    --blue-lighter-teal: #E0F9F8;
+} 
+
+/* Button used to open the contact form - fixed at the bottom of the page */
+.open-button {
+    background-color: #555;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    opacity: 0.8;
+    position: fixed;
+    bottom: 23px;
+    right: 28px;
+    width: 280px;
+}
+
+/* The popup form - hidden by default */
+.form-popup {
+    display: block;
+    position: fixed;
+    bottom: 10px;
+    right: 20px;
+    border: 3px solid var(--blue-darker-teal) ;
+    background-color: var(--blue-darker-teal);
+    z-index: 100;
+
+}
+.form-container-h1{
+    font-size: 1.5rem;
+    color: white;
+    font-weight: 300;
+}
+
+/* Add styles to the form container */
+.form-container {
+    border-radius: 10px;
+    width: 300px;
+    padding: 10px 20px;
+    background-color:  #555;
+}
+
+
+/* Set a style for the submit/login button */
+input[type="submit"].btn-appointment-update {
+    background-color: hsl(158, 95%, 34%);
+    color: white;
+    padding: 10px 12px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom:10px;
+    opacity: 0.8;
+}
+
+input[type="submit"].btn-appointment-update:hover {
+    background-color: hsl(158, 95%, 17%);
+    color: white;
+
+}
+
+/* Add a red background color to the cancel button */
+
+
+.cancel-appointment {
+    background-color: hsl(0, 100%, 50%);
+    color: white;
+    padding: 10px 12px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom:10px;
+    opacity: 0.8;
+    border-radius: 15px;
+    font-size: 1.10rem;
+    font-weight: bold;
+
+}
+
+.cancel-appointment:hover{
+    background-color: hsl(0, 100%, 25%);
+}
+
+/* Add some hover effects to buttons */
+.form-container input[type="submit"].btn-appointment-update:hover, .open-button:hover{
+    opacity: 1;
+}
+
+label{
+    color: white;
+}
