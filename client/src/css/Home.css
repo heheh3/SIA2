@@ -118,10 +118,25 @@ a .btn-back{
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     padding: 0.75rem;
+    margin:20px;
 
 }
 
-.btn-back:hover{
+a .btn-back1{
+    height: 50px;
+    width: 100%;
+    border: none;
+    color: var(--blue-dark-teal);
+    background-color: var(--white);
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 0.75rem;
+
+}
+
+.btn-back:hover,.btn-back1:hover {
     background-color: rgba(255, 255, 255, 0.8);
 }
 

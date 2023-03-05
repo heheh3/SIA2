@@ -234,6 +234,9 @@ const handleChange = (event) => {
                 <Link to={'/admin/appointment'} className="button-a">
                   <button className='btn-back'>BACK</button>
                 </Link>
+                <Link to={`/admin/appointment/procedures/${id}`} className="button-a">
+                  <button className='btn-back1'>PROCEDURES</button>
+                </Link>
               </div>
            
          

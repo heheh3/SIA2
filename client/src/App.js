@@ -25,6 +25,7 @@ import MedicalHistory from './pages/MedicalHistory';
 import AppointmentHistory from './pages/AppointmentHistory';
 import UpdatePatient from './pages/UpdatePatient';
 import Walkin from './pages/Walkin';
+import Procedures from './pages/Procedures';
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
           <Route path="/admin" element={<AdminNavbar />} />
           <Route path="/admin/employee" element={<Employee />} />
           <Route path="/admin/appointment/update/:id" element={<UpdateAppointment />} />
+          <Route path='/admin/appointment/procedures/:id' element={<Procedures />} />
           <Route path='/admin/appointment' element={<PendingAppointment />} />
 
           <Route path='/admin/employee/add' element={<EmployeeAdd />} />
@@ -44,6 +46,7 @@ function App() {
 
           <Route path='/admin/completed' element={<Completed />} />
           <Route path='/admin/user/update/:id' element={<UpdatePatient />} />
+          
           
           <Route path='/admin/user' element={<PatientTable />} />
           <Route path='/allergies' element={<Allergies />} /> 

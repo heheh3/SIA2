@@ -109,7 +109,7 @@ const ReminderAppointment = () => {
         toast.error("Please provide value into each input field");
 
     } else{
-      if(window.confirm("Are you sure you wanted to reschedule/cancel this appointment, there is Php100.00 Rescheduling/Cancelling Fee?")){
+      if(window.confirm("There is Php100.00 Rescheduling/Cancelling Fee. Do you want to continue?")){
         axios.put(`http://localhost:5000/admin/appointment/update/${a_ID}`, {
           b_date,
           b_time,
