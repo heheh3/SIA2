@@ -236,7 +236,7 @@ input[type="text"].e_information, input[type="email"].e_information, input[type=
 }
 
 
-.back__ebutton-style{
+.back__ebutton-style, .back__procedures{
     padding: 0.5rem 2rem;
     background-color: var(--blue-dark-teal);
     color: var(--white);
@@ -247,13 +247,13 @@ input[type="text"].e_information, input[type="email"].e_information, input[type=
     font-size: 1rem;
     display: flex;
     margin-left: 10px;
- 
-
-
-
 }
 
-.back__ebutton-style:hover{
+.back__procedures{
+    margin-top: 10px;
+}
+
+.back__ebutton-style:hover, .back__procedures:hover{
     opacity: 0.7;
     cursor: pointer;
 }
@@ -335,4 +335,8 @@ input[type="text"].e_information, input[type="email"].e_information, input[type=
   /* Handle on hover */
 .profile__container::-webkit-scrollbar-thumb:hover {
     background: #555; 
+}
+
+.h1__apppointment{
+    color: var(--blue-darker-teal);
 }

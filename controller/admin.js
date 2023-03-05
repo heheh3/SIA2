@@ -52,7 +52,7 @@ export const appointment_delete = (req, res) =>{
 
 export const appointment_getUser = (req, res) =>{
     const { a_ID } = req.params;
-    const sqlGet = "SELECT * FROM booking_db where a_ID = ?";
+    const sqlGet = "SELECT * FROM booking_db as b JOIN users_db as u ON b.patientId = u.user_id WHERE a_ID = ?"
     db.query(sqlGet, a_ID ,(error, result)=>{
         if(error){
             console.log(error)

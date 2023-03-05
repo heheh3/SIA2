@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useContext} from 'react';
 import { FaSearch  } from "react-icons/fa";
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import axios from 'axios';
 import AdminNavbar from './AdminNavbar';
 import '../css/Home.css';
@@ -9,26 +9,17 @@ import { toast } from 'react-toastify';
 const Procedures = () => {
     const [data, setData] = useState([]);
     const [searchValue, setSearchValue] = useState('');
+    const {id} = useParams();
 
     const loadData = async () =>{
-        const response = await axios.get("http://localhost:5000/appointment/get");
+        const response = await axios.get(`http://localhost:5000/admin/appointment/get/${id}`);
         setData(response.data);  
     }
 
 
     useEffect(()=>{
         loadData();
-    }, [])
-
-    const deleteAppointment = (id)=>{
-        if(window.confirm("Are you sure you wanted to delete this appointment?")){
-            axios.delete(`http://localhost:5000/appointment/delete/${id}`);
-            toast.success("Appointment Deleted Successfully!");
-            setTimeout(()=> loadData(), 500);
-       
-        }
-    }
-
+    }, [id])
     
     return (
         <div>
@@ -36,11 +27,12 @@ const Procedures = () => {
                 <AdminNavbar />
             </header>
             <body className='pending_body'>
+                <Link to={`/admin/appointment/update/${id}`}>
+                        <button className='back__procedures'><span>Back</span></button>
+                </Link>
+           
+                <h1 className='h1__apppointment'>Apppointment Details</h1>
                 <div className='pending_body-flex'>
-                    <div className='search__bar-container'>
-                        <input type='text' className='search__bar' value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder="Search Here..."/>
-                        <span className='search__bar-icon'><FaSearch className="bar-icon"/></span>
-                    </div>
                     <table className='styled-table'>
                         <thead>
                             <tr>
@@ -53,8 +45,6 @@ const Procedures = () => {
                                 <th style={{textAlign: "center"}}>Procedure</th>
                                 <th style={{textAlign: "center"}}>Note</th>
                                 <th style={{textAlign: "center"}}>Status</th>
-                                <th style={{textAlign: "center"}}>Payment Status</th>
-                                <th style={{textAlign: "center"}}>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -76,27 +66,17 @@ const Procedures = () => {
                                         <td>{item.b_procedure}</td>
                                         <td>{item.b_note}</td>
                                         <td><span  style={
-                                            {backgroundColor: item.b_status === "In Progress" ? 'orange' : '' ||   item.b_status === "Pending" ? 'blue': '' ||
-                                                    item.b_status === "Cancelled" ? 'red': '' ||  item.b_status === "Rescheduled" ? 'violet': '' ||  
-                                                    item.b_status === "Completed" ? 'green': '' || item.b_status === "Walk-In" ? 'gray': '', padding: '5px 10px', color: 'white', borderRadius: '10px', fontSize: '0.8rem', letterSpacing: "1.5px",}
-                                            }>{item.b_status}</span>
-                                        </td>
-                                        <td><span  style={
-                                            {backgroundColor: item.b_paymentStatus === "Not-Paid" ? 'red' : '' ||   item.b_paymentStatus === "Fully-Paid" ? 'green': '' ||
-                                                    item.b_paymentStatus === "EMI" ? 'pink': '' , padding: '5px 10px', color: 'white', borderRadius: '10px', fontSize: '0.8rem', letterSpacing: "1.5px",}
-                                            }>{item.b_paymentStatus}</span>
-                                        </td>
-                                        <td>
-                                            <Link to={`/admin/appointment/procedures/${item.a_ID}`}>
-                                                <button className='btn btn-view'>View/Edit</button>
-                                            </Link>
-                                             <button className='btn btn-delete' onClick={() => deleteAppointment(item.a_ID)}>Delete</button>
-                                        </td>
+                                        {backgroundColor: item.b_status === "In Progress" ? 'orange' : '' ||   item.b_status === "Pending" ? 'blue': '' ||
+                                                item.b_status === "Cancelled" ? 'red': '' ||  item.b_status === "Rescheduled" ? 'violet': '' ||  
+                                                item.b_status === "Completed" ? 'green': '' || item.b_status === "Walk-In" ? 'gray': '', padding: '5px 10px', color: 'white', borderRadius: '10px', fontSize: '0.8rem', letterSpacing: "1.5px",}
+                                        }>{item.b_status}</span>
+                                    </td>
                                     </tr>
                                 )})}
                         </tbody>
                     </table> 
                 </div>
+                <h1 className='h1__apppointment'>Procedure Details</h1>
             </body>
         </div>
     )
