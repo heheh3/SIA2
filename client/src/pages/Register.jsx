@@ -20,7 +20,8 @@ const initialState = {
     p_password: "",
     p_fullname: "",
     p_contact: "",
-    p_birthdate: ""
+    p_birthdate: "",
+    p_gender: ""
   };
   
 
@@ -29,7 +30,7 @@ const Register = () => {
 
 
     const [state, setState] = useState(initialState);
-    const {p_username, p_email, p_password, p_fullname, p_contact, p_birthdate} = state;
+    const {p_username, p_email, p_password, p_fullname, p_contact, p_birthdate, p_gender} = state;
 
     const [validName, setValidName]  = useState(false)
     const [userFocus, setUserFocus]  = useState(false)
@@ -57,6 +58,7 @@ const Register = () => {
 
     const userRef = useRef();
     const errRef = useRef();
+
 
     useEffect(()=>{
         userRef.current.focus()
@@ -115,7 +117,7 @@ const Register = () => {
     const handleSubmit = (e) =>{
         e.preventDefault();
 
-        if (!p_username || !p_email || !p_password || !p_fullname || !p_contact || !p_birthdate){
+        if (!p_username || !p_email || !p_password || !p_fullname || !p_contact || !p_birthdate || !p_gender){
             toast.error("Please provide value into each input field");
         }else{
             axios.post("http://localhost:5000/register", {
@@ -124,10 +126,11 @@ const Register = () => {
                 p_password,
                 p_fullname,
                 p_contact,
-                p_birthdate
+                p_birthdate,
+                p_gender
             
             }).then(()=>{
-                setState({p_username: "", p_email: "", p_password: "", p_fullname: "", p_contact: "", p_birthdate: "" });
+                setState({p_username: "", p_email: "", p_password: "", p_fullname: "", p_contact: "", p_birthdate: "", p_gender: ""});
                 toast.success("Registered Successfully");   
                 setTimeout(()=> navigate("/login"), 500)
             }).catch((err) =>{
@@ -136,7 +139,7 @@ const Register = () => {
                 } else if (err.response?.status === 409 ){
                     setErrMsg("Username Taken!")
                 } else{
-                    setErrMsg("Email is Already Exists!")
+                    toast.success(err);   
                 }
                 errRef.current.focus()
 
@@ -280,12 +283,13 @@ const Register = () => {
 
                             </p>
                         </div>
+                
 
                         <div className='register-form__row'>
                             <div className='register-form__input'>
                               
                             <label className='register-form-name' htmlFor='p_password'>Confirm Password: 
-                                <span className={validMatch && matchPwd ? "valid" : "hide"}>
+                                <span className={validMatch&& matchPwd ? "valid" : "hide"}>
                                     <FontAwesomeIcon icon={faCheck }  className="icon-add"/>
                                 </span>
                                 <span className={validMatch || !matchPwd ? "hide" : "Invalid"}>
@@ -343,15 +347,26 @@ const Register = () => {
                                  
                                  
                             />
-          
-                        
-                         
                             </div>
-                   
                             <p id="uidnode" className={FullNameFocus && p_fullname && !validFullName ? "Intructions" : "offscreen"}>
                                 <FontAwesomeIcon icon={faInfoCircle} /> Invalid Name. Name must starts with letter <br />
                             </p>
+                   
                         </div>
+
+                        
+                        <div className='register-form__row'>
+                            <div className='register-form__input'>
+                            <label htmlFor='p_gender' className="register-form-name">Gender: </label>
+                                <select name="p_gender" id="p_gender" className="register-gender" value={p_gender || ""} onChange={handleChange}>
+                                        <option value="" disabled selected> --- Choose One --- </option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Another Gender">Another Gender</option>
+                                </select>
+                                </div>
+                        </div>
+
 
                         <div className='register-form__row'>
                             <div className='register-form__input'>
@@ -378,11 +393,7 @@ const Register = () => {
                                 onFocus={() => setPhoneFocus(true)}
                                 onBlur={() => setPhoneFocus(false)}
                                  
-                                 
                             />
-          
-                        
-                         
                             </div>
                    
                             <p id="uidnode" className={phoneFocus && p_contact && !validPhone ? "Intructions" : "offscreen"}>

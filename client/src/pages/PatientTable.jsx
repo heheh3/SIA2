@@ -71,7 +71,7 @@ const PatientTable = () => {
                                     <td>{item.p_fullname}</td>
                                     <td>{item.p_contact}</td>
                                     <td>
-                                        <Link to={`/admin/user/update/${item.user_id}`}>
+                                        <Link to={`/admin/user/profile-settings/${item.user_id}`}>
                                             <button className='btn btn-view'>View/Edit</button>
                                         </Link>
                                         <button className='btn btn-delete' onClick={() => deleteAppointment(item.user_id)}>Delete</button>

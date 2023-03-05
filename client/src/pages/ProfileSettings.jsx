@@ -15,7 +15,8 @@ const initialState = {
   p_email: "",
   p_fullname: "",
   p_contact: "",
-  p_birthdate: ""
+  p_birthdate: "",
+  p_gender: ""
 };
 
 
@@ -23,7 +24,7 @@ const initialState = {
 
 const ProfileSettings = () => {
   const [state, setState] = useState(initialState);
-  const {p_username, p_email, p_fullname , p_contact, p_birthdate} = state;
+  const {p_username, p_email, p_fullname , p_contact, p_birthdate, p_gender} = state;
   const {id} = useParams();
 
   const { currentUser } = useContext(AuthContext);
@@ -33,7 +34,7 @@ const ProfileSettings = () => {
 
   const handleSubmit = (e) =>{
     e.preventDefault();
-    if (!p_username || !p_email || !p_fullname || !p_contact || !p_birthdate ){
+    if (!p_username || !p_email || !p_fullname || !p_contact || !p_birthdate || !p_gender){
         
         toast.error("Please provide value into each input field");
       
@@ -44,11 +45,12 @@ const ProfileSettings = () => {
           p_email,
           p_fullname,
           p_contact,
-          p_birthdate,  
+          p_birthdate,
+          p_gender  
       })
       
         .then(()=>{
-          setState({p_username: "", p_email: "", p_fullname: "", p_contact: "", p_birthdate: ""});
+          setState({p_username: "", p_email: "", p_fullname: "", p_contact: "", p_birthdate: "", p_gender});
           toast.success("Profile Settings Updated Successfully");
           window.location.reload(false);
         
@@ -63,10 +65,10 @@ const ProfileSettings = () => {
 
       axios.get(`http://localhost:5000/admin/patient/get/${currentUser.user_id}`)
       .then(response => {
-        const {user_id, p_username, p_email, p_fullname, p_contact, p_birthdate } = response.data[0];
+        const {user_id, p_username, p_email, p_fullname, p_contact, p_birthdate, p_gender } = response.data[0];
         const isoDateString = format(new Date(p_birthdate), 'MM/dd/yyyy');
   
-        setState({user_id: user_id,p_username: p_username, p_email: p_email, p_fullname: p_fullname, p_contact: p_contact, p_birthdate: isoDateString}); 
+        setState({user_id: user_id,p_username: p_username, p_email: p_email, p_fullname: p_fullname, p_contact: p_contact, p_birthdate: isoDateString, p_gender: p_gender}); 
       }).catch(error => {
         console.error(error);
       });
@@ -184,6 +186,18 @@ const handleChange = (event) => {
 
                               />
                       </div>
+                      <div className='profileSettings__row--col'>
+                        <label htmlFor='p_gender' className='label__input'>Gender: </label>
+                        <select name="p_gender" id="p_gender" value={p_gender || ""} className="patient__input" onChange={handleChange}>
+                                <option value="" disabled selected> --- Choose One --- </option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Another Gender">Another Gender</option>
+                      
+                        </select>
+                    </div>
+
+                      
                     </div>
                     <div className='profileSettings__row'>
                       <div className='profileSettings__row--col'>

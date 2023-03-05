@@ -12,6 +12,7 @@ export const register = (req, res) =>{
     const p_fullname = req.body.p_fullname;
     const p_contact = req.body.p_contact;
     const p_birthdate = req.body.p_birthdate;
+    const p_gender = req.body.p_gender;
     
 
     //CHECK IF USER EXISTS
@@ -31,8 +32,8 @@ export const register = (req, res) =>{
             console.log(p_birthdate)
             console.log(formattedDate)
 
-            const sqlInsert = "INSERT INTO users_db (p_username, p_email, p_password, p_fullname, p_contact, p_birthdate) VALUES (?, ?, ?, ?, ?, ?)";
-            db.query(sqlInsert, [p_username, p_email, hashedPassword, p_fullname, p_contact, formattedDate], (err, result) =>{
+            const sqlInsert = "INSERT INTO users_db (p_username, p_email, p_password, p_fullname, p_contact, p_birthdate, p_gender) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            db.query(sqlInsert, [p_username, p_email, hashedPassword, p_fullname, p_contact, formattedDate, p_gender], (err, result) =>{
                 if (err) return res.status(500).json(err)
                 return res.status(200).json("User has been created")
                
@@ -50,8 +51,6 @@ export const register = (req, res) =>{
 export const login = (req, res) =>{
 
     const p_username = req.body.p_username;
-
-
     const q = "SELECT * FROM users_db WHERE p_username = ?";
     db.query(q, [p_username], (err, data)=>{
         if(err) return res.status(500).json(err);

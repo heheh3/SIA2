@@ -47,12 +47,12 @@
 
 input[type="text"].patient__input,
 input[type="email"].patient__input,
-input[type="date"].patient__input
+input[type="date"].patient__input,
+select.patient__input
 {
     width: 100%;
     height: 50px;
     padding: 25px 10px;
-    outline: none;
     color: rgb(114, 111, 111);
     border-radius: 5px;
     border: 1px solid rgba(114, 111, 111, 0.2);
@@ -60,6 +60,10 @@ input[type="date"].patient__input
    
 }
 
+select.patient__input{
+   padding: 0 10px;
+
+}
 
 input[type="text"].patient__input.username__style{
     border-top-left-radius: 0;
@@ -71,7 +75,8 @@ input[type="text"].patient__input.username__style{
 
 input[type="text"].patient__input::placeholder,
 input[type="email"].patient__input::placeholder,
-input[type="date"].patient__input::placeholder{
+input[type="date"].patient__input::placeholder,
+select.patient__input::placeholder{
     color:rgba(114, 111, 111, 0.4);
     font-size: 1rem;
     font-weight: 600;

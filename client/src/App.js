@@ -2,8 +2,6 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
-
-
 import Appointment from './pages/Appointment';
 import PendingAppointment from './pages/PendingAppointment';
 import AdminNavbar from './pages/AdminNavbar';
@@ -26,6 +24,8 @@ import AppointmentHistory from './pages/AppointmentHistory';
 import UpdatePatient from './pages/UpdatePatient';
 import Walkin from './pages/Walkin';
 import Procedures from './pages/Procedures';
+import AdminPatientHistory from './pages/AdminPatientHistory';
+import AdminMedicalHistory from './pages/AdminMedicalHistory';
 
 
 function App() {
@@ -46,6 +46,9 @@ function App() {
 
           <Route path='/admin/completed' element={<Completed />} />
           <Route path='/admin/user/update/:id' element={<UpdatePatient />} />
+          <Route path='/admin/user/profile-settings/:id' element={<UpdatePatient />} />
+          <Route path='/admin/user/medical-history/:id' element={<AdminMedicalHistory />} />
+          <Route path='/admin/user/appointment-history/:id' element={<AdminPatientHistory />} />
           
           
           <Route path='/admin/user' element={<PatientTable />} />

@@ -141,7 +141,7 @@ const handleChange = (event) => {
       <Link to="/admin/appointment">
           <button className='back__procedures'><span>Back</span></button>
         </Link>
-        <main className='display--flex'>
+        <main className='display--flex m-0'>
           <div className='update appointmentCard'>
             <h3 className='book__title'>UPDATE/ VIEW AN APPOINTMENT</h3>
 

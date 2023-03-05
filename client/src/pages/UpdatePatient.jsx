@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import {useNavigate, useParams } from "react-router-dom"
-import ProfileNavbar from './ProfileNavbar'
+import AdminProfileNavbar from './AdminProfileNavbar'
 import AdminNavbar from './AdminNavbar'
 import "../css/Profile.css";
 import { FaAt  } from "react-icons/fa";
 import axios from "axios";
 import {toast} from "react-toastify";
-import { parseISO, format } from 'date-fns';
+import { format } from 'date-fns';
 import { AuthContext } from "../context/authContext";
 
 
@@ -51,9 +51,6 @@ const UpdatePatient = () => {
     if (!p_username || !p_email || !p_fullname || !p_contact || !p_birthdate ){
         
         toast.error("Please provide value into each input field");
-        toast.error(p_username)
-        console.log(p_username)
-        console.log(p_email)
 
     } else{
         axios.put(`http://localhost:5000/admin/patient/update/${id}`, {
@@ -66,7 +63,6 @@ const UpdatePatient = () => {
       }).then(()=>{
         setState({user_id: null, p_username: "", p_email: "", p_fullname: "", p_contact: "", p_birthdate: ""});
         toast.success("Profile Settings Updated Successfully");
-        toast.success(p_fullname);
       
         
         })
@@ -96,7 +92,7 @@ const handleChange = (event) => {
       <body>
         <main>
             <div className='profileNavbar__container'>
-              <ProfileNavbar />
+              <AdminProfileNavbar />
               <div className='profile__container'>
                 <form onSubmit={handleSubmit} className='profileSettings__form'>
                     <div className='profileSettings__row'>

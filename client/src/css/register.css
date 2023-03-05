@@ -114,16 +114,21 @@ input[type="text"].register-fullname,
 input[type="email"].register-email , 
 input[type="password"].register-password,
 input[type="text"].register-phone,
-input[type="date"].register-birthdate
+input[type="date"].register-birthdate,
+select.register-gender
 {
     border: none;
     border-bottom: 1px solid lightgray;
-    padding: 20px 10px;
+    padding: 10px 10px;
     outline: none;
     border-radius: 0;
     width: 200px;   
 
 
+}
+
+select.register-gender{
+    margin: 0;
 }
 
 input[type="text"].register-username, input[type="text"].register-phone {
