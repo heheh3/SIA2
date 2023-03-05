@@ -21,7 +21,7 @@ body{
 }
 
 main{
-    margin-top: 2.5rem;
+    margin: 0;
 
 }
 
@@ -32,7 +32,7 @@ main{
 
 .home{
     width: 45%;
-    padding: 1rem;
+    padding: 0.75rem;
     display: flex;
  
     
@@ -97,7 +97,7 @@ main{
     flex-direction: column;
     border-radius: 20px;
     color: var(--white);
-    padding: 2.5rem;
+    padding: 1.8rem 2.5rem;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 

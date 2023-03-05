@@ -107,7 +107,7 @@ const UpdateAppointment = () => {
           setState({b_date: "", b_time: "", b_procedure: "", b_note: "", b_status: "", b_paymentStatus: ""});
           toast.success("Appointment Updated Successfully");
           if(b_status == "In Progress"){
-            setTimeout(()=> navigate(`/admin/appointment/proceduresw/${id}`),500)
+            setTimeout(()=> navigate(`/admin/appointment/procedures/${id}`),500)
           } else{
             setTimeout(()=> navigate("/admin/appointment"),500)
           }
@@ -138,6 +138,9 @@ const handleChange = (event) => {
       </header>
 
       <body>
+      <Link to="/admin/appointment">
+          <button className='back__procedures'><span>Back</span></button>
+        </Link>
         <main className='display--flex'>
           <div className='update appointmentCard'>
             <h3 className='book__title'>UPDATE/ VIEW AN APPOINTMENT</h3>
@@ -236,9 +239,6 @@ const handleChange = (event) => {
 
               <div className='back__update-buttons'>
                 <input type="submit" value="UPDATE" className='btn-update' />
-                <Link to={'/admin/appointment'} className="button-a">
-                  <button className='btn-back'>BACK</button>
-                </Link>
                 <Link to={`/admin/appointment/procedures/${id}`} className="button-a">
                   <button className='btn-back1'>PROCEDURES</button>
                 </Link>
