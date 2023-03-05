@@ -61,11 +61,15 @@ const ReminderAppointment = () => {
       console.log("parse:" + parsedDate)
       setData({b_date:b_date, b_time: b_time})
       setState({b_date: parsedDate, b_time: b_time, b_procedure: b_procedure, b_note: b_note, b_paymentStatus: b_paymentStatus, a_ID: a_ID}); 
+ 
     }).catch(error => {
       console.error(error);
     });
       
   }, [currentUser.user_id])
+
+    const isDataEmpty = !data;
+
 
 
   useEffect(() => {
@@ -105,6 +109,7 @@ const ReminderAppointment = () => {
         toast.error("Please provide value into each input field");
 
     } else{
+      if(window.confirm("Are you sure you wanted to reschedule/cancel this appointment, there is Php100.00 Rescheduling/Cancelling Fee?")){
         axios.put(`http://localhost:5000/admin/appointment/update/${a_ID}`, {
           b_date,
           b_time,
@@ -124,7 +129,7 @@ const ReminderAppointment = () => {
         })
         .catch((err) => toast.error(err.response.data));
         
-      }
+      }}
     }
   
 
@@ -172,7 +177,7 @@ const handleChange = (event) => {
                 )}
                 <div className='reminder-cancel-resched'>
 
-                    <button class="open-button" onClick={toggleVisibility}>Reschedule/Cancel</button>
+                    <button class="open-button" onClick={toggleVisibility} disabled={isDataEmpty}>Reschedule/Cancel</button>
                     {isVisible && (
                           <div className="form-popup">
                           <form className="form-container" onSubmit={handleSubmit} >
