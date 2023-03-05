@@ -7,7 +7,6 @@ import { FaAt  } from "react-icons/fa";
 import axios from "axios";
 import {toast} from "react-toastify";
 import { format } from 'date-fns';
-import { AuthContext } from "../context/authContext";
 
 
 const initialState = {
@@ -27,7 +26,6 @@ const UpdatePatient = () => {
 
   const navigate = useNavigate();
 
-  const { currentUser } = useContext(AuthContext);
 
   useEffect (() => {
 

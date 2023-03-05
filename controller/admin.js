@@ -30,7 +30,7 @@ export const appointment_post = (req, res) =>{
 }
 
 export const appointment_get = (req, res) =>{
-    const sqlGet = "SELECT * FROM booking_db as b JOIN users_db as u ON b.patientId = u.user_id WHERE NOT b_status = 'Completed' ORDER BY STR_TO_DATE(b_date,'%a, %b %d, %Y') ASC , STR_TO_DATE(b_time, '%h:%i%p') ASC";
+    const sqlGet = "SELECT * FROM booking_db as b JOIN users_db as u ON b.patientId = u.user_id WHERE NOT b_status = 'Completed' AND NOT b_status = 'Cancelled' ORDER BY STR_TO_DATE(b_date,'%a, %b %d, %Y') ASC , STR_TO_DATE(b_time, '%h:%i%p') ASC";
 
     db.query(sqlGet, (error, result)=>{
         res.send(result);
@@ -52,7 +52,7 @@ export const appointment_delete = (req, res) =>{
 
 export const appointment_getUser = (req, res) =>{
     const { a_ID } = req.params;
-    const sqlGet = "SELECT * FROM booking_db as b JOIN users_db as u ON b.patientId = u.user_id WHERE a_ID = ?"
+    const sqlGet = "SELECT * FROM booking_db as b JOIN users_db as u ON b.patientId = u.user_id  WHERE a_ID = ?"
     db.query(sqlGet, a_ID ,(error, result)=>{
         if(error){
             console.log(error)
@@ -61,6 +61,7 @@ export const appointment_getUser = (req, res) =>{
     });
 
 }
+
 
 export const appointment_updateUser = (req, res) =>{
     const {a_ID} = req.params;
@@ -114,6 +115,20 @@ export const appointment_getCompletedHistory = (req, res) =>{
     db.query(sqlGet, user_id, (error, result)=>{
         res.send(result);
     });
+}
+
+
+export const appointment_getAppointmentCancel = (req, res) =>{
+    const { user_id } = req.params;
+    const sqlGet = "SELECT * FROM booking_db as b JOIN users_db as u ON b.patientId = u.user_id WHERE b.b_status = 'Cancelled' AND b.b_paymentStatus = 'Not-Paid' AND u.user_id = ?"
+    db.query(sqlGet, user_id ,(error, result)=>{
+        if(error){
+            console.log(error)
+        }
+        res.send(result);
+    });
+
+
 }
 
 

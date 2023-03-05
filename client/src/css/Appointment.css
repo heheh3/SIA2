@@ -220,6 +220,10 @@ input[type="submit"]:hover{
     width: 100%;
 }
 
+.btn-update1{
+    width: 200%;
+}
+
 .search__bar-container{
     width: 20%;
     margin-top: 20px;

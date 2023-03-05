@@ -9,7 +9,8 @@ import
         appointment_getCompleted,
         appointment_getDateTime,
         appointment_getPending,
-        appointment_getCompletedHistory
+        appointment_getCompletedHistory,
+        appointment_getAppointmentCancel
     } 
 from "../controller/admin.js";
 
@@ -22,6 +23,7 @@ router.delete("/appointment/delete/:a_ID", appointment_delete);
 
 router.get("/admin/appointment/get/:a_ID", appointment_getUser);
 router.put("/admin/appointment/update/:a_ID", appointment_updateUser);
+router.get("/admin/appointment/cancelled/get/:user_id", appointment_getAppointmentCancel);
 
 router.get("/appointment/completed/get", appointment_getCompleted);
 router.get("/appointment/pending/get/:user_id", appointment_getPending);

@@ -19,7 +19,7 @@ const initialState = {
 
 
 
-const UpdateAppointment = () => {
+const CancelledUpdate = () => {
   const [state, setState] = useState(initialState);
   const {b_date, b_time, b_procedure, b_note, b_status, b_paymentStatus} = state;
   const {id} = useParams();
@@ -129,7 +129,6 @@ const handleChange = (event) => {
   
 }
 
-
   return (
     
     <div>
@@ -137,7 +136,7 @@ const handleChange = (event) => {
         <AdminNavbar />  
       </header>
       <body>
-      <Link to="/admin/appointment">
+      <Link to={`/admin/appointment`}>
           <button className='back__procedures'><span>Back</span></button>
         </Link>
         <main className='display--flex m-0'>
@@ -237,10 +236,7 @@ const handleChange = (event) => {
               </div>
 
               <div className='back__update-buttons'>
-                <input type="submit" value="UPDATE" className='btn-update' />
-                <Link to={`/admin/appointment/procedures/${id}`} className="button-a">
-                  <button className='btn-back1'>PROCEDURES</button>
-                </Link>
+                <input type="submit" value="UPDATE" className='btn-update1' />
               </div>
            
          
@@ -254,4 +250,4 @@ const handleChange = (event) => {
 }
 
 
-export default UpdateAppointment
+export default CancelledUpdate
