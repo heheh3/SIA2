@@ -236,7 +236,7 @@ input[type="text"].e_information, input[type="email"].e_information, input[type=
 }
 
 
-.back__ebutton-style, .back__procedures{
+.back__ebutton-style, .back__procedures, .back__patient{
     padding: 0.5rem 2rem;
     background-color: var(--blue-dark-teal);
     color: var(--white);
@@ -250,6 +250,10 @@ input[type="text"].e_information, input[type="email"].e_information, input[type=
 }
 
 .back__procedures{
+    margin-top: 10px;
+}
+
+.back__patient{
     margin-top: 10px;
 }
 

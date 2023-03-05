@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
-import {useNavigate, useParams } from "react-router-dom"
+import {useNavigate, useParams, Link} from "react-router-dom"
 import AdminProfileNavbar from './AdminProfileNavbar'
 import AdminNavbar from './AdminNavbar'
 import "../css/Profile.css";
@@ -90,7 +90,10 @@ const handleChange = (event) => {
         <AdminNavbar />
       </header>
       <body>
-        <main>
+        <Link to="/admin/user">
+            <button className='back__patient'><span>Back</span></button>
+          </Link>
+        <main className='patient-settings'>
             <div className='profileNavbar__container'>
               <AdminProfileNavbar />
               <div className='profile__container'>

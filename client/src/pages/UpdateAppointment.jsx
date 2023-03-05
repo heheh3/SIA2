@@ -136,7 +136,6 @@ const handleChange = (event) => {
       <header>
         <AdminNavbar />  
       </header>
-
       <body>
       <Link to="/admin/appointment">
           <button className='back__procedures'><span>Back</span></button>

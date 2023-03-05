@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
-import {useNavigate, useParams } from "react-router-dom"
+import {useNavigate, useParams, Link } from "react-router-dom"
 import ProfileNavbar from './ProfileNavbar'
 import PatientNavbar from './PatientNavbar'
 import "../css/Profile.css";

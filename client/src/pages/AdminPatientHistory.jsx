@@ -3,8 +3,9 @@ import "../css/Profile.css";
 import React, {useState, useEffect} from 'react';
 import { FaSearch  } from "react-icons/fa";
 import axios from 'axios';
-import {useParams} from "react-router-dom";
+import {useParams, Link} from "react-router-dom";
 import AdminProfileNavbar from './AdminProfileNavbar';
+
 
 const AdminPatientHistory = () => {
     const [data, setData] = useState([]);
@@ -27,7 +28,11 @@ const AdminPatientHistory = () => {
             <AdminNavbar />
         </header>
         <body>
-            <main>
+            <Link to="/admin/user">
+              <button className='back__patient'><span>Back</span></button>
+            </Link>
+
+            <main className='patient-settings'>
                 <div className='profileNavbar__container'>
                     <AdminProfileNavbar />
                     <div className='profile__container'>

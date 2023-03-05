@@ -1,6 +1,7 @@
 import React from 'react'
 import AdminNavbar from './AdminNavbar'
 import AdminProfileNavbar from './AdminProfileNavbar'
+import {Link} from 'react-router-dom'
 
 const AdminMedicalHistory = () => {
     return (
@@ -9,7 +10,10 @@ const AdminMedicalHistory = () => {
                 <AdminNavbar />
             </header>
             <body>
-                <main>
+                <Link to="/admin/user">
+                    <button className='back__patient'><span>Back</span></button>
+                </Link>
+                <main className='patient-settings'>
                     <div className='profileNavbar__container'>
                         <AdminProfileNavbar />
                         <div className='profile__container'>
