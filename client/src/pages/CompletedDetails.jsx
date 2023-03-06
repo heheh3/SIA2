@@ -28,7 +28,7 @@ const CompletedDetails = () => {
                 <AdminNavbar />
             </header>
             <body className='pending_body'>
-                <Link to={`/admin/appointment/update/${id}`}>
+                <Link to={`/admin/completed`}>
                         <button className='back__procedures'><span>Back</span></button>
                 </Link>
            

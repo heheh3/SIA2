@@ -94,9 +94,12 @@ export const appointment_getCompleted = (req, res) =>{
 }
 
 export const appointment_getCompletedCancelled = (req, res) =>{
-    const { user_id } = req.params;
-    const sqlGet = "SELECT * FROM booking_db as b JOIN users_db as u ON b.patientId = u.user_id WHERE b.b_status = 'Cancelled' AND b.b_paymentStatus = 'Fully-Paid' AND u.user_id = ?"
-    db.query(sqlGet, user_id ,(error, result)=>{
+    const {user_id} = req.params;
+    const a_ID = req.params.a_ID;
+    console.log(a_ID)
+    
+    const sqlGet = "SELECT * FROM booking_db as b JOIN users_db as u ON b.patientId = u.user_id WHERE b.b_status = 'Cancelled' AND b.b_paymentStatus = 'Fully-Paid' AND u.user_id = ? AND 30 < a_ID = ?"
+    db.query(sqlGet, [user_id, a_ID] ,(error, result)=>{
         if(error){
             console.log(error)
         }

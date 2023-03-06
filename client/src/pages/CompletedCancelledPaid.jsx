@@ -19,8 +19,8 @@ const CompletedCancelledPaid = () => {
         loadData();
     }, [id])
 
-    // const userID = JSON.parse(JSON.stringify(data1[0].user_id))
-
+    console.log(data1)
+    console.log(data1.user_id)
 
     const LoadingData = async () =>{
         const response = await axios.get(`http://localhost:5000/admin/completedCancelled/get/${data1.user_id}`);
