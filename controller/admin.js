@@ -93,6 +93,17 @@ export const appointment_getCompleted = (req, res) =>{
     });
 }
 
+export const appointment_getCompletedCancelled = (req, res) =>{
+    const { user_id } = req.params;
+    const sqlGet = "SELECT * FROM booking_db as b JOIN users_db as u ON b.patientId = u.user_id WHERE b.b_status = 'Cancelled' AND b.b_paymentStatus = 'Fully-Paid' AND u.user_id = ?"
+    db.query(sqlGet, user_id ,(error, result)=>{
+        if(error){
+            console.log(error)
+        }
+        res.send(result);
+    });
+}
+
 export const appointment_getDateTime = (req, res) =>{
     const sqlGet = "SELECT b_date, b_time FROM booking_db";
     db.query(sqlGet, (error, result)=>{

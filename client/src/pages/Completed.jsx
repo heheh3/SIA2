@@ -95,7 +95,7 @@ const Completed = () => {
                                     </td>
                                     <td>
                                     
-                                        <Link to={`/admin/appointment/update/${item.a_ID}`}>
+                                        <Link to={`/admin/completed/procedures/${item.a_ID}`}>
                                             <button className='btn btn-view'>View/Edit</button>
                                         </Link>
                                         <button className='btn btn-delete' onClick={() => deleteAppointment(item.a_ID)}>Delete</button>

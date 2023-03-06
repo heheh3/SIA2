@@ -4,9 +4,10 @@ import axios from 'axios';
 import AdminNavbar from './AdminNavbar';
 import '../css/Home.css';
 import CancelledAppointment from './CancelledAppointment';
+import CompletedCancelledPaid from './CompletedCancelledPaid';
 
 
-const Procedures = () => {
+const CompletedDetails = () => {
     const [data, setData] = useState([]);
     const [searchValue, setSearchValue] = useState('');
     const {id} = useParams();
@@ -45,6 +46,7 @@ const Procedures = () => {
                                 <th style={{textAlign: "center"}}>Procedure</th>
                                 <th style={{textAlign: "center"}}>Note</th>
                                 <th style={{textAlign: "center"}}>Status</th>
+                                <th style={{textAlign: "center"}}>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -71,12 +73,19 @@ const Procedures = () => {
                                                 item.b_status === "Completed" ? 'green': '' || item.b_status === "Walk-In" ? 'gray': '', padding: '5px 10px', color: 'white', borderRadius: '10px', fontSize: '0.8rem', letterSpacing: "1.5px",}
                                         }>{item.b_status}</span>
                                     </td>
+
+                                    <td>
+                                        <Link to={`/admin/completed/update/${item.a_ID}`}>
+                                            <button className='btn btn-view'>View/Edit</button>
+                                        </Link>
+                                    </td>
+                                   
                                     </tr>
                                 )})}
                         </tbody>
                     </table> 
                 </div>
-                <CancelledAppointment />
+                <CompletedCancelledPaid />
                 <h1 className='h1__apppointment'>Procedure Details</h1>
                 <div className='pending_body-flex'>
                     <table className='styled-table'>
@@ -122,4 +131,4 @@ const Procedures = () => {
     )
     }
 
-export default Procedures
+export default CompletedDetails

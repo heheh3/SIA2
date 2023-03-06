@@ -27,6 +27,8 @@ import Procedures from './pages/Procedures';
 import AdminPatientHistory from './pages/AdminPatientHistory';
 import AdminMedicalHistory from './pages/AdminMedicalHistory';
 import CancelledUpdate from './pages/CancelledUpdate';
+import CompletedUpdate from './pages/CompletedUpdate';
+import CompletedDetails from './pages/CompletedDetails';
 
 
 function App() {
@@ -42,6 +44,8 @@ function App() {
           <Route path='/admin/appointment/procedures/:id' element={<Procedures />} />
           <Route path='/admin/appointment/cancelled/:id' element={<CancelledUpdate />} />
           <Route path='/admin/appointment' element={<PendingAppointment />} />
+          <Route path='/admin/completed/update/:id' element={<CompletedUpdate />} />
+          <Route path='/admin/completed/procedures/:id' element={<CompletedDetails />} />
 
           <Route path='/admin/employee/add' element={<EmployeeAdd />} />
           <Route path='/admin/employee/update/:id' element={<EmployeeUpdate />} />
