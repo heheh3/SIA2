@@ -1,61 +1,152 @@
-import React, { useState, useContext } from 'react';
-import {useNavigate, useParams, Link } from "react-router-dom"
-import "../css/Appointment.css";
+import React, {useRef, useState, useEffect } from 'react';
+import "../css/Walkin.css";
 import AdminNavbar from './AdminNavbar';
 import { FaLocationArrow } from "react-icons/fa";
+import {faCheck, faTimes, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import {toast} from "react-toastify";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
+const EMAIL_REGEX = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
+const FULLNAME_REGEX = /(^[A-Za-z]{3,16})([ ]{0,1})([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})/;
+const PHONE_REGEX = /^(09|\+639)\d{9}$/;
+const DATE_REGEX = /((0?[13578]|10|12)(-|\/)((0[0-9])|([12])([0-9]?)|(3[01]?))(-|\/)((\d{4})|(\d{2}))|(0?[2469]|11)(-|\/)((0[0-9])|([12])([0-9]?)|(3[0]?))(-|\/)((\d{2,4})))/;
 
 const initialState = {
-  b_date: "",
-  b_time: "",
-  b_procedure: "",
-  b_note: "",
-  b_status: ""
+    p_username: "",
+    p_fullname: "",
+    p_email: "",
+    p_password: "",
+    p_contact: "",
+    p_birthdate: "",
+    p_gender: ""
 };
 
 
 
 const Walkin = () => {  
   const [state, setState] = useState(initialState);
-  const { b_date, b_status, b_time, b_procedure, b_note} = state;
+    const {p_username, p_email, p_fullname, p_contact, p_birthdate, p_gender} = state;
 
-  const navigate = useNavigate();
-  // const [b_date, setSelectedDate] = useState("")
-  const minDate = new Date();
-  minDate.setDate(minDate.getDate() + 2);
+    const [validName, setValidName]  = useState(false)
+    const [userFocus, setUserFocus]  = useState(false)
+    
+    const [validEmail, setValidEmail]  = useState(false)
+    const [emailFocus, setEmailFocus]  = useState(false)
 
-  const handleSubmit = (e) =>{
-    e.preventDefault();
-    if (!b_date || !b_time || !b_procedure){
-        toast.error("Please provide value into each input field");
+    const [validPhone, setValidPhone]  = useState(false)
+    const [phoneFocus, setPhoneFocus]  = useState(false)
 
-    } else{
-        axios.post("http://localhost:5000/appointment/post", {
-            b_date,
-            b_time,
-            b_procedure,
-            b_note,
-            b_status
-        })
-        .then(()=>{
-            setState({  b_date: "", b_time: "", b_procedure: "", b_note: ""})
-            toast.success("Appointment Added Successfully");
-        }).catch((err) => toast.error(err.response.data) );
- 
-        setTimeout(()=> navigate("/appointment"), 300)
+    const [valiDate, setValidDate]  = useState(false)
+    const [dateFocus, setDateFocus]  = useState(false)
+
+    const [validFullName, setValidFullName]  = useState(false)
+    const [FullNameFocus, setFullNameFocus]  = useState(false)
+
+    const [matchPwd, setMatchPwd]  = useState('')
+    const [validMatch, setValidMatch]  = useState(false)
+    const [matchFocus, setMatchFocus]  = useState(false)
+
+    const [errMsg, setErrMsg]  = useState("")
+
+    const userRef = useRef();
+    const errRef = useRef();
+
+
+    useEffect(()=>{
+        userRef.current.focus()
+    }, [])
+
+    useEffect(() => {
+      if (p_fullname) {
+        const formattedUsername = p_fullname
+          .toLowerCase()
+          .replace(/\s+/g, "");
+        setState((prevState) => ({
+          ...prevState,
+          p_username: formattedUsername
+        }));
+        userRef.current.placeholder = formattedUsername;
+        userRef.current.disabled = true;
+      } else {
+        setState((prevState) => ({
+          ...prevState,
+          p_username: ""
+        }));
+        userRef.current.placeholder = "username";
+        userRef.current.disabled = true;
       }
-    }
+    }, [p_fullname]);
+
+    useEffect(()=>{
+        const result = EMAIL_REGEX.test(p_email)
+        console.log(result);
+        console.log(p_email);
+        setValidEmail(result);
+    }, [p_email]);
+
+    useEffect(()=>{
+        const result = FULLNAME_REGEX.test(p_fullname)
+        console.log(result);
+        console.log(p_fullname);
+        setValidFullName(result);
+    }, [p_fullname]);
+
+    useEffect(()=>{
+        const result = PHONE_REGEX.test(p_contact)
+        console.log(result);
+        console.log(p_contact);
+        setValidPhone(result);
+    }, [p_contact]);
+
+    useEffect(()=>{
+        const result = DATE_REGEX.test(p_birthdate)
+        console.log(result);
+        console.log(p_birthdate);
+        setValidDate(result);
+    }, [p_birthdate]);
 
 
-const handleChange = (event) => {
-  const {name, value} = event.target;
-  setState({...state, [name]: value});
-}
+    const handleSubmit = (e) => {
+        e.preventDefault();
+      
+        if (!p_email || !p_fullname || !p_contact || !p_birthdate || !p_gender) {
+          toast.error('Please provide value into each input field');
+        } else {
+          const formattedpassword = p_fullname + '123';
+          axios
+            .post('http://localhost:5000/register', {
+              p_username,
+              p_email,
+              p_password: formattedpassword,
+              p_fullname,
+              p_contact,
+              p_birthdate,
+              p_gender
+            })
+            .then(() => {
+              setState(initialState);
+              toast.success('Registered Successfully');
+            })
+            .catch((err) => {
+              if (!err.response) {
+                setErrMsg('No Server Response');
+              } else if (err.response?.status === 409) {
+                setErrMsg('Username Taken!');
+              } else {
+                setErrMsg('Email is Already Exists!');
+              }
+              errRef.current.focus();
+            });
+        }
+      };
+        const handleChange = (event) => {
+          const { name, value } = event.target;
+          setState((prevState) => ({ ...prevState, [name]: value }));
+        };
 
   return (
     
@@ -64,111 +155,211 @@ const handleChange = (event) => {
         <AdminNavbar />  
       </header>
 
-      <body>
-  
-        {/* <div>{setState({b_procedure})}</div> */}
-        <main className='display--flex'>
-          <div className='home intro'>
-            <h3 className='intro__title'>TOOTHFULLY YOURS</h3>
-            <h1 className='intro__description'> We&apos;re open and <br/>welcoming<br/>patients.</h1>
-            <p className='intro__description2'>We have implemented a number of safety measures
-                      to ensure not <br/> only dental health but also the safety
-                      of both our patients and team.</p>
-                      <p className='intro__description2'><strong>Contact Number: </strong> (+63)9123456789 &nbsp; <strong>Email:</strong> toothfully@gmail.com</p>
-            <div className='intro__location'>
-                <a href=''><FaLocationArrow /> Sampaguita St., Mintal 8000, Davao City, Philippines</a>  
-            </div>
-          </div>  
-          <div className='home appointmentCard'>
-            <h3 className='book__title'>BOOK AN APPOINTMENT</h3>
-            <p>As soon as you as you contact our expert team, 
-                we will get back to you <br /> as soon as possibe! Book
-                an appointment at the comfort of your home and <br/>
-                we'll take care of the rest!
-            </p>
+      <body className='body-walkin'>
+        <section className="walkin">
+            <div className="walkin__card">
+                <div className="walkin__right">
+                    <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
+                    <h1 className='walkin__right-title'>Register a Walk-in Patient</h1>
+                    <form className="walkin-form" onSubmit={handleSubmit}>
 
-            <form onSubmit={handleSubmit} >
-              <div className='book-row'>
-                    <input 
-                      type='number' 
-                      name='p_fullname' 
-                      id='p_fullname'
-                      value
-                      hidden
-                    />
-                  </div>
+                    <div className='walkin-form__row'>
+                            <div className='walkin-form__input'>
+                              
+                            <label className='walkin-form-name' htmlFor='p_fullname'>Full Name : 
+                            <span className={validFullName ? "valid" : "hide"}>
+                                    <FontAwesomeIcon icon={faCheck }  className="icon-add"/>
+                                </span>
+                                <span className={validFullName || !p_fullname ? "hide" : "Invalid"}>
+                                    <FontAwesomeIcon className='icon-times' icon={faTimes} />
+                                </span>
 
-              <div className='book__row'>
-                <label htmlFor='date'>DATE: </label>
-                <div className='date__container'>
+                            </label>
+                            <input 
+                                className='walkin-fullname'
+                                type="text" 
+                                placeholder="Enter full name" 
+                                id="p_fullname" 
+                                name="p_fullname" 
+                                value={p_fullname || ""}
+                                onChange={handleChange} 
+                                aria-invalid = {validFullName ? "false" : "true"}
+                                aria-describedby = "uidnote"
+                                onFocus={() => setFullNameFocus(true)}
+                                onBlur={() => setFullNameFocus(false)}
+                                 
+                                 
+                            />
+        
+                         
+                            </div>
+                   
+                            <p id="uidnode" className={FullNameFocus && p_fullname && !validFullName ? "Intructions" : "offscreen"}>
+                                <FontAwesomeIcon icon={faInfoCircle} /> Invalid Name. Name must starts with letter <br />
+                            </p>
+                        </div>
 
-      
-                <DatePicker
-                  id='b_date'
-                  name='b_date'
-                  className='datepicker__style'
-                  selected={b_date}
-                  onChange={b_date => handleChange({ target: { value: b_date, name: 'b_date' } })}
-                  minDate={minDate}
-                  dateFormat="MMM-dd-yyyy"
-                  filterDate={date => date.getDay() !== 0}
-                  placeholderText="Select a date"
-                  value={b_date || ""}     
-            
-                />
+                        <div className='walkin-form__row'>
+                            <div className='walkin-form__input'>
+                              
+                            <label className='walkin-form-name' htmlFor='p_username'>Username :</label>
+                            <input
+                                className='walkin-username' 
+                                type="text" 
+                                ref={userRef}
+                                autoComplete="off"
+                                id="p_username" 
+                                name="p_username" 
+                                value={p_username || ""} 
+                                onChange={handleChange} 
+                                aria-invalid = {validName ? "false" : "true"}
+                                aria-describedby = "uidnode"
+                                onFocus={() => setUserFocus(true)}
+                                onBlur={() => setUserFocus(false)}
+                                 
+                            />
+                            </div>
+                   
+                           <p id="uidnode" className={userFocus && p_username && !validName ? "Intructions" : "offscreen"}>
+                                <FontAwesomeIcon icon={faInfoCircle} /> 4 to 25 characters. <br />
+                                Must begin with a letter. <br />
+                                Letters, numbers, underscores, hypens allowed.
+
+                            </p>
+                        </div>
+
+                        
+                            
                
+                        <div className='walkin-form__row'>
+                            <div className='walkin-form__input'>
+                              
+                            <label className='walkin-form-name' htmlFor='p_email'>Email : 
+                                <span className={validEmail ? "valid" : "hide"}>
+                                    <FontAwesomeIcon icon={faCheck }  className="icon-add"/>
+                                </span>
+                                <span className={validEmail || !p_email ? "hide" : "Invalid"}>
+                                    <FontAwesomeIcon className='icon-times' icon={faTimes} />
+                                </span>
+                            </label>
+                            <input 
+                                className='walkin-email'
+                                type="email" 
+                                placeholder="Enter patient email" 
+                                id="p_email" 
+                                name="p_email" 
+                                value={p_email || ""} 
+                                onChange={handleChange} 
+                                aria-invalid = {validEmail ? "false" : "true"}
+                                aria-describedby = "uidnode"
+                                onFocus={() => setEmailFocus(true)}
+                                onBlur={() => setEmailFocus(false)}
+                                 
+                            /> 
+                         
+                            </div>
+                   
+                           <p id="uidnode" className={emailFocus && p_email && !validEmail ? "Intructions" : "offscreen"}>
+                                <FontAwesomeIcon icon={faInfoCircle} /> Allowed characters: letters (a-z), numbers, underscores, periods, and dashes. <br />
+                           
+                      
+
+                            </p>
+                        </div>
+
+                        <div className='walkin-form__row'>
+                            <div className='walkin-form__input'>
+                            <label htmlFor='p_gender' className="walkin-form-name">Gender: </label>
+                                <select name="p_gender" id="p_gender" className="walkin-gender" value={p_gender || ""} onChange={handleChange}>
+                                        <option value="" disabled selected> --- Choose One --- </option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Another Gender">Another Gender</option>
+                                </select>
+                                </div>
+                        </div>
+
+
+                        
+                        <div className='walkin-form__row'>
+                            <div className='walkin-form__input'>
+                              
+                            <label className='walkin-form-name' htmlFor='p_contact'>Phone Number : 
+                            <span className={validPhone ? "valid" : "hide"}>
+                                    <FontAwesomeIcon icon={faCheck }  className="icon-add"/>
+                                </span>
+                                <span className={validPhone || !p_contact ? "hide" : "Invalid"}>
+                                    <FontAwesomeIcon className='icon-times' icon={faTimes} />
+                                </span>
+
+                            </label>
+                            <input 
+                                className='walkin-phone'
+                                type="text" 
+                                placeholder="Enter phone number" 
+                                id="p_contact" 
+                                name="p_contact" 
+                                value={p_contact || ""}
+                                onChange={handleChange} 
+                                aria-invalid = {validPhone ? "false" : "true"}
+                                aria-describedby = "uidnote"
+                                onFocus={() => setPhoneFocus(true)}
+                                onBlur={() => setPhoneFocus(false)}
+                                 
+                                 
+                            />
+          
+                        
+                         
+                            </div>
+                   
+                            <p id="uidnode" className={phoneFocus && p_contact && !validPhone ? "Intructions" : "offscreen"}>
+                                <FontAwesomeIcon icon={faInfoCircle} /> Phone Number must be 11 digits and starts with 09xxxxxxxxx   <br />
+                            </p>
+                        </div>
+
+
+                        <div className='walkin-form__row'>
+                            <div className='walkin-form__input'>
+                              
+                            <label className='walkin-form-name' htmlFor='p_birthdate'>Birth Date : 
+                            <span className={valiDate ? "valid" : "hide"}>
+                                    <FontAwesomeIcon icon={faCheck }  className="icon-add"/>
+                                </span>
+                                <span className={valiDate || !p_birthdate ? "hide" : "Invalid"}>
+                                    <FontAwesomeIcon className='icon-times' icon={faTimes} />
+                                </span>
+                            </label>
+
+                            <input 
+                                className='walkin-birthdate'
+                                type="date" 
+                                placeholder="mm/dd/yyyy" 
+                                id="p_birthdate" 
+                                name="p_birthdate" 
+                                value={p_birthdate || ""}
+                                onChange={handleChange} 
+                                aria-invalid = {p_birthdate ? "false" : "true"}
+                                aria-describedby = "uidnote"
+                                onFocus={() => setDateFocus(true)}
+                                onBlur={() => setDateFocus(false)}
+                                 
+                                 
+                            />
+          
+                        
+                         
+                            </div>
+                   
+                            <p id="uidnode" className={dateFocus && p_birthdate && !valiDate ? "Intructions" : "offscreen"}>
+                                <FontAwesomeIcon icon={faInfoCircle} /> Date Must be Valid!<br />
+                            </p>
+                        </div>
+                            <button className='book-walkin'>Add Patient</button>
+                    </form>
                 </div>
-           
-            
-              </div>
-
-            <div className='book__row'> 
-                <label htmlFor='time'>TIME: </label>
-                <select name="b_time" id="b_time" value={b_time || ""} onChange={handleChange} >
-                        <option value="" disabled selected>Select your option</option>
-                        <option value="8:00AM">08:00 AM</option>
-                        <option value="9:00AM">09:00 AM</option>
-                        <option value="10:00AM">10:00 AM</option>
-                        <option value="11:00AM">11:00 AM</option>
-                        <option value="1:00PM">01:00 PM</option>
-                        <option value="2:00PM">02:00 PM</option>
-                        <option value="3:00PM">03:00 PM</option>				
-                        <option value="4:00PM">04:00 PM</option>
-                    </select>
-
-              </div>
-
-              <div className='book__row'>
-                <label htmlFor='procedure'>PROCEDURE: </label>
-                <select id="b_procedure" name="b_procedure"  value={b_procedure || "" }  onChange={handleChange} >
-                        <option value="" disabled selected>Select your option</option>
-                        <option value="Fillings">Fillings</option>
-                        <option value="Root Canal">Root Canal</option>
-                        <option value="Consultation">Consultation</option>
-                        <option value="Fixing Bridge">Fixing Bridge</option>
-                        <option value="Dental Implant">Dental Implant</option>
-                        <option value="Dental Crown">Dental Crown</option>
-                        <option value="X-Ray">X-Ray</option>
-                        <option value="Teeth Whitening"> Teeth Whitening</option>
-                        <option value="Dental Brace">Dental Brace</option>
-                        <option value="Tooth Extraction">Tooth Extraction</option>
-                        <option value="Scaling">Scaling</option>						
-                        <option value="Others">Others</option>
-                </select>
-              </div>
-
-              <div className='book__row'>
-                <label htmlFor='note'>NOTES: </label>
-                <textarea for="note" id="b_note" name="b_note" value={b_note || "" }  onChange={handleChange} placeholder='Add some notes... (optional)' />
- 
-              </div> 
-
-              <input type="submit" className='book-button' value="Book" />
- 
-            </form>
-          </div>
-   
-        </main>
+            </div>
+        </section>
             
       </body>
     </div>

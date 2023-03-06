@@ -186,16 +186,7 @@ const handleChange = (event) => {
 
                               />
                       </div>
-                      <div className='profileSettings__row--col'>
-                        <label htmlFor='p_gender' className='label__input'>Gender: </label>
-                        <select name="p_gender" id="p_gender" value={p_gender || ""} className="patient__input" onChange={handleChange}>
-                                <option value="" disabled selected> --- Choose One --- </option>
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                                <option value="Another Gender">Another Gender</option>
-                      
-                        </select>
-                    </div>
+             
 
                       
                     </div>

@@ -1,0 +1,170 @@
+:root{
+    --white: #ffffff;
+    --gray: #706c6c;
+    --white-contrast: #E5EDED;
+    --blue-dark-teal: #1EBEB6;
+    --blue-darker-teal: #38B1B1;
+    --blue-light-teal: #50fcf3;
+    --blue-lighter-teal: #E0F9F8;
+} 
+
+
+.body-walkin{
+    width: 100%;
+}
+
+.walkin{
+    margin-top: 2rem;
+    background-color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.walkin__card{
+    width: 30%;
+    display: flex;
+    background-color: #1EBEB6;
+    border-radius: 10px;
+    max-height: 700px;
+
+}
+
+
+.walkin__right{
+    flex: 1;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    position: relative;
+ 
+
+}
+
+.walkin__right-title{
+
+    color: var(--white);
+}
+            
+form.walkin-form{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+input[type="text"].walkin-username,
+input[type="text"].walkin-fullname,
+input[type="email"].walkin-email,
+input[type="text"].walkin-phone,
+input[type="date"].walkin-birthdate,
+select.walkin-gender {
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    outline: none;
+    width: 230px;
+    height: 50px;
+
+}
+
+input[type="text"].walkin-username{
+    border: 1px solid var(--white);
+    color: var(--white);
+}
+
+select.walkin-gender {
+    margin: 0;
+}
+
+
+
+.book-walkin{
+    width: 50%;
+    padding: 10px;
+    border: none;
+    background-color: rgb(72, 128, 129);
+    color: white;
+    font-weight: 300;
+    cursor: pointer;
+    margin: auto;
+    margin-top: 15px;
+    border-radius: 10px;
+                    
+}
+
+.book-walkin:hover{
+
+    background-color: rgba(72, 128, 129, 0.7);
+ 
+                    
+}
+
+
+.walkin-form-name{
+    text-align: left;
+    color: var(--white);
+    margin-right: 15px;
+    font-size: 1rem;
+    font-weight: 500;
+    
+}
+
+.walkin-form__input{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.offscreen {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+ 
+  }
+
+.Intructions{
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 10px;
+    color: #ffffff;
+    font-size: 0.85rem;
+    width: 100%;
+ 
+}
+      
+.hide{
+    display: none;
+}
+
+.valid{
+   display: inline-block;
+   color: var(--blue-darker-teal);
+}
+
+.icon-times{
+    color: red;
+}
+
+.icon-add{
+    color: green;
+   
+}
+
+.errmsg{
+    background-color: var(--blue-darker-teal);
+    padding: 10px;
+    color: var(--white);
+    border-radius: 10px;
+
+}

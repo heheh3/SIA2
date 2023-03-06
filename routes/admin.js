@@ -12,7 +12,7 @@ import
         appointment_getCompletedHistory,
         appointment_getAppointmentCancel,
         appointment_getCompletedCancelled,
-
+        
     } 
 from "../controller/admin.js";
 
