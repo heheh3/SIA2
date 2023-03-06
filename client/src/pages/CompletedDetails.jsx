@@ -3,7 +3,6 @@ import {Link, useParams} from "react-router-dom";
 import axios from 'axios';
 import AdminNavbar from './AdminNavbar';
 import '../css/Home.css';
-import CancelledAppointment from './CancelledAppointment';
 import CompletedCancelledPaid from './CompletedCancelledPaid';
 
 

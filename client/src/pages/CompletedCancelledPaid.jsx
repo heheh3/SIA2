@@ -19,17 +19,14 @@ const CompletedCancelledPaid = () => {
         loadData();
     }, [id])
 
-    console.log(data1)
-    console.log(data1.user_id)
-
     const LoadingData = async () =>{
-        const response = await axios.get(`http://localhost:5000/admin/completedCancelled/get/${data1.user_id}`);
+        const response = await axios.get(`http://localhost:5000/admin/completedCancelled/get/${data1.user_id}/${data1.a_ID}`);
         setData(response.data);  
     }
 
     useEffect(()=>{
         LoadingData();
-    }, [data1.user_id])
+    }, [data1.user_id, data1.a_ID])
 
     return (
         <div>
