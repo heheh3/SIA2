@@ -106,7 +106,7 @@ const UpdateAppointment = () => {
         .then(()=>{
           setState({b_date: "", b_time: "", b_procedure: "", b_note: "", b_status: "", b_paymentStatus: ""});
           toast.success("Appointment Updated Successfully");
-          if(b_status == "In Progress"){
+          if(b_status === "In Progress"){
             setTimeout(()=> navigate(`/admin/appointment/procedures/${id}`),500)
           }else{
             setTimeout(()=> navigate("/admin/appointment"),500)
