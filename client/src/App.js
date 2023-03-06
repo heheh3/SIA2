@@ -29,6 +29,7 @@ import AdminMedicalHistory from './pages/AdminMedicalHistory';
 import CancelledUpdate from './pages/CancelledUpdate';
 import CompletedUpdate from './pages/CompletedUpdate';
 import CompletedDetails from './pages/CompletedDetails';
+import PatientBook from './pages/PatientBook';
 
 
 function App() {
@@ -55,6 +56,7 @@ function App() {
           <Route path='/admin/user/profile-settings/:id' element={<UpdatePatient />} />
           <Route path='/admin/user/medical-history/:id' element={<AdminMedicalHistory />} />
           <Route path='/admin/user/appointment-history/:id' element={<AdminPatientHistory />} />
+          <Route path='/admin/user/book/:id' element={<PatientBook />} />
           
           
           <Route path='/admin/user' element={<PatientTable />} />
