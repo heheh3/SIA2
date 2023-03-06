@@ -26,9 +26,8 @@ const PatientBook = () => {
     const {b_date, b_status, b_time, b_procedure, b_note} = state;
     const [dateTime, setDateTime] = useState([])
     const [time, setTime] = useState([])
-    const [data] = useState([])
     const {id} = useParams();
-    const [patientID] = useState(id)
+    const [patientID, setPatientID] = useState(id)
 
 
     const navigate = useNavigate();
@@ -118,90 +117,78 @@ const PatientBook = () => {
 
 
             <form onSubmit={handleSubmit} >
-                {data && 
-                    <div className='book-row'>
-                        <input 
-                            type='number' 
-                            name='patientID' 
-                            id='patientID'
-                            value={data.user_id} 
-                            hidden
-                          />
-                    </div>
-                
-                }
-    
-
-              <div className='book__row'>
-                <label htmlFor='date'>DATE: </label>
-                <div className='date__container'>
-
-      
-                <DatePicker
-                  id='b_date'
-                  name='b_date'
-                  className='datepicker__style'
-                  selected={b_date}
-                  onChange={b_date => handleChange({ 
-                    target: { value: b_date, name: 'b_date' }
-                    
-                  })}
-                  minDate={minDate}
-                  dateFormat="MMM-dd-yyyy"
-                  filterDate={date => date.getDay() !== 0}
-                  placeholderText="Select a date"
-                  value={b_date || ""}
-              
-            
-                />
-               
+                <div className='book-row'>
+                    <input 
+                        type='number' 
+                        name='patientID' 
+                        id='patientID'
+                        value={setPatientID} 
+                        hidden
+                    />
                 </div>
-           
-            
-              </div>
+                    
+                <div className='book__row'>
+                    <label htmlFor='date'>DATE: </label>
+                    <div className='date__container'>
+                        <DatePicker
+                            id='b_date'
+                            name='b_date'
+                            className='datepicker__style'
+                            selected={b_date}
+                            onChange={b_date => handleChange({ 
+                                target: { value: b_date, name: 'b_date' }
+                                
+                            })}
+                            minDate={minDate}
+                            dateFormat="MMM-dd-yyyy"
+                            filterDate={date => date.getDay() !== 0}
+                            placeholderText="Select a date"
+                            value={b_date || ""}
+                        />
+                    </div>
+                </div>
 
-            <div className='book__row'> 
-                <label htmlFor='time'>TIME: </label>
-                <select name="b_time" id="b_time" value={b_time || ""} onChange={handleChange} >
-                        <option value="" disabled selected>Select your option</option>
-                        <option value="8:00AM" disabled={time.includes('8:00AM')} >08:00 AM</option>
-                        <option value="9:00AM" disabled={time.includes('9:00AM')}>09:00 AM</option>
-                        <option value="10:00AM" disabled={time.includes('10:00AM')}>10:00 AM</option>
-                        <option value="11:00AM" disabled={time.includes('11:00AM')}>11:00 AM</option>
-                        <option value="1:00PM" disabled={time.includes('1:00PM')} >01:00 PM</option>
-                        <option value="2:00PM" disabled={time.includes('2:00PM')}>02:00 PM</option>
-                        <option value="3:00PM" disabled={time.includes('3:00PM')}>03:00 PM</option>				
-                        <option value="4:00PM" disabled={time.includes('4:00PM')}>04:00 PM</option>
+                <div className='book__row'> 
+                    <label htmlFor='time'>TIME: </label>
+                    <select name="b_time" id="b_time" value={b_time || ""} onChange={handleChange} >
+                            <option value="" disabled selected>Select your option</option>
+                            <option value="8:00AM" disabled={time.includes('8:00AM')} >08:00 AM</option>
+                            <option value="9:00AM" disabled={time.includes('9:00AM')}>09:00 AM</option>
+                            <option value="10:00AM" disabled={time.includes('10:00AM')}>10:00 AM</option>
+                            <option value="11:00AM" disabled={time.includes('11:00AM')}>11:00 AM</option>
+                            <option value="1:00PM" disabled={time.includes('1:00PM')} >01:00 PM</option>
+                            <option value="2:00PM" disabled={time.includes('2:00PM')}>02:00 PM</option>
+                            <option value="3:00PM" disabled={time.includes('3:00PM')}>03:00 PM</option>				
+                            <option value="4:00PM" disabled={time.includes('4:00PM')}>04:00 PM</option>
+                        </select>
+
+                </div>
+
+                <div className='book__row'>
+                    <label htmlFor='procedure'>PROCEDURE: </label>
+                    <select id="b_procedure" name="b_procedure"  value={b_procedure || "" }  onChange={handleChange} >
+                            <option value="" disabled selected>Select your option</option>
+                            <option value="Fillings">Fillings</option>
+                            <option value="Root Canal">Root Canal</option>
+                            <option value="Consultation">Consultation</option>
+                            <option value="Fixing Bridge">Fixing Bridge</option>
+                            <option value="Dental Implant">Dental Implant</option>
+                            <option value="Dental Crown">Dental Crown</option>
+                            <option value="X-Ray">X-Ray</option>
+                            <option value="Teeth Whitening"> Teeth Whitening</option>
+                            <option value="Dental Brace">Dental Brace</option>
+                            <option value="Tooth Extraction">Tooth Extraction</option>
+                            <option value="Scaling">Scaling</option>						
+                            <option value="Others">Others</option>
                     </select>
+                </div>
 
-              </div>
+                <div className='book__row'>
+                    <label htmlFor='note'>NOTES: </label>
+                    <textarea for="note" id="b_note" name="b_note" value={b_note || "" }  onChange={handleChange} placeholder='Add some notes... (optional)' />
+                </div> 
 
-              <div className='book__row'>
-                <label htmlFor='procedure'>PROCEDURE: </label>
-                <select id="b_procedure" name="b_procedure"  value={b_procedure || "" }  onChange={handleChange} >
-                        <option value="" disabled selected>Select your option</option>
-                        <option value="Fillings">Fillings</option>
-                        <option value="Root Canal">Root Canal</option>
-                        <option value="Consultation">Consultation</option>
-                        <option value="Fixing Bridge">Fixing Bridge</option>
-                        <option value="Dental Implant">Dental Implant</option>
-                        <option value="Dental Crown">Dental Crown</option>
-                        <option value="X-Ray">X-Ray</option>
-                        <option value="Teeth Whitening"> Teeth Whitening</option>
-                        <option value="Dental Brace">Dental Brace</option>
-                        <option value="Tooth Extraction">Tooth Extraction</option>
-                        <option value="Scaling">Scaling</option>						
-                        <option value="Others">Others</option>
-                </select>
-              </div>
-
-              <div className='book__row'>
-                <label htmlFor='note'>NOTES: </label>
-                <textarea for="note" id="b_note" name="b_note" value={b_note || "" }  onChange={handleChange} placeholder='Add some notes... (optional)' />
- 
-              </div> 
-
-              <input type="submit" className='book-button' value="Book" />
+                <input type="submit" className='book-button' value="Book" />
  
             </form>
    
