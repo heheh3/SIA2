@@ -15,16 +15,17 @@ body{
     
 }
 
-
 .styled-table{
-    width: 80%;
+    width: 100%;
     border-collapse: collapse;
     margin: 1rem auto;
     font-size: 0.9em;
     font-family: sans-serif;
-    max-width: 90%;
+    max-width: 80%;
     box-shadow: 0 0 20px rgba(0,0,0,0.15);
 }
+
+
 
 .styled-table thead tr{
     background-color: var(--blue-dark-teal);
@@ -36,7 +37,7 @@ body{
 
 .styled-table th,
 .styled-table td{
-    padding: 10px 12px;
+    padding: 10px 5px;
 
 }
 
@@ -338,17 +339,14 @@ input[type="text"].e_information, input[type="email"].e_information, input[type=
     width: 10px;
 }
   
-  /* Track */
 .profile__container::-webkit-scrollbar-track {
     background: #f1f1f1; 
 }
-   
-  /* Handle */
+
 .profile__container::-webkit-scrollbar-thumb {
     background: #888; 
 }
-  
-  /* Handle on hover */
+
 .profile__container::-webkit-scrollbar-thumb:hover {
     background: #555; 
 }
