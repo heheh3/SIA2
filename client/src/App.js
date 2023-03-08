@@ -30,6 +30,7 @@ import CancelledUpdate from './pages/CancelledUpdate';
 import CompletedUpdate from './pages/CompletedUpdate';
 import CompletedDetails from './pages/CompletedDetails';
 import PatientBook from './pages/PatientBook';
+import { Table } from 'react-bootstrap';
 
 
 function App() {
@@ -58,7 +59,7 @@ function App() {
           <Route path='/admin/user/appointment-history/:id' element={<AdminPatientHistory />} />
           <Route path='/admin/user/book/:id' element={<PatientBook />} />
           
-          
+          <Route path='/table' element={<Table />} /> 
           <Route path='/admin/user' element={<PatientTable />} />
           <Route path='/allergies' element={<Allergies />} /> 
 

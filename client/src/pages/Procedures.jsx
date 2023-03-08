@@ -78,19 +78,21 @@ const Procedures = () => {
                 </div>
                 <CancelledAppointment />
                 <h1 className='h1__apppointment'>Procedure Details</h1>
+                <div className='add__ebutton'>
+                      <Link to="/admin/employee/add">
+                        <button className='add__ebutton-style'><span>ADD PROCEDURE</span></button>
+                      </Link>
+                     
+                  </div>
                 <div className='pending_body-flex'>
                     <table className='styled-table'>
                         <thead>
                             <tr>
                                 <th style={{textAlign: "center"}}>No.</th>
-                                <th style={{textAlign: "center"}}>Appointment ID</th>
-                                <th style={{textAlign: "center"}}>Date</th>
-                                <th style={{textAlign: "center"}}>Time</th>
                                 <th style={{textAlign: "center"}}>Procedure Done</th>
                                 <th style={{textAlign: "center"}}>Note</th>
                                 <th style={{textAlign: "center"}}>Tooth Number</th>
                                 <th style={{textAlign: "center"}}>Procedure Fee</th>
-                                <th style={{textAlign: "center"}}>Status</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -98,21 +100,16 @@ const Procedures = () => {
                                 return(
                                     <tr key={item.a_ID}>
                                         <th scope='row'>{index+1}</th>
-                                        <td>{item.a_ID}</td>
-                                        <td>{item.b_date}</td>
-                                        <td>{item.b_time}</td>
                                         <td>{item.b_procedure}</td>
                                         <td>{item.b_note}</td>
                                         <td>{item.toothNo}</td>
                                         <td>{item.procedureFee}</td>
-                                        <td><span  style={
-                                        {backgroundColor: item.b_status === "In Progress" ? 'orange' : '' ||   item.b_status === "Pending" ? 'blue': '' ||
-                                                item.b_status === "Cancelled" ? 'red': '' ||  item.b_status === "Rescheduled" ? 'violet': '' ||  
-                                                item.b_status === "Completed" ? 'green': '' || item.b_status === "Walk-In" ? 'gray': '', padding: '5px 10px', color: 'white', borderRadius: '10px', fontSize: '0.8rem', letterSpacing: "1.5px",}
-                                        }>{item.b_status}</span>
-                                    </td>
                                     </tr>
+                                    
                                 )})}
+                                <tr>
+                                <td colSpan="4" style={{textAlign:"right", fontWeight: "bold"}}>Total Amount: </td>
+                                </tr>
                         </tbody>
                     </table> 
                 </div>
