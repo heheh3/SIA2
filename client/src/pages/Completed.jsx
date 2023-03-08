@@ -66,7 +66,7 @@ const Completed = () => {
                     </thead>
                     <tbody>
                         {data.filter((item) =>{
-                            return searchValue.toLowerCase() === '' || item.b_date.toLowerCase().includes(searchValue) 
+                            return searchValue.toLowerCase() === '' || item.b_date.toLowerCase().includes(searchValue) || item.p_fullname.toLowerCase().includes(searchValue)
                                 || item.b_note.toLowerCase().includes(searchValue) || item.b_time.toLowerCase().includes(searchValue) 
                                 || item.b_procedure.toLowerCase().includes(searchValue) || item.patientID.toString().includes(searchValue) 
                                 || item.b_status.toLowerCase().includes(searchValue) || item.b_paymentStatus.toLowerCase().includes(searchValue)
