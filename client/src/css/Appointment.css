@@ -48,6 +48,12 @@ main{
     display: flex; 
 }
 
+.add-procedure{
+    width: 50%;
+    padding: 1rem;
+    display: flex; 
+}
+
 .home__img{
     width: 100%;
     margin: auto;
@@ -127,7 +133,10 @@ label{
     font-weight: bold;
 }
 
-select, textarea{
+input[type="text"].toothNoStyle,
+input[type="number"].procedFee, 
+select, 
+textarea{
     width: 70%;
     height: 50px;
     margin: 10px 0;
@@ -216,13 +225,21 @@ input[type="submit"]:hover{
     justify-content: space-between;
 }
 
+.back__update-buttons1{
+    margin: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .btn-update{
     width: 100%;
 }
 
 .btn-update1{
-    width: 200%;
+    width: 100%;
 }
+
 
 .search__bar-container{
     width: 20%;

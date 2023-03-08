@@ -12,7 +12,10 @@ import
         appointment_getCompletedHistory,
         appointment_getAppointmentCancel,
         appointment_getCompletedCancelled,
-        
+        appointment_addProcedures,
+        appointment_getProcedures,
+        appointment_getSum
+
     } 
 from "../controller/admin.js";
 
@@ -33,5 +36,11 @@ router.get("/admin/completedCancelled/get/:user_id/:a_ID", appointment_getComple
 router.get("/appointment/pending/get/:user_id", appointment_getPending);
 router.get("/appointment/completed/get/:user_id", appointment_getCompletedHistory);
 router.get("/appointment/date-time", appointment_getDateTime)
+router.post("/admin/appointment/procedure/post/:a_ID", appointment_addProcedures);
+router.get("/admin/appointment/procedure/get/:a_ID", appointment_getProcedures);
+router.get("/admin/appointment/procedure/sum/:a_ID", appointment_getSum);
+
+
+
 
 export default router

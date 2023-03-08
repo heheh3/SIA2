@@ -142,5 +142,43 @@ export const appointment_getAppointmentCancel = (req, res) =>{
 
 }
 
+export const appointment_addProcedures = (req, res) =>{
 
+    const {a_ID} = req.params;
+    console.log(a_ID)
+    const b_procedure = req.body.b_procedure;
+    const b_note = req.body.b_note;
+    const toothNo = req.body.toothNo;
+    const procedFee = req.body.procedFee;
+    console.log(procedFee)
+
+
+    const sqlInsert = "INSERT INTO procedures_db (a_ID, b_procedure, b_note, toothNo, procedFee) VALUES (?, ?, ?, ?, ?)";
+    db.query(sqlInsert, [Number(a_ID), b_procedure, b_note, toothNo, Number(procedFee)], (err, result) =>{
+        if (err){
+            console.log(err);
+        }else {
+            res.send("Values Added")
+        }
+    });
+
+}
+
+export const appointment_getProcedures = (req, res) =>{
+    const {a_ID} = req.params;
+    const sqlGet = "SELECT * FROM procedures_db WHERE a_ID = ?"
+
+    db.query(sqlGet, a_ID, (error, result)=>{
+        res.send(result);
+    });
+}
+
+export const appointment_getSum = (req, res) =>{
+    const {a_ID} = req.params;
+    
+    const sqlGet = `SELECT SUM{procedFee} as totalAmount FROM procedures_db WHERE a_ID = ?`
+    db.query(sqlGet, a_ID, (error, result)=>{
+        res.send(result);
+    });
+}
 

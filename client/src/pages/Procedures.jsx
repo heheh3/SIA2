@@ -8,7 +8,8 @@ import CancelledAppointment from './CancelledAppointment';
 
 const Procedures = () => {
     const [data, setData] = useState([]);
-    const [searchValue, setSearchValue] = useState('');
+    const [proceduresData, setProcedures] = useState([]);
+    const [sumData, setSumData] = useState(null)
     const {id} = useParams();
 
     const loadData = async () =>{
@@ -20,6 +21,28 @@ const Procedures = () => {
     useEffect(()=>{
         loadData();
     }, [id])
+
+    const loadProcedures = async () =>{
+        const response = await axios.get(`http://localhost:5000/admin/appointment/procedure/get/${id}`);
+        setProcedures(response.data);  
+    }
+
+    useEffect(()=>{
+        loadProcedures();   
+    }, [id])
+
+    const loadSum = async () =>{
+        const response = await axios.get(`http://localhost:5000/admin/appointment/procedure/sum/${id}`);
+        setSumData(response.data);  
+    }
+
+    useEffect(()=>{
+        loadSum();   
+    }, [id])
+
+    console.log(proceduresData)
+    console.log(sumData)
+
     
     return (
         <div>
@@ -48,13 +71,7 @@ const Procedures = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {data.filter((item) =>{
-                                return searchValue.toLowerCase() === '' || item.b_date.toLowerCase().includes(searchValue) 
-                                    || item.b_note.toLowerCase().includes(searchValue) || item.b_time.toLowerCase().includes(searchValue) 
-                                    || item.b_procedure.toLowerCase().includes(searchValue) || item.patientID.toString().includes(searchValue) 
-                                    || item.b_status.toLowerCase().includes(searchValue) || item.b_paymentStatus.toLowerCase().includes(searchValue)
-                                    
-                            }).map((item, index)=>{
+                            {data.map((item, index)=>{
                                 return(
                                     <tr key={item.a_ID}>
                                         <th scope='row'>{index+1}</th>
@@ -79,11 +96,11 @@ const Procedures = () => {
                 <CancelledAppointment />
                 <h1 className='h1__apppointment'>Procedure Details</h1>
                 <div className='add__ebutton'>
-                      <Link to="/admin/employee/add">
+                      <Link to={`/admin/appointment/procedures/add/${id}`}>
                         <button className='add__ebutton-style'><span>ADD PROCEDURE</span></button>
-                      </Link>
+                      </Link>   
                      
-                  </div>
+                </div>
                 <div className='pending_body-flex'>
                     <table className='styled-table'>
                         <thead>
@@ -96,19 +113,19 @@ const Procedures = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {data.map((item, index)=>{
+                            {proceduresData.map((item, index)=>{
                                 return(
                                     <tr key={item.a_ID}>
                                         <th scope='row'>{index+1}</th>
                                         <td>{item.b_procedure}</td>
                                         <td>{item.b_note}</td>
                                         <td>{item.toothNo}</td>
-                                        <td>{item.procedureFee}</td>
+                                        <td>{item.procedFee}</td>
                                     </tr>
                                     
                                 )})}
                                 <tr>
-                                <td colSpan="4" style={{textAlign:"right", fontWeight: "bold"}}>Total Amount: </td>
+                                <td colSpan="4" style={{textAlign:"right", fontWeight: "bold"}}>Total Amount: {sumData} </td>
                                 </tr>
                         </tbody>
                     </table> 
