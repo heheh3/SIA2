@@ -9,7 +9,7 @@ import CancelledAppointment from './CancelledAppointment';
 const Procedures = () => {
     const [data, setData] = useState([]);
     const [proceduresData, setProcedures] = useState([]);
-    const [sumData, setSumData] = useState(null)
+    const [sumData, setSumData] = useState([]);
     const {id} = useParams();
 
     const loadData = async () =>{
@@ -31,17 +31,16 @@ const Procedures = () => {
         loadProcedures();   
     }, [id])
 
+    console.log(proceduresData)
+
     const loadSum = async () =>{
         const response = await axios.get(`http://localhost:5000/admin/appointment/procedure/sum/${id}`);
-        setSumData(response.data);  
+        setSumData(response.data[0]);  
     }
 
     useEffect(()=>{
         loadSum();   
     }, [id])
-
-    console.log(proceduresData)
-    console.log(sumData)
 
     
     return (
@@ -51,7 +50,7 @@ const Procedures = () => {
             </header>
             <body className='pending_body'>
                 <Link to={`/admin/appointment/update/${id}`}>
-                        <button className='back__procedures'><span>Back</span></button>
+                    <button className='back__procedures'>Back</button>
                 </Link>
            
                 <h1 className='h1__apppointment'>Apppointment Details</h1>
@@ -95,11 +94,12 @@ const Procedures = () => {
                 </div>
                 <CancelledAppointment />
                 <h1 className='h1__apppointment'>Procedure Details</h1>
-                <div className='add__ebutton'>
-                      <Link to={`/admin/appointment/procedures/add/${id}`}>
-                        <button className='add__ebutton-style'><span>ADD PROCEDURE</span></button>
-                      </Link>   
+                <div className='add_pcontainer'>
+                    <Link to={`/admin/appointment/procedures/add/${id}`}>
+                        <button className='add__procedures-btn'><span>ADD PROCEDURE</span></button>
+                    </Link>   
                      
+
                 </div>
                 <div className='pending_body-flex'>
                     <table className='styled-table'>
@@ -125,9 +125,10 @@ const Procedures = () => {
                                     
                                 )})}
                                 <tr>
-                                <td colSpan="4" style={{textAlign:"right", fontWeight: "bold"}}>Total Amount: {sumData} </td>
-                                </tr>
-                        </tbody>
+                                    <td colSpan="4" style={{textAlign:"right", fontWeight: "bold"}}>Total Amount: </td>  
+                                    <td colSpan="1" style={{textAlign:"center", fontWeight: "bold"}}>{sumData.totalAmount}</td>  
+                                </tr>          
+                        </tbody>         
                     </table> 
                 </div>
                 

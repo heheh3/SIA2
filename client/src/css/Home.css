@@ -58,7 +58,16 @@ body{
     align-items: center;
     align-items: flex-end;
     justify-content: center;
-}   
+}  
+
+.add-procedure-btn{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-items: flex-end;
+    justify-content: center;
+}    
 
 .btn{
     border: none;
@@ -188,7 +197,29 @@ a .btn-back1{
 
 }
 
-.add__ebutton-style:hover{
+.add__procedures-btn{
+    padding: 0.5rem 2rem;
+    background-color: var(--blue-dark-teal);
+    color: var(--white);
+    font-weight: bold;
+    border: 1px solid var(--blue-darker-teal);
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    border-radius: 7px;
+    font-size: 1rem;
+ 
+
+
+}
+
+.add_pcontainer a{
+    display: flex;
+    margin-left: 10%;
+    width: 15%;
+    height: 40px;
+}
+
+.add__ebutton-style:hover,  
+.add__procedures-btn:hover{
     opacity: 0.7;
     cursor: pointer;
 }
@@ -265,6 +296,7 @@ input[type="text"].e_information, input[type="email"].e_information, input[type=
 .back__procedures{
     margin-top: 10px;
 }
+
 
 .back__patient{
     margin-top: 10px;

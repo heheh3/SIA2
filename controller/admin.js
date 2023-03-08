@@ -176,7 +176,7 @@ export const appointment_getProcedures = (req, res) =>{
 export const appointment_getSum = (req, res) =>{
     const {a_ID} = req.params;
     
-    const sqlGet = `SELECT SUM{procedFee} as totalAmount FROM procedures_db WHERE a_ID = ?`
+    const sqlGet = "SELECT SUM(procedFee) as totalAmount FROM procedures_db WHERE a_ID = ?"
     db.query(sqlGet, a_ID, (error, result)=>{
         res.send(result);
     });
