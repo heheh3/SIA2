@@ -67,7 +67,7 @@ body{
     align-items: center;
     align-items: flex-end;
     justify-content: center;
-}    
+}  
 
 .btn{
     border: none;
@@ -80,6 +80,22 @@ body{
     font-size: 1rem;
     margin: 4px 2px;    
     cursor: pointer;
+}
+
+.btn1{
+    border: none;
+    color: white;
+    padding: 5px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.mx-10{
+    margin: 0 10px;
 }
 
 .btn-edit{
