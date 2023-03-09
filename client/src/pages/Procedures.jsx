@@ -47,7 +47,7 @@ const Procedures = () => {
     
     const deleteProcedure = (id)=>{
         if(window.confirm("Are you sure you wanted to delete this user?")){
-            axios.delete(`/admin/appointment/procedure/delete/${id}`);
+            axios.delete(`http://localhost:5000/admin/appointment/procedure/delete/${id}`);
             toast.success("Procedure Deleted Successfully!");
             setTimeout(()=> loadData(), 500);
        
@@ -134,7 +134,10 @@ const Procedures = () => {
                                         <td>{item.toothNo}</td>
                                         <td>{item.procedFee}</td>
                                         <td>
-                                            <button className='btn btn-delete' onClick={() => deleteProcedure(item.procedNum)}>Delete</button>
+                                            <button className='btn1 btn-delete' onClick={() => deleteProcedure(item.procedNum)}>Delete</button>
+                                            <Link to={`/admin/appointment/update/${item.procedNum}`}>
+                                                <button className='btn1 btn-view mx-10'>Edit</button>
+                                            </Link>
                                         </td>
                                     </tr>
                                     
