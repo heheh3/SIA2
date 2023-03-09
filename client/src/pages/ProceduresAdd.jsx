@@ -84,7 +84,7 @@ const ProceduresAdd = () => {
                                         <option value="Dental Brace">Dental Brace</option>
                                         <option value="Tooth Extraction">Tooth Extraction</option>
                                         <option value="Scaling">Scaling</option>						
-                                        <option value={InputEvent}>Others</option>
+                                        <option value="Others">Others (Add a Note)</option>
                                 </select>
                             </div>
                             <div className='book__row'>
