@@ -123,6 +123,11 @@ main{
     
 }
 
+.toothNo__note{
+    text-align: right;
+    margin-bottom: 15px;
+}
+
 form{
     margin-top: 10px;
     

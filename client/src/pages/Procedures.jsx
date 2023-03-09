@@ -49,7 +49,8 @@ const Procedures = () => {
         if(window.confirm("Are you sure you wanted to delete this user?")){
             axios.delete(`http://localhost:5000/admin/appointment/procedure/delete/${id}`);
             toast.success("Procedure Deleted Successfully!");
-            setTimeout(()=> loadData(), 500);
+            setTimeout(()=>  loadProcedures(), 500);
+            setTimeout(()=>  loadSum(), 500);
        
         }
     }
@@ -143,7 +144,7 @@ const Procedures = () => {
                                     
                                 )})}
                                 <tr>
-                                    <td colSpan="4" style={{textAlign:"right", fontWeight: "bold"}}>Total Amount: </td>  
+                                    <td colSpan="4" style={{textAlign:"right", paddingRight: "rem", fontWeight: "bold"}}>Total Amount: </td>  
                                     <td colSpan="1" style={{textAlign:"center", fontWeight: "bold"}}>{"PHP " + (Number(sumData.totalAmount)).toFixed(2)}</td>  
                                 </tr>          
                         </tbody>         

@@ -43,7 +43,7 @@ const ProceduresUpdate = () => {
             toast.error("Please provide value into each input field");
     
         } else{
-            axios.put(`http://localhost:5000/admin/appointment/procedure/post/${id}`, {
+            axios.put(`http://localhost:5000/admin/appointment/procedure/update/${id}`, {
                 a_ID,
                 b_procedure,
                 b_note,
@@ -53,8 +53,8 @@ const ProceduresUpdate = () => {
           
             .then(()=>{
                 setState({a_ID: "", b_procedure: "", b_note: "", toothNo: "", procedFee: ""});
-                toast.success("Procedure Added Successfully");
-                setTimeout(()=> navigate(`/admin/appointment/procedures/${id}`),500)
+                toast.success("Procedure Updated Successfully");
+                setTimeout(()=> navigate(`/admin/appointment/procedures/${a_ID}`),500)
             })
             .catch((err) => toast.error(err.response.data));
             
@@ -111,6 +111,8 @@ const ProceduresUpdate = () => {
                                 <label htmlFor='toothNo'>TOOTH NUMBER: </label>
                                 <input type="text" className='toothNoStyle' for="toothNo" id="toothNo" name="toothNo" value={toothNo || "" }  onChange={handleChange} placeholder='Enter Tooth Position/Number' />
                             </div>
+                            <p className='toothNo__note'>Note: Type <strong>N/A</strong> in Tooth Number if every teeth is included in the procedure</p> 
+
                             <div className='book__row'>
                                 <label htmlFor='procedFee'>PROCEDURE FEE: </label>
                                 <input type="number" className='procedFee' for="procedFee" id="procedFee" name="procedFee" value={procedFee || "" }  onChange={handleChange} placeholder='Enter the Procedure Fee' />
@@ -122,7 +124,7 @@ const ProceduresUpdate = () => {
         
 
                             <div className='back__update-buttons1'>
-                                <input type="submit" value="SUBMIT" className='btn-update1' />
+                                <input type="submit" value="UPDATE" className='btn-update1' />
                             </div>
                      </form>
                 </div>

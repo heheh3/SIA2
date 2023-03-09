@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { FaSearch  } from "react-icons/fa";
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import axios from 'axios';
 import AdminNavbar from './AdminNavbar';
 import '../css/Home.css';
@@ -15,6 +15,10 @@ const Completed = () => {
 
     const [data, setData] = useState([]);
     const [searchValue, setSearchValue] = useState('');
+    const [proceduresData, setProcedures] = useState([]);
+    const [sumData, setSumData] = useState([]);
+    const {id} = useParams();
+
 
     const loadData = async () =>{
         const response = await axios.get("http://localhost:5000/appointment/completed/get");
@@ -25,6 +29,28 @@ const Completed = () => {
     useEffect(()=>{
         loadData();
     }, [])
+
+    
+    const loadProcedures = async () =>{
+        const response = await axios.get(`http://localhost:5000/admin/appointment/procedure/get/${id}`);
+        setProcedures(response.data);  
+    }
+
+    useEffect(()=>{
+        loadProcedures();   
+    }, [id])
+
+    console.log(proceduresData)
+
+    const loadSum = async () =>{
+        const response = await axios.get(`http://localhost:5000/admin/appointment/procedure/sum/${id}`);
+        setSumData(response.data[0]);  
+    }
+
+    useEffect(()=>{
+        loadSum();   
+    }, [id])
+
 
     const deleteAppointment = (id)=>{
         if(window.confirm("Are you sure you wanted to delete this appointment?")){

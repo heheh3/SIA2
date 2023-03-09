@@ -96,7 +96,9 @@ const ProceduresAdd = () => {
                             <div className='book__row'>
                                 <label htmlFor='toothNo'>TOOTH NUMBER: </label>
                                 <input type="text" className='toothNoStyle' for="toothNo" id="toothNo" name="toothNo" value={toothNo || "" }  onChange={handleChange} placeholder='Enter Tooth Position/Number' />
+                               
                             </div>
+                            <p className='toothNo__note'>Note: Type <strong>N/A</strong> in Tooth Number if every teeth is included in the procedure</p> 
                             <div className='book__row'>
                                 <label htmlFor='procedFee'>PROCEDURE FEE: </label>
                                 <input type="number" className='procedFee' for="procedFee" id="procedFee" name="procedFee" value={procedFee || "" }  onChange={handleChange} placeholder='Enter the Procedure Fee' />
