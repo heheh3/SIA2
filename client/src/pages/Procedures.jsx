@@ -4,6 +4,8 @@ import axios from 'axios';
 import AdminNavbar from './AdminNavbar';
 import '../css/Home.css';
 import CancelledAppointment from './CancelledAppointment';
+import { toast } from 'react-toastify';
+
 
 
 const Procedures = () => {
@@ -42,6 +44,15 @@ const Procedures = () => {
         loadSum();   
     }, [id])
 
+    
+    const deleteProcedure = (id)=>{
+        if(window.confirm("Are you sure you wanted to delete this user?")){
+            axios.delete(`/admin/appointment/procedure/delete/${id}`);
+            toast.success("Procedure Deleted Successfully!");
+            setTimeout(()=> loadData(), 500);
+       
+        }
+    }
     
     return (
         <div>
@@ -110,6 +121,7 @@ const Procedures = () => {
                                 <th style={{textAlign: "center"}}>Note</th>
                                 <th style={{textAlign: "center"}}>Tooth Number</th>
                                 <th style={{textAlign: "center"}}>Procedure Fee</th>
+                                <th style={{textAlign: "center"}}>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -121,12 +133,15 @@ const Procedures = () => {
                                         <td>{item.b_note}</td>
                                         <td>{item.toothNo}</td>
                                         <td>{item.procedFee}</td>
+                                        <td>
+                                            <button className='btn btn-delete' onClick={() => deleteProcedure(item.procedNum)}>Delete</button>
+                                        </td>
                                     </tr>
                                     
                                 )})}
                                 <tr>
                                     <td colSpan="4" style={{textAlign:"right", fontWeight: "bold"}}>Total Amount: </td>  
-                                    <td colSpan="1" style={{textAlign:"center", fontWeight: "bold"}}>{sumData.totalAmount}</td>  
+                                    <td colSpan="1" style={{textAlign:"center", fontWeight: "bold"}}>{"PHP " + (Number(sumData.totalAmount)).toFixed(2)}</td>  
                                 </tr>          
                         </tbody>         
                     </table> 

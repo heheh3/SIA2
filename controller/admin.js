@@ -182,3 +182,17 @@ export const appointment_getSum = (req, res) =>{
     });
 }
 
+
+export const procedure_delete = (req, res) =>{
+    const {procedNum} = req.params
+   
+    const sqlRemove = "DELETE FROM procedures_db where procedNum = ?";
+    db.query(sqlRemove, procedNum, (err, result) =>{
+        if (err){
+            console.log(err);
+        }else {
+            res.send(result);
+        }
+    });    
+}
+

@@ -14,7 +14,8 @@ import
         appointment_getCompletedCancelled,
         appointment_addProcedures,
         appointment_getProcedures,
-        appointment_getSum
+        appointment_getSum,
+        procedure_delete
 
     } 
 from "../controller/admin.js";
@@ -39,6 +40,7 @@ router.get("/appointment/date-time", appointment_getDateTime)
 router.post("/admin/appointment/procedure/post/:a_ID", appointment_addProcedures);
 router.get("/admin/appointment/procedure/get/:a_ID", appointment_getProcedures);
 router.get("/admin/appointment/procedure/sum/:a_ID", appointment_getSum);
+router.delete("/admin/appointment/procedure/delete/:procedNum", procedure_delete);
 
 
 
