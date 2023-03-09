@@ -196,3 +196,36 @@ export const procedure_delete = (req, res) =>{
     });    
 }
 
+
+
+export const procedure_get = (req, res) =>{
+    const { procedNum } = req.params;
+    const sqlGet = "SELECT * FROM procedures_db WHERE procedNum = ?"
+    db.query(sqlGet, procedNum ,(error, result)=>{
+        if(error){
+            console.log(error)
+        }
+        res.send(result);
+    });
+
+}
+
+
+export const procedure_update = (req, res) =>{
+    const {procedNum} = req.params;
+
+    const b_procedure = req.body.b_procedure;
+    const b_note = req.body.b_note;
+    const toothNo = req.body.toothNo;
+    const procedFee = req.body.procedFee;
+    
+
+    const sqlUpdate = "UPDATE procedures_db SET b_procedure = ?, b_note = ?, toothNo = ?, procedFee = ? WHERE procedNum = ?";
+    db.query(sqlUpdate, [b_procedure, b_note, toothNo, procedFee, procedNum] ,(error, result)=>{
+        if(error){
+            console.log(error)
+        }
+        res.send(result);
+    });
+}
+

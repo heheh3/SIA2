@@ -135,7 +135,7 @@ const Procedures = () => {
                                         <td>{item.procedFee}</td>
                                         <td>
                                             <button className='btn1 btn-delete' onClick={() => deleteProcedure(item.procedNum)}>Delete</button>
-                                            <Link to={`/admin/appointment/update/${item.procedNum}`}>
+                                            <Link to={`/admin/appointment/procedures/update/${item.procedNum}`}>
                                                 <button className='btn1 btn-view mx-10'>Edit</button>
                                             </Link>
                                         </td>

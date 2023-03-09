@@ -15,7 +15,9 @@ import
         appointment_addProcedures,
         appointment_getProcedures,
         appointment_getSum,
-        procedure_delete
+        procedure_delete,
+        procedure_update,
+        procedure_get
 
     } 
 from "../controller/admin.js";
@@ -41,6 +43,8 @@ router.post("/admin/appointment/procedure/post/:a_ID", appointment_addProcedures
 router.get("/admin/appointment/procedure/get/:a_ID", appointment_getProcedures);
 router.get("/admin/appointment/procedure/sum/:a_ID", appointment_getSum);
 router.delete("/admin/appointment/procedure/delete/:procedNum", procedure_delete);
+router.get("/admin/appointment/procedure/procedure/get/:procedNum", procedure_get);
+router.put("/admin/appointment/procedure/update/:procedNum", procedure_update);
 
 
 

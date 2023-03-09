@@ -31,6 +31,7 @@ import CompletedUpdate from './pages/CompletedUpdate';
 import CompletedDetails from './pages/CompletedDetails';
 import PatientBook from './pages/PatientBook';
 import ProceduresAdd from './pages/ProceduresAdd';
+import ProceduresUpdate from './pages/ProceduresUpdate';
 
 
 
@@ -61,6 +62,8 @@ function App() {
           <Route path='/admin/user/book/:id' element={<PatientBook />} />
           
           <Route path='/admin/appointment/procedures/add/:id' element={<ProceduresAdd />} /> 
+          <Route path='/admin/appointment/procedures/update/:id' element={<ProceduresUpdate />} /> 
+
           <Route path='/admin/user' element={<PatientTable />} />
           <Route path='/allergies' element={<Allergies />} /> 
 
