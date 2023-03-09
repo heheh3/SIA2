@@ -8,6 +8,8 @@ import CompletedCancelledPaid from './CompletedCancelledPaid';
 
 const CompletedDetails = () => {
     const [data, setData] = useState([]);
+    const [proceduresData, setProcedures] = useState([]);
+    const [sumData, setSumData] = useState([]);
     const [searchValue, setSearchValue] = useState('');
     const {id} = useParams();
 
@@ -20,6 +22,27 @@ const CompletedDetails = () => {
     useEffect(()=>{
         loadData();
     }, [id])
+
+    const loadProcedures = async () =>{
+        const response = await axios.get(`http://localhost:5000/admin/appointment/procedure/get/${id}`);
+        setProcedures(response.data);  
+    }
+
+    useEffect(()=>{
+        loadProcedures();   
+    }, [id])
+
+    console.log(proceduresData)
+
+    const loadSum = async () =>{
+        const response = await axios.get(`http://localhost:5000/admin/appointment/procedure/sum/${id}`);
+        setSumData(response.data[0]);  
+    }
+
+    useEffect(()=>{
+        loadSum();   
+    }, [id])
+
     
     return (
         <div>
