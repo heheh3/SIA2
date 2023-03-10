@@ -65,7 +65,7 @@ const CancelledAppointment = () => {
                                                     item.b_status === "Completed" ? 'green': '' || item.b_status === "Walk-In" ? 'gray': '', padding: '5px 10px', color: 'white', borderRadius: '10px', fontSize: '0.8rem', letterSpacing: "1.5px",}
                                             }>{item.b_status}</span>
                                             </td>
-                                            <td>{"PHP " + 100.00}</td>
+                                            <td>{item.procedFee}</td>
                                             <td>
                                                 <Link to={`/admin/appointment/cancelled/${item.a_ID}`}>
                                                     <button className='btn btn-view'>Check</button>

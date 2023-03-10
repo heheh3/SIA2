@@ -14,14 +14,15 @@ const initialState = {
   b_procedure: "",
   b_note: "",
   b_status: "",
-  b_paymentStatus: ""
+  b_paymentStatus: "",
+  procedFee: ""
 };
 
 
 
 const UpdateAppointment = () => {
   const [state, setState] = useState(initialState);
-  const {b_date, b_time, b_procedure, b_note, b_status, b_paymentStatus} = state;
+  const {b_date, b_time, b_procedure, b_note, b_status, b_paymentStatus, procedFee} = state;
   const {id} = useParams();
   const [dateTime, setDateTime] = useState([])
   const [time, setTime] = useState([])
@@ -70,14 +71,15 @@ const UpdateAppointment = () => {
 
     axios.get(`http://localhost:5000/admin/appointment/get/${id}`)
     .then(response => {
-      const { b_date, b_time, b_procedure, b_note, b_status, b_paymentStatus } = response.data[0];
+      const { b_date, b_time, b_procedure, b_note, b_status, b_paymentStatus, procedFee} = response.data[0];
       const isoDateString = format(new Date(b_date), 'yyyy-MM-dd');
       const parsedDate = parseISO(isoDateString);
 
       console.log(isoDateString)
       console.log("parse:" + parsedDate)
+      
 
-      setState({b_date: parsedDate, b_time: b_time, b_procedure: b_procedure, b_note: b_note, b_status: b_status, b_paymentStatus: b_paymentStatus}); 
+      setState({b_date: parsedDate, b_time: b_time, b_procedure: b_procedure, b_note: b_note, b_status: b_status, b_paymentStatus: b_paymentStatus, procedFee: procedFee}); 
     }).catch(error => {
       console.error(error);
     });
@@ -100,11 +102,19 @@ const UpdateAppointment = () => {
           b_procedure,
           b_note,
           b_status,  
-          b_paymentStatus
+          b_paymentStatus,
+          procedFee,
       })
       
-        .then(()=>{
-          setState({b_date: "", b_time: "", b_procedure: "", b_note: "", b_status: "", b_paymentStatus: ""});
+        .then((response)=>{
+          if(response.data.b_status === "Cancelled"){
+            setState({b_date: "", b_time: "", b_procedure: "", b_note: "", b_status: "", b_paymentStatus: "", procedFee: 100});
+          }else{
+            setState({b_date: "", b_time: "", b_procedure: "", b_note: "", b_status: "", b_paymentStatus: "", procedFee: 0});
+          }
+        
+          // toast.success(response.data.b_status)
+          
           toast.success("Appointment Updated Successfully");
           if(b_status === "In Progress"){
             setTimeout(()=> navigate(`/admin/appointment/procedures/${id}`),500)

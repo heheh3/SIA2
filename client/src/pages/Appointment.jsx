@@ -16,7 +16,8 @@ const initialState = {
   b_time: "",
   b_procedure: "",
   b_note: "",
-  b_status: ""
+  b_status: "",
+  
 };
 
 
