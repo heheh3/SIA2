@@ -218,6 +218,7 @@ const handleChange = (event) => {
                         <option value="In Progress">In Progress</option>
                         <option value="Completed">Completed</option>
                         <option value="Rescheduled">Rescheduled</option>
+                        <option value="R-Completed">R-Completed</option>
                         <option value="Pending">Pending</option>
                         <option value="Cancelled">Cancelled</option>
                         <option value="Walk-In">Walk-In</option>
