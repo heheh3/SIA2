@@ -75,7 +75,7 @@ export const appointment_updateUser = (req, res) =>{
     const b_paymentStatus = req.body.b_paymentStatus;
     let procedFee = 0;
 
-    if (b_status === "Cancelled"){
+    if (b_status === "Cancelled" || b_status === "Rescheduled"){
         procedFee = 100
     } else{
         procedFee = 0
@@ -145,7 +145,7 @@ export const appointment_getCompletedHistory = (req, res) =>{
 
 export const appointment_getAppointmentCancel = (req, res) =>{
     const { user_id } = req.params;
-    const sqlGet = "SELECT * FROM booking_db as b JOIN users_db as u ON b.patientId = u.user_id WHERE b.b_status = 'Cancelled' AND b.b_paymentStatus = 'Not-Paid' AND u.user_id = ?"
+    const sqlGet = "SELECT * FROM booking_db as b JOIN users_db as u ON b.patientId = u.user_id WHERE (b.b_status = 'Cancelled' OR b.b_status = 'Rescheduled') AND b.b_paymentStatus = 'Not-Paid' AND u.user_id = ?"
     db.query(sqlGet, user_id ,(error, result)=>{
         if(error){
             console.log(error)
