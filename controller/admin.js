@@ -31,7 +31,7 @@ export const appointment_post = (req, res) =>{
 }
 
 export const appointment_get = (req, res) =>{
-    const sqlGet = "SELECT * FROM booking_db as b JOIN users_db as u ON b.patientId = u.user_id WHERE NOT b_status = 'Completed' AND NOT b_status = 'Cancelled' ORDER BY STR_TO_DATE(b_date,'%a, %b %d, %Y') ASC , STR_TO_DATE(b_time, '%h:%i%p') ASC";
+    const sqlGet = "SELECT * FROM booking_db as b JOIN users_db as u ON b.patientId = u.user_id WHERE NOT b_status = 'Completed' AND NOT b_status = 'Cancelled' AND NOT b_status = 'R-Completed' ORDER BY STR_TO_DATE(b_date,'%a, %b %d, %Y') ASC , STR_TO_DATE(b_time, '%h:%i%p') ASC";
 
     db.query(sqlGet, (error, result)=>{
         res.send(result);
@@ -136,7 +136,7 @@ export const appointment_getPending = (req, res) =>{
 
 export const appointment_getCompletedHistory = (req, res) =>{
     const { user_id } = req.params;
-    const sqlGet = "SELECT * FROM booking_db as b JOIN users_db as u ON b.patientId = u.user_id WHERE b.b_status = 'Completed' AND u.user_id = ? ORDER BY STR_TO_DATE(b_date,'%a, %b %d, %Y') ASC , STR_TO_DATE(b_time, '%h:%i%p') ASC";
+    const sqlGet = "SELECT * FROM booking_db as b JOIN users_db as u ON b.patientId = u.user_id WHERE (b.b_status = 'Completed' OR b.b_status = 'R-Completed') AND u.user_id = ? ORDER BY STR_TO_DATE(b_date,'%a, %b %d, %Y') ASC , STR_TO_DATE(b_time, '%h:%i%p') ASC";
     db.query(sqlGet, user_id, (error, result)=>{
         res.send(result);
     });
