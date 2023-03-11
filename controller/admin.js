@@ -75,7 +75,7 @@ export const appointment_updateUser = (req, res) =>{
     const b_paymentStatus = req.body.b_paymentStatus;
     let procedFee = 0;
 
-    if (b_status === "Cancelled" || b_status === "Rescheduled"){
+    if (b_status === "Cancelled" || b_status === "Rescheduled" || b_status === "R-Completed"){
         procedFee = 100
     } else{
         procedFee = 0
