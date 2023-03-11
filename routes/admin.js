@@ -41,7 +41,7 @@ router.get("/appointment/completed/get/:user_id", appointment_getCompletedHistor
 router.get("/appointment/date-time", appointment_getDateTime)
 router.post("/admin/appointment/procedure/post/:a_ID", appointment_addProcedures);
 router.get("/admin/appointment/procedure/get/:a_ID", appointment_getProcedures);
-router.get("/admin/appointment/procedure/sum/:a_ID", appointment_getSum);
+router.get("/admin/appointment/procedure/sum/:a_ID/", appointment_getSum);
 router.delete("/admin/appointment/procedure/delete/:procedNum", procedure_delete);
 router.get("/admin/appointment/procedure/procedure/get/:procedNum", procedure_get);
 router.put("/admin/appointment/procedure/update/:procedNum", procedure_update);
