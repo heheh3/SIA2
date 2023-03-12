@@ -28,13 +28,15 @@
     width: 100%;
 }
 
-.profileSettings__row{
+.profileSettings__row, .medicalSettings__row{
     display: flex;
     width: 100%;
     padding: 0 3rem;
 }
 
-.profileSettings__row--col{
+
+
+.profileSettings__row--col, .medicalSettings__row--col{
     width: 50%;
     display: flex;
     flex-direction: column;
@@ -45,9 +47,21 @@
 
 }
 
+.medicalSettings__row--col{
+    gap: 5px;
+    padding: 0.5rem 1rem;
+}
+
+.input-mcontainer{
+    display: flex;
+    width: 100%;
+    gap: 5px;
+}
+
 input[type="text"].patient__input,
 input[type="email"].patient__input,
 input[type="date"].patient__input,
+input[type="text"].mpatient__input,
 select.patient__input
 {
     width: 100%;
@@ -100,7 +114,7 @@ input[type="submit"].profile-update:hover{
 }
 
 
-.label__input{
+.label__input, .mpatient__input{
     color: rgb(114, 111, 111);
 }
 

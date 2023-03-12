@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
-import {useNavigate, useParams, Link } from "react-router-dom"
+import {useParams } from "react-router-dom"
 import ProfileNavbar from './ProfileNavbar'
 import PatientNavbar from './PatientNavbar'
 import "../css/Profile.css";
 import { FaAt  } from "react-icons/fa";
 import axios from "axios";
 import {toast} from "react-toastify";
-import {parseISO, format } from 'date-fns';
+import {format } from 'date-fns';
 import { AuthContext } from "../context/authContext";
 
 

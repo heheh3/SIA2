@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import ProfileNavbar from './ProfileNavbar'
 import PatientNavbar from './PatientNavbar'
 import "../css/Profile.css";
@@ -58,7 +58,6 @@ const MedicalHistory = () => {
           setTumorChecked(false);
           setOtherIllnessesChecked(false);
           setPregnantChecked(false);
-
           toast.success("Medical History Updated Successfully");
         } catch (error) {
           console.error(error);
@@ -155,7 +154,7 @@ const MedicalHistory = () => {
                                             id='operation'
                                             className='mpatient__input' 
                                             onChange= {(event) => setOperation(event.target.value)}
-                                            placeholder='' 
+                                            placeholder='Enter Operation Information' 
                                             value={operationChecked ? operation : ''}
                                             disabled={!operationChecked}
                                         />
@@ -177,7 +176,7 @@ const MedicalHistory = () => {
                                             name='self-medication' 
                                             id='self-medication'
                                             className='mpatient__input' 
-                                            placeholder='' 
+                                            placeholder='Enter Self Medication Information' 
                                             onChange={(event) => setSelfMedication(event.target.value)}
                                             value={selfMedicationChecked ? selfMedication : ''}
                                             disabled={!selfMedicationChecked}
@@ -198,7 +197,7 @@ const MedicalHistory = () => {
                                             id='tumor'
                                             className='mpatient__input' 
                                             onChange= {(event) => setTumor(event.target.value)}
-                                            placeholder='' 
+                                            placeholder='Enter Tumor Information' 
                                             value={tumorChecked ? tumor : ''}
                                             disabled={!tumorChecked}
                                         />
