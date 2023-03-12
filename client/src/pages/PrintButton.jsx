@@ -1,13 +1,37 @@
-import React from 'react';
-import { PDFDownloadLink } from '@react-pdf/renderer';
-import DataPDF from './AppointmentHistory';
+import React, { useState } from 'react';
+import axios from 'axios';
+import PdfDocument from './PdfDocument';
 
-const PrintButton = ({ data }) => (
-  <PDFDownloadLink document={<DataPDF data={data} />} fileName="data.pdf">
-    {({ blob, url, loading, error }) =>
-      loading ? 'Loading document...' : 'Download PDF'
+const PrintButton = () => {
+  const [data, setData] = useState([]);
+
+  const fetchMySqlData = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/appointment/get');
+      setData(response.data);
+      printPdf();
+    } catch (error) {
+      console.error(error);
     }
-  </PDFDownloadLink>
-);
+  };
+
+  const printPdf = () => {
+    const pdfWindow = window.open("http://localhost:3000/reminder", "", "popup");
+    pdfWindow.document.write('<html><head><title>TOOTHFULLY YOURS </title></head><body>');
+    pdfWindow.document.write(document.getElementById('pdf-content').innerHTML);
+    pdfWindow.document.write('</body></html>');
+    pdfWindow.document.close();
+    pdfWindow.print();
+  };
+
+  return (
+    <div>
+      <button onClick={fetchMySqlData} style={{padding:"8px", cursor: "pointer"}}>Download</button>
+      <div id="pdf-content" style={{ display: 'none' }}>
+        {data.length > 0 && <PdfDocument data={data} />}
+      </div>
+    </div>
+  );
+};
 
 export default PrintButton;

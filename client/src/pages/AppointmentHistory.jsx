@@ -6,6 +6,7 @@ import {Link} from 'react-router-dom';
 import { FaSearch  } from "react-icons/fa";
 import axios from 'axios';
 import { AuthContext } from "../context/authContext";
+import PrintButton from './PrintButton';
 
 
 
@@ -74,9 +75,7 @@ const AppointmentHistory = () => {
                                     <td>{item.b_procedure}</td>
                                     <td>{item.b_note}</td> 
                                     <td>
-                                        <Link to={`/admin/appointment/procedures/${currentUser.user_id}`} className="button-b">
-                                            <button className='btn-details'>View Details</button>
-                                        </Link>
+                                      <PrintButton />
                                     </td> 
 
                                     <td>{item.b_paid}</td> 
