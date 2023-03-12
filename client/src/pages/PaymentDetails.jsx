@@ -4,7 +4,7 @@ import axios from 'axios';
 import '../css/Home.css';
 
 
-const CancelledAppointment = () => {
+const CompletedCancelledPaid = () => {
     const [data, setData] = useState([]);
     const [data1, setData1] = useState([]);
 
@@ -19,21 +19,18 @@ const CancelledAppointment = () => {
         loadData();
     }, [id])
 
-    // const userID = JSON.parse(JSON.stringify(data1[0].user_id))
-
-
     const LoadingData = async () =>{
-        const response = await axios.get(`http://localhost:5000/admin/appointment/cancelled/get/${data1.user_id}`);
+        const response = await axios.get(`http://localhost:5000/admin/completedCancelled/get/${data1.user_id}/${data1.a_ID}`);
         setData(response.data);  
     }
 
     useEffect(()=>{
         LoadingData();
-    }, [data1.user_id])
+    }, [data1.user_id, data1.a_ID])
 
     return (
         <div>
-            <h1 className='h1__apppointment'>Cancelled/Rescheduled Appointments Details</h1>
+            <h1 className='h1__apppointment'>Cancelled Appointment Details</h1>
                     <div className='pending_body-flex'>
                         <table className='styled-table'>
                             <thead>
@@ -62,18 +59,15 @@ const CancelledAppointment = () => {
                                             <td><span  style={
                                             {backgroundColor: item.b_status === "In Progress" ? 'orange' : '' ||   item.b_status === "Pending" ? 'blue': '' ||
                                                     item.b_status === "Cancelled" ? 'red': '' ||  item.b_status === "Rescheduled" ? 'violet': '' ||  
-                                                    item.b_status === "Completed" ? 'green': '' || item.b_status === "Walk-In" ? 'gray': '' || item.b_status === "R-Completed" ? 'lightgreen': '', padding: '5px 10px', color: 'white', borderRadius: '10px', fontSize: '0.8rem', letterSpacing: "1.5px",}
+                                                    item.b_status === "Completed" ? 'green': '' || item.b_status === "Walk-In" ? 'gray': ''|| item.b_status === "R-Completed" ? 'lightgreen': '', padding: '5px 10px', color: 'white', borderRadius: '10px', fontSize: '0.8rem', letterSpacing: "1.5px",}
                                             }>{item.b_status}</span>
                                             </td>
-                                            <td>{item.procedFee}</td>
-                                            <td>
-                                                <Link to={`/admin/appointment/cancelled/${item.a_ID}`}>
-                                                    <button className='btn btn-view'>Check</button>
-                                                </Link>
-
-
+                                            <td>{"PHP " + 100.00}</td>
+                                            <td><span  style={
+                                                {backgroundColor: item.b_paymentStatus === "Not-Paid" ? 'red' : '' ||   item.b_paymentStatus === "Fully-Paid" ? 'green': '' ||
+                                                        item.b_paymentStatus === "EMI" ? 'pink': '' , padding: '5px 10px', color: 'white', borderRadius: '10px', fontSize: '0.8rem', letterSpacing: "1.5px",}
+                                                }>{item.b_paymentStatus}</span>
                                             </td>
-                                            
                                         </tr>
                                     )})}
                             </tbody>
@@ -84,4 +78,4 @@ const CancelledAppointment = () => {
     )
 }
 
-export default CancelledAppointment
+export default CompletedCancelledPaid

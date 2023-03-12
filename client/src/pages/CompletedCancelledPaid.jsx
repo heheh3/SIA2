@@ -30,7 +30,7 @@ const CompletedCancelledPaid = () => {
 
     return (
         <div>
-            <h1 className='h1__apppointment'>Cancelled Appointment Details</h1>
+            <h1 className='h1__apppointment'>Cancelled/Rescheduled Appointments Details</h1>
                     <div className='pending_body-flex'>
                         <table className='styled-table'>
                             <thead>
@@ -62,7 +62,7 @@ const CompletedCancelledPaid = () => {
                                                     item.b_status === "Completed" ? 'green': '' || item.b_status === "Walk-In" ? 'gray': ''|| item.b_status === "R-Completed" ? 'lightgreen': '', padding: '5px 10px', color: 'white', borderRadius: '10px', fontSize: '0.8rem', letterSpacing: "1.5px",}
                                             }>{item.b_status}</span>
                                             </td>
-                                            <td>{"PHP " + 100.00}</td>
+                                            <td>{item.procedFee}</td>
                                             <td><span  style={
                                                 {backgroundColor: item.b_paymentStatus === "Not-Paid" ? 'red' : '' ||   item.b_paymentStatus === "Fully-Paid" ? 'green': '' ||
                                                         item.b_paymentStatus === "EMI" ? 'pink': '' , padding: '5px 10px', color: 'white', borderRadius: '10px', fontSize: '0.8rem', letterSpacing: "1.5px",}
