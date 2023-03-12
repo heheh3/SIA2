@@ -50,7 +50,7 @@ const ProfileSettings = () => {
       })
       
         .then(()=>{
-          setState({p_username: "", p_email: "", p_fullname: "", p_contact: "", p_birthdate: "", p_gender});
+          setState({p_username: "", p_email: "", p_fullname: "", p_contact: "", p_birthdate: "", p_gender: ""});
           toast.success("Profile Settings Updated Successfully");
           window.location.reload(false);
         

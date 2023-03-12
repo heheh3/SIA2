@@ -3,6 +3,7 @@ import ProfileNavbar from './ProfileNavbar'
 import PatientNavbar from './PatientNavbar'
 import "../css/Profile.css";
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 import { AuthContext } from '../context/authContext';
 import { toast } from 'react-toastify';
 
@@ -11,6 +12,7 @@ import { toast } from 'react-toastify';
   
 
 const MedicalHistory = () => {
+    const {id} = useParams();
 
     const { currentUser } = useContext(AuthContext);
     const [heartAilment, setHeartAilment] = useState('');
@@ -33,7 +35,7 @@ const MedicalHistory = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-          const response = await axios.put(`http://localhost:5000/medicalhistory/:user_id`, {
+          const response = await axios.put(`http://localhost:5000/medicalhistory/update/${id}`, {
             userId: currentUser.id,
             heartAilment: heartAilmentChecked ? heartAilment : 'none',
             allergies: allergiesChecked ? allergies : 'none',
@@ -65,7 +67,7 @@ const MedicalHistory = () => {
           })
         } catch (error) {
             console.error(error);
-           toast.success("Error");
+           toast.error("Error");
         }
       };
   

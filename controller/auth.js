@@ -36,7 +36,9 @@ export const register = (req, res) =>{
             db.query(sqlInsert, [p_username, p_email, hashedPassword, p_fullname, p_contact, formattedDate, p_gender], (err, result) =>{
                 if (err) return res.status(500).json(err)
                 return res.status(200).json("User has been created")
-               
+        
+
+           
             
         });
     })
