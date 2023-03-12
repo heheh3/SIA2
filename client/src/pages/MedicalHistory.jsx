@@ -6,6 +6,10 @@ import axios from 'axios';
 import { AuthContext } from '../context/authContext';
 import { toast } from 'react-toastify';
 
+
+
+  
+
 const MedicalHistory = () => {
 
     const { currentUser } = useContext(AuthContext);
@@ -39,28 +43,29 @@ const MedicalHistory = () => {
             tumor: tumorChecked ? tumor: 'none',
             otherIllnesses: otherIllnessesChecked ? otherIllnesses: 'none',
             pregnant: pregnantChecked ? pregnant: 'none'
-          });
-          console.log(response.data);
-          // Reset state
-          setHeartAilment('');
-          setAllergies('');
-          setHospitalAdmission('');
-          setOperation('');
-          setSelfMedication('');
-          setTumor('');
-          setOtherIllnesses('');
-          setPregnant('');
-          setHeartAilmentChecked(false);
-          setAllergiesChecked(false);
-          setHospitalAdmissionChecked(false);
-          setOperationChecked(false);
-          setSelfMedicationChecked(false);
-          setTumorChecked(false);
-          setOtherIllnessesChecked(false);
-          setPregnantChecked(false);
-          toast.success("Medical History Updated Successfully");
+          }).then(()=>{
+                // Reset state
+                setHeartAilment('');
+                setAllergies('');
+                setHospitalAdmission('');
+                setOperation('');
+                setSelfMedication('');
+                setTumor('');
+                setOtherIllnesses('');
+                setPregnant('');
+                setHeartAilmentChecked(false);
+                setAllergiesChecked(false);
+                setHospitalAdmissionChecked(false);
+                setOperationChecked(false);
+                setSelfMedicationChecked(false);
+                setTumorChecked(false);
+                setOtherIllnessesChecked(false);
+                setPregnantChecked(false);
+                toast.success("Medical History Updated Successfully");
+          })
         } catch (error) {
-          console.error(error);
+            console.error(error);
+           toast.success("Error");
         }
       };
   
