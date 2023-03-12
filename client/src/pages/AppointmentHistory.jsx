@@ -2,6 +2,7 @@ import ProfileNavbar from './ProfileNavbar'
 import PatientNavbar from './PatientNavbar'
 import "../css/Profile.css";
 import React, {useState, useEffect, useContext} from 'react';
+import {Link} from 'react-router-dom';
 import { FaSearch  } from "react-icons/fa";
 import axios from 'axios';
 import { AuthContext } from "../context/authContext";
@@ -52,6 +53,7 @@ const AppointmentHistory = () => {
                                 <th style={{textAlign: "center"}}>Time</th>
                                 <th style={{textAlign: "center"}}>Procedure</th>
                                 <th style={{textAlign: "center"}}>Note</th>
+                                <th style={{textAlign: "center"}}>Appointment</th>
                                 <th style={{textAlign: "center"}}>Amount</th>
                             </tr>
                         </thead>
@@ -71,6 +73,12 @@ const AppointmentHistory = () => {
                                     <td>{item.b_time}</td>
                                     <td>{item.b_procedure}</td>
                                     <td>{item.b_note}</td> 
+                                    <td>
+                                        <Link to={`/admin/appointment/procedures/${currentUser.user_id}`} className="button-b">
+                                            <button className='btn-details'>View Details</button>
+                                        </Link>
+                                    </td> 
+
                                     <td>{item.b_paid}</td> 
                                 </tr>
                                     )})}
