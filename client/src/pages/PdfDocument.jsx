@@ -15,25 +15,13 @@ const styles = StyleSheet.create({
 
 const PdfDocument = ({ data }) => (
   <Document>
-    <Page style={styles.page}>
-      <View style={styles.section}>
-        <Text>Date</Text>
+    <Page style={styles.page} >
         {data.map((item, index) => (
-          <Text key={index}>{item.b_date}</Text>
+          <div>
+             
+          </div>
+         
         ))}
-      </View>
-      <View style={styles.section}>
-        <Text>Time</Text>
-        {data.map((item, index) => (
-          <Text key={index}>{item.b_time}</Text>
-        ))}
-      </View>
-      <View style={styles.section}>
-        <Text>Procedure</Text>
-        {data.map((item, index) => (
-          <Text key={index}>{item.b_procedure}</Text>
-        ))}
-      </View>
     </Page>
   </Document>
 );
