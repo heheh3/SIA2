@@ -151,10 +151,6 @@ body{
 
 .button-b{
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
 }
 
 a .btn-back{
@@ -191,11 +187,11 @@ a .btn-details{
     color: var(--white);
     background-color: var(--blue-dark-teal);
     font-size: 1rem;
-    font-weight: bold;
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     padding: 0.75rem;
     cursor: pointer;
+    
 
 }
 
@@ -363,12 +359,11 @@ input[type="text"].e_information, input[type="email"].e_information, input[type=
 
 
 .styled-table-history{
-    width: 100%;
     border-collapse: collapse;
     margin: 1rem auto;
     font-size: 0.9em;
     font-family: sans-serif;
-    max-width: 90%;
+    min-width: 90%;
     box-shadow: 0 0 20px rgba(0,0,0,0.15);
 }
 
