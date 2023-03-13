@@ -12,7 +12,7 @@ import { toast } from 'react-toastify';
   
 
 const MedicalHistory = () => {
-    const {id} = useParams();
+
 
     const { currentUser } = useContext(AuthContext);
     const [heartAilment, setHeartAilment] = useState('');
