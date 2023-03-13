@@ -35,7 +35,7 @@ const MedicalHistory = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-          const response = await axios.put(`http://localhost:5000/medicalhistory/update/${id}`, {
+          const response = await axios.put(`http://localhost:5000/medicalhistory/update/`, {
             userId: currentUser.id,
             heartAilment: heartAilmentChecked ? heartAilment : 'none',
             allergies: allergiesChecked ? allergies : 'none',
