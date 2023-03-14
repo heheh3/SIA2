@@ -32,6 +32,8 @@ import CompletedDetails from './pages/CompletedDetails';
 import PatientBook from './pages/PatientBook';
 import ProceduresAdd from './pages/ProceduresAdd';
 import ProceduresUpdate from './pages/ProceduresUpdate';
+import Inventory from './pages/Inventory';
+import InventoryAdd from './pages/InventoryAdd';
 
 
 
@@ -66,6 +68,9 @@ function App() {
 
           <Route path='/admin/user' element={<PatientTable />} />
           <Route path='/allergies' element={<Allergies />} /> 
+
+          <Route path='/admin/inventory' element={<Inventory />} /> 
+          <Route path='/admin/inventory/add' element={<InventoryAdd />} />
 
 
           <Route path='/admin/walk-in' element={<Walkin />} /> 
