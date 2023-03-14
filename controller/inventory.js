@@ -20,6 +20,19 @@ export const inventory_get = (req, res) =>{
         const i_quantity = req.body.i_quantity;
         const i_price= req.body.i_price;
         const i_totalprice= req.body.i_totalprice;
+        console.log(i_item)
+        console.log(i_room)
+
+        console.log(i_model)
+
+        console.log(i_serial)
+        console.log(i_place)
+        console.log(i_datepurchased)
+
+        console.log(i_quantity)
+
+        console.log(i_price)
+        console.log(i_totalprice)
 
         const date = parseISO(i_datepurchased);
         const formattedDate = format(date, 'EEE, MMM dd, yyyy');

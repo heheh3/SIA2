@@ -10,6 +10,7 @@ import adminRoutes from "./routes/admin.js"
 import employeeRoutes from "./routes/employee.js"
 import userRoutes from "./routes/users.js"
 import medicalRoutes from "./routes/medicalhistory.js"
+import inventoryRoutes from "./routes/inventory.js"
 
 
 //middlewares
@@ -29,6 +30,7 @@ app.use(
 app.use("/", authRoutes)
 app.use("/", adminRoutes)
 app.use("/", employeeRoutes)
+app.use("/", inventoryRoutes)
 app.use("/", userRoutes)
 app.use("/", medicalRoutes)
 

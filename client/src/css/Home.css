@@ -310,10 +310,32 @@ a{
     align-items: center;
 }
 
-input[type="text"].e_information, input[type="email"].e_information, input[type="date"].e_information{
+.inventory__form-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.row-inventory-field{
+    
+}
+
+
+input[type="text"].e_information, input[type="email"].e_information, input[type="date"].e_information, input[type="number"].e_information{
     width: 70%;
     height: 50px;
     margin: 10px 0;
+    border-radius: 10px;
+    padding: 10px;
+    border: none;
+    color: var(--gray);
+}
+
+
+input[type="text"].i_information, input[type="email"].i_information, input[type="date"].i_information, input[type="number"].i_information{
+    width: 70%;
+    height: 50px;
+    margin: 5px 0;
     border-radius: 10px;
     padding: 10px;
     border: none;

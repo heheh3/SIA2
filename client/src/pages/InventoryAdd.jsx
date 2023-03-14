@@ -44,10 +44,25 @@ const InventoryAdd = () => {
           })
           .then(()=>{
               setState(initialState);
+              toast.success("Item Added Successfully");
+              setTimeout(()=> navigate("/admin/inventory"), 300)
           }).catch((err) => toast.error(err.response.data) );
+            // console.log(i_item)
+            // console.log(i_room)
+
+            // console.log(i_model)
+
+            // console.log(i_serial)
+            // console.log(i_place)
+            // console.log(i_datepurchased)
+
+            // console.log(i_quantity)
+
+            // console.log(i_price)
+            // console.log(i_totalprice)
+
    
-          toast.success("Item Added Successfully");
-          setTimeout(()=> navigate("/admin/inventory"), 300)
+        
         }
       }
   
@@ -78,7 +93,7 @@ const InventoryAdd = () => {
                         name='i_item'
                         id='i_item'
                         type='text' 
-                        className='e_information' 
+                        className='i_information' 
                         placeholder='Enter Item...' 
                         value={i_item || ""} 
                         onChange={handleChange}/>
@@ -90,7 +105,7 @@ const InventoryAdd = () => {
                         name='i_room'
                         id='i_room'
                         type='text' 
-                        className='e_information' 
+                        className='i_information' 
                         placeholder='Enter Room...' 
                         value={i_room || ""} 
                         onChange={handleChange}/>
@@ -102,7 +117,7 @@ const InventoryAdd = () => {
                         name='i_model'
                         id='i_model'
                         type='text' 
-                        className='e_information' 
+                        className='i_information' 
                         placeholder='Enter Model Name...' 
                         value={i_model || ""} 
                         onChange={handleChange}/>
@@ -114,7 +129,7 @@ const InventoryAdd = () => {
                         name='i_serial'
                         id='i_serial'
                         type='text' 
-                        className='e_information' 
+                        className='i_information' 
                         placeholder='Enter Serial Number...' 
                         value={i_serial || ""} 
                         onChange={handleChange}/>
@@ -126,7 +141,7 @@ const InventoryAdd = () => {
                         name='i_place'
                         id='i_place'
                         type='text' 
-                        className='e_information' 
+                        className='i_information' 
                         placeholder='Enter Place of Purchase...' 
                         value={i_place || ""} 
                         onChange={handleChange}/>
@@ -156,7 +171,7 @@ const InventoryAdd = () => {
                         name='i_quantity'
                         id='i_quantity'
                         type='number' 
-                        className='e_information' 
+                        className='i_information' 
                         placeholder='Enter Quantity...' 
                         value={i_quantity || ""} 
                         onChange={handleChange}/>
@@ -168,7 +183,7 @@ const InventoryAdd = () => {
                         name='i_price'
                         id='i_price'
                         type='number' 
-                        className='e_information' 
+                        className='i_information' 
                         placeholder='Enter Purchase Price...' 
                         value={i_price || ""} 
                         onChange={handleChange}/>
