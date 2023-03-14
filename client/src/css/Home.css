@@ -427,3 +427,43 @@ input[type="text"].e_information, input[type="email"].e_information, input[type=
     color: var(--blue-darker-teal);
 }
 
+table.styled-table input:focus {
+    outline: none;
+    background-color: #fff;
+    text-align: center;
+    box-shadow: 0 0 5px #ccc;
+  }
+
+.i_inputs  {
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    padding: 5px;
+    border-radius: 3px;
+    border: 1px solid rgb(243, 242, 242) !important;
+}
+
+
+.quantity-container {
+    display: flex;
+    align-items: center;
+}
+
+.quantity-btn {
+    height: 30px;
+    color: var(--white);
+    background-color:#1EBEB6;
+    border: none;
+    padding: 5px 10px;
+    font-size: 1rem;
+    border-radius:3px;
+    font-weight: bold;
+}
+
+.minus {
+    margin-right: 7px;
+}
+
+.plus {
+    margin-left: 7px;
+  }
