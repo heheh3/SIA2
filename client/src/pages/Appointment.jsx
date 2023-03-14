@@ -73,8 +73,18 @@ const Appointment = () => {
     if (!b_date || !b_time || !b_procedure || !patientID){
         toast.error("Please provide value into each input field");
 
+        
+
        
     } else{
+      if(b_status){
+        window.confirm("There is Php100.00 Rescheduling/Cancelling Fee. Do you want to continue?")
+
+      }else{
+
+      }
+       
+
         axios.post("http://localhost:5000/appointment/post", {
             patientID,
             b_date,
@@ -82,7 +92,7 @@ const Appointment = () => {
             b_procedure,
             b_note,
             b_status
-        })
+          })
         .then(()=>{
             setState({patientID: null , b_date: "", b_time: "", b_procedure: "", b_note: ""})
             toast.success("Appointment Added Successfully");
@@ -205,7 +215,7 @@ const Appointment = () => {
                 <label htmlFor='note'>NOTES: </label>
                 <textarea for="note" id="b_note" name="b_note" value={b_note || "" }  onChange={handleChange} placeholder='Add some notes... (optional)' />
  
-              </div> 
+              </div>  
 
               <input type="submit" className='book-button' value="Book" />
  
