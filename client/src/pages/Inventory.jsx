@@ -171,8 +171,8 @@ const Inventory = () => {
                 </tbody>
                 <tfoot>
                 <tr>
-                  <td colSpan="10" style={{ textAlign: "right" }}>Total Price:</td>
-                  <td>{totalPrice}</td>
+                  <td colSpan="10" style={{ textAlign: "right" }}>Total Spent:</td>
+                  <td>{"PHP " + totalPrice}</td>
                   <td></td>
                 </tr>
                 </tfoot>

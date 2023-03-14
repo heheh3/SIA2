@@ -14,12 +14,12 @@ export default function AdminNavbar() {
                 <h2 className='title__name'>TOOTHFULLY YOURS</h2>
             </div>
             <ul>
-                <li><NavLink to="/admin/appointment">APPOINTMENT</NavLink></li>
+                <li><NavLink to="/admin/appointment">SERVICES</NavLink></li>
                 <li><NavLink to="/admin/completed">TRANSACTION</NavLink></li>
                 <li><NavLink to="/admin/employee">EMPLOYEE</NavLink></li>
                 <li><NavLink to="/admin/user">PATIENT</NavLink></li>
-                <li><NavLink to="/admin/inventory">INVENTORY</NavLink></li>
                 <li><NavLink to="/admin/walk-in">WALK IN</NavLink></li>
+                <li><NavLink to="/admin/inventory">INVENTORY</NavLink></li>
             </ul>
             <ul>
                 <FaUserNurse className='User-Icon' />

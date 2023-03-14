@@ -76,7 +76,7 @@ const PatientTable = () => {
                                         </Link>
                                         <button className='btn btn-delete' onClick={() => deleteAppointment(item.user_id)}>Delete</button>
                                         <Link to={`/admin/user/book/${item.user_id}`}>
-                                            <button className='btn bookAppointment'>Book an Appointment</button>
+                                            <button className='btn bookAppointment'>Book/Schedule</button>
                                         </Link>
                                     </td>
                                 </tr>
