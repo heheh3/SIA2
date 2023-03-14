@@ -80,7 +80,7 @@ const Appointment = () => {
   const handleSubmit = (e) =>{
     e.preventDefault();
     if (!b_date || !b_time || !b_procedure || !patientID  || !b_update){
-      toast.error(b_update);
+      toast.error(b_update.toString);
 
         toast.error("Please provide value into each input field");
    
@@ -227,7 +227,7 @@ const Appointment = () => {
                       type='text' 
                       name='b_update' 
                       id='b_update'
-                      value={dateOnly} 
+                      value={today.toDateString()} 
                       hidden
                     />
                   </div>  
