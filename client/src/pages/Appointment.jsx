@@ -17,6 +17,7 @@ const initialState = {
   b_procedure: "",
   b_note: "",
   b_status: "",
+  b_update: ""
   
 };
 
@@ -26,10 +27,18 @@ const Appointment = () => {
   const { currentUser } = useContext(AuthContext);
   const [patientID, setPatientID] = useState(currentUser.user_id);
   const [state, setState] = useState(initialState);
-  const { b_date, b_status, b_time, b_procedure, b_note} = state;
+  const { b_date, b_status, b_time, b_procedure, b_note, b_update} = state;
   const [taken, setTaken] = useState(false)
   const [dateTime, setDateTime] = useState([])
   const [time, setTime] = useState([])
+  const [dateOnly, setDateOnly] = useState('');
+
+  useEffect(() => {
+    const now = new Date();
+    setDateOnly(now.toISOString());
+  }, []);
+
+  
 
   const navigate = useNavigate();
 
@@ -70,20 +79,17 @@ const Appointment = () => {
 
   const handleSubmit = (e) =>{
     e.preventDefault();
-    if (!b_date || !b_time || !b_procedure || !patientID){
+    if (!b_date || !b_time || !b_procedure || !patientID  || !b_update){
+      toast.error(b_update);
+
         toast.error("Please provide value into each input field");
-
-        
-
-       
+   
     } else{
       if(b_status){
         window.confirm("There is Php100.00 Rescheduling/Cancelling Fee. Do you want to continue?")
-
       }else{
 
       }
-       
 
         axios.post("http://localhost:5000/appointment/post", {
             patientID,
@@ -91,20 +97,24 @@ const Appointment = () => {
             b_time,
             b_procedure,
             b_note,
-            b_status
+            b_status,
+            b_update
           })
         .then(()=>{
-            setState({patientID: null , b_date: "", b_time: "", b_procedure: "", b_note: ""})
+            setState({patientID: null , b_date: "", b_time: "", b_procedure: "", b_note: "", b_update: ""})
             toast.success("Appointment Added Successfully");
         }).catch((err) => toast.error(err.response.data) );
  
-        setTimeout(()=> navigate("/reminder"), 300)
+        setTimeout(()=> navigate("/appointment"), 300)
       }
     }
 
   const handleChange = (event) => {
     const {name, value} = event.target;
     setState({...state, [name]: value});
+
+
+
   
   }
 
@@ -211,11 +221,23 @@ const Appointment = () => {
                 </select>
               </div>
 
+                    
+              <div className='book-row'>
+                    <input 
+                      type='text' 
+                      name='b_update' 
+                      id='b_update'
+                      value={dateOnly} 
+                      hidden
+                    />
+                  </div>  
+
               <div className='book__row'>
                 <label htmlFor='note'>NOTES: </label>
                 <textarea for="note" id="b_note" name="b_note" value={b_note || "" }  onChange={handleChange} placeholder='Add some notes... (optional)' />
  
-              </div>  
+              </div>
+      
 
               <input type="submit" className='book-button' value="Book" />
  

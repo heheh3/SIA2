@@ -22,13 +22,14 @@ const initialState = {
   b_note: "",
   b_status: "",
   b_paymentStatus: "",
-  a_ID: null
+  a_ID: null,
+  b_update: ""
 };
 
 
 const ReminderAppointment = () => {
   const [state, setState] = useState(initialState);
-  const {b_date, b_time, b_procedure, b_note, b_status, b_paymentStatus, a_ID} = state;
+  const {b_date, b_time, b_procedure, b_note, b_status, b_paymentStatus, a_ID, b_update} = state;
   const [data, setData] = useState(null);
   const { currentUser } = useContext(AuthContext);
   const [isVisible, setIsVisible] = useState(false);
@@ -53,7 +54,7 @@ const ReminderAppointment = () => {
   useEffect (() => {
     axios.get(`http://localhost:5000/appointment/pending/get/${currentUser.user_id}`)
     .then(response => {
-      const { b_date, b_time, b_procedure, b_note, b_paymentStatus, a_ID } = response.data[0];
+      const { b_date, b_time, b_procedure, b_note, b_paymentStatus, a_ID} = response.data[0];
       const isoDateString = format(new Date(b_date), 'yyyy-MM-dd');
       const parsedDate = parseISO(isoDateString);
 
@@ -116,7 +117,7 @@ const ReminderAppointment = () => {
           b_procedure,
           b_note,
           b_status,  
-          b_paymentStatus
+          b_paymentStatus,
       })
       
         .then(()=>{

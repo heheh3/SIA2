@@ -12,14 +12,19 @@ export const appointment_post = (req, res) =>{
     const b_status = "Pending";
     const b_paymentStatus = "Not-Paid";
     const procedFee = 0;
+    const b_update = req.body.b_update;
+
     console.log(patientID)
+    console.log(b_update)
 
 
     const date = parseISO(b_date);
     const formattedDate = format(date, 'EEE, MMM dd, yyyy');
+    const updated = parseISO(b_update);
+    const formattedDate1 = format(updated, 'MMM dd, yyyy');
 
-    const sqlInsert = "INSERT INTO booking_db (patientID, b_date, b_time, b_procedure, b_note, b_status, b_paymentStatus, procedFee) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-    db.query(sqlInsert, [patientID, formattedDate, b_time, b_procedure, b_note, b_status, b_paymentStatus, procedFee], (err, result) =>{
+    const sqlInsert = "INSERT INTO booking_db (patientID, b_date, b_time, b_procedure, b_note, b_status, b_paymentStatus, procedFee, b_update) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    db.query(sqlInsert, [patientID, formattedDate, b_time, b_procedure, b_note, b_status, b_paymentStatus, procedFee, formattedDate1], (err, result) =>{
         if (err){
             console.log(err);
         }else {
@@ -80,14 +85,16 @@ export const appointment_updateUser = (req, res) =>{
     } else{
         procedFee = 0
     }
+    const today = new Date();
+    const z =  moment(d).format('MMM DD, YYYY'); 
 
     const d = new Date(b_date);
     const v =  moment(d).format('ddd, MMM DD, YYYY'); 
 
-    const sqlUpdate = "UPDATE booking_db SET b_date = ?, b_time = ?, b_procedure = ?, b_note = ?, b_status = ?, b_paymentStatus = ?, procedFee = ? WHERE a_ID = ?";
+    const sqlUpdate = "UPDATE booking_db SET b_date = ?, b_time = ?, b_procedure = ?, b_note = ?, b_status = ?, b_paymentStatus = ?, procedFee = ?, b_update = ? WHERE a_ID = ?";
     
     
-    db.query(sqlUpdate, [v, b_time, b_procedure, b_note, b_status, b_paymentStatus, procedFee, a_ID] ,(error, result)=>{
+    db.query(sqlUpdate, [v, b_time, b_procedure, b_note, b_status, b_paymentStatus, procedFee, a_ID, today] ,(error, result)=>{
         if(error){
             console.log(error)
         }
