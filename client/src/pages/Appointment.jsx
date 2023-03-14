@@ -31,12 +31,14 @@ const Appointment = () => {
   const [taken, setTaken] = useState(false)
   const [dateTime, setDateTime] = useState([])
   const [time, setTime] = useState([])
-  const [dateOnly, setDateOnly] = useState('');
+  const [dateOnly, setDateOnly] = useState("");
 
   useEffect(() => {
     const now = new Date();
-    setDateOnly(now.toISOString());
+    const formattedDate = now.toDateString();
+    setDateOnly(formattedDate);
   }, []);
+
 
   
 
@@ -80,8 +82,8 @@ const Appointment = () => {
   const handleSubmit = (e) =>{
     e.preventDefault();
     if (!b_date || !b_time || !b_procedure || !patientID  || !b_update){
-      toast.error(b_update.toString);
-
+        toast.error("time " + b_update);
+        toast.error("date " + b_date);
         toast.error("Please provide value into each input field");
    
     } else{
@@ -224,10 +226,11 @@ const Appointment = () => {
                     
               <div className='book-row'>
                     <input 
-                      type='text' 
+                      type='date' 
                       name='b_update' 
                       id='b_update'
-                      value={today.toDateString()} 
+                      value={ dateOnly }
+                      onChange={(e) => setDateOnly(e.target.value)}
                       hidden
                     />
                   </div>  
