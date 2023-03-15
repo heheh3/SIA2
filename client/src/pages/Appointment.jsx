@@ -31,7 +31,6 @@ const Appointment = () => {
   const [taken, setTaken] = useState(false)
   const [dateTime, setDateTime] = useState([])
   const [time, setTime] = useState([])
-  const [dateOnly, setDateOnly] = useState("");
 
   useEffect(() => {
     const now = new Date();
