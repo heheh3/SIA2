@@ -12,16 +12,22 @@ export const appointment_post = (req, res) =>{
     const b_status = "Pending";
     const b_paymentStatus = "Not-Paid";
     const procedFee = 0;
-    const b_update = req.body.b_update;
+    const b_update = new Date();
 
-    console.log(patientID)
-    console.log(b_update)
+    
+    // console.log(b_date)
+    // console.log(b_update)
 
 
     const date = parseISO(b_date);
     const formattedDate = format(date, 'EEE, MMM dd, yyyy');
     const updated = parseISO(b_update);
     const formattedDate1 = format(updated, 'MMM dd, yyyy');
+
+       
+    console.log(formattedDate)
+    console.log(formattedDate1)
+
 
     const sqlInsert = "INSERT INTO booking_db (patientID, b_date, b_time, b_procedure, b_note, b_status, b_paymentStatus, procedFee, b_update) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     db.query(sqlInsert, [patientID, formattedDate, b_time, b_procedure, b_note, b_status, b_paymentStatus, procedFee, formattedDate1], (err, result) =>{

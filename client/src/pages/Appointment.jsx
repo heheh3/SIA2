@@ -32,12 +32,6 @@ const Appointment = () => {
   const [dateTime, setDateTime] = useState([])
   const [time, setTime] = useState([])
 
-  useEffect(() => {
-    const now = new Date();
-    const formattedDate = now.toDateString();
-    setDateOnly(formattedDate);
-  }, []);
-
 
   
 
@@ -81,9 +75,9 @@ const Appointment = () => {
   const handleSubmit = (e) =>{
     e.preventDefault();
     if (!b_date || !b_time || !b_procedure || !patientID  || !b_update){
-        toast.error("time " + b_update);
-        toast.error("date " + b_date);
-        toast.error("Please provide value into each input field");
+        // toast.error("time " + b_update);
+        // toast.error("date " + b_date);
+        // toast.error("Please provide value into each input field");
    
     } else{
       if(b_status){
@@ -91,7 +85,6 @@ const Appointment = () => {
       }else{
 
       }
-
         axios.post("http://localhost:5000/appointment/post", {
             patientID,
             b_date,
@@ -222,17 +215,6 @@ const Appointment = () => {
                 </select>
               </div>
 
-                    
-              <div className='book-row'>
-                    <input 
-                      type='date' 
-                      name='b_update' 
-                      id='b_update'
-                      value={ dateOnly }
-                      onChange={(e) => setDateOnly(e.target.value)}
-                      hidden
-                    />
-                  </div>  
 
               <div className='book__row'>
                 <label htmlFor='note'>NOTES: </label>
