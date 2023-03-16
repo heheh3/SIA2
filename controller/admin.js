@@ -14,9 +14,7 @@ export const appointment_post = (req, res) =>{
     const procedFee = 0;
     const b_update = new Date();
 
-    
-    // console.log(b_date)
-    // console.log(b_update)
+
 
 
     const date = parseISO(b_date);
@@ -24,8 +22,6 @@ export const appointment_post = (req, res) =>{
     const updated = parseISO(b_update);
     const formattedDate1 = format(updated, 'MMM dd, yyyy');
 
-        console.log(updated)
-    console.log(date)
 
 
        
