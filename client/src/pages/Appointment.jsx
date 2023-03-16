@@ -17,7 +17,6 @@ const initialState = {
   b_procedure: "",
   b_note: "",
   b_status: "",
-  b_update: ""
   
 };
 
@@ -74,10 +73,9 @@ const Appointment = () => {
 
   const handleSubmit = (e) =>{
     e.preventDefault();
-    if (!b_date || !b_time || !b_procedure || !patientID  || !b_update){
-        // toast.error("time " + b_update);
-        // toast.error("date " + b_date);
-        // toast.error("Please provide value into each input field");
+    if (!b_date || !b_time || !b_procedure || !patientID){
+
+        toast.error("Please provide value into each input field");
    
     } else{
       if(b_status){
