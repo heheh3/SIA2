@@ -55,7 +55,7 @@ const PendingAppointment = () => {
                             <th style={{textAlign: "center"}}>Note</th>
                             <th style={{textAlign: "center"}}>Status</th>
                             <th style={{textAlign: "center"}}>Payment Status</th>
-                            <th style={{textAlign: "center"}}>Appointment Updated</th>
+                            <th style={{textAlign: "center"}}>Service Updated</th>
                             <th style={{textAlign: "center"}}>Action</th>
                             
                         </tr>

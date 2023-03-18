@@ -105,7 +105,7 @@ export const appointment_updateUser = (req, res) =>{
     const sqlUpdate = "UPDATE booking_db SET b_date = ?, b_time = ?, b_procedure = ?, b_note = ?, b_status = ?, b_paymentStatus = ?, procedFee = ?, b_update = ? WHERE a_ID = ?";
     
     
-    db.query(sqlUpdate, [v, b_time, b_procedure, b_note, b_status, b_paymentStatus, procedFee, formattedDate1, a_ID,] ,(error, result)=>{
+    db.query(sqlUpdate, [v, b_time, b_procedure, b_note, b_status, b_paymentStatus, procedFee, formattedDate1, a_ID] ,(error, result)=>{
         if(error){
             console.log(error)
         }
