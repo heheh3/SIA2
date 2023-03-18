@@ -86,6 +86,7 @@ export const appointment_updateUser = (req, res) =>{
     const b_note = req.body.b_note;
     const b_status = req.body.b_status;
     const b_paymentStatus = req.body.b_paymentStatus;
+    const b_update = (new Date()).toISOString();
     let procedFee = 0;
 
     if (b_status === "Cancelled" || b_status === "Rescheduled" || b_status === "R-Completed"){
@@ -93,8 +94,10 @@ export const appointment_updateUser = (req, res) =>{
     } else{
         procedFee = 0
     }
-    const today = new Date();
-    const z =  moment(d).format('MMM DD, YYYY'); 
+    const updated = parseISO(b_update);
+    const formattedDate1 = format(updated, 'MMM dd, yyyy HH:mm aa');
+
+
 
     const d = new Date(b_date);
     const v =  moment(d).format('ddd, MMM DD, YYYY'); 
@@ -102,7 +105,7 @@ export const appointment_updateUser = (req, res) =>{
     const sqlUpdate = "UPDATE booking_db SET b_date = ?, b_time = ?, b_procedure = ?, b_note = ?, b_status = ?, b_paymentStatus = ?, procedFee = ?, b_update = ? WHERE a_ID = ?";
     
     
-    db.query(sqlUpdate, [v, b_time, b_procedure, b_note, b_status, b_paymentStatus, procedFee, a_ID, today] ,(error, result)=>{
+    db.query(sqlUpdate, [v, b_time, b_procedure, b_note, b_status, b_paymentStatus, procedFee, formattedDate1, a_ID,] ,(error, result)=>{
         if(error){
             console.log(error)
         }
