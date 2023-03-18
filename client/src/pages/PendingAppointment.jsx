@@ -55,6 +55,7 @@ const PendingAppointment = () => {
                             <th style={{textAlign: "center"}}>Note</th>
                             <th style={{textAlign: "center"}}>Status</th>
                             <th style={{textAlign: "center"}}>Payment Status</th>
+                            <th style={{textAlign: "center"}}>Appointment Updated</th>
                             <th style={{textAlign: "center"}}>Action</th>
                             
                         </tr>
@@ -88,6 +89,7 @@ const PendingAppointment = () => {
                                                 item.b_paymentStatus === "EMI" ? 'pink': '' , padding: '5px 10px', color: 'white', borderRadius: '10px', fontSize: '0.8rem', letterSpacing: "1.5px",}
                                         }>{item.b_paymentStatus}</span>
                                     </td>
+                                    <td>{item.b_update}</td>
                                     <td>                        
                                         <Link to={`/admin/appointment/update/${item.a_ID}`}>
                                             <button className='btn btn-view'>View/Edit</button>

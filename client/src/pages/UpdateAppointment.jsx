@@ -15,14 +15,15 @@ const initialState = {
   b_note: "",
   b_status: "",
   b_paymentStatus: "",
-  procedFee: ""
+  procedFee: "",
+  b_update: ""
 };
 
 
 
 const UpdateAppointment = () => {
   const [state, setState] = useState(initialState);
-  const {b_date, b_time, b_procedure, b_note, b_status, b_paymentStatus, procedFee} = state;
+  const {b_date, b_time, b_procedure, b_note, b_status, b_paymentStatus, procedFee, b_update} = state;
   const {id} = useParams();
   const [dateTime, setDateTime] = useState([])
   const [time, setTime] = useState([])
@@ -71,7 +72,7 @@ const UpdateAppointment = () => {
 
     axios.get(`http://localhost:5000/admin/appointment/get/${id}`)
     .then(response => {
-      const { b_date, b_time, b_procedure, b_note, b_status, b_paymentStatus, procedFee} = response.data[0];
+      const { b_date, b_time, b_procedure, b_note, b_status, b_paymentStatus, procedFee, b_update} = response.data[0];
       const isoDateString = format(new Date(b_date), 'yyyy-MM-dd');
       const parsedDate = parseISO(isoDateString);
 
@@ -79,7 +80,7 @@ const UpdateAppointment = () => {
       console.log("parse:" + parsedDate)
       
 
-      setState({b_date: parsedDate, b_time: b_time, b_procedure: b_procedure, b_note: b_note, b_status: b_status, b_paymentStatus: b_paymentStatus, procedFee: procedFee}); 
+      setState({b_date: parsedDate, b_time: b_time, b_procedure: b_procedure, b_note: b_note, b_status: b_status, b_paymentStatus: b_paymentStatus, procedFee: procedFee, b_update: b_update}); 
     }).catch(error => {
       console.error(error);
     });
@@ -104,13 +105,14 @@ const UpdateAppointment = () => {
           b_status,  
           b_paymentStatus,
           procedFee,
+          b_update
       })
       
         .then((response)=>{
           if(response.data.b_status === "Cancelled"){
-            setState({b_date: "", b_time: "", b_procedure: "", b_note: "", b_status: "", b_paymentStatus: "", procedFee: 100});
+            setState({b_date: "", b_time: "", b_procedure: "", b_note: "", b_status: "", b_paymentStatus: "", procedFee: 100, b_update: ""});
           }else{
-            setState({b_date: "", b_time: "", b_procedure: "", b_note: "", b_status: "", b_paymentStatus: "", procedFee: 0});
+            setState({b_date: "", b_time: "", b_procedure: "", b_note: "", b_status: "", b_paymentStatus: "", procedFee: 0, b_update: ""});
           }
         
           // toast.success(response.data.b_status)

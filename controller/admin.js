@@ -12,15 +12,17 @@ export const appointment_post = (req, res) =>{
     const b_status = "Pending";
     const b_paymentStatus = "Not-Paid";
     const procedFee = 0;
-    const b_update = new Date();
+    const b_update = (new Date()).toISOString();
 
-
+        
+    // console.log(formattedDate)
+    // console.log(formattedDate1)
 
 
     const date = parseISO(b_date);
     const formattedDate = format(date, 'EEE, MMM dd, yyyy');
     const updated = parseISO(b_update);
-    const formattedDate1 = format(updated, 'MMM dd, yyyy');
+    const formattedDate1 = format(updated, 'MMM dd, yyyy HH:mm aa');
 
 
 
