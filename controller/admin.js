@@ -22,7 +22,7 @@ export const appointment_post = (req, res) =>{
     const date = parseISO(b_date);
     const formattedDate = format(date, 'EEE, MMM dd, yyyy');
     const updated = parseISO(b_update);
-    const formattedDate1 = format(updated, 'MMM dd, yyyy HH:mm aa');
+    const formattedDate1 = format(updated, 'MMM dd, yyyy h:mm aa');
 
 
 
@@ -95,7 +95,7 @@ export const appointment_updateUser = (req, res) =>{
         procedFee = 0
     }
     const updated = parseISO(b_update);
-    const formattedDate1 = format(updated, 'MMM dd, yyyy HH:mm aa');
+    const formattedDate1 = format(updated, 'MMM dd, yyyy h:mm aa');
 
 
 
