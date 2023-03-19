@@ -1,9 +1,7 @@
 import React, {useRef, useState, useEffect } from 'react';
 import "../css/Walkin.css";
 import AdminNavbar from './AdminNavbar';
-import { FaLocationArrow } from "react-icons/fa";
 import {faCheck, faTimes, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
-import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import {toast} from "react-toastify";
