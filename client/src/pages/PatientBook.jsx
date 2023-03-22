@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import {useNavigate, useParams } from "react-router-dom"
 import "../css/Appointment.css";
 import AdminNavbar from './AdminNavbar';
-import { FaLocationArrow } from "react-icons/fa";
+
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
