@@ -5,7 +5,7 @@ import date from "../img/image 18.png";
 import "../css/Reminder.css";
 import "../css/Reschedule.css";
 import React, { useState, useEffect, useContext } from 'react';
-import {useNavigate, useParams} from "react-router-dom"
+import {useNavigate} from "react-router-dom"
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import { AuthContext } from "../context/authContext";
