@@ -38,7 +38,6 @@ router.get("/appointment/completed/get", appointment_getCompleted);
 router.get("/admin/completedCancelled/get/:user_id/:a_ID", appointment_getCompletedCancelled);
 router.get("/admin/completedCancelled/sum/:user_id/:a_ID", appointment_CancelledSum);
 
-// router.get("/admin/completedCancelled/get/:user_id/:a_ID", appointment_getPrevious);
 router.get("/appointment/pending/get/:user_id", appointment_getPending);
 router.get("/appointment/completed/get/:user_id", appointment_getCompletedHistory);
 router.get("/appointment/date-time", appointment_getDateTime)
