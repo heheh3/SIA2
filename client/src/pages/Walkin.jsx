@@ -44,7 +44,7 @@ const Walkin = () => {
     const [validFullName, setValidFullName]  = useState(false)
     const [FullNameFocus, setFullNameFocus]  = useState(false)
 
-    const [matchPwd, setMatchPwd]  = useState('')
+    
     const [validMatch, setValidMatch]  = useState(false)
     const [matchFocus, setMatchFocus]  = useState(false)
 
