@@ -1,18 +1,12 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import ProfileNavbar from './ProfileNavbar'
 import PatientNavbar from './PatientNavbar'
 import "../css/Profile.css";
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
 import { AuthContext } from '../context/authContext';
 import { toast } from 'react-toastify';
 
-
-
-  
-
 const MedicalHistory = () => {
-
 
     const { currentUser } = useContext(AuthContext);
     const [heartAilment, setHeartAilment] = useState('');
@@ -26,50 +20,104 @@ const MedicalHistory = () => {
     const [selfMedication, setSelfMedication] = useState('');
     const [selfMedicationChecked, setSelfMedicationChecked] = useState(false);
     const [tumor, setTumor] = useState('');
-    const [tumorChecked, setTumorChecked] = useState(false);
+    const [tumorChecked, setTumorChecked] = useState(false);    
     const [otherIllnesses, setOtherIllnesses] = useState('');
     const [otherIllnessesChecked, setOtherIllnessesChecked] = useState(false);
     const [pregnant, setPregnant] = useState('');
     const [pregnantChecked, setPregnantChecked] = useState(false);
+    const [data, setData] = useState([]);
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const newData = {
+            user_id: currentUser.user_id,
+            heartAilment: heartAilment || 'none',
+            heartAilmentChecked: heartAilmentChecked ? true : false,
+            allergies: allergies|| 'none',
+            allergiesChecked: allergiesChecked ? true : false,
+            hospitalAdmission: hospitalAdmission || 'none',
+            hospitalAdmissionChecked: hospitalAdmissionChecked ? true : false,
+            operation: operation || 'none',
+            operationChecked: operationChecked ? true : false,
+            selfMedication: selfMedication || 'none',
+            selfMedicationChecked: selfMedicationChecked ? true : false,
+            tumor: tumor || 'none',
+            tumorChecked: tumorChecked ? true : false,
+            otherIllnesses: otherIllnesses || 'none',
+            otherIllnessesChecked: otherIllnessesChecked ? true : false,
+            pregnant: pregnant || 'none',
+            pregnantChecked: pregnantChecked ? true : false
+        };
+
         try {
-          const response = await axios.put(`http://localhost:5000/medicalhistory/update/`, {
-            userId: currentUser.id,
-            heartAilment: heartAilmentChecked ? heartAilment : 'none',
-            allergies: allergiesChecked ? allergies : 'none',
-            hospitalAdmission: hospitalAdmissionChecked ? hospitalAdmission: 'none',
-            operation: operationChecked ? operation: 'none',
-            selfMedication: selfMedicationChecked ? selfMedication: 'none',
-            tumor: tumorChecked ? tumor: 'none',
-            otherIllnesses: otherIllnessesChecked ? otherIllnesses: 'none',
-            pregnant: pregnantChecked ? pregnant: 'none'
-          }).then(()=>{
-                // Reset state
-                setHeartAilment('');
-                setAllergies('');
-                setHospitalAdmission('');
-                setOperation('');
-                setSelfMedication('');
-                setTumor('');
-                setOtherIllnesses('');
-                setPregnant('');
-                setHeartAilmentChecked(false);
-                setAllergiesChecked(false);
-                setHospitalAdmissionChecked(false);
-                setOperationChecked(false);
-                setSelfMedicationChecked(false);
-                setTumorChecked(false);
-                setOtherIllnessesChecked(false);
-                setPregnantChecked(false);
-                toast.success("Medical History Updated Successfully");
-          })
+          const response = await axios.post(`http://localhost:5000/medicalhistory/update/${currentUser.user_id}`, newData); 
+          console.log(response.data);
+          toast.success("Medical History Updated Successfully");
+
+          localStorage.setItem('medicalHistoryData', JSON.stringify(newData));
+
+          setData([
+            ...data,
+            { user_id: data.length + 1, heartAilment, heartAilmentChecked, allergies, allergiesChecked, hospitalAdmission, hospitalAdmissionChecked, operation, operationChecked, selfMedication, selfMedicationChecked, tumor, tumorChecked, otherIllnesses, otherIllnessesChecked, pregnant, pregnantChecked  },
+          ]);
+          setHeartAilment('');
+          setHeartAilmentChecked(false);
+          setAllergies('');
+          setAllergiesChecked(false);
+          setHospitalAdmission('');
+          setHospitalAdmissionChecked(false);
+          setOperation('');
+          setOperationChecked(false);
+          setSelfMedication('');
+          setSelfMedicationChecked(false);
+          setTumor('');
+          setTumorChecked(false);
+          setOtherIllnesses('');
+          setOtherIllnessesChecked(false);
+          setPregnant('');
+          setPregnantChecked(false);
         } catch (error) {
-            console.error(error);
-           toast.error("Error");
+          console.error(error);
         }
       };
+
+      useEffect(() => {
+        const storedData = localStorage.getItem('medicalHistoryData');
+        if (storedData) {
+          const parsedData = JSON.parse(storedData);
+          setHeartAilment(parsedData.heartAilment);
+          setHeartAilmentChecked(parsedData.heartAilmentChecked);
+          setAllergies(parsedData.allergies);
+          setAllergiesChecked(parsedData.allergiesChecked);
+          setHospitalAdmission(parsedData.hospitalAdmission);
+          setHospitalAdmissionChecked(parsedData.hospitalAdmissionChecked);
+          setOperation(parsedData.operation);
+          setOperationChecked(parsedData.operationChecked);
+          setSelfMedication(parsedData.selfMedication);
+          setSelfMedicationChecked(parsedData.selfMedicationChecked);
+          setTumor(parsedData.tumor);
+          setTumorChecked(parsedData.tumorChecked);
+          setOtherIllnesses(parsedData.otherIllnesses);
+          setOtherIllnessesChecked(parsedData.otherIllnessesChecked);
+          setPregnant(parsedData.pregnant);
+          setPregnantChecked(parsedData.pregnantChecked);
+        }
+      }, []);
+
+    //   useEffect (() => {
+
+    //     axios.get(`http://localhost:5000/medicalhistory/get/${currentUser.user_id}`)
+    //     .then(response => {
+    //       const {user_id, heartAilment, heartAilmentChecked, allergies, allergiesChecked, hospitalAdmission, hospitalAdmissionChecked, operation, operationChecked, selfMedication, selfMedicationChecked, tumor, tumorChecked, otherIllnesses, otherIllnessesChecked, pregnant, pregnantChecked } = response.data[0];
+    
+    //       setData({user_id: user_id,heartAilment: heartAilment, heartAilmentChecked: heartAilmentChecked, allergies: allergies, allergiesChecked: allergiesChecked, hospitalAdmission:hospitalAdmission, hospitalAdmissionChecked:hospitalAdmissionChecked, operation:operation, operationChecked:operationChecked, selfMedication:selfMedication, selfMedicationChecked : selfMedicationChecked, tumor : tumor, tumorChecked:tumorChecked, otherIllnesses:otherIllnesses, otherIllnessesChecked:otherIllnessesChecked, pregnant:pregnant, pregnantChecked:pregnantChecked}); 
+    //     }).catch(error => {
+    //       console.error(error);
+    //     });
+          
+    //   }, [currentUser.user_id])
   
     return (
       <div>
@@ -161,7 +209,7 @@ const MedicalHistory = () => {
                                             id='operation'
                                             className='mpatient__input' 
                                             onChange= {(event) => setOperation(event.target.value)}
-                                            placeholder='Enter Operation Information' 
+                                            placeholder='' 
                                             value={operationChecked ? operation : ''}
                                             disabled={!operationChecked}
                                         />
@@ -183,7 +231,7 @@ const MedicalHistory = () => {
                                             name='self-medication' 
                                             id='self-medication'
                                             className='mpatient__input' 
-                                            placeholder='Enter Self Medication Information' 
+                                            placeholder='' 
                                             onChange={(event) => setSelfMedication(event.target.value)}
                                             value={selfMedicationChecked ? selfMedication : ''}
                                             disabled={!selfMedicationChecked}
@@ -204,7 +252,7 @@ const MedicalHistory = () => {
                                             id='tumor'
                                             className='mpatient__input' 
                                             onChange= {(event) => setTumor(event.target.value)}
-                                            placeholder='Enter Tumor Information' 
+                                            placeholder='' 
                                             value={tumorChecked ? tumor : ''}
                                             disabled={!tumorChecked}
                                         />

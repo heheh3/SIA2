@@ -4,13 +4,13 @@ import { medicalhistory_delete, medicalhistory_get, medicalhistory_getUser, medi
 const router = express.Router()
 
 // Get all medical history records
-router.get('/medicalhistory', medicalhistory_get);
+router.get('/medicalhistory/get', medicalhistory_get);
 
 // Get a specific user's medical history record
 router.get('/medicalhistory/get/:user_id', medicalhistory_getUser);
 
 // Update a user's medical history record
-router.post('/medicalhistory/post/:user_id', medicalhistory_updateUser);
+router.post('/medicalhistory/update/:user_id', medicalhistory_updateUser);
 
 // Delete a user's medical history record
 router.delete('/medicalhistory/delete/:user_id', medicalhistory_delete);

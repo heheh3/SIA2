@@ -33,30 +33,56 @@ export const medicalhistory_getUser = (req, res) =>{
     });
 }
 
-export const medicalhistory_updateUser = (req, res) =>{
+export const medicalhistory_updateUser = (req, res) => {
     const user_id = req.params.user_id;
-    const medical_history = req.body;
+    const medicalhistory_db = req.body;
 
-    db.query('SELECT * FROM users WHERE id = ?', [user_id], (err, results) => {
+    // Check if the user exists
+    db.query('SELECT * FROM users_db WHERE user_id = ?', [user_id], (err, results) => {
         if (err) {
-        console.error('Error executing query:', err);
-        res.status(500).send('Error retrieving user ' + user_id);
-        return;
+            console.error('Error executing query:', err);
+            res.status(500).send('Error retrieving user ' + user_id);
+            return;
         }
 
         if (results.length === 0) {
-        res.status(404).send('User ' + user_id + ' not found');
-        return;
-        }
-
-        db.query('UPDATE medical_history SET heart_ailment = ?, heart_ailment_checked = ?, allergies = ?, allergies_checked = ?, hospital_admission = ?, hospital_admission_checked = ?, operation = ?, operation_checked = ?, self_medication = ?, self_medication_checked = ?, tumor = ?, tumor_checked = ?, other_illnesses = ?, other_illnesses_checked = ?, pregnant = ?, pregnant_checked = ? WHERE user_id = ?', 
-                [medical_history.heartAilment, medical_history.heartAilmentChecked, medical_history.allergies, medical_history.allergiesChecked, medical_history.hospitalAdmission, medical_history.hospitalAdmissionChecked, medical_history.operation, medical_history.operationChecked, medical_history.selfMedication, medical_history.selfMedicationChecked, medical_history.tumor, medical_history.tumorChecked, medical_history.otherIllnesses, medical_history.otherIllnessesChecked, medical_history.pregnant, medical_history.pregnantChecked, user_id], (err, results) => {
-        if (err) {
-            console.error('Error executing query:', err);
-            res.status(500).send('Error updating medical history for user ' + user_id);
+            res.status(404).send('User ' + user_id + ' not found');
             return;
         }
-        res.send('Medical history updated for user ' + user_id);
-        });
-    });
-}
+
+        // Check if user has existing medical history in medicalhistory_db
+    db.query('SELECT * FROM medicalhistory_db WHERE user_id = ?', [user_id], (err, results) => {
+        if (err) {
+          console.error('Error executing query:', err);
+          res.status(500).send('Error retrieving medical history for user ' + user_id);
+          return;
+        }
+  
+        if (results.length === 0) {
+          // User has no existing medical history, so insert new record
+          db.query('INSERT INTO medicalhistory_db (user_id, heartAilment, heartAilmentChecked, allergies, allergiesChecked, hospitalAdmission, hospitalAdmissionChecked, operation, operationChecked, selfMedication, selfMedicationChecked, tumor, tumorChecked, otherIllnesses, otherIllnessesChecked, pregnant, pregnantChecked) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+            [user_id, medicalhistory_db.heartAilment, medicalhistory_db.heartAilmentChecked, medicalhistory_db.allergies, medicalhistory_db.allergiesChecked, medicalhistory_db.hospitalAdmission, medicalhistory_db.hospitalAdmissionChecked, medicalhistory_db.operation, medicalhistory_db.operationChecked, medicalhistory_db.selfMedication, medicalhistory_db.selfMedicationChecked, medicalhistory_db.tumor, medicalhistory_db.tumorChecked, medicalhistory_db.otherIllnesses, medicalhistory_db.otherIllnessesChecked, medicalhistory_db.pregnant, medicalhistory_db.pregnantChecked],
+            (err, results) => {
+              if (err) {
+                console.error('Error executing query:', err);   
+                res.status(500).send('Error inserting medical history for user ' + user_id);
+                return;
+              }
+              res.send('Medical history inserted for user ' + user_id);
+            });
+        } else {
+            // User has existing medical history, so update record
+            db.query('UPDATE medicalhistory_db SET heartAilment = ?, heartAilmentChecked = ?, allergies = ?, allergiesChecked = ?, hospitalAdmission = ?, hospitalAdmissionChecked = ?, operation = ?, operationChecked = ?, selfMedication = ?, selfMedicationChecked = ?, tumor = ?, tumorChecked = ?, otherIllnesses = ?, otherIllnessesChecked = ?, pregnant = ?, pregnantChecked = ? WHERE user_id = ?',
+              [medicalhistory_db.heartAilment, medicalhistory_db.heartAilmentChecked, medicalhistory_db.allergies, medicalhistory_db.allergiesChecked, medicalhistory_db.hospitalAdmission, medicalhistory_db.hospitalAdmissionChecked, medicalhistory_db.operation, medicalhistory_db.operationChecked, medicalhistory_db.selfMedication, medicalhistory_db.selfMedicationChecked, medicalhistory_db.tumor, medicalhistory_db.tumorChecked, medicalhistory_db.otherIllnesses, medicalhistory_db.otherIllnessesChecked, medicalhistory_db.pregnant, medicalhistory_db.pregnantChecked, user_id],
+              (err, results) => {
+                if (err) {
+                  console.error('Error executing query:', err);
+                  res.status(500).send('Error updating medical history for user ' + user_id);
+                  return;
+                }
+                res.send('Medical history updated for user ' + user_id);
+              }
+            );
+          }
+        })}
+    )};
