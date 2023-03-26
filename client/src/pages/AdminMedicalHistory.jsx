@@ -6,7 +6,11 @@ import "../css/Profile.css";
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
+
+
 const AdminMedicalHistory = () => {
+    
+
 
     const [heartAilment, setHeartAilment] = useState('');
     const [heartAilmentChecked, setHeartAilmentChecked] = useState(false);
@@ -84,39 +88,27 @@ const AdminMedicalHistory = () => {
         }
       };
 
-    //   useEffect(() => {
-    //     const storedData = localStorage.getItem('medicalHistoryData');
-    //     if (storedData) {
-    //       const parsedData = JSON.parse(storedData);
-    //       setHeartAilment(parsedData.heartAilment);
-    //       setHeartAilmentChecked(parsedData.heartAilmentChecked);
-    //       setAllergies(parsedData.allergies);
-    //       setAllergiesChecked(parsedData.allergiesChecked);
-    //       setHospitalAdmission(parsedData.hospitalAdmission);
-    //       setHospitalAdmissionChecked(parsedData.hospitalAdmissionChecked);
-    //       setOperation(parsedData.operation);
-    //       setOperationChecked(parsedData.operationChecked);
-    //       setSelfMedication(parsedData.selfMedication);
-    //       setSelfMedicationChecked(parsedData.selfMedicationChecked);
-    //       setTumor(parsedData.tumor);
-    //       setTumorChecked(parsedData.tumorChecked);
-    //       setOtherIllnesses(parsedData.otherIllnesses);
-    //       setOtherIllnessesChecked(parsedData.otherIllnessesChecked);
-    //       setPregnant(parsedData.pregnant);
-    //       setPregnantChecked(parsedData.pregnantChecked);
-    //     }
-    //   }, []);
 
-      
-        const loadData = async () =>{
-            const response = await axios.get(`http://localhost:5000/medicalhistory/get/${id}`);
-            setData(response.data);  
-        }
-        useEffect(()=>{
-            loadData();
-        }, [id])
+    
+        useEffect (() => {
 
-        console.log(data)
+            axios.get(`http://localhost:5000/medicalhistory/get/${id}`)
+            .then(response => {
+              const { heartAilment, allergies, hospitalAdmission, operation, selfMedication, tumor, otherIllnesses, pregnant} = response.data[0];
+
+              setHeartAilment(heartAilment);
+              setAllergies(allergies);
+              setHospitalAdmission(hospitalAdmission);
+              setOperation(operation);
+              setSelfMedication(selfMedication);
+              setTumor(tumor);
+              setOtherIllnesses(otherIllnesses);
+              setPregnant(pregnant);
+       
+            });
+              
+          }, [id])
+        
 
     return (
         <div>
@@ -138,14 +130,14 @@ const AdminMedicalHistory = () => {
                                     <div className="input-mcontainer">
                                         <input 
                                             type='text' 
-                                            name='heart-ailment' 
-                                            id='heart-ailment'
+                                            name='heartAilment' 
+                                            id='heartAilment'
                                             className='mpatient__input' 
-                                            placeholder='Blood Pressure, etc...' 
+                                            placeholder='none'  
                                             onChange={(event) => setHeartAilment(event.target.value)}
-                                            value={heartAilmentChecked ? heartAilment : ''}
+                                            value={heartAilment ||  ''}
                                             disabled={!heartAilmentChecked}
-                                        />
+                                        />  
                                     </div>
                                 </div>
                                 <div className='medicalSettings__row--col'>
@@ -157,8 +149,8 @@ const AdminMedicalHistory = () => {
                                             id='allergies'
                                             className='mpatient__input' 
                                             onChange= {(event) => setAllergies(event.target.value)}
-                                            placeholder='Peanuts, Shrimp, etc..' 
-                                            value={allergiesChecked ? allergies : ''}
+                                            placeholder='none' 
+                                            value={ allergies || ''}
                                             disabled={!allergiesChecked}
                                         />
                                     </div>
@@ -171,12 +163,12 @@ const AdminMedicalHistory = () => {
                                     <div className="input-mcontainer">
                                         <input 
                                             type='text' 
-                                            name='hospital-admission' 
-                                            id='hospital-admission'
+                                            name='hospitalAdmission' 
+                                            id='hospitalAdmission'
                                             className='mpatient__input' 
-                                            placeholder='Reason' 
+                                            placeholder='none'  
                                             onChange={(event) => setHospitalAdmission(event.target.value)}
-                                            value={hospitalAdmissionChecked ? hospitalAdmission : ''}
+                                            value={ hospitalAdmission || ''}
                                             disabled={!hospitalAdmissionChecked}
                                         />
                                     </div>
@@ -191,8 +183,8 @@ const AdminMedicalHistory = () => {
                                             id='operation'
                                             className='mpatient__input' 
                                             onChange= {(event) => setOperation(event.target.value)}
-                                            placeholder='' 
-                                            value={operationChecked ? operation : ''}
+                                            placeholder='none'  
+                                            value={operation || ''}
                                             disabled={!operationChecked}
                                         />
                                     </div>
@@ -205,12 +197,12 @@ const AdminMedicalHistory = () => {
                                     <div className="input-mcontainer">
                                         <input 
                                             type='text' 
-                                            name='self-medication' 
-                                            id='self-medication'
+                                            name='selfMedication' 
+                                            id='selfMedication'
                                             className='mpatient__input' 
-                                            placeholder='' 
+                                            placeholder='none' 
                                             onChange={(event) => setSelfMedication(event.target.value)}
-                                            value={selfMedicationChecked ? selfMedication : ''}
+                                            value={selfMedication || ''}
                                             disabled={!selfMedicationChecked}
                                         />
                                     </div>
@@ -224,8 +216,8 @@ const AdminMedicalHistory = () => {
                                             id='tumor'
                                             className='mpatient__input' 
                                             onChange= {(event) => setTumor(event.target.value)}
-                                            placeholder='' 
-                                            value={tumorChecked ? tumor : ''}
+                                            placeholder='none' 
+                                            value={tumor || ''}
                                             disabled={!tumorChecked}
                                         />
                                     </div>
@@ -238,12 +230,12 @@ const AdminMedicalHistory = () => {
                                     <div className="input-mcontainer">
                                         <input 
                                             type='text' 
-                                            name='other_illnesses' 
-                                            id='other_illnesses'
+                                            name='otherIllnesses' 
+                                            id='otherIllnesses'
                                             className='mpatient__input' 
-                                            placeholder='Diabetes, Sinusitis, Bleeding gums, etc...' 
+                                            placeholder='none' 
                                             onChange={(event) => setOtherIllnesses(event.target.value)}
-                                            value={otherIllnessesChecked ? otherIllnesses : ''}
+                                            value={otherIllnesses || ''}
                                             disabled={!otherIllnessesChecked}
                                         />
                                     </div>
@@ -257,19 +249,15 @@ const AdminMedicalHistory = () => {
                                             id='pregnant'
                                             className='mpatient__input' 
                                             onChange= {(event) => setPregnant(event.target.value)}
-                                            placeholder='No. of Months' 
-                                            value={pregnantChecked ? pregnant : ''}
+                                            placeholder='none' 
+                                            value={ pregnant || ''}
                                             disabled={!pregnantChecked}
                                         />
                                     </div>
                                 </div>
                             </div>
                     
-                            <div className='medicalSettings__row'>
-                                <div className='medicalSettings__row--col'>
-                                        <input type="submit" className='profile-update' value="UPDATE" />
-                                </div>
-                            </div>
+                        
 
 
                         </form>
