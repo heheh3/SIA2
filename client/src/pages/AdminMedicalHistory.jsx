@@ -1,10 +1,111 @@
-import React from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import AdminNavbar from './AdminNavbar'
 import AdminProfileNavbar from './AdminProfileNavbar'
-import {Link} from 'react-router-dom'
-import MedicalHistory from './MedicalHistory'
+import "../css/Profile.css";
+import axios from 'axios';
+import { AuthContext } from '../context/authContext';
+import { toast } from 'react-toastify';
 
 const AdminMedicalHistory = () => {
+
+    const { currentUser } = useContext(AuthContext);
+    const [heartAilment, setHeartAilment] = useState('');
+    const [heartAilmentChecked, setHeartAilmentChecked] = useState(false);
+    const [allergies, setAllergies] = useState('');
+    const [allergiesChecked, setAllergiesChecked] = useState(false);
+    const [hospitalAdmission, setHospitalAdmission] = useState('');
+    const [hospitalAdmissionChecked, setHospitalAdmissionChecked] = useState(false);
+    const [operation, setOperation] = useState('');
+    const [operationChecked, setOperationChecked] = useState(false);
+    const [selfMedication, setSelfMedication] = useState('');
+    const [selfMedicationChecked, setSelfMedicationChecked] = useState(false);
+    const [tumor, setTumor] = useState('');
+    const [tumorChecked, setTumorChecked] = useState(false);    
+    const [otherIllnesses, setOtherIllnesses] = useState('');
+    const [otherIllnessesChecked, setOtherIllnessesChecked] = useState(false);
+    const [pregnant, setPregnant] = useState('');
+    const [pregnantChecked, setPregnantChecked] = useState(false);
+    const [data, setData] = useState([]);
+
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const newData = {
+            user_id: currentUser.user_id,
+            heartAilment: heartAilment || 'none',
+            heartAilmentChecked: heartAilmentChecked ? true : false,
+            allergies: allergies|| 'none',
+            allergiesChecked: allergiesChecked ? true : false,
+            hospitalAdmission: hospitalAdmission || 'none',
+            hospitalAdmissionChecked: hospitalAdmissionChecked ? true : false,
+            operation: operation || 'none',
+            operationChecked: operationChecked ? true : false,
+            selfMedication: selfMedication || 'none',
+            selfMedicationChecked: selfMedicationChecked ? true : false,
+            tumor: tumor || 'none',
+            tumorChecked: tumorChecked ? true : false,
+            otherIllnesses: otherIllnesses || 'none',
+            otherIllnessesChecked: otherIllnessesChecked ? true : false,
+            pregnant: pregnant || 'none',
+            pregnantChecked: pregnantChecked ? true : false
+        };
+
+        try {
+          const response = await axios.post(`http://localhost:5000/medicalhistory/update/${currentUser.user_id}`, newData); 
+          console.log(response.data);
+          toast.success("Medical History Updated Successfully");
+
+          localStorage.setItem('medicalHistoryData', JSON.stringify(newData));
+
+          setData([
+            ...data,
+            { user_id: data.length + 1, heartAilment, heartAilmentChecked, allergies, allergiesChecked, hospitalAdmission, hospitalAdmissionChecked, operation, operationChecked, selfMedication, selfMedicationChecked, tumor, tumorChecked, otherIllnesses, otherIllnessesChecked, pregnant, pregnantChecked  },
+          ]);
+          setHeartAilment('');
+          setHeartAilmentChecked(false);
+          setAllergies('');
+          setAllergiesChecked(false);
+          setHospitalAdmission('');
+          setHospitalAdmissionChecked(false);
+          setOperation('');
+          setOperationChecked(false);
+          setSelfMedication('');
+          setSelfMedicationChecked(false);
+          setTumor('');
+          setTumorChecked(false);
+          setOtherIllnesses('');
+          setOtherIllnessesChecked(false);
+          setPregnant('');
+          setPregnantChecked(false);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+
+      useEffect(() => {
+        const storedData = localStorage.getItem('medicalHistoryData');
+        if (storedData) {
+          const parsedData = JSON.parse(storedData);
+          setHeartAilment(parsedData.heartAilment);
+          setHeartAilmentChecked(parsedData.heartAilmentChecked);
+          setAllergies(parsedData.allergies);
+          setAllergiesChecked(parsedData.allergiesChecked);
+          setHospitalAdmission(parsedData.hospitalAdmission);
+          setHospitalAdmissionChecked(parsedData.hospitalAdmissionChecked);
+          setOperation(parsedData.operation);
+          setOperationChecked(parsedData.operationChecked);
+          setSelfMedication(parsedData.selfMedication);
+          setSelfMedicationChecked(parsedData.selfMedicationChecked);
+          setTumor(parsedData.tumor);
+          setTumorChecked(parsedData.tumorChecked);
+          setOtherIllnesses(parsedData.otherIllnesses);
+          setOtherIllnessesChecked(parsedData.otherIllnessesChecked);
+          setPregnant(parsedData.pregnant);
+          setPregnantChecked(parsedData.pregnantChecked);
+        }
+      }, []);
+
     return (
         <div>
             <header>
