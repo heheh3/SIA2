@@ -1,15 +1,13 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
-import {Link} from 'react-router-dom'
+import React, { useContext, useEffect, useState } from 'react'
+import {Link, useParams} from 'react-router-dom'
 import AdminNavbar from './AdminNavbar'
 import AdminProfileNavbar from './AdminProfileNavbar'
 import "../css/Profile.css";
 import axios from 'axios';
-import { AuthContext } from '../context/authContext';
 import { toast } from 'react-toastify';
 
 const AdminMedicalHistory = () => {
 
-    const { currentUser } = useContext(AuthContext);
     const [heartAilment, setHeartAilment] = useState('');
     const [heartAilmentChecked, setHeartAilmentChecked] = useState(false);
     const [allergies, setAllergies] = useState('');
@@ -27,13 +25,15 @@ const AdminMedicalHistory = () => {
     const [pregnant, setPregnant] = useState('');
     const [pregnantChecked, setPregnantChecked] = useState(false);
     const [data, setData] = useState([]);
+    const {id} = useParams();
+    console.log(id)
 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         const newData = {
-            user_id: currentUser.user_id,
+            user_id: id,
             heartAilment: heartAilment || 'none',
             heartAilmentChecked: heartAilmentChecked ? true : false,
             allergies: allergies|| 'none',
@@ -53,7 +53,7 @@ const AdminMedicalHistory = () => {
         };
 
         try {
-          const response = await axios.post(`http://localhost:5000/medicalhistory/update/${currentUser.user_id}`, newData); 
+          const response = await axios.put(`http://localhost:5000/medicalhistory/update/${id}`, newData); 
           console.log(response.data);
           toast.success("Medical History Updated Successfully");
 
@@ -84,28 +84,39 @@ const AdminMedicalHistory = () => {
         }
       };
 
-      useEffect(() => {
-        const storedData = localStorage.getItem('medicalHistoryData');
-        if (storedData) {
-          const parsedData = JSON.parse(storedData);
-          setHeartAilment(parsedData.heartAilment);
-          setHeartAilmentChecked(parsedData.heartAilmentChecked);
-          setAllergies(parsedData.allergies);
-          setAllergiesChecked(parsedData.allergiesChecked);
-          setHospitalAdmission(parsedData.hospitalAdmission);
-          setHospitalAdmissionChecked(parsedData.hospitalAdmissionChecked);
-          setOperation(parsedData.operation);
-          setOperationChecked(parsedData.operationChecked);
-          setSelfMedication(parsedData.selfMedication);
-          setSelfMedicationChecked(parsedData.selfMedicationChecked);
-          setTumor(parsedData.tumor);
-          setTumorChecked(parsedData.tumorChecked);
-          setOtherIllnesses(parsedData.otherIllnesses);
-          setOtherIllnessesChecked(parsedData.otherIllnessesChecked);
-          setPregnant(parsedData.pregnant);
-          setPregnantChecked(parsedData.pregnantChecked);
+    //   useEffect(() => {
+    //     const storedData = localStorage.getItem('medicalHistoryData');
+    //     if (storedData) {
+    //       const parsedData = JSON.parse(storedData);
+    //       setHeartAilment(parsedData.heartAilment);
+    //       setHeartAilmentChecked(parsedData.heartAilmentChecked);
+    //       setAllergies(parsedData.allergies);
+    //       setAllergiesChecked(parsedData.allergiesChecked);
+    //       setHospitalAdmission(parsedData.hospitalAdmission);
+    //       setHospitalAdmissionChecked(parsedData.hospitalAdmissionChecked);
+    //       setOperation(parsedData.operation);
+    //       setOperationChecked(parsedData.operationChecked);
+    //       setSelfMedication(parsedData.selfMedication);
+    //       setSelfMedicationChecked(parsedData.selfMedicationChecked);
+    //       setTumor(parsedData.tumor);
+    //       setTumorChecked(parsedData.tumorChecked);
+    //       setOtherIllnesses(parsedData.otherIllnesses);
+    //       setOtherIllnessesChecked(parsedData.otherIllnessesChecked);
+    //       setPregnant(parsedData.pregnant);
+    //       setPregnantChecked(parsedData.pregnantChecked);
+    //     }
+    //   }, []);
+
+      
+        const loadData = async () =>{
+            const response = await axios.get(`http://localhost:5000/medicalhistory/get/${id}`);
+            setData(response.data);  
         }
-      }, []);
+        useEffect(()=>{
+            loadData();
+        }, [id])
+
+        console.log(data)
 
     return (
         <div>
@@ -126,11 +137,6 @@ const AdminMedicalHistory = () => {
                                     <label className='label__input' htmlFor='heart-ailment'>Heart Ailment/Disease</label>
                                     <div className="input-mcontainer">
                                         <input 
-                                            type='checkbox'
-                                            checked={heartAilmentChecked}
-                                            onChange={(event) => setHeartAilmentChecked(event.target.checked)}
-                                        />
-                                        <input 
                                             type='text' 
                                             name='heart-ailment' 
                                             id='heart-ailment'
@@ -145,11 +151,6 @@ const AdminMedicalHistory = () => {
                                 <div className='medicalSettings__row--col'>
                                     <label className='label__input' htmlFor='allergies'>Allergies</label>
                                     <div className="input-mcontainer">
-                                        <input 
-                                            type='checkbox'
-                                            checked={allergiesChecked}
-                                            onChange={(event) => setAllergiesChecked(event.target.checked)}
-                                        />
                                         <input 
                                             type='text' 
                                             name='allergies' 
@@ -169,11 +170,6 @@ const AdminMedicalHistory = () => {
                                     <label className='label__input' htmlFor='hospital-admission'>Hospital Admission</label>
                                     <div className="input-mcontainer">
                                         <input 
-                                            type='checkbox'
-                                            checked={hospitalAdmissionChecked}
-                                            onChange={(event) => setHospitalAdmissionChecked(event.target.checked)}
-                                        />
-                                        <input 
                                             type='text' 
                                             name='hospital-admission' 
                                             id='hospital-admission'
@@ -189,11 +185,6 @@ const AdminMedicalHistory = () => {
                                 <div className='medicalSettings__row--col'>
                                     <label className='label__input' htmlFor='operation'>Operation</label>
                                     <div className="input-mcontainer">
-                                        <input 
-                                            type='checkbox'
-                                            checked={operationChecked}
-                                            onChange={(event) => setOperationChecked(event.target.checked)}
-                                        />
                                         <input 
                                             type='text' 
                                             name='operation' 
@@ -213,11 +204,6 @@ const AdminMedicalHistory = () => {
                                     <label className='label__input' htmlFor='self-medication'>Self - Medication</label>
                                     <div className="input-mcontainer">
                                         <input 
-                                            type='checkbox'
-                                            checked={selfMedicationChecked}
-                                            onChange={(event) => setSelfMedicationChecked(event.target.checked)}
-                                        />
-                                        <input 
                                             type='text' 
                                             name='self-medication' 
                                             id='self-medication'
@@ -232,11 +218,6 @@ const AdminMedicalHistory = () => {
                                 <div className='medicalSettings__row--col'>
                                     <label className='label__input' htmlFor='tumor'>Tumor/Growth</label>
                                     <div className="input-mcontainer">
-                                        <input 
-                                            type='checkbox'
-                                            checked={tumorChecked}
-                                            onChange={(event) => setTumorChecked(event.target.checked)}
-                                        />
                                         <input 
                                             type='text' 
                                             name='tumor' 
@@ -256,11 +237,6 @@ const AdminMedicalHistory = () => {
                                     <label className='label__input' htmlFor='hospital-admission'>Other Illnesses:</label>
                                     <div className="input-mcontainer">
                                         <input 
-                                            type='checkbox'
-                                            checked={otherIllnessesChecked}
-                                            onChange={(event) => setOtherIllnessesChecked(event.target.checked)}
-                                        />
-                                        <input 
                                             type='text' 
                                             name='other_illnesses' 
                                             id='other_illnesses'
@@ -275,11 +251,6 @@ const AdminMedicalHistory = () => {
                                 <div className='medicalSettings__row--col'>
                                     <label className='label__input' htmlFor='tumor'>Pregnant</label>
                                     <div className="input-mcontainer">
-                                        <input 
-                                            type='checkbox'
-                                            checked={pregnantChecked}
-                                            onChange={(event) => setPregnantChecked(event.target.checked)}
-                                        />
                                         <input 
                                             type='text' 
                                             name='pregnant' 
