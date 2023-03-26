@@ -256,6 +256,7 @@ const AdminMedicalHistory = () => {
                                     </div>
                                 </div>
                             </div>
+                            
                     
                         
 
