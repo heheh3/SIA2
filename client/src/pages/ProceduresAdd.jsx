@@ -68,7 +68,19 @@ const ProceduresAdd = () => {
                     <button className='back__procedures'><span>Back</span></button>
                 </Link>           
                 <main className='display--flex m-0'>
-                    <div className='add-procedure appointmentCard'>
+                    <div className='appointmentCard1'>
+                            <h3 className='book__title'>TOOTH CHART</h3>
+                        <div className='toothchart__type'>
+                            <label htmlFor='tooth_type'>Tooth Type: </label>
+                            <select id="tooth_type" name="tooth_type"  value={ "" }  onChange={handleChange} >
+                                <option value="Adult" selected>Adult</option>
+                                <option value="Child">Child</option>
+                            </select>
+                        </div>
+                       
+
+                    </div>
+                    <div className='add-procedure appointmentCard1'>
                         <h3 className='book__title'>ADD PROCEDURE DETAILS</h3>
                         <form onSubmit={handleSubmit} style={{display: 'relative'}}>
                             <div className='book__row'>

@@ -102,7 +102,19 @@ main{
 
 }
 
+.appointmentCard1{
+    width: 40%;
+    margin: 10px;
+    background-color: var(--blue-darker-teal);
+    flex-direction: column;
+    border-radius: 20px;
+    color: var(--white);
+    padding: 1.5rem 2.5rem;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
 .appointmentCard{
+    width: 60%;
     background-color: var(--blue-darker-teal);
     flex-direction: column;
     border-radius: 20px;
@@ -272,6 +284,12 @@ input[type="submit"]:hover{
    width: 60px;
    color: var(--gray);
    
+}
+
+.toothchart__type{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;    
 }
 
 
