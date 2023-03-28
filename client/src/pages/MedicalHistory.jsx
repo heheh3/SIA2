@@ -106,18 +106,6 @@ const MedicalHistory = () => {
         }
       }, []);
 
-    //   useEffect (() => {
-
-    //     axios.get(`http://localhost:5000/medicalhistory/get/${currentUser.user_id}`)
-    //     .then(response => {
-    //       const {user_id, heartAilment, heartAilmentChecked, allergies, allergiesChecked, hospitalAdmission, hospitalAdmissionChecked, operation, operationChecked, selfMedication, selfMedicationChecked, tumor, tumorChecked, otherIllnesses, otherIllnessesChecked, pregnant, pregnantChecked } = response.data[0];
-    
-    //       setData({user_id: user_id,heartAilment: heartAilment, heartAilmentChecked: heartAilmentChecked, allergies: allergies, allergiesChecked: allergiesChecked, hospitalAdmission:hospitalAdmission, hospitalAdmissionChecked:hospitalAdmissionChecked, operation:operation, operationChecked:operationChecked, selfMedication:selfMedication, selfMedicationChecked : selfMedicationChecked, tumor : tumor, tumorChecked:tumorChecked, otherIllnesses:otherIllnesses, otherIllnessesChecked:otherIllnessesChecked, pregnant:pregnant, pregnantChecked:pregnantChecked}); 
-    //     }).catch(error => {
-    //       console.error(error);
-    //     });
-          
-    //   }, [currentUser.user_id])
   
     return (
       <div>
