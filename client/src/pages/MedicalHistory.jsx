@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import ProfileNavbar from './ProfileNavbar'
 import PatientNavbar from './PatientNavbar'
 import "../css/Profile.css";
