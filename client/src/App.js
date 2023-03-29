@@ -74,6 +74,8 @@ function App() {
 
 
           <Route path='/admin/walk-in' element={<Walkin />} /> 
+          <Route path='/admin/toothchart' element={<ProceduresAdd />} /> 
+
 
           <Route path="/appointment" element={<Appointment />} />
           <Route path='/aboutUs' element={<AboutUs />} />

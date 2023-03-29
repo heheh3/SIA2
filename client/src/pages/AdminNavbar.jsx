@@ -20,6 +20,7 @@ export default function AdminNavbar() {
                 <li><NavLink to="/admin/user">PATIENT</NavLink></li>
                 <li><NavLink to="/admin/walk-in">WALK IN</NavLink></li>
                 <li><NavLink to="/admin/inventory">INVENTORY</NavLink></li>
+                <li><NavLink to="/admin/toothchart">TOOTHCHART</NavLink></li>
             </ul>
             <ul>
                 <FaUserNurse className='User-Icon' />
