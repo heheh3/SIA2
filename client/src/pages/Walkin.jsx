@@ -45,9 +45,6 @@ const Walkin = () => {
     const [FullNameFocus, setFullNameFocus]  = useState(false)
 
     
-
-    const [matchFocus, setMatchFocus]  = useState(false)
-
     const [errMsg, setErrMsg]  = useState("")
 
     const userRef = useRef();
