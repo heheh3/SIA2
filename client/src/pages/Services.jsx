@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import axios from 'axios';
 import AdminNavbar from './AdminNavbar';
 import '../css/Home.css';
+import { FaPlusCircle  } from "react-icons/fa";
 import { toast } from 'react-toastify';
 
 const Services = () => {
@@ -37,10 +38,19 @@ const Services = () => {
             <AdminNavbar />
         </header>
         <body className='pending_body'>
+                     
             <div className='pending_body-flex'>
-                <div className='search__bar-container'>
-                    <input type='text' className='search__bar' value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder="Search Here..."/>
-                    <span className='search__bar-icon'><FaSearch className="bar-icon"/></span>
+            <div className='employee__header'>
+                  <div className='add__ebutton'>
+                      <Link to="">
+                        <button className='add__ebutton-style'><span>ADD SERVICES</span> <FaPlusCircle className="add-icon"/></button>
+                      </Link>
+                     
+                  </div>
+                  <div className='search__bar-container'>
+                      <input type='text' className='search__bar' value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder="Search Here..."/>
+                      <span className='search__bar-icon'><FaSearch className="bar-icon"/></span>
+                  </div>
                 </div>
                 <table className='styled-table'>
                     <thead>
@@ -65,7 +75,7 @@ const Services = () => {
                             return searchValue.toLowerCase() === '' || item.b_date.toLowerCase().includes(searchValue)  || item.a_ID.toString().includes(searchValue)
                                 || item.b_note.toLowerCase().includes(searchValue) || item.b_time.toLowerCase().includes(searchValue) 
                                 || item.b_procedure.toLowerCase().includes(searchValue) || item.patientID.toString().includes(searchValue) 
-                                || item.b_status.toLowerCase().includes(searchValue) || item.b_paymentStatus.toLowerCase().includes(searchValue)
+                                || item.b_status.toLowerCase().includes(searchValue) || item.b_paymentStatus.toLowerCase().includes(searchValue) || item.p_fullname.toLowerCase().includes(searchValue)
                                 
                         }).map((item, index)=>{
                             return(
