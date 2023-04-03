@@ -17,8 +17,10 @@ export const inventory_get = (req, res) =>{
         const i_serial = req.body.i_serial;
         const i_place = req.body.i_place;
         const i_datepurchased = req.body.i_datepurchased;
+        const i_expirydate = req.body.i_expirydate;
         const i_quantity = req.body.i_quantity;
         const i_price= req.body.i_price;
+        const i_quantityOH = req.body.i_quantityOH;
         const i_totalprice= req.body.i_totalprice;
         console.log(i_item)
         console.log(i_room)
@@ -35,10 +37,12 @@ export const inventory_get = (req, res) =>{
         console.log(i_totalprice)
 
         const date = parseISO(i_datepurchased);
+        const date2 = parseISO(i_expirydate);
         const formattedDate = format(date, 'EEE, MMM dd, yyyy');
+        const formattedDate2 = format(date2, 'EEE, MMM dd, yyyy');
 
-        const sqlInsert = "INSERT INTO inventory_db (i_item, i_room, i_model, i_serial, i_place, i_datepurchased, i_quantity, i_price, i_totalprice) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        db.query(sqlInsert, [i_item, i_room, i_model, i_serial, i_place, formattedDate, i_quantity, i_price, i_totalprice], (err, result) =>{
+        const sqlInsert = "INSERT INTO inventory_db (i_item, i_room, i_model, i_serial, i_place, i_datepurchased, i_expirydate, i_quantity, i_price, i_quantityOH, i_totalprice) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        db.query(sqlInsert, [i_item, i_room, i_model, i_serial, i_place, formattedDate, formattedDate2, i_quantity, i_price, i_quantityOH, i_totalprice], (err, result) =>{
             if (err){
                 console.log(err);
                 res.status(500).send("Error adding inventory item");
@@ -88,16 +92,20 @@ export const inventory_updateInventory = (req, res) =>{
     const i_serial = req.body.i_serial;
     const i_place = req.body.i_place;
     const i_datepurchased = req.body.i_datepurchased;
+    const i_expirydate = req.body.i_expirydate;
     const i_quantity = req.body.i_quantity;
     const i_price= req.body.i_price;
+    const i_quantityOH = req.body.i_quantityOH;
     const i_totalprice= req.body.i_totalprice;
 
     const date = new Date(i_datepurchased);
+    const date2 = new Date(i_expirydate);
     const formattedDate = format(date, 'EEE, MMM dd, yyyy');
+    const formattedDate2 = format(date2, 'EEE, MMM dd, yyyy');
 
    
-    const sqlUpdate = "UPDATE inventory_db SET i_item = ?, i_room = ?, i_model = ?, i_serial = ?, i_place = ?, i_datepurchased = ?, i_quantity = ?, i_price = ?, i_totalprice = ? WHERE inventoryID = ?";
-    db.query(sqlUpdate, [i_item, i_room, i_model, i_serial, i_place, formattedDate, i_quantity, i_price, i_totalprice, inventoryID] ,(error, result)=>{
+    const sqlUpdate = "UPDATE inventory_db SET i_item = ?, i_room = ?, i_model = ?, i_serial = ?, i_place = ?, i_datepurchased = ?, i_expirydate = ?, i_quantity = ?, i_price = ?, i_quantityOH = ?, i_totalprice = ? WHERE inventoryID = ?";
+    db.query(sqlUpdate, [i_item, i_room, i_model, i_serial, i_place, formattedDate, formattedDate2, i_quantity, i_price, i_quantityOH, i_totalprice, inventoryID] ,(error, result)=>{
         if(error){
             console.log(error)
         }

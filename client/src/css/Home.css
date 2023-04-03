@@ -489,3 +489,7 @@ table.styled-table input:focus {
 .plus {
     margin-left: 7px;
   }
+
+.expired_header{
+    color: #1EBEB6;
+}

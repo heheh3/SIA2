@@ -13,21 +13,23 @@ const initialState = {
     i_serial: "",
     i_place: "",
     i_datepurchased: "",
+    i_expirydate: "",
     i_quantity: 0,
     i_price: 0,
 }
 
 const InventoryAdd = () => {
     const [state, setState] = useState(initialState);
-    const {i_item, i_room, i_model, i_serial, i_place, i_datepurchased, i_quantity, i_price} = state
+    const {i_item, i_room, i_model, i_serial, i_place, i_datepurchased, i_expirydate, i_quantity, i_price} = state
     const navigate = useNavigate();
 
     const handleSubmit = (e) =>{
       e.preventDefault();
 
       const i_totalprice = i_quantity * i_price;
+      const i_quantityOH = i_quantity;
 
-      if (!i_item || !i_room || !i_model || !i_serial || !i_place || !i_datepurchased || !i_quantity || !i_price){
+      if (!i_item || !i_room || !i_model || !i_serial || !i_place || !i_datepurchased || !i_expirydate || !i_quantity || !i_price){
           toast.error("Please provide value into each input field");
    
       } else{
@@ -38,8 +40,10 @@ const InventoryAdd = () => {
               i_serial,
               i_place,
               i_datepurchased,
+              i_expirydate,
               i_quantity,
               i_price,
+              i_quantityOH,
               i_totalprice,
           })
           .then(()=>{
@@ -60,9 +64,6 @@ const InventoryAdd = () => {
 
             // console.log(i_price)
             // console.log(i_totalprice)
-
-   
-        
         }
       }
   
@@ -160,6 +161,24 @@ const InventoryAdd = () => {
                             placeholderText="mm/dd/yyyy"
                             showYearPicker
                             value={i_datepurchased || ""}  
+
+                        />
+                        </div>
+                    </div>
+
+                    <div className='employee__form-row'>
+                        <label htmlFor='e_birthdate'>Expiry Date: </label>
+                        <div className='date__container'>
+                        <DatePicker
+                            id='i_expirydate'
+                            name='i_expirydate'
+                            className='datepicker__style'
+                            selected={i_expirydate}
+                            onChange={(date) => handleChange({target: {name: 'i_expirydate', value: date}})}
+                            dateFormat="MM/dd/yyyy"
+                            placeholderText="mm/dd/yyyy"
+                            showYearPicker
+                            value={i_expirydate || ""}  
 
                         />
                         </div>

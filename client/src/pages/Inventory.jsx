@@ -69,7 +69,9 @@ const Inventory = () => {
   const handleQuantityOHChange = (id, value) => {
     const newData = data.map((item) => {
       if (item.inventoryID === id) {
-        const updatedItem = { ...item, i_quantityOH: item.i_quantityOH + value };
+        const updatedQuantityOH = item.i_quantityOH + value;
+        const newQuantityOH = updatedQuantityOH < 0 ? 0 : updatedQuantityOH;
+        const updatedItem = { ...item, i_quantityOH: newQuantityOH };
         //updatedItem.i_totalprice = updatedItem.i_quantity * updatedItem.i_price; // calculate the new total price
         return updatedItem;
       } else {
@@ -93,7 +95,7 @@ const Inventory = () => {
   
 
   useEffect(() => {
-    const total = data.reduce((sum, item) => sum + item.i_totalprice, 0);
+    const total = data.reduce((sum, item) => sum + Number(item.i_totalprice), 0);
     setTotalPrice(total);
   }, [data]);
 
@@ -188,13 +190,12 @@ const Inventory = () => {
                               <input type="text" className="i_inputs" value={item.i_quantity} onChange={(e) => handleInputChange(item.inventoryID, 'i_quantity', parseInt(e.target.value))} />
                             </td>
                             <td>
-                              <input type="text" className="i_inputs" step="0.01" value={item.i_price} onChange={(e) => handleInputChange(item.inventoryID, 'i_price', parseFloat(e.target.value))} />
+                              <input type="number" className="i_inputs" step="0.01" value={item.i_price} onChange={(e) => handleInputChange(item.inventoryID, 'i_price', parseFloat(e.target.value))} />
                             </td>
                             <td>
                             <div className='quantity-container'>
                               <button className='quantity-btn minus' onClick={() => handleQuantityOHChange(item.inventoryID, -1)}> - </button>
-                              <input type="text" className="i_inputs" value={item.i_quantityOH} onChange={(e) => handleInputChange(item.inventoryID, 'i_quantityOH', parseInt(e.target.value))} />
-                              <button className='quantity-btn plus'onClick={() => handleQuantityOHChange(item.inventoryID, 1)}> + </button>
+                              <input type="text" className="i_inputs"  value={item.i_quantityOH} onChange={(e) => handleInputChange(item.inventoryID, 'i_quantityOH', parseInt(e.target.value))} />
                             </div>
                             </td>
                             <td>{item.i_totalprice}</td>
@@ -251,7 +252,7 @@ const Inventory = () => {
               </table>
               <div className='employee__header'>
                 <div className='add__ebutton'>
-                      <h2 className='expired_header'> Nearly Running Out Items</h2>
+                      <h2 className='expired_header'> Nearly Running Out Items <code>(10 & Below Quantity)</code> </h2>
                 </div>
             </div>
               <table className='styled-table'>
