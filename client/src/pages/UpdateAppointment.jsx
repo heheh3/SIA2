@@ -119,7 +119,7 @@ const UpdateAppointment = () => {
           
           toast.success("Appointment Updated Successfully");
           if(b_status === "In Progress"){
-            setTimeout(()=> navigate(`/admin/services/${id}`),500)
+            setTimeout(()=> navigate(`/admin/services/procedures/${id}`),500)
           }else{
             setTimeout(()=> navigate("/admin/appointment"),500)
           }
@@ -250,9 +250,9 @@ const handleChange = (event) => {
               </div>
 
               <div className='back__update-buttons'>
-                <input type="submit" value="UPDATE" className='btn-update' />
+                <input type="submit" value="SAVE" className='btn-update' />
                 <Link to={`/admin/appointment/procedures/${id}`} className="button-a">
-                  <button className='btn-back1'>PROCEDURES</button>
+                  <button className='btn-back1'>SAVE AND NEXT</button>
                 </Link>
               </div>
            
