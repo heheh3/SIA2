@@ -1,0 +1,310 @@
+
+.toothchart__image-container {
+    position: relative;
+    margin-top: 50px;
+    margin-bottom: 20px;
+  }
+  
+  .toothchart__image {
+    width: 80%;
+    height: auto;
+    top: 0;
+    left: 0;
+    object-fit: contain;
+  }
+  
+  .toothchart__number {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    font-size: 0.8vw;
+    color: white;
+    background-color: rgb(233, 142, 142);
+    text-align: center;
+    line-height: 25px;
+  }
+
+  .toothchart__number:hover {
+    transform: scale(1.2);
+  }
+
+  .toothchart__number:hover::before {
+    content: attr(data-label);
+    position: absolute;
+    top: -5px;
+    right: 110%;
+    background-color: #ffffff;
+    color: rgb(117, 206, 187);
+    font-size: 9px;
+    padding: 3px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  .toothchart__number.selected {
+    background-color: #6fe473;
+    color: white;
+  }
+  
+  .toothchart__number--1 {
+    top: 11.6vw;
+    left: 9vw;
+  }
+
+  .toothchart__number--2 {
+    top: 9.6vw;
+    left: 8.6vw;
+  }
+  
+  .toothchart__number--3 {
+    top: 7.5vw;
+    left: 8.8vw;
+  }
+
+  .toothchart__number--4 {
+    top: 5.6vw;
+    left: 9.5vw;
+  }
+
+  .toothchart__number--5 {
+    top: 3.9vw;
+    left: 10.4vw;
+  }
+
+  .toothchart__number--6 {
+    top: 2.1vw;
+    left: 11.7vw;
+  }
+
+  .toothchart__number--7 {
+    top: .6vw;
+    left: 13.4vw;
+  }
+
+  .toothchart__number--8 {
+    top: -.5vw;
+    left: 15.6vw;
+  }
+
+  .toothchart__number--9 {
+    top: -.5vw;
+    left: 18.3vw;
+  }
+
+  .toothchart__number--10 {
+    top: .4vw;
+    left: 21vw;
+  }
+  
+  .toothchart__number--11 {
+    top: 1.7vw;
+    left: 22.4vw;
+  }
+
+  .toothchart__number--12 {
+    top: 3.3vw;
+    left: 23.8vw;
+  }
+
+  .toothchart__number--13 {
+    top: 5vw;
+    left: 24.7vw;
+  }
+
+  .toothchart__number--14 {
+    top: 7vw;
+    left: 25.4vw;
+  }
+
+  .toothchart__number--15 {
+    top: 9vw;
+    left: 25.8vw;
+  }
+
+  .toothchart__number--16 {
+    top: 11.2vw;
+    left: 25.6vw;
+  }
+
+  .toothchart__number--17 {
+    top: 16vw;
+    left: 25.5vw;
+    }
+  
+  .toothchart__number--18 {
+    top: 18vw;
+    left: 25.7vw;
+    }
+    
+    .toothchart__number--19 {
+    top: 20.2vw;
+    left: 25.4vw;
+    }
+    
+    .toothchart__number--20 {
+    top: 22.4vw;
+    left: 24.7vw;
+    }
+    
+    .toothchart__number--21 {
+    top: 24.3vw;
+    left: 23.2vw;
+    }
+    
+    .toothchart__number--22 {
+    top: 26vw;
+    left: 21.7vw;
+    }
+    
+    .toothchart__number--23 {
+    top: 27.2vw;
+    left: 19.9vw;
+    }
+    
+    .toothchart__number--24 {
+    top: 27.8vw;
+    left: 18vw;
+    }
+    
+    .toothchart__number--25 {
+    top: 27.8vw;
+    left: 16.4vw;
+    }
+    
+    .toothchart__number--26 {
+    top: 27.2vw;
+    left: 14.6vw;
+    }
+    
+    .toothchart__number--27 {
+    top: 26.1vw;
+    left: 13vw;
+    }
+    
+    .toothchart__number--28 {
+    top: 24.5vw;
+    left: 11.6vw;
+    }
+    
+    .toothchart__number--29 {
+    top: 22.6vw;
+    left: 10.2vw;
+    }
+    
+    .toothchart__number--30 {
+    top: 20.7vw;
+    left: 9.4vw;
+    }
+    
+    .toothchart__number--31 {
+    top: 18.6vw;
+    left: 9vw;
+    }
+    
+    .toothchart__number--32 {
+    top: 16.2vw;
+    left: 9vw;
+    }
+
+    /*CHILD TEETH*/
+
+    .toothchart__number--a {
+      top: 10.2vw;
+      left: 9vw;
+    }
+  
+    .toothchart__number--b {
+      top: 7.1vw;
+      left: 9.8vw;
+    }
+    
+    .toothchart__number--c {
+      top: 5vw;
+      left: 11vw;
+    }
+  
+    .toothchart__number--d {
+      top: 3vw;
+      left: 13.1vw;
+    }
+  
+    .toothchart__number--e {
+      top: 2.1vw;
+      left: 15.7vw;
+    }
+  
+    .toothchart__number--f {
+      top: 2.1vw;
+      left: 18.3vw;
+    }
+  
+    .toothchart__number--g {
+      top: 3vw;
+      left: 21.4vw;
+    }
+  
+    .toothchart__number--h {
+      top: 5vw;
+      left: 23.3vw;
+    }
+  
+    .toothchart__number--i {
+      top: 7.1vw;
+      left: 24.5vw;
+    }
+  
+    .toothchart__number--j {
+      top: 10.2vw;
+      left: 25.5vw;
+    }
+
+    .toothchart__number--t {
+      top: 17.2vw;
+      left: 9vw;
+    }
+    
+    .toothchart__number--s {
+      top: 20vw;
+      left: 9.9vw;
+    }
+    
+    .toothchart__number--r {
+      top: 22.2vw;
+      left: 11.3vw;
+    }
+    
+    .toothchart__number--q {
+      top: 24.1vw;
+      left: 13.4vw;
+    }
+    
+    .toothchart__number--p {
+      top: 25.2vw;
+      left: 15.9vw;
+    }
+    
+    .toothchart__number--o {
+      top: 25.2vw;
+      left: 18.5vw;
+    }
+    
+    .toothchart__number--n {
+      top: 24vw;
+      left: 21.2vw;
+    }
+    
+    .toothchart__number--m {
+      top: 22.1vw;
+      left: 23.3vw;
+    }
+    
+    .toothchart__number--l {
+      top: 19.9vw;
+      left: 24.5vw;
+    }
+    
+    .toothchart__number--k {
+      top: 17.2vw;
+      left: 25.5vw;
+    }
