@@ -21,7 +21,7 @@ const initialState = {
 
 
 
-const UpdateAppointment = () => {
+const UpdateService = () => {
   const [state, setState] = useState(initialState);
   const {b_date, b_time, b_procedure, b_note, b_status, b_paymentStatus, procedFee, b_update} = state;
   const {id} = useParams();
@@ -267,4 +267,4 @@ const handleChange = (event) => {
 }
 
 
-export default UpdateAppointment
+export default UpdateService
