@@ -131,7 +131,7 @@ const Appointment = () => {
                 <a href=''><FaLocationArrow /> Sampaguita St., Mintal 8000, Davao City, Philippines</a>  
             </div>
           </div>  
-          <div className='home appointmentCard'>
+          <div className='home appointmentCard1'>
             <h3 className='book__title'>BOOK AN APPOINTMENT</h3>
             <p>As soon as you as you contact our expert team, 
                 we will get back to you <br /> as soon as possibe! Book
