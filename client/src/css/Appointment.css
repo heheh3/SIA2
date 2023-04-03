@@ -160,8 +160,23 @@ textarea{
     border-radius: 10px;
     padding: 10px;
     border: none;
+
     color: var(--gray);
 }
+
+input[type="text"].toothNoStyle,
+input[type="number"].procedFee, 
+select, 
+textarea{
+    width: 70%;
+    height: 50px;
+    margin: 10px 0;
+    border-radius: 10px;
+    padding: 10px;
+    border: none;
+    color: var(--gray);
+}
+
 
 textarea{
     resize: none;

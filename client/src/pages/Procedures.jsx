@@ -61,10 +61,15 @@ const Procedures = () => {
                 <AdminNavbar />
             </header>
             <body className='pending_body'>
-                <Link to={`/admin/appointment/update/${id}`}>
-                    <button className='back__procedures'>Back</button>
-                </Link>
-           
+                <div className='flex--links'> 
+                    <Link to={`/admin/services`}>
+                        <button className='back__procedures'>Back</button>
+                    </Link>
+                    <Link to={`/admin/services/update/${id}`}>
+                        <button className='back__procedures'>SAVE AND NEXT</button>
+                    </Link>
+                </div>
+             
                 <h1 className='h1__apppointment'>Apppointment Details</h1>
                 <div className='pending_body-flex'>
                     <table className='styled-table'>
@@ -107,7 +112,7 @@ const Procedures = () => {
                 <CancelledAppointment />
                 <h1 className='h1__apppointment'>Procedure Details</h1>
                 <div className='add_pcontainer'>
-                    <Link to={`/admin/appointment/procedures/add/${id}`}>
+                    <Link to={`/admin/services/procedures/add/${id}`}>
                         <button className='add__procedures-btn'><span>ADD PROCEDURE</span></button>
                     </Link>   
                      

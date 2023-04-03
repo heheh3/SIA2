@@ -129,7 +129,7 @@ const ProceduresAdd = () => {
                 <AdminNavbar />
             </header>
             <body>
-                <Link to={`/admin/appointment/procedures/${id}`}>
+                <Link to={`/admin/services/procedures/${id}`}>
                     <button className='back__procedures'><span>Back</span></button>
                 </Link>           
                 <main className='display--flex m-0'>

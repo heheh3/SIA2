@@ -143,7 +143,7 @@ const ProceduresUpdate = () => {
                 <AdminNavbar />
             </header>
             <body>
-              <Link to={`/admin/appointment/procedures/${data.a_ID}`}>
+              <Link to={`/admin/services/procedures/${data.a_ID}`}>
                     <button className='back__procedures'><span>Back</span></button>
                 </Link>        
                 <main className='display--flex m-0'>

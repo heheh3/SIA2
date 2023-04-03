@@ -118,12 +118,8 @@ const UpdateService = () => {
           // toast.success(response.data.b_status)
           
           toast.success("Appointment Updated Successfully");
-          if(b_status === "In Progress"){
-            setTimeout(()=> navigate(`/admin/services/${id}`),500)
-          }else{
-            setTimeout(()=> navigate("/admin/appointment"),500)
-          }
-           
+          setTimeout(()=> navigate(`/admin/services/`),500)
+      
           
       
         
@@ -154,7 +150,7 @@ const handleChange = (event) => {
         </Link>
         <main className='display--flex m-0'>
           <div className='update appointmentCard'>
-            <h3 className='book__title'>UPDATE/ VIEW AN APPOINTMENT</h3>
+            <h3 className='book__title'>UPDATE SERVICES</h3>
 
             <form onSubmit={handleSubmit} style={{display: 'relative'}}>
               <div className='book__row'>
@@ -171,7 +167,7 @@ const handleChange = (event) => {
                   filterDate={date => date.getDay() !== 0}
                   placeholderText="Select a date"
                   value={b_date  || ""}     
-               
+                  disabled
                   
             
                 />
@@ -183,7 +179,7 @@ const handleChange = (event) => {
 
             <div className='book__row'> 
                 <label htmlFor='time'>TIME: </label>
-                <select name="b_time" id="b_time" value={b_time || ""} onChange={handleChange} >
+                <select name="b_time" id="b_time" value={b_time || ""} onChange={handleChange} disabled >
                         <option value="" disabled selected>Select your option</option>
                         <option value="8:00AM" disabled={time.includes('8:00AM')} >08:00 AM</option>
                         <option value="9:00AM" disabled={time.includes('9:00AM')}>09:00 AM</option>
@@ -199,7 +195,7 @@ const handleChange = (event) => {
 
               <div className='book__row'>
                 <label htmlFor='procedure'>PROCEDURE: </label>
-                <select id="b_procedure" name="b_procedure"  value={b_procedure || "" }  onChange={handleChange} >
+                <select id="b_procedure" name="b_procedure"  value={b_procedure || "" }  onChange={handleChange} disabled>
                         <option value="" disabled selected>Select your option</option>
                         <option value="Fillings">Fillings</option>
                         <option value="Root Canal">Root Canal</option>
@@ -219,7 +215,7 @@ const handleChange = (event) => {
 
               <div className='book__row'>
                 <label htmlFor='note'>NOTES: </label>
-                <textarea for="note" id="b_note" name="b_note" value={b_note || "" }  onChange={handleChange} placeholder='Add some notes... (optional)' />
+                <textarea for="note" id="b_note" name="b_note" value={b_note || "" }  onChange={handleChange} placeholder='Add some notes... (optional)' disabled/>
  
               </div> 
 
@@ -227,19 +223,16 @@ const handleChange = (event) => {
                 <label htmlFor='procedure'>STATUS: </label>
                 <select id="b_status" name="b_status"  value={b_status || "" }  onChange={handleChange} >
                         <option value="" disabled selected>Select your option</option>
-                        <option value="In Progress">In Progress</option>
                         <option value="Completed">Completed</option>
                         <option value="Rescheduled">Rescheduled</option>
                         <option value="R-Completed">R-Completed</option>
-                        <option value="Pending">Pending</option>
-                        <option value="Cancelled">Cancelled</option>
-                        <option value="Walk-In">Walk-In</option>
+                  
                 </select>
               </div>
 
               <div className='book__row'>
                 <label htmlFor='payment'>PAYMENT: </label>
-                <select id="b_paymentStatus" name="b_paymentStatus"  value={b_paymentStatus || "" }  onChange={handleChange} >
+                <select id="b_paymentStatus" name="b_paymentStatus"  value={b_paymentStatus || "" }  onChange={handleChange} disabled>
                         <option value="" disabled selected>Select your option</option>
                         <option value="EMI">EMI</option>
                         <option value="Fully-Paid">Fully-Paid</option>
@@ -250,9 +243,9 @@ const handleChange = (event) => {
               </div>
 
               <div className='back__update-buttons'>
-                <input type="submit" value="UPDATE" className='btn-update' />
-                <Link to={`/admin/appointment/procedures/${id}`} className="button-a">
-                  <button className='btn-back1'>PROCEDURES</button>
+                <input type="submit" value="SAVE" className='btn-update' />
+                <Link to={`/admin/services/procedures/${id}`} className="button-a">
+                  <button className='btn-back1'>SAVE AND NEXT</button>
                 </Link>
               </div>
            

@@ -35,6 +35,7 @@ import ProceduresUpdate from './pages/ProceduresUpdate';
 import Inventory from './pages/Inventory';
 import InventoryAdd from './pages/InventoryAdd';
 import Services from './pages/Services';
+import UpdateService from './pages/UpdateService';
 
 
 
@@ -48,7 +49,7 @@ function App() {
           <Route path="/admin" element={<AdminNavbar />} />
           <Route path="/admin/employee" element={<Employee />} />
           <Route path="/admin/appointment/update/:id" element={<UpdateAppointment />} />
-          <Route path='/admin/appointment/procedures/:id' element={<Procedures />} />
+          <Route path='/admin/services/procedures/:id' element={<Procedures />} />
           <Route path='/admin/appointment/cancelled/:id' element={<CancelledUpdate />} />
           <Route path='/admin/appointment' element={<PendingAppointment />} />
           <Route path='/admin/completed/update/:id' element={<CompletedUpdate />} />
@@ -64,8 +65,8 @@ function App() {
           <Route path='/admin/user/appointment-history/:id' element={<AdminPatientHistory />} />
           <Route path='/admin/user/book/:id' element={<PatientBook />} />
           
-          <Route path='/admin/appointment/procedures/add/:id' element={<ProceduresAdd />} /> 
-          <Route path='/admin/appointment/procedures/update/:id' element={<ProceduresUpdate />} /> 
+          <Route path='/admin/services/procedures/add/:id' element={<ProceduresAdd />} /> 
+          <Route path='/admin/services/procedures/update/:id' element={<ProceduresUpdate />} /> 
 
           <Route path='/admin/user' element={<PatientTable />} />
           <Route path='/allergies' element={<Allergies />} /> 
@@ -76,6 +77,7 @@ function App() {
 
           <Route path='/admin/walk-in' element={<Walkin />} /> 
           <Route path='/admin/services' element={<Services />} /> 
+          <Route path='/admin/services/update/:id' element={<UpdateService />} /> 
 
 
           <Route path="/appointment" element={<Appointment />} />
