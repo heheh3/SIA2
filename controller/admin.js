@@ -205,12 +205,13 @@ export const appointment_addProcedures = (req, res) =>{
     const b_procedure = req.body.b_procedure;
     const b_note = req.body.b_note;
     const toothNo = req.body.toothNo;
+    const toothType = req.body.toothType;
     const procedFee = req.body.procedFee;
     console.log(procedFee)
 
 
-    const sqlInsert = "INSERT INTO procedures_db (a_ID, b_procedure, b_note, toothNo, procedFee) VALUES (?, ?, ?, ?, ?)";
-    db.query(sqlInsert, [Number(a_ID), b_procedure, b_note, toothNo, Number(procedFee)], (err, result) =>{
+    const sqlInsert = "INSERT INTO procedures_db (a_ID, b_procedure, b_note, toothNo, toothType, procedFee) VALUES (?, ?, ?, ?, ?, ?)";
+    db.query(sqlInsert, [Number(a_ID), b_procedure, b_note, toothNo, toothType, Number(procedFee)], (err, result) =>{
         if (err){
             console.log(err);
         }else {
@@ -275,11 +276,12 @@ export const procedure_update = (req, res) =>{
     const b_procedure = req.body.b_procedure;
     const b_note = req.body.b_note;
     const toothNo = req.body.toothNo;
+    const toothType = req.body.toothType;
     const procedFee = req.body.procedFee;
     
 
-    const sqlUpdate = "UPDATE procedures_db SET b_procedure = ?, b_note = ?, toothNo = ?, procedFee = ? WHERE procedNum = ?";
-    db.query(sqlUpdate, [b_procedure, b_note, toothNo, procedFee, procedNum] ,(error, result)=>{
+    const sqlUpdate = "UPDATE procedures_db SET b_procedure = ?, b_note = ?, toothNo = ?, toothType = ?,  procedFee = ? WHERE procedNum = ?";
+    db.query(sqlUpdate, [b_procedure, b_note, toothNo, toothType, procedFee, procedNum] ,(error, result)=>{
         if(error){
             console.log(error)
         }

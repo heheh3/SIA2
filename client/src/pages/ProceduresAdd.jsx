@@ -13,14 +13,15 @@ const initialState = {
     a_ID: "",
     b_procedure: "",
     toothNo: "",
-    procedFee: ""
+    toothType: "Adult",
+    procedFee: "",
+
   }
 
 
 const ProceduresAdd = () => {
     const [state, setState] = useState(initialState);
-    const {a_ID, b_procedure, toothNo, procedFee} = state;
-    const [toothType, setToothType] = useState("Adult");
+    const {a_ID, b_procedure, toothNo, toothType, procedFee} = state;
     const [selectedNumbers, setSelectedNumbers] = useState([]);
     const [notes, setNotes] = useState({});
     const [showNoteInput, setShowNoteInput] = useState(false);
@@ -41,12 +42,13 @@ const ProceduresAdd = () => {
                 a_ID,
                 b_procedure,
                 b_note,
-                toothNo,  
+                toothNo,
+                toothType,  
                 procedFee
           })
           
             .then(()=>{
-                setState({a_ID: "", b_procedure: "", b_note: "", toothNo: "", procedFee: ""});
+                setState({a_ID: "", b_procedure: "", b_note: "", toothNo: "", toothType: "", procedFee: ""});
                 toast.success("Procedure Added Successfully");
                 setTimeout(()=> navigate(`/admin/appointment/procedures/${id}`),500)
             })
@@ -97,8 +99,7 @@ const ProceduresAdd = () => {
           const handleChange = (event) => {
             const { name, value } = event.target;
             setState({ ...state, [name]: value });
-            setToothType(event.target.value);
-            setSelectedNumbers([]);
+           
           };
 
     // const toothNumberAndNotes = Object.entries(notes)
@@ -123,10 +124,10 @@ const ProceduresAdd = () => {
                     <div className='appointmentCard1'>
                         <h3 className='book__title'>TOOTH CHART</h3>
                         <div className='toothchart__type'>
-                            <label htmlFor='tooth_type'>Tooth Type: </label>
-                            <select id="tooth_type" name="tooth_type" value={toothType} onChange={handleChange}>
-                            <option value="Adult">Adult</option>
-                            <option value="Child">Child</option>
+                            <label htmlFor='toothType'>Tooth Type: </label>
+                            <select id="toothType" name="toothType" value={toothType} onChange={handleChange}>
+                                <option value="Adult" selected>Adult</option>
+                                <option value="Child">Child</option>
                             </select>
                         </div>
                         <div className='toothchart__image-container'>
