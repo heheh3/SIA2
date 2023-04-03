@@ -34,6 +34,7 @@ import ProceduresAdd from './pages/ProceduresAdd';
 import ProceduresUpdate from './pages/ProceduresUpdate';
 import Inventory from './pages/Inventory';
 import InventoryAdd from './pages/InventoryAdd';
+import Services from './pages/Services';
 
 
 
@@ -74,7 +75,7 @@ function App() {
 
 
           <Route path='/admin/walk-in' element={<Walkin />} /> 
-          <Route path='/admin/services' element={<PendingAppointment />} /> 
+          <Route path='/admin/services' element={<Services />} /> 
 
 
           <Route path="/appointment" element={<Appointment />} />
