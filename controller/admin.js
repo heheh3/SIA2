@@ -44,7 +44,7 @@ export const appointment_post = (req, res) =>{
 }
 
 export const appointment_get = (req, res) =>{
-    const sqlGet = "SELECT * FROM booking_db as b JOIN users_db as u ON b.patientId = u.user_id WHERE NOT b_status = 'Completed' AND NOT b_status = 'Cancelled' AND NOT b_status = 'R-Completed' ORDER BY STR_TO_DATE(b_date,'%a, %b %d, %Y') ASC , STR_TO_DATE(b_time, '%h:%i%p') ASC";
+    const sqlGet = "SELECT * FROM booking_db as b JOIN users_db as u ON b.patientId = u.user_id WHERE NOT b_status = 'Completed' AND NOT b_status = 'Cancelled' AND NOT b_status = 'R-Completed' AND NOT b_status = 'In Progress' ORDER BY STR_TO_DATE(b_date,'%a, %b %d, %Y') ASC , STR_TO_DATE(b_time, '%h:%i%p') ASC";
 
     db.query(sqlGet, (error, result)=>{
         res.send(result);
@@ -53,7 +53,7 @@ export const appointment_get = (req, res) =>{
 
 
 export const services_get = (req, res) =>{
-    const sqlGet = "SELECT * FROM booking_db as b JOIN users_db as u ON b.patientId = u.user_id WHERE NOT b_status = 'Completed' AND NOT b_status = 'Cancelled' AND NOT b_status = 'R-Completed' AND NOT b_status = 'Pending' ORDER BY STR_TO_DATE(b_date,'%a, %b %d, %Y') ASC , STR_TO_DATE(b_time, '%h:%i%p') ASC";
+    const sqlGet = "SELECT * FROM booking_db as b JOIN users_db as u ON b.patientId = u.user_id WHERE NOT b_status = 'Completed' AND NOT b_status = 'Cancelled' AND NOT b_status = 'R-Completed' AND NOT b_status = 'Pending' AND NOT b_status = 'Rescheduled' ORDER BY STR_TO_DATE(b_date,'%a, %b %d, %Y') ASC , STR_TO_DATE(b_time, '%h:%i%p') ASC";
 
     db.query(sqlGet, (error, result)=>{
         res.send(result);
