@@ -34,8 +34,19 @@ const ProceduresAdd = () => {
 
     const handleSubmit = (e) =>{
         e.preventDefault();
+        // console.log(typeof(selectedNumbers))
+        // console.log(selectedNumbers)
+        // console.log((selectedNumbers).toString())
+        const toothNo = (selectedNumbers).toString()
+
         if (!b_procedure || !toothNo || !procedFee){
             toast.error("Please provide value into each input field");
+            toast.error(b_procedure)
+            toast.error(toothNo)
+            toast.error(procedFee)
+            toast.error(toothType)
+
+            
     
         } else{
             axios.post(`http://localhost:5000/admin/appointment/procedure/post/${id}`, {
@@ -99,8 +110,9 @@ const ProceduresAdd = () => {
           const handleChange = (event) => {
             const { name, value } = event.target;
             setState({ ...state, [name]: value });
-           
+
           };
+
 
     // const toothNumberAndNotes = Object.entries(notes)
     // .filter(([n, note]) => note !== "")
@@ -191,9 +203,9 @@ const ProceduresAdd = () => {
                         {showNoteInput && (
                             <div className='book__row'>
                                 <label htmlFor='note'>NOTES: </label>
-                                <textarea id="note" name="note" value={selectedNote} onChange={(e) => setSelectedNote(e.target.value)} placeholder='Add some notes for selected tooth... (optional)' />
-                                <button onClick={saveNote}>Save Note</button>
-                                <button onClick={cancelNote}>Cancel</button>
+                                <textarea style={{margin: "0 10px"}} id="note" name="note" value={selectedNote} onChange={(e) => setSelectedNote(e.target.value)} placeholder='Add some notes for selected tooth... (optional)' />
+                                <button className='btn-toothchart savenote' onClick={saveNote}>Save Note</button>
+                                <button className='btn-toothchart cancelnote' onClick={cancelNote}>Cancel</button>
                             </div>
                             )}
                     </div>
@@ -228,7 +240,7 @@ const ProceduresAdd = () => {
                         </div>
                             <div className='book__row'>
                                 <label htmlFor='toothNo'>TOOTH NUMBER: </label>
-                                <input type='text' className='toothNoStyle' for='toothNo' id='toothNo' name='toothNo' value={selectedNumbers.join(', ')}  onChange={() => {}} placeholder='Enter Tooth Position/Number' />
+                                <input type='text' className='toothNoStyle' for='toothNo' id='toothNo' name='toothNo' value={selectedNumbers}  onChange={handleChange} placeholder='Enter Tooth Position/Number' disabled/>
                             </div>
                             <div className='book__row'>
                                 <label htmlFor='b_note'>NOTES: </label>

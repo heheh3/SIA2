@@ -46,6 +46,26 @@
     background-color: #6fe473;
     color: white;
   }
+
+  .btn-toothchart{
+    border: none;
+    padding: 0.5rem;
+    width: 20%;
+    margin: 0.3rem;
+    cursor: pointer;
+    color: white;
+    font-size: 0.9rem;
+    border-radius: 10px;
+
+  }
+
+  .savenote{
+    background-color: #6fe473; 
+  }
+
+  .cancelnote{
+    background-color: red; 
+  }
   
   .toothchart__number--1 {
     top: 11.6vw;

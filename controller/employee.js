@@ -17,7 +17,6 @@ export const employee_post = (req, res) =>{
     const e_address = req.body.e_address;
     const e_birthdate = req.body.e_birthdate;
     const e_gender = req.body.e_gender;
-
     const date = parseISO(e_birthdate);
     const formattedDate = format(date, 'EEE, MMM dd, yyyy');
 
