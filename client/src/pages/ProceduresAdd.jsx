@@ -123,13 +123,7 @@ const ProceduresAdd = () => {
                 <main className='display--flex m-0'>
                     <div className='appointmentCard1'>
                         <h3 className='book__title'>TOOTH CHART</h3>
-                        <div className='toothchart__type'>
-                            <label htmlFor='toothType'>Tooth Type: </label>
-                            <select id="toothType" name="toothType" value={toothType} onChange={handleChange}>
-                                <option value="Adult" selected>Adult</option>
-                                <option value="Child">Child</option>
-                            </select>
-                        </div>
+                
                         <div className='toothchart__image-container'>
                             <img className='toothchart__image' src={selectedImage} alt={toothType} />
                             {toothType === 'Adult' ? (
@@ -225,10 +219,16 @@ const ProceduresAdd = () => {
                                         <option value="Others">Other(Add a Note)</option>
                                 </select>
                             </div>
-
+                            <div className='toothchart__type'>
+                            <label htmlFor='toothType'>Tooth Type: </label>
+                            <select id="toothType" name="toothType" value={toothType || ""} onChange={handleChange}>
+                                <option value="Adult" selected>Adult</option>
+                                <option value="Child">Child</option>
+                            </select>
+                        </div>
                             <div className='book__row'>
                                 <label htmlFor='toothNo'>TOOTH NUMBER: </label>
-                                    <input type='text' className='toothNoStyle' for='toothNo' id='toothNo' name='toothNo' value={selectedNumbers.join(', ')}  onChange={() => {}} placeholder='Enter Tooth Position/Number' />
+                                <input type='text' className='toothNoStyle' for='toothNo' id='toothNo' name='toothNo' value={selectedNumbers.join(', ')}  onChange={() => {}} placeholder='Enter Tooth Position/Number' />
                             </div>
                             <div className='book__row'>
                                 <label htmlFor='b_note'>NOTES: </label>
