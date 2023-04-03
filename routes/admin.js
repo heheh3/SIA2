@@ -18,7 +18,8 @@ import
         procedure_delete,
         procedure_update,
         procedure_get,
-        appointment_CancelledSum
+        appointment_CancelledSum,
+        services_get
 
     } 
 from "../controller/admin.js";
@@ -47,6 +48,8 @@ router.get("/admin/appointment/procedure/sum/:a_ID/", appointment_getSum);
 router.delete("/admin/appointment/procedure/delete/:procedNum", procedure_delete);
 router.get("/admin/appointment/procedure/procedure/get/:procedNum", procedure_get);
 router.put("/admin/appointment/procedure/update/:procedNum", procedure_update);
+
+router.get("/services/get", services_get);
 
 
 

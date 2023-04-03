@@ -11,7 +11,7 @@ const Services = () => {
     const [searchValue, setSearchValue] = useState('');
 
     const loadData = async () =>{
-        const response = await axios.get("http://localhost:5000/appointment/get");
+        const response = await axios.get("http://localhost:5000/services/get");
         setData(response.data);  
     }
 
