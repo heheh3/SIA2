@@ -5,11 +5,11 @@
     margin-bottom: 20px;
   }
   
-  .toothchart__image {
+  .toothchart__image{
     width: 80%;
     height: auto;
-    top: 0;
-    left: 0;
+    margin-left: 20px;
+    margin-top: 10px;
     object-fit: contain;
   }
   
