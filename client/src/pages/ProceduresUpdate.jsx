@@ -41,7 +41,9 @@ const ProceduresUpdate = () => {
           const {a_ID, b_procedure, b_note, toothNo, toothType, procedFee } = response.data[0];
           setData(response.data[0]);
           setState({a_ID: a_ID, b_procedure: b_procedure, b_note: b_note, toothNo: toothNo, toothType: toothType, procedFee: procedFee}); 
-          setSelectedNumbers(toothNo.split(','))
+          const toothSet = toothNo.split(',');
+          const newToothSet = toothSet.slice('')
+          setSelectedNumbers(newToothSet)
         }).catch(error => {
           console.error(error);
         });
