@@ -253,15 +253,7 @@ const handleChange = (event) => {
                      
                 )}
 
-              <div className='book__row'>
-                <label htmlFor='procedure'>STATUS: </label>
-                <select id="b_status" name="b_status"  value={b_status || "" }  onChange={handleChange} >
-                        <option value={b_status} selected>{b_status} --- Current Status</option>
-                        <option value="Completed">Completed</option>
-                        <option value="R-Completed">Rescheduled - Completed</option>
-                  
-                </select>
-              </div>
+       
 
               <div className='book__row'>
                 <label htmlFor='payment'>PAYMENT: </label>
