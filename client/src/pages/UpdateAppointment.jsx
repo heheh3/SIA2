@@ -219,17 +219,37 @@ const handleChange = (event) => {
  
               </div> 
 
-              <div className='book__row'>
-                <label htmlFor='procedure'>STATUS: </label>
-                <select id="b_status" name="b_status"  value={b_status || "" }  onChange={handleChange} >
-                        <option value={b_status} selected>{b_status} --- Current Status</option>
-                        <option value="In Progress">In Progress</option>
-                        <option value="Rescheduled">Rescheduled</option>
-                        <option value="R-In Progress">R - In Progress</option>
-                        <option value="Cancelled">Cancelled</option>
-        
-                </select>
-              </div>
+              {b_status === 'Rescheduled' ? (
+                <>
+                  <div className='book__row'>
+                  <label htmlFor='procedure'>STATUS: </label>
+                    <select id="b_status" name="b_status"  value={b_status || "" }  onChange={handleChange} >
+                            <option value={b_status} selected>{b_status} --- Current Status</option>
+                            <option value="R-In Progress">R - In Progress</option>
+                            <option value="Cancelled">Cancelled</option>
+            
+                    </select>
+                  </div>
+
+                </>
+                ) : (
+                <>
+                  <div className='book__row'>
+                  <label htmlFor='procedure'>STATUS: </label>
+                    <select id="b_status" name="b_status"  value={b_status || "" }  onChange={handleChange} >
+                            <option value={b_status} selected>{b_status} --- Current Status</option>
+                            <option value="In Progress">In Progress</option>
+                            <option value="Rescheduled">Rescheduled</option>
+                            <option value="Cancelled">Cancelled</option>
+            
+                    </select>
+                  </div>
+
+                </>
+                     
+                )}
+
+             
 
               <div className='book__row'>
                 <label htmlFor='payment'>PAYMENT: </label>

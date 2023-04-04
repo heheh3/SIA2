@@ -99,7 +99,7 @@ export const appointment_updateUser = (req, res) =>{
     const b_update = (new Date()).toISOString();
     let procedFee = 0;
 
-    if (b_status === "Cancelled" || b_status === "Rescheduled" || b_status === "R-Completed"){
+    if (b_status === "Cancelled" || b_status === "Rescheduled" || b_status === "R-Completed" ||  b_status === "R-In Progress"){
         procedFee = 100
     } else{
         procedFee = 0
