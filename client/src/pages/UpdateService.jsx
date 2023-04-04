@@ -119,10 +119,9 @@ const UpdateService = () => {
           
           toast.success("Appointment Updated Successfully");
           if(b_status === "In Progress"){
+            setTimeout(()=> navigate(`/admin/services/procedures/${id}`),500)
+          } else
             setTimeout(()=> navigate(`/admin/completed/procedures/${id}`),500)
-          }else{
-            setTimeout(()=> navigate("/admin/completed"),500)
-          }
            
 
       
@@ -223,15 +222,43 @@ const handleChange = (event) => {
                 <label htmlFor='note'>NOTES: </label>
                 <textarea for="note" id="b_note" name="b_note" value={b_note || "" }  onChange={handleChange} placeholder='Add some notes... (optional)' disabled/>
  
-              </div> 
+              </div>
+
+                {b_status === 'R-In Progress' ? (
+                <>
+                  <div className='book__row'>
+                  <label htmlFor='procedure'>STATUS: </label>
+                    <select id="b_status" name="b_status"  value={b_status || "" }  onChange={handleChange} >
+                            <option value={b_status} selected>{b_status} --- Current Status</option>
+                            <option value="R-Completed">R - Completed</option>
+                        
+                    </select>
+                  </div>
+                
+                </> 
+                ) : (
+                  <>
+            
+                  <div className='book__row'>
+                  <label htmlFor='procedure'>STATUS: </label>
+                    <select id="b_status" name="b_status"  value={b_status || "" }  onChange={handleChange} >
+                            <option value={b_status} selected>{b_status} --- Current Status</option>
+                            <option value="In Progress">Completed</option>
+             
+            
+                    </select>
+                  </div>
+
+                </>
+                     
+                )}
 
               <div className='book__row'>
                 <label htmlFor='procedure'>STATUS: </label>
                 <select id="b_status" name="b_status"  value={b_status || "" }  onChange={handleChange} >
                         <option value={b_status} selected>{b_status} --- Current Status</option>
                         <option value="Completed">Completed</option>
-                        <option value="Rescheduled">Rescheduled</option>
-                        <option value="R-Completed">R-Completed</option>
+                        <option value="R-Completed">Rescheduled - Completed</option>
                   
                 </select>
               </div>

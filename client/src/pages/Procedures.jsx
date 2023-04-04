@@ -66,7 +66,7 @@ const Procedures = () => {
                         <button className='back__procedures'>Back</button>
                     </Link>
                     <Link to={`/admin/services/update/${id}`}>
-                        <button className='back__procedures'>SAVE AND NEXT</button>
+                        <button className='back__procedures'>Next</button>
                     </Link>
                 </div>
              
