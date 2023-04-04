@@ -31,41 +31,83 @@ const ProceduresAdd = () => {
     console.log(id)
     const navigate = useNavigate();
 
+    console.log(toothNo)
+
 
     const handleSubmit = (e) =>{
         e.preventDefault();
         // console.log(typeof(selectedNumbers))
         // console.log(selectedNumbers)
         // console.log((selectedNumbers).toString())
-        const toothNo = (selectedNumbers).toString()
-
-        if (!b_procedure || !toothNo || !procedFee){
-            toast.error("Please provide value into each input field");
-            toast.error(b_procedure)
-            toast.error(toothNo)
-            toast.error(procedFee)
-            toast.error(toothType)
-
+        if (selectedNumbers != ''){
+            const toothNo = (selectedNumbers).toString()   
             
+            if (!b_procedure || !procedFee){
+                toast.error("Please provide value into each input field");
+                toast.error(b_procedure)
+                toast.error(toothNo)
+                toast.error(procedFee)
+                toast.error(toothType)
     
-        } else{
-            axios.post(`http://localhost:5000/admin/appointment/procedure/post/${id}`, {
-                a_ID,
-                b_procedure,
-                b_note,
-                toothNo,
-                toothType,  
-                procedFee
-          })
-          
-            .then(()=>{
-                setState({a_ID: "", b_procedure: "", b_note: "", toothNo: "", toothType: "", procedFee: ""});
-                toast.success("Procedure Added Successfully");
-                setTimeout(()=> navigate(`/admin/services/procedures/${id}`),500)
-            })
-            .catch((err) => toast.error(err.response.data));
-            
-          }
+                
+        
+            } else{
+              
+    
+                axios.post(`http://localhost:5000/admin/appointment/procedure/post/${id}`, {
+                    a_ID,
+                    b_procedure,
+                    b_note,
+                    toothNo,
+                    toothType,  
+                    procedFee
+              })
+              
+                .then(()=>{
+                    setState({a_ID: "", b_procedure: "", b_note: "", toothNo: "", toothType: "", procedFee: ""});
+                    toast.success("Procedure Added Successfully");
+                    setTimeout(()=> navigate(`/admin/services/procedures/${id}`),500)
+                })
+                .catch((err) => toast.error(err.response.data));
+                
+              }
+
+        }else{
+            const toothNo = "N/A"   
+            if (!b_procedure || !procedFee){
+                toast.error("Please provide value into each input field");
+                toast.error(b_procedure)
+                toast.error(toothNo)
+                toast.error(procedFee)
+                toast.error(toothType)
+    
+                
+        
+            } else{
+              
+    
+                axios.post(`http://localhost:5000/admin/appointment/procedure/post/${id}`, {
+                    a_ID,
+                    b_procedure,
+                    b_note,
+                    toothNo,
+                    toothType,  
+                    procedFee
+              })
+              
+                .then(()=>{
+                    setState({a_ID: "", b_procedure: "", b_note: "", toothNo: "", toothType: "", procedFee: ""});
+                    toast.success("Procedure Added Successfully");
+                    setTimeout(()=> navigate(`/admin/services/procedures/${id}`),500)
+                })
+                .catch((err) => toast.error(err.response.data));
+                
+              }
+        }
+       
+
+
+    
         }
 
         const handleNumberClick = (event) => {
@@ -118,8 +160,7 @@ const ProceduresAdd = () => {
     // .filter(([n, note]) => note !== "")
     // .map(([n, note]) => `${n} - "${note}"`)
     // .join(', ');
-
-
+        
     let selectedImage = toothType === "Adult" ? adultPNG : childPNG;
     //let selectedNumbers = toothType === "Adult" ? adultNumbers : childNumbers;
 
@@ -140,6 +181,7 @@ const ProceduresAdd = () => {
                             <img className='toothchart__image' src={selectedImage} alt={toothType} />
                             {toothType === 'Adult' ? (
                             <>
+                               
                                 <div className={`toothchart__number toothchart__number--1${selectedNumbers.includes('1') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Wisdom Tooth - 3rd Molar">1</div>
                                 <div className={`toothchart__number toothchart__number--2${selectedNumbers.includes('2') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Molar - 2nd Molar">2</div>
                                 <div className={`toothchart__number toothchart__number--3${selectedNumbers.includes('3') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Molar - 1st Molar">3</div>
@@ -240,13 +282,13 @@ const ProceduresAdd = () => {
                         </div>
                             <div className='book__row'>
                                 <label htmlFor='toothNo'>TOOTH NUMBER: </label>
-                                <input type='text' className='toothNoStyle' for='toothNo' id='toothNo' name='toothNo' value={selectedNumbers}  onChange={handleChange} placeholder='Enter Tooth Position/Number' disabled/>
+                                <input type='text' className='toothNoStyle' for='toothNo' id='toothNo' name='toothNo' value={selectedNumbers}  onChange={handleChange} placeholder='N/A' disabled/>
                             </div>
                             <div className='book__row'>
                                 <label htmlFor='b_note'>NOTES: </label>
                                 <input type='text' id='b_note' className='toothNoStyle' name='b_note' value={b_note || ""} onChange={(e) => setBNote(e.target.value)} placeholder='Add some notes... (optional)' />
                             </div>
-                            <p className='toothNo__note'>Note: Type <strong>N/A</strong> in Tooth Number if every teeth is included in the procedure</p> 
+                            <p className='toothNo__note' style={{textAlign:'center'}}>Note: Automatically stores <strong>N/A</strong> in Tooth Number if every teeth is included in the procedure</p> 
                             <div className='book__row'>
                                 <label htmlFor='procedFee'>PROCEDURE FEE: </label>
                                 <input type="number" className='procedFee' for="procedFee" id="procedFee" name="procedFee" value= {procedFee || "" }  onChange={handleChange} placeholder='Enter the Procedure Fee' />

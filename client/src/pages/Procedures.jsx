@@ -109,7 +109,6 @@ const Procedures = () => {
                         </tbody>
                     </table> 
                 </div>
-                <CancelledAppointment />
                 <h1 className='h1__apppointment'>Procedure Details</h1>
                 <div className='add_pcontainer'>
                     <Link to={`/admin/services/procedures/add/${id}`}>

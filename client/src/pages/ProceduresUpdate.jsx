@@ -42,49 +42,77 @@ const ProceduresUpdate = () => {
           setData(response.data[0]);
           setState({a_ID: a_ID, b_procedure: b_procedure, b_note: b_note, toothNo: toothNo, toothType: toothType, procedFee: procedFee}); 
           const toothSet = toothNo.split(',');
-          const newToothSet = toothSet.slice('')
-          setSelectedNumbers(newToothSet)
+          let toothSet2 = toothSet.filter((element) => element !== 'N/A');
+
+        
+          // const newToothSet = toothSet2.slice(toothSet2.indexOf("N/A"))
+          
+          setSelectedNumbers(toothSet2)
         }).catch(error => {
           console.error(error);
         });
           
       }, [id])
-      // console.log(data)
-      // console.log(data.a_ID)
-      // console.log(toothNo)
-      // console.log(toothNo.split())
+  
+ 
     const handleSubmit = (e) =>{
         e.preventDefault();
-        const toothNo = (selectedNumbers).toString()
 
-        if (!b_procedure || !toothNo || !procedFee){
-            toast.error("Please provide value into each input field");
-            // toast.error(b_procedure)
-            // toast.error(toothNo)
-            // toast.error(procedFee)
-            // toast.error(toothType)
-
+        if (selectedNumbers != ''){
+          const toothNo = (selectedNumbers).toString()   
+          
+          if (!b_procedure || !procedFee){
+              toast.error("Please provide value into each input field");
+          } else{
             
-    
-        } else{
+  
             axios.put(`http://localhost:5000/admin/appointment/procedure/update/${id}`, {
-                a_ID,
-                b_procedure,
-                b_note,
-                toothNo, 
-                toothType, 
-                procedFee
-          })
-          
-          
-            .then(()=>{
-                setState({a_ID: "", b_procedure: "", b_note: "", toothNo: "", toothType: "", procedFee: ""});
-                toast.success("Procedure Updated Successfully");
-                setTimeout(()=> navigate(`/admin/services/procedures/${data.a_ID}`),500)
+                  a_ID,
+                  b_procedure,
+                  b_note,
+                  toothNo,
+                  toothType,  
+                  procedFee
             })
-            .catch((err) => toast.error(err.response.data));
             
-          }
+              .then(()=>{
+                  setState({a_ID: "", b_procedure: "", b_note: "", toothNo: "", toothType: "", procedFee: ""});
+                  toast.success("Procedure Updated Successfully");
+                  setTimeout(()=> navigate(`/admin/services/procedures/${data.a_ID}`),500)
+              })
+              .catch((err) => toast.error(err.response.data));
+              
+            }
+
+      }else{
+          const toothNo = "N/A"   
+          if (!b_procedure || !procedFee){
+              toast.error("Please provide value into each input field");
+  
+              
+      
+          } else{
+            
+  
+            axios.put(`http://localhost:5000/admin/appointment/procedure/update/${id}`, {
+                  a_ID,
+                  b_procedure,
+                  b_note,
+                  toothNo,
+                  toothType,  
+                  procedFee
+            })
+            
+              .then(()=>{
+                  setState({a_ID: "", b_procedure: "", b_note: "", toothNo: "", toothType: "", procedFee: ""});
+                  toast.success("Procedure Updated Successfully");
+                  setTimeout(()=> navigate(`/admin/services/procedures/${data.a_ID}`),500)
+              })
+              .catch((err) => toast.error(err.response.data));
+              
+            }
+      }
+     
         }
 
         const handleNumberClick = (event) => {
@@ -254,12 +282,12 @@ const ProceduresUpdate = () => {
                             <label htmlFor='toothType'>Tooth Type: </label>
                             <select id="toothType" name="toothType" value={toothType || ""} onChange={handleChange}>
                                 <option value="Adult" selected>Adult</option>
-                                <option value="Child">Child</option>
+                             
                             </select>
                         </div>
                             <div className='book__row'>
                                 <label htmlFor='toothNo'>TOOTH NUMBER: </label>
-                                <input type='text' className='toothNoStyle' for='toothNo' id='toothNo' name='toothNo' value={selectedNumbers || toothNo || "" }  onChange={handleChange} placeholder='Enter Tooth Position/Number' disabled/>
+                                <input type='text' className='toothNoStyle' for='toothNo' id='toothNo' name='toothNo' value={selectedNumbers || "" }  onChange={handleChange} placeholder='Enter Tooth Position/Number' disabled/>
                             </div>
                             <div className='book__row'>
                                 <label htmlFor='b_note'>NOTES: </label>
