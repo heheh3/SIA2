@@ -22,7 +22,10 @@ const initialState = {
 const ProceduresUpdate = () => {
     const [state, setState] = useState(initialState);
     const {a_ID, b_procedure, toothNo, toothType, procedFee} = state;
+
     const [selectedNumbers, setSelectedNumbers] = useState([]);
+
+    console.log("selected: " + selectedNumbers)
     const [notes, setNotes] = useState({});
     const [showNoteInput, setShowNoteInput] = useState(false);
     const [selectedNote, setSelectedNote] = useState("");
@@ -38,26 +41,26 @@ const ProceduresUpdate = () => {
           const {a_ID, b_procedure, b_note, toothNo, toothType, procedFee } = response.data[0];
           setData(response.data[0]);
           setState({a_ID: a_ID, b_procedure: b_procedure, b_note: b_note, toothNo: toothNo, toothType: toothType, procedFee: procedFee}); 
+          setSelectedNumbers(toothNo.split(','))
         }).catch(error => {
           console.error(error);
         });
           
       }, [id])
-      console.log(data)
-      console.log(data.a_ID)
+      // console.log(data)
+      // console.log(data.a_ID)
+      // console.log(toothNo)
+      // console.log(toothNo.split())
     const handleSubmit = (e) =>{
         e.preventDefault();
-        // console.log(typeof(selectedNumbers))
-        // console.log(selectedNumbers)
-        // console.log((selectedNumbers).toString())
-        // const toothNo = (tooth).toString()
+        const toothNo = (selectedNumbers).toString()
 
         if (!b_procedure || !toothNo || !procedFee){
             toast.error("Please provide value into each input field");
-            toast.error(b_procedure)
-            toast.error(toothNo)
-            toast.error(procedFee)
-            toast.error(toothType)
+            // toast.error(b_procedure)
+            // toast.error(toothNo)
+            // toast.error(procedFee)
+            // toast.error(toothType)
 
             
     
@@ -162,30 +165,30 @@ const ProceduresUpdate = () => {
                                 <div className={`toothchart__number toothchart__number--6${selectedNumbers.includes('6') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Canine (Eye tooth/Cuspid)">6</div>
                                 <div className={`toothchart__number toothchart__number--7${selectedNumbers.includes('7') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Incisor - Lateral">7</div>
                                 <div className={`toothchart__number toothchart__number--8${selectedNumbers.includes('8') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Incisor - Central">8</div>
-                                <div className={`toothchart__number toothchart__number--9${selectedNumbers.includes('9') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Bicuspid - 1st">9</div>
-                                <div className={`toothchart__number toothchart__number--10${selectedNumbers.includes('10') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Bicuspid - 1st">10</div>
-                                <div className={`toothchart__number toothchart__number--11${selectedNumbers.includes('11') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Bicuspid - 1st">11</div>
+                                <div className={`toothchart__number toothchart__number--9${selectedNumbers.includes('9') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Incisor - Central">9</div>
+                                <div className={`toothchart__number toothchart__number--10${selectedNumbers.includes('10') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Incisor - Lateral">10</div>
+                                <div className={`toothchart__number toothchart__number--11${selectedNumbers.includes('11') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Canine (Eye tooth/Cuspid)">11</div>
                                 <div className={`toothchart__number toothchart__number--12${selectedNumbers.includes('12') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Bicuspid - 1st">12</div>
-                                <div className={`toothchart__number toothchart__number--13${selectedNumbers.includes('13') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Bicuspid - 1st">13</div>
-                                <div className={`toothchart__number toothchart__number--14${selectedNumbers.includes('14') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Bicuspid - 1st">14</div>
-                                <div className={`toothchart__number toothchart__number--15${selectedNumbers.includes('15') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Bicuspid - 1st">15</div>
-                                <div className={`toothchart__number toothchart__number--16${selectedNumbers.includes('16') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Bicuspid - 1st">16</div>
-                                <div className={`toothchart__number toothchart__number--17${selectedNumbers.includes('17') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Bicuspid - 1st">17</div>
-                                <div className={`toothchart__number toothchart__number--18${selectedNumbers.includes('18') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Bicuspid - 1st">18</div>
-                                <div className={`toothchart__number toothchart__number--19${selectedNumbers.includes('19') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Bicuspid - 1st">19</div>
-                                <div className={`toothchart__number toothchart__number--20${selectedNumbers.includes('20') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Bicuspid - 1st">20</div>
+                                <div className={`toothchart__number toothchart__number--13${selectedNumbers.includes('13') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Bicuspid - 2nd">13</div>
+                                <div className={`toothchart__number toothchart__number--14${selectedNumbers.includes('14') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Molar - 1st Molar">14</div>
+                                <div className={`toothchart__number toothchart__number--15${selectedNumbers.includes('15') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Molar - 2nd Molar">15</div>
+                                <div className={`toothchart__number toothchart__number--16${selectedNumbers.includes('16') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Wisdom Tooth - 3rd Molar">16</div>
+                                <div className={`toothchart__number toothchart__number--17${selectedNumbers.includes('17') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Wisdom Tooth - 3rd Molar">17</div>
+                                <div className={`toothchart__number toothchart__number--18${selectedNumbers.includes('18') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Molar - 2nd Molar">18</div>
+                                <div className={`toothchart__number toothchart__number--19${selectedNumbers.includes('19') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Molar - 1st Molar">19</div>
+                                <div className={`toothchart__number toothchart__number--20${selectedNumbers.includes('20') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Bicuspid - 2nd">20</div>
                                 <div className={`toothchart__number toothchart__number--21${selectedNumbers.includes('21') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Bicuspid - 1st">21</div>
-                                <div className={`toothchart__number toothchart__number--22${selectedNumbers.includes('22') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Bicuspid - 1st">22</div>
-                                <div className={`toothchart__number toothchart__number--23${selectedNumbers.includes('23') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Bicuspid - 1st">23</div>
-                                <div className={`toothchart__number toothchart__number--24${selectedNumbers.includes('24') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Bicuspid - 1st">24</div>
-                                <div className={`toothchart__number toothchart__number--25${selectedNumbers.includes('25') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Bicuspid - 1st">25</div>
-                                <div className={`toothchart__number toothchart__number--26${selectedNumbers.includes('26') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Bicuspid - 1st">26</div>
-                                <div className={`toothchart__number toothchart__number--27${selectedNumbers.includes('27') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Bicuspid - 1st">27</div>
+                                <div className={`toothchart__number toothchart__number--22${selectedNumbers.includes('22') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Canine (Eye tooth/Cuspid)">22</div>
+                                <div className={`toothchart__number toothchart__number--23${selectedNumbers.includes('23') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Incisor - Lateral">23</div>
+                                <div className={`toothchart__number toothchart__number--24${selectedNumbers.includes('24') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Incisor - Central">24</div>
+                                <div className={`toothchart__number toothchart__number--25${selectedNumbers.includes('25') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Incisor - Central">25</div>
+                                <div className={`toothchart__number toothchart__number--26${selectedNumbers.includes('26') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Incisor - Lateral">26</div>
+                                <div className={`toothchart__number toothchart__number--27${selectedNumbers.includes('27') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Canine (Eye tooth/Cuspid)">27</div>
                                 <div className={`toothchart__number toothchart__number--28${selectedNumbers.includes('28') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Bicuspid - 1st">28</div>
-                                <div className={`toothchart__number toothchart__number--29${selectedNumbers.includes('29') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Bicuspid - 1st">29</div>
-                                <div className={`toothchart__number toothchart__number--30${selectedNumbers.includes('30') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Bicuspid - 1st">30</div>
-                                <div className={`toothchart__number toothchart__number--31${selectedNumbers.includes('31') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Bicuspid - 1st">31</div>
-                                <div className={`toothchart__number toothchart__number--32${selectedNumbers.includes('32') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Bicuspid - 1st">32</div>
+                                <div className={`toothchart__number toothchart__number--29${selectedNumbers.includes('29') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Bicuspid - 2nd">29</div>
+                                <div className={`toothchart__number toothchart__number--30${selectedNumbers.includes('30') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Molar - 1st Molar">30</div>
+                                <div className={`toothchart__number toothchart__number--31${selectedNumbers.includes('31') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Molar - 2nd Molar">31</div>
+                                <div className={`toothchart__number toothchart__number--32${selectedNumbers.includes('32') ? ' selected' : ''}`} onClick={handleNumberClick} data-label="Wisdom Tooth - 3rd Molar" value={toothNo}>32</div>
                                 {/* Add more number divs as needed */}
                             </>
                             ) : (
@@ -254,7 +257,7 @@ const ProceduresUpdate = () => {
                         </div>
                             <div className='book__row'>
                                 <label htmlFor='toothNo'>TOOTH NUMBER: </label>
-                                <input type='text' className='toothNoStyle' for='toothNo' id='toothNo' name='toothNo' value={selectedNumbers || toothNo || ""}  onChange={handleChange} placeholder='Enter Tooth Position/Number' disabled/>
+                                <input type='text' className='toothNoStyle' for='toothNo' id='toothNo' name='toothNo' value={selectedNumbers || toothNo || "" }  onChange={handleChange} placeholder='Enter Tooth Position/Number' disabled/>
                             </div>
                             <div className='book__row'>
                                 <label htmlFor='b_note'>NOTES: </label>
@@ -272,7 +275,7 @@ const ProceduresUpdate = () => {
         
 
                             <div className='back__update-buttons1'>
-                                <input type="submit" value="SUBMIT" className='btn-update1' />
+                                <input type="submit" value="UPDATE" className='btn-update1' />
                             </div>
                      </form>
                 </div>
