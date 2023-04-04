@@ -118,7 +118,13 @@ const UpdateService = () => {
           // toast.success(response.data.b_status)
           
           toast.success("Appointment Updated Successfully");
-          setTimeout(()=> navigate(`/admin/services`),500)
+          if(b_status === "In Progress"){
+            setTimeout(()=> navigate(`/admin/completed/procedures/${id}`),500)
+          }else{
+            setTimeout(()=> navigate("/admin/completed"),500)
+          }
+           
+
       
           
       
@@ -222,7 +228,7 @@ const handleChange = (event) => {
               <div className='book__row'>
                 <label htmlFor='procedure'>STATUS: </label>
                 <select id="b_status" name="b_status"  value={b_status || "" }  onChange={handleChange} >
-                        <option value="" disabled selected>Select your option</option>
+                        <option value={b_status} selected>{b_status} --- Current Status</option>
                         <option value="Completed">Completed</option>
                         <option value="Rescheduled">Rescheduled</option>
                         <option value="R-Completed">R-Completed</option>
@@ -244,9 +250,8 @@ const handleChange = (event) => {
 
               <div className='back__update-buttons'>
                 <input type="submit" value="SAVE" className='btn-update' />
-                <Link to={`/admin/services/procedures/${id}`} className="button-a">
-                  <button className='btn-back1'>SAVE AND NEXT</button>
-                </Link>
+                <input type="submit" value="SAVE & NEXT" className='btn-update' />
+                
               </div>
            
          

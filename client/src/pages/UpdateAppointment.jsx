@@ -27,10 +27,6 @@ const UpdateAppointment = () => {
   const {id} = useParams();
   const [dateTime, setDateTime] = useState([])
   const [time, setTime] = useState([])
-
-  console.log(id)
-
-
   const navigate = useNavigate();
   const minDate = new Date();
   minDate.setDate(minDate.getDate() + 2);
@@ -90,12 +86,12 @@ const UpdateAppointment = () => {
 
 
 
-
   const handleSubmit = (e) =>{
     e.preventDefault();
     if (!b_date || !b_time || !b_procedure || !b_status){
         toast.error("Please provide value into each input field");
 
+      
     } else{
         axios.put(`http://localhost:5000/admin/appointment/update/${id}`, {
           b_date,
@@ -118,7 +114,7 @@ const UpdateAppointment = () => {
           // toast.success(response.data.b_status)
           
           toast.success("Appointment Updated Successfully");
-          if(b_status === "In Progress"){
+          if(b_status === "In Progress" || b_status === "R-In Progress"){
             setTimeout(()=> navigate(`/admin/services/procedures/${id}`),500)
           }else{
             setTimeout(()=> navigate("/admin/appointment"),500)
@@ -226,9 +222,10 @@ const handleChange = (event) => {
               <div className='book__row'>
                 <label htmlFor='procedure'>STATUS: </label>
                 <select id="b_status" name="b_status"  value={b_status || "" }  onChange={handleChange} >
-                        <option value="" disabled selected>Select your option</option>
+                        <option value={b_status} selected>{b_status} --- Current Status</option>
                         <option value="In Progress">In Progress</option>
                         <option value="Rescheduled">Rescheduled</option>
+                        <option value="R-In Progress">R - In Progress</option>
                         <option value="Cancelled">Cancelled</option>
         
                 </select>
@@ -248,9 +245,8 @@ const handleChange = (event) => {
 
               <div className='back__update-buttons'>
                 <input type="submit" value="SAVE" className='btn-update' />
-                <Link to={`/admin/appointment/procedures/${id}`} className="button-a">
-                  <button className='btn-back1'>SAVE AND NEXT</button>
-                </Link>
+                <input type="submit" value="SAVE & NEXT" className='btn-update' />
+         
               </div>
            
          
