@@ -118,11 +118,11 @@ const UpdateService = () => {
           // toast.success(response.data.b_status)
           
           toast.success("Appointment Updated Successfully");
-          if(b_status === "In Progress"){
+          if(b_status === "In Progress" || b_status === "R-In Progress"){
             setTimeout(()=> navigate(`/admin/services/procedures/${id}`),500)
-          } else
+          } else{
             setTimeout(()=> navigate(`/admin/completed/procedures/${id}`),500)
-           
+          }
 
       
           

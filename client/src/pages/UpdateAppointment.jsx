@@ -230,10 +230,11 @@ const handleChange = (event) => {
             
                     </select>
                   </div>
-
+                
                 </>
                 ) : (
                 <>
+            
                   <div className='book__row'>
                   <label htmlFor='procedure'>STATUS: </label>
                     <select id="b_status" name="b_status"  value={b_status || "" }  onChange={handleChange} >
