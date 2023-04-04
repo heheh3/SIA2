@@ -74,8 +74,8 @@ const ProceduresUpdate = () => {
           
             .then(()=>{
                 setState({a_ID: "", b_procedure: "", b_note: "", toothNo: "", toothType: "", procedFee: ""});
-                toast.success("Procedure Added Successfully");
-                setTimeout(()=> navigate(`/admin/appointment/procedures/${data.a_ID}`),500)
+                toast.success("Procedure Updated Successfully");
+                setTimeout(()=> navigate(`/admin/services/procedures/${data.a_ID}`),500)
             })
             .catch((err) => toast.error(err.response.data));
             

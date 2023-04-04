@@ -118,7 +118,7 @@ const UpdateService = () => {
           // toast.success(response.data.b_status)
           
           toast.success("Appointment Updated Successfully");
-          setTimeout(()=> navigate(`/admin/services/`),500)
+          setTimeout(()=> navigate(`/admin/services`),500)
       
           
       
