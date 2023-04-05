@@ -36,6 +36,7 @@ import Inventory from './pages/Inventory';
 import InventoryAdd from './pages/InventoryAdd';
 import Services from './pages/Services';
 import UpdateService from './pages/UpdateService';
+import Payment from './pages/Payment';
 
 
 
@@ -54,6 +55,7 @@ function App() {
           <Route path='/admin/appointment' element={<PendingAppointment />} />
           <Route path='/admin/completed/update/:id' element={<CompletedUpdate />} />
           <Route path='/admin/completed/procedures/:id' element={<CompletedDetails />} />
+          <Route path='/admin/completed/payment/:id' element={<Payment />} />
 
           <Route path='/admin/employee/add' element={<EmployeeAdd />} />
           <Route path='/admin/employee/update/:id' element={<EmployeeUpdate />} />

@@ -50,10 +50,14 @@ const CompletedDetails = () => {
                 <AdminNavbar />
             </header>
             <body className='pending_body'>
+            <div className='flex--links'> 
                 <Link to={`/admin/completed`}>
                         <button className='back__procedures'><span>Back</span></button>
                 </Link>
-           
+                <Link to={`/admin/completed/payment/${id}`}>
+                        <button className='back__procedures'>Next</button>
+                </Link>
+           </div>
                 <h1 className='h1__apppointment'>Apppointment Details</h1>
                 <div className='pending_body-flex'>
                     <table className='styled-table'>
@@ -68,7 +72,7 @@ const CompletedDetails = () => {
                                 <th style={{textAlign: "center"}}>Procedure</th>
                                 <th style={{textAlign: "center"}}>Note</th>
                                 <th style={{textAlign: "center"}}>Status</th>
-                                <th style={{textAlign: "center"}}>Action</th>
+                                <th style={{textAlign: "center"}}>Payment Status</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -95,11 +99,10 @@ const CompletedDetails = () => {
                                                 item.b_status === "Completed" ? 'green': '' || item.b_status === "Walk-In" ? 'gray': '' || item.b_status === "R-Completed" ? 'lightgreen' : '', padding: '5px 10px', color: 'white', borderRadius: '10px', fontSize: '0.8rem', letterSpacing: "1.5px",}
                                         }>{item.b_status}</span>
                                     </td>
-
-                                    <td>
-                                        <Link to={`/admin/completed/update/${item.a_ID}`}>
-                                            <button className='btn btn-view'>View/Edit</button>
-                                        </Link>
+                                    <td><span  style={
+                                        {backgroundColor: item.b_paymentStatus === "Not-Paid" ? 'red' : '' ||   item.b_paymentStatus === "Fully-Paid" ? 'green': '' ||
+                                                item.b_paymentStatus === "EMI" ? 'pink': '' , padding: '5px 10px', color: 'white', borderRadius: '10px', fontSize: '0.8rem', letterSpacing: "1.5px",}
+                                        }>{item.b_paymentStatus}</span>
                                     </td>
                                    
                                     </tr>

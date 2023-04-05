@@ -135,6 +135,30 @@ main{
     
 }
 
+span .span__line{
+    display: block;
+    border-bottom: 2px solid white;
+    margin: 10px 0;
+}
+
+.book__row1{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+    
+}
+
+.amount__total{
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.total{
+    font-size: 1.5rem;
+   
+}
+
 .toothNo__note{
     text-align: right;
     margin-bottom: 15px;
@@ -166,6 +190,7 @@ textarea{
 
 input[type="text"].toothNoStyle,
 input[type="number"].procedFee, 
+input[type="number"].b_payment, 
 select, 
 textarea{
     width: 70%;
