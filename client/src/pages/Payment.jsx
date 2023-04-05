@@ -4,7 +4,7 @@ import "../css/Appointment.css";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import AdminNavbar from './AdminNavbar';
-import {parseISO, format} from 'date-fns';
+import {format} from 'date-fns';
 
 
 
@@ -74,14 +74,19 @@ const handleChange = (event) => {
             <AdminNavbar />  
         </header>
         <body>
-        <Link to="/admin/appointment">
+        <Link to={`/admin/completed/procedures/${id}`}>
           <button className='back__procedures'><span>Back</span></button>
         </Link>
         <main className='display--flex m-0'>
-          <div className='update appointmentCard'>
+          <div className='update appointmentCard2'>
             <h3 className='book__title'>PAYMENT DETAILS</h3>
 
             <form onSubmit={handleSubmit} style={{display: 'relative'}}>
+
+            <div className='book__row1'>
+                    <label htmlFor='a_ID'>SERVICE ID:  </label>
+                    <div className='amount__total infos'>{data1.a_ID}</div>
+            </div>   
             <div className='book__row1'>
                     <label htmlFor='b_fullname'>NAME:  </label>
                     <div className='amount__total infos'>{data1.p_fullname}</div>
@@ -123,12 +128,33 @@ const handleChange = (event) => {
                 <input className='b_payment' type='number' id="b_payment" name="b_payment" value={amountPaid} onChange={handleChange} placeholder="Enter Amount Paid" />
  
               </div> 
+            
+            {0 < (amountPaid - ((Number((Number(sumData.totalAmount)).toFixed(2)) + Number((Number(data.totalAmount)).toFixed(2))).toFixed(2))) ? (
+                <>
+                    <div className='book__row1'>
+                        <label htmlFor='b_change'>CHANGE AMOUNT:  </label>
+                        <div className='amount__total total'>PHP {amountPaid - ((Number((Number(sumData.totalAmount)).toFixed(2)) + Number((Number(data.totalAmount)).toFixed(2))).toFixed(2))}</div>
+                     </div> 
+                
+                </> 
+                ) : (
+                <>
+            
+                    <div className='book__row1'>
+                        <label htmlFor='b_change'>CHANGE AMOUNT:  </label>
+                        <div className='amount__total total'>PHP 0.00</div>
+                     </div> 
+
+                     <div className='book__row1'>
+                        <label htmlFor='b_balance'>REMAINING BALANCE:  </label>
+                        <div className='amount__total total'>PHP {(((Number((Number(sumData.totalAmount)).toFixed(2)) + Number((Number(data.totalAmount)).toFixed(2))).toFixed(2))- amountPaid).toFixed(2)}</div>
+                     </div> 
+
+                </>
+                     
+                )}
 
 
-              <div className='book__row1'>
-                    <label htmlFor='b_change'>CHANGE AMOUNT:  </label>
-                    <div className='amount__total total'>PHP {amountPaid - ((Number((Number(sumData.totalAmount)).toFixed(2)) + Number((Number(data.totalAmount)).toFixed(2))).toFixed(2))}</div>
-            </div> 
 
            
 

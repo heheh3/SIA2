@@ -123,6 +123,18 @@ main{
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
+.appointmentCard2{
+    width: 60%;
+    background-color: var(--blue-darker-teal);
+    flex-direction: column;
+    border-radius: 20px;
+    color: var(--white);
+    padding: 1.5rem 2.5rem;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    margin-bottom: 2rem;
+}
+
+
 .book__title{
     margin-bottom: 1rem;
     text-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
