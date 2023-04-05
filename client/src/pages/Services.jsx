@@ -40,18 +40,12 @@ const Services = () => {
         <body className='pending_body'>
                      
             <div className='pending_body-flex'>
-            <div className='employee__header'>
-                  <div className='add__ebutton'>
-                      <Link to="">
-                        <button className='add__ebutton-style'><span>ADD SERVICES</span> <FaPlusCircle className="add-icon"/></button>
-                      </Link>
-                     
-                  </div>
+   
                   <div className='search__bar-container'>
                       <input type='text' className='search__bar' value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder="Search Here..."/>
                       <span className='search__bar-icon'><FaSearch className="bar-icon"/></span>
                   </div>
-                </div>
+         
                 <table className='styled-table'>
                     <thead>
                         <tr>
