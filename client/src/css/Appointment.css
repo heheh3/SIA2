@@ -159,6 +159,10 @@ span .span__line{
    
 }
 
+.infos{
+    font-weight: 300;
+}
+
 .toothNo__note{
     text-align: right;
     margin-bottom: 15px;
