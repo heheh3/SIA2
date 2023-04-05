@@ -44,11 +44,7 @@ const ProceduresAdd = () => {
             
             if (!b_procedure || !procedFee){
                 toast.error("Please provide value into each input field");
-                toast.error(b_procedure)
-                toast.error(toothNo)
-                toast.error(procedFee)
-                toast.error(toothType)
-    
+       
                 
         
             } else{
@@ -76,10 +72,7 @@ const ProceduresAdd = () => {
             const toothNo = "N/A"   
             if (!b_procedure || !procedFee){
                 toast.error("Please provide value into each input field");
-                toast.error(b_procedure)
-                toast.error(toothNo)
-                toast.error(procedFee)
-                toast.error(toothType)
+  
     
                 
         

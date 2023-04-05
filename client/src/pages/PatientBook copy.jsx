@@ -15,7 +15,8 @@ const initialState = {
   b_time: "",
   b_procedure: "",
   b_note: "",
-  b_status: ""
+  b_status: "",
+  b_patientType: ""
 };
 
 
@@ -23,7 +24,7 @@ const initialState = {
 const PatientBook = () => {
 
     const [state, setState] = useState(initialState);
-    const {b_date, b_status, b_time, b_procedure, b_note} = state;
+    const {b_date, b_status, b_time, b_procedure, b_note, b_patientType} = state;
     const [dateTime, setDateTime] = useState([])
     const [time, setTime] = useState([])
     const {id} = useParams();
@@ -81,10 +82,11 @@ const PatientBook = () => {
             b_time,
             b_procedure,
             b_note,
-            b_status
+            b_status,
+            b_patientType
         })
         .then(()=>{
-            setState({patientID: null , b_date: "", b_time: "", b_procedure: "", b_note: ""})
+            setState({patientID: null , b_date: "", b_time: "", b_procedure: "", b_note: "", b_patientType: ""})
             toast.success("Appointment Added Successfully");
         }).catch((err) => toast.error(err.response.data) );
  
@@ -107,7 +109,7 @@ const PatientBook = () => {
 
       <body>
         <Link to={`/admin/user`}>
-                    <button className='back__procedures'><span>Back</span></button>
+            <button className='back__procedures'><span>Back</span></button>
         </Link>  
         <main className='display--flex'>
           <div className='home appointmentCard'>
@@ -120,6 +122,48 @@ const PatientBook = () => {
 
 
             <form onSubmit={handleSubmit} >
+
+              <div className='book__row'>
+                  <label htmlFor='b_patientType'>TYPE: </label>
+                  <select name="b_patientType" id="b_patientType" value={b_patientType} onChange={handleChange} >
+                          <option value="" disabled selected>Select your option</option>
+                          <option value="WALK-IN">WALK-IN</option>
+                          <option value="BOOK">BOOK</option>
+                  </select>
+
+                </div>
+
+                {b_patientType === 'WALK-IN' ? (
+                <>
+                  <div className='book__row'>
+                      <label htmlFor='date'>DATE: </label>
+                      <div className='date__container'>
+                          <DatePicker
+                              id='b_date'
+                              name='b_date'
+                              className='datepicker__style'
+                              selected={b_date}
+                              onChange={b_date => handleChange({ 
+                                  target: { value: b_date, name: 'b_date' }
+                                  
+                              })}
+                              minDate={minDate}
+                              dateFormat="MMM-dd-yyyy"
+                              filterDate={date => date.getDay() !== 0}
+                              placeholderText="Select a date"
+                              value={b_date || ""}
+                          />
+                    </div>
+                  </div>
+
+                  
+                
+                </> 
+
+
+
+                ) : (
+                <>
                 <div className='book-row'>
                     <input 
                         type='number' 
@@ -190,7 +234,10 @@ const PatientBook = () => {
                     <label htmlFor='note'>NOTES: </label>
                     <textarea for="note" id="b_note" name="b_note" value={b_note || "" }  onChange={handleChange} placeholder='Add some notes... (optional)' />
                 </div> 
-
+                </>
+                     
+                     )}
+     
                 <input type="submit" className='book-button' value="Book" />
  
             </form>

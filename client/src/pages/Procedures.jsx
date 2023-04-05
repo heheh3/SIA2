@@ -70,13 +70,13 @@ const Procedures = () => {
                     </Link>
                 </div>
              
-                <h1 className='h1__apppointment'>Apppointment Details</h1>
+                <h1 className='h1__apppointment'>Services Details</h1>
                 <div className='pending_body-flex'>
                     <table className='styled-table'>
                         <thead>
                             <tr>
                                 <th style={{textAlign: "center"}}>No.</th>
-                                <th style={{textAlign: "center"}}>Appointment ID</th>
+                                <th style={{textAlign: "center"}}>Services ID</th>
                                 <th style={{textAlign: "center"}}>Name</th>
                                 <th style={{textAlign: "center"}}>Contact</th>
                                 <th style={{textAlign: "center"}}>Date</th>

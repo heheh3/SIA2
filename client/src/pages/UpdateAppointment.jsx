@@ -265,7 +265,6 @@ const handleChange = (event) => {
               </div>
 
               <div className='back__update-buttons'>
-                <input type="submit" value="SAVE" className='btn-update' />
                 <input type="submit" value="SAVE & NEXT" className='btn-update' />
          
               </div>
