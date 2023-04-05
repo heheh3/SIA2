@@ -46,9 +46,6 @@ export const users_updateUser = (req, res) =>{
     const p_birthdate = req.body.p_birthdate;
     const p_gender = req.body.p_gender
 
-    // const date = parseISO(p_birthdate);
-    // console.log(date)
-   
     const sqlUpdate = "UPDATE users_db SET p_username = ?, p_email = ?, p_fullname = ?, p_contact = ?, p_birthdate = ?, p_gender = ? WHERE user_id = ?";
     db.query(sqlUpdate, [p_username, p_email, p_fullname, p_contact, p_birthdate, p_gender, user_id] ,(error, result)=>{
         if(error){
