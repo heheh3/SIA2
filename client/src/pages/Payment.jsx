@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import {useNavigate, useParams, Link } from "react-router-dom"
+import {useParams, Link } from "react-router-dom"
 import "../css/Appointment.css";  
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
-import {toast} from "react-toastify";
 import AdminNavbar from './AdminNavbar';
+import {parseISO, format} from 'date-fns';
+
 
 
 
@@ -12,7 +13,9 @@ const Payment = () => {
     const [data, setData] = useState([]);
     const [data1, setData1] = useState([]);
     const [sumData, setSumData] = useState([]);
-    const [amountPaid, setAmountPaid] = useState();
+    const [amountPaid, setAmountPaid] = useState(); 
+    const dateToday = format(new Date(), 'EEE, MMM dd, yyyy');
+    console.log(dateToday)
     
     const {id} = useParams();
 
@@ -21,6 +24,7 @@ const Payment = () => {
         setData1(response.data[0]);  
     }
 
+    console.log(data1)
 
     useEffect(()=>{
         loadData();
@@ -78,6 +82,16 @@ const handleChange = (event) => {
             <h3 className='book__title'>PAYMENT DETAILS</h3>
 
             <form onSubmit={handleSubmit} style={{display: 'relative'}}>
+            <div className='book__row1'>
+                    <label htmlFor='b_fullname'>NAME:  </label>
+                    <div className='amount__total infos'>{data1.p_fullname}</div>
+            </div>
+
+            <div className='book__row1'>
+                    <label htmlFor='b_fullname'>DATE:  </label>
+                    <div className='amount__total infos'>{dateToday}</div>
+            </div>    
+
             <div className='book__row1'>
                     <label htmlFor='b_totProcedFee'>TOTAL PROCEDURAL FREE:  </label>
                     <div className='amount__total'>{(Number(sumData.totalAmount)).toFixed(2)}</div>
