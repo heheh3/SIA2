@@ -1,8 +1,6 @@
 import {parseISO, format} from 'date-fns';
 import { db } from "../connection.js";
 
-
-//  EMPLOYEE BACKEND CRUD
 export const employee_get = (req, res) =>{
     const sqlGet = "SELECT * FROM employee_db"
     db.query(sqlGet, (error, result)=>{
