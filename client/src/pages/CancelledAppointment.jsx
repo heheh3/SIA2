@@ -46,7 +46,7 @@ const CancelledAppointment = () => {
                                     <th style={{textAlign: "center"}}>Note</th>
                                     <th style={{textAlign: "center"}}>Status</th>
                                     <th style={{textAlign: "center"}}>Fee</th>
-                                    <th style={{textAlign: "center"}}>Actions</th>
+                                    <th style={{textAlign: "center"}}>Payment Status</th>
                                 </tr>
                             </thead>
                             <tbody>

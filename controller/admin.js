@@ -272,7 +272,6 @@ export const procedure_get = (req, res) =>{
 
 export const procedure_update = (req, res) =>{
     const {procedNum} = req.params;
-
     const b_procedure = req.body.b_procedure;
     const b_note = req.body.b_note;
     const toothNo = req.body.toothNo;

@@ -64,7 +64,7 @@ const CompletedDetails = () => {
                         <thead>
                             <tr>
                                 <th style={{textAlign: "center"}}>No.</th>
-                                <th style={{textAlign: "center"}}>Appointment ID</th>
+                                <th style={{textAlign: "center"}}>Service ID</th>
                                 <th style={{textAlign: "center"}}>Name</th>
                                 <th style={{textAlign: "center"}}>Contact</th>
                                 <th style={{textAlign: "center"}}>Date</th>

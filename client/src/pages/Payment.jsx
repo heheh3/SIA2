@@ -1,23 +1,49 @@
 import React, { useState, useEffect } from 'react';
-import {useParams, Link } from "react-router-dom"
+import {useParams, Link, useNavigate } from "react-router-dom"
 import "../css/Appointment.css";  
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import AdminNavbar from './AdminNavbar';
 import {format} from 'date-fns';
+import {toast} from "react-toastify";
 
 
+
+const initialState = {
+  p_date: "",
+  p_totalProd: "",
+  p_addFee:"",
+  p_totalPayment: "",
+  p_paymentType: "",
+  p_paidAmount: 0,
+  p_change: "",
+  p_balance: ""
+  
+};
 
 
 const Payment = () => {
     const [data, setData] = useState([]);
     const [data1, setData1] = useState([]);
+    const [state, setState] = useState(initialState);
+    const [state1, setState1] = useState(initialState);
+
+    const [invoice_ID, setInvoice_ID] = useState(0);
+    const {p_paymentType, p_paidAmount, p_totalProd, p_addFee, p_totalPayment, p_change,p_balance} = state;
+    // const {p_paymentType, p_paidAmount} = state;
     const [sumData, setSumData] = useState([]);
-    const [amountPaid, setAmountPaid] = useState(); 
     const dateToday = format(new Date(), 'EEE, MMM dd, yyyy h:mm aa');
-    console.log(dateToday)
-    
+    const navigate = useNavigate();
     const {id} = useParams();
+    const [service_ID, setService_ID] = useState(id);
+    const [p_date, setP_date] = useState(dateToday);
+
+
+    
+
+
+    console.log(dateToday)
+
 
     const loadData = async () =>{
         const response = await axios.get(`http://localhost:5000/admin/appointment/get/${id}`);
@@ -56,18 +82,51 @@ const Payment = () => {
 
 
 
-  const handleSubmit = (e) =>{
-    e.preventDefault();
+    const handleSubmit = (e) =>{
+      e.preventDefault();
+      if (!p_paidAmount || p_paidAmount){
+  
+          toast.error("Please provide value into each input field");
+          toast.error(p_date)
+
+          toast.error(p_totalProd)
+
+     
+      } else{
+           axios.post("http://localhost:5000/appointment/post", {
+            invoice_ID,
+            service_ID,
+            p_date,
+            p_totalProd,
+            p_addFee,
+            p_totalPayment,
+            p_paymentType,
+            p_paidAmount,
+            p_change,
+            p_balance
+             
+            })
+          .then(()=>{
+              setState({p_paidAmount: "" , p_paidAmount: ""})
+              toast.success("Service Updated Successfully");
+          }).catch((err) => toast.error(err.response.data) );
+   
+          setTimeout(()=> navigate("/completed"), 300)
+        }
+      }
+
+      console.log("The date today is: " + p_date)
+      console.log("The p_totalProd today is: " + p_totalProd)
+
+
+    const handleChange = (event) => {
+      const {name, value} = event.target;
+      setState({...state, [name]: value});
+  
+  
+  
     
     }
-  
-
-
-const handleChange = (event) => {
-    setAmountPaid(event.target.value)
-  
-}
-
   return (
     <div style={{backgroundColor: "#E0F9F8"}}>
         <header>
@@ -83,9 +142,28 @@ const handleChange = (event) => {
 
             <form onSubmit={handleSubmit} style={{display: 'relative'}}>
 
+            <div className='book-row1'>
+                    <input 
+                      type='number' 
+                      name='invoice_ID' 
+                      id='invoice_ID'
+                      value={setInvoice_ID} 
+                      hidden
+                    />
+                  </div>
+              <div className='book-row1'>
+                    <input 
+                      type='number' 
+                      name='service_ID' 
+                      id='service_ID'
+                      value={setService_ID} 
+                      hidden
+                    />
+                </div>
+
             <div className='book__row1'>
-                    <label className='p_label' htmlFor='a_ID'>SERVICE ID:  </label>
-                    <div className='amount__total infos'>{data1.a_ID}</div>
+                  <label className='p_label' htmlFor='a_ID'>SERVICE ID:  </label>
+                <div className='amount__total infos'>{data1.a_ID}</div>
             </div>   
             <div className='book__row1'>
                     <label className='p_label' htmlFor='b_fullname'>NAME:  </label>
@@ -93,30 +171,42 @@ const handleChange = (event) => {
             </div>
 
             <div className='book__row1'>
-                    <label className='p_label' htmlFor='b_fullname'>DATE:  </label>
-                    <div className='amount__total infos'>{dateToday}</div>
+                    <label className='p_label' htmlFor='p_date'>DATE:  </label>
+                    <input 
+                      className='amount__total infos'
+                      type='text' 
+                      name='p_date' 
+                      id='p_date'
+                      value={setP_date} 
+
+                    />
+{/* 
+                    <input type='text' id="p_date" name="p_date" value={dateToday} className='amount__total infos' />
+                    <input className='b_payment payment__select' type='number' id="p_paidAmount" name="p_paidAmount" value={p_paidAmount} onChange={handleChange} placeholder="Enter Amount Paid" /> */}
+
             </div>    
 
             <div className='book__row1'>
-                    <label className='p_label' htmlFor='b_totProcedFee'>TOTAL PROCEDURAL FREE:  </label>
-                    <div className='amount__total'>{(Number(sumData.totalAmount)).toFixed(2)}</div>
+                <label className='p_label' htmlFor='b_totProcedFee'>TOTAL PROCEDURAL FEE:  </label>
+                {/* <div id="p_totalProd" name="p_totalProd" className='amount__total' >{(Number(sumData.totalAmount)).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div> */}
+                <input type='text' id="p_totalProd" name="p_totalProd" value={( Number(sumData.totalAmount)).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}  className='amount__total infos' disabled/>
             </div>  
 
             <div className='book__row1'>
                     <label className='p_label' htmlFor='b_addFee'>CANCELLATION/RESCHEDULED FEE:  </label>
-                    <div className='amount__total'>{(Number(data.totalAmount)).toFixed(2)}</div>
+                    <div id="p_addFee" name="p_addFee" className='amount__total'>{(Number(data.totalAmount)).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
             </div>   
 
             <hr className='span__line'></hr>
             
             <div className='book__row1'>
-              <label htmlFor='b_payment'>TOTAL BILL:  </label>
-              <div className='amount__total total'>PHP {(Number((Number(sumData.totalAmount)).toFixed(2)) + Number((Number(data.totalAmount)).toFixed(2))).toFixed(2)}</div>
+              <label className='p_label' htmlFor='b_totalpayment'>TOTAL BILL:  </label>
+              <div id="p_totalPayment" name="p_totalPayment" className='amount__total total'>PHP {(Number((Number(sumData.totalAmount)).toFixed(2)) + Number((Number(data.totalAmount)).toFixed(2))).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
             </div> 
 
             <div className='book__row1'>
-              <label className='p_label' htmlFor='b_paymentType'>MODE OF PAYMENT: </label>
-                <select className='payment__select' id="b_paymentType" name="b_paymentType" onChange={handleChange} >
+              <label className='p_label' htmlFor='p_paymentType'>MODE OF PAYMENT: </label>
+                <select className=' payment__select' id="p_paymentType" name="p_paymentType" value={p_paymentType} onChange={handleChange} >
                   <option value="" disabled selected>Select your option</option>
                   <option value="Cash">Cash</option>
                   <option value="Card">Card</option>
@@ -124,15 +214,15 @@ const handleChange = (event) => {
             </div>
 
               <div className='book__row1'>
-                <label className='p_label' htmlFor='b_payment'>PAID AMOUNT: </label>
-                <input className='b_payment payment__select' type='number' id="b_payment" name="b_payment" value={amountPaid || 0} onChange={handleChange} placeholder="Enter Amount Paid" />
+                <label className='p_label' htmlFor='p_paidAmount'>PAID AMOUNT: </label>
+                <input className='b_payment payment__select' type='number' id="p_paidAmount" name="p_paidAmount" value={p_paidAmount} onChange={handleChange} placeholder="Enter Amount Paid" />
               </div> 
             
-            {0 <= (amountPaid - ((Number((Number(sumData.totalAmount)).toFixed(2)) + Number((Number(data.totalAmount)).toFixed(2))).toFixed(2))) ? (
+            {0 <= (Number(p_paidAmount) - ((Number((Number(sumData.totalAmount)).toFixed(2)) + Number((Number(data.totalAmount)).toFixed(2))).toFixed(2))) ? (
                 <>
                     <div className='book__row1'>
-                        <label htmlFor='b_change'>CHANGE AMOUNT:  </label>
-                        <div className='amount__total total'>PHP {amountPaid - ((Number((Number(sumData.totalAmount)).toFixed(2)) + Number((Number(data.totalAmount)).toFixed(2))).toFixed(2))}</div>
+                        <label className='p_label' htmlFor='p_change'>CHANGE AMOUNT:  </label>
+                        <div id="p_change" name="p_change" className='amount__total total'>PHP {(Number(p_paidAmount) - ((Number((Number(sumData.totalAmount)).toFixed(2)) + Number((Number(data.totalAmount)).toFixed(2))).toFixed(2))).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
                      </div> 
                 
                 </> 
@@ -141,12 +231,12 @@ const handleChange = (event) => {
             
                     <div className='book__row1'>
                         <label className='p_label' htmlFor='b_change'>CHANGE AMOUNT:  </label>
-                        <div className='amount__total total'>PHP 0.00</div>
+                        <div id="p_change" name="p_change"  className='amount__total total'>PHP 0.00</div>
                      </div> 
 
                      <div className='book__row1'>
-                        <label className='p_label' htmlFor='b_balance'>REMAINING BALANCE:  </label>
-                        <div className='amount__total total'>PHP {(((Number((Number(sumData.totalAmount)).toFixed(2)) + Number((Number(data.totalAmount)).toFixed(2))).toFixed(2))- amountPaid).toFixed(2)}</div>
+                        <label className='p_label' htmlFor='p_balance'>REMAINING BALANCE:  </label>
+                        <div id="p_balance" name="p_balance" className='amount__total total'>PHP {(((Number((Number(sumData.totalAmount)).toFixed(2)) + Number((Number(data.totalAmount)).toFixed(2))).toFixed(2))- p_paidAmount).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
                      </div> 
 
                 </>

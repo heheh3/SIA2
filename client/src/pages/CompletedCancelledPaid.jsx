@@ -36,14 +36,14 @@ const CompletedCancelledPaid = () => {
                             <thead>
                                 <tr>
                                     <th style={{textAlign: "center"}}>No.</th>
-                                    <th style={{textAlign: "center"}}>Appointment ID</th>
+                                    <th style={{textAlign: "center"}}>Service ID</th>
                                     <th style={{textAlign: "center"}}>Date</th>
                                     <th style={{textAlign: "center"}}>Time</th>
                                     <th style={{textAlign: "center"}}>Procedure</th>
                                     <th style={{textAlign: "center"}}>Note</th>
                                     <th style={{textAlign: "center"}}>Status</th>
                                     <th style={{textAlign: "center"}}>Fee</th>
-                                    <th style={{textAlign: "center"}}>Actions</th>
+                                    <th style={{textAlign: "center"}}>Payment Status</th>
                                 </tr>
                             </thead>
                             <tbody>

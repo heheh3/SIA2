@@ -10,7 +10,7 @@ import employeeRoutes from "./routes/employee.js"
 import userRoutes from "./routes/users.js"
 import medicalRoutes from "./routes/medicalhistory.js"
 import inventoryRoutes from "./routes/inventory.js"
-
+import paymentRoutes from "./routes/payment.js"
 
 //middlewares
 app.use((req,res,next) =>{
@@ -32,6 +32,7 @@ app.use("/", employeeRoutes)
 app.use("/", inventoryRoutes)   
 app.use("/", userRoutes)
 app.use("/", medicalRoutes)
+app.use("/", paymentRoutes)
 
 
 app.listen(5000, () =>{

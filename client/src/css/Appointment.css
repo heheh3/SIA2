@@ -144,8 +144,7 @@ main{
 
 .payment__title{
     font-size: 2rem;
-    text-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-    color: black;
+    color: var(--blue-darker-teal);
 }
 .book__row{
     display: flex;
