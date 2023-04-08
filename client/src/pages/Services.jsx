@@ -4,7 +4,6 @@ import {Link} from "react-router-dom";
 import axios from 'axios';
 import AdminNavbar from './AdminNavbar';
 import '../css/Home.css';
-import { FaPlusCircle  } from "react-icons/fa";
 import { toast } from 'react-toastify';
 
 const Services = () => {
