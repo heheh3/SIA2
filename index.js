@@ -29,7 +29,7 @@ app.use(
 app.use("/", authRoutes)
 app.use("/", adminRoutes)
 app.use("/", employeeRoutes)
-app.use("/", inventoryRoutes)
+app.use("/", inventoryRoutes)   
 app.use("/", userRoutes)
 app.use("/", medicalRoutes)
 

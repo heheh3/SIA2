@@ -35,7 +35,6 @@ import ProceduresUpdate from './pages/ProceduresUpdate';
 import Inventory from './pages/Inventory';
 import InventoryAdd from './pages/InventoryAdd';
 import Services from './pages/Services';
-import UpdateService from './pages/UpdateService';
 import Payment from './pages/Payment';
 
 
@@ -79,7 +78,6 @@ function App() {
 
           <Route path='/admin/walk-in' element={<Walkin />} /> 
           <Route path='/admin/services' element={<Services />} /> 
-          <Route path='/admin/services/update/:id' element={<UpdateService />} /> 
 
 
           <Route path="/appointment" element={<Appointment />} />

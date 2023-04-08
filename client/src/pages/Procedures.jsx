@@ -4,11 +4,24 @@ import axios from 'axios';
 import AdminNavbar from './AdminNavbar';
 import '../css/Home.css';
 import { toast } from 'react-toastify';
+import { parseISO, format } from 'date-fns';
+
+const initialState = {
+    b_date: "",
+    b_time: "",
+    b_procedure: "",
+    b_note: "",
+    b_status: "",
+    b_paymentStatus: "",
+    procedFee: "",
+    b_update: ""
+  };
 
 
 
 const Procedures = () => {
-    const [b_status, setB_status] = useState("")
+    const [state, setState] = useState(initialState);
+    const {b_date, b_time, b_procedure, b_note, b_status, b_paymentStatus, procedFee, b_update} = state;
     const [data, setData] = useState([]);
     const [proceduresData, setProcedures] = useState([]);
     const [sumData, setSumData] = useState([]);
@@ -16,16 +29,28 @@ const Procedures = () => {
     const navigate = useNavigate();
 
     
+  useEffect (() => {
 
-    const loadData = async () =>{
-        const response = await axios.get(`http://localhost:5000/admin/appointment/get/${id}`);
-        setData(response.data);  
-    }
+    axios.get(`http://localhost:5000/admin/appointment/get/${id}`)
+    .then(response => {
+        setData(response.data); 
+      const { b_date, b_time, b_procedure, b_note, b_status, b_paymentStatus, procedFee, b_update} = response.data[0];
+      const isoDateString = format(new Date(b_date), 'yyyy-MM-dd');
+      const parsedDate = parseISO(isoDateString);
 
+      console.log(isoDateString)
+      console.log("parse:" + parsedDate)
+      
+     
+      setState({b_date: parsedDate, b_time: b_time, b_procedure: b_procedure, b_note: b_note, b_status: b_status, b_paymentStatus: b_paymentStatus, procedFee: procedFee, b_update: b_update}); 
+    }).catch(error => {
+      console.error(error);
+    });
+      
+  }, [id])
 
-    useEffect(()=>{
-        loadData();
-    }, [id])
+  console.log(data)
+
 
     const loadProcedures = async () =>{
         const response = await axios.get(`http://localhost:5000/admin/appointment/procedure/get/${id}`);
@@ -59,28 +84,51 @@ const Procedures = () => {
         }
     }
 
+
+
     const handleSubmit = (e) =>{
         e.preventDefault();
-        axios.put(`http://localhost:5000/admin/appointment/update/${id}`, {
-            b_status 
-          }).then((response)=>{              
-              toast.success("Services Updated Successfully");
-              if(b_status === "Completed" || b_status === "R-Competed"){
-                setTimeout(()=> navigate(`/admin/completed/procedures/${id}`),500)
-              } else{
-                setTimeout(()=> navigate(`/admin/completed/procedures/${id}`),500)
-              }
+
+        if (b_status === "R-In Progress"){
+            const newstatus = "R-Completed"
+            if(window.confirm("Is all the information that has been made correct?")){
+                axios.put(`http://localhost:5000/admin/appointment/update/${id}`, {
+                    b_date,
+                    b_time,
+                    b_procedure,
+                    b_note,
+                    b_status: newstatus,  
+                    b_paymentStatus,
+                    procedFee,
+                    b_update  
+              }).then((response)=>{              
+                    toast.success("Services Updated Successfully");
+                    setTimeout(()=> navigate(`/admin/completed/procedures/${id}`),500)     
+                })
+                .catch((err) => toast.error(err.response.data));
+             }
+            
     
-          
-              
-          
-            
-            })
-            .catch((err) => toast.error(err.response.data));
-            
-          }
-        
-      
+        } else{
+            const newstatus = "Completed"
+            if(window.confirm("Is all the information that has been made correct?")){
+                axios.put(`http://localhost:5000/admin/appointment/update/${id}`, {
+                    b_date,
+                    b_time,
+                    b_procedure,
+                    b_note,
+                    b_status: newstatus,  
+                    b_paymentStatus,
+                    procedFee,
+                    b_update  
+              }).then((response)=>{              
+                    toast.success("Services Updated Successfully");
+                    setTimeout(()=> navigate(`/admin/completed/procedures/${id}`),500)     
+                })
+                .catch((err) => toast.error(err.response.data));
+             }
+      }
+    }
     
     
     return (
@@ -96,10 +144,7 @@ const Procedures = () => {
 
 
                     <form onSubmit={handleSubmit}>
-                            
-                    
-                    
-                        <button className='back__procedures'>Next</button>
+                        <button className='back__procedures'>Save & Next</button>
                     </form>
                 </div>
              
