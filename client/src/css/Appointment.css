@@ -125,7 +125,7 @@ main{
 
 .appointmentCard2{
     width: 60%;
-    background-color: var(--blue-darker-teal);
+    background-color: var(--white);
     flex-direction: column;
     border-radius: 20px;
     color: var(--white);
@@ -138,8 +138,15 @@ main{
 .book__title{
     margin-bottom: 1rem;
     text-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+   
 }
 
+
+.payment__title{
+    font-size: 2rem;
+    text-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    color: black;
+}
 .book__row{
     display: flex;
     justify-content: space-between;
@@ -147,9 +154,9 @@ main{
     
 }
 
-span .span__line{
+.span__line{
     display: block;
-    border-bottom: 2px solid white;
+    border-bottom: 2px solid black;
     margin: 10px 0;
 }
 
@@ -163,7 +170,11 @@ span .span__line{
 
 .amount__total{
     font-size: 1.25rem;
-    font-weight: bold;
+    color: black;
+}
+
+.p_label{
+    color: black;
 }
 
 .total{
@@ -217,6 +228,14 @@ textarea{
     border: none;
     color: var(--gray);
 }
+
+select.payment__select,
+input[type="number"].payment__select{
+    width: 30%;
+    border: 1px solid black;
+    
+}
+
 
 
 textarea{
@@ -273,6 +292,16 @@ input[type="submit"]{
 
 }
 
+input[type="submit"].payment__btn-update{
+    background-color: var(--blue-darker-teal);
+    color: white;
+    font-weight: 300;
+
+
+}
+
+
+
 .book-button{
      width: 100%;
      margin: 10px 0;
@@ -280,6 +309,12 @@ input[type="submit"]{
 
 input[type="submit"]:hover{
     background-color: rgba(255, 255, 255, 0.8);
+}
+
+input[type="submit"].payment__btn-update:hover{
+    background-color: var(--blue-darker-teal);
+    opacity: 0.7;
+
 }
 
 .login__title{
