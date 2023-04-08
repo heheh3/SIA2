@@ -91,18 +91,18 @@ const Payment = () => {
       let p_addFee = sumFee
       const totalAmount = (Number((Number(sumData.totalAmount)).toFixed(2)) + Number((Number(data.totalAmount)).toFixed(2))).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})
       let p_totalPayment = totalAmount
-      const change = (Number(p_paidAmount) - ((Number((Number(sumData.totalAmount)).toFixed(2)) + Number((Number(data.totalAmount)).toFixed(2))).toFixed(2))).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})
-      let p_change = change
-      const balance = (((Number((Number(sumData.totalAmount)).toFixed(2)) + Number((Number(data.totalAmount)).toFixed(2))).toFixed(2))- p_paidAmount).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})
+      const balance = (Number(p_paidAmount) - ((Number((Number(sumData.totalAmount)).toFixed(2)) + Number((Number(data.totalAmount)).toFixed(2))).toFixed(2))).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})
       let p_balance = balance
+      if(p_balance < 0) p_balance = 0
+
+      const change = (((Number((Number(sumData.totalAmount)).toFixed(2)) + Number((Number(data.totalAmount)).toFixed(2))).toFixed(2)) - p_paidAmount).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})
+      
+      let p_change = change
+      if(p_change < 0) p_change = 0
 
       if (!p_paidAmount || p_paidAmount){
   
           toast.error("Please provide value into each input field");
-          toast.error(p_date)
-          toast.error(p_addFee)
-          toast.error(p_totalProd)
-          toast.error(p_totalPayment)
           toast.error(p_paymentType)
           toast.error(p_paidAmount)
           toast.error("change " + p_balance)
