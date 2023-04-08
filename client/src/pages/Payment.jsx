@@ -29,7 +29,7 @@ const Payment = () => {
     const [state1, setState1] = useState(initialState);
 
     const [invoice_ID, setInvoice_ID] = useState(0);
-    const {p_paymentType, p_paidAmount, p_totalProd, p_addFee, p_totalPayment, p_change,p_balance} = state;
+    const {p_paymentType, p_paidAmount, p_addFee,p_totalProd, p_totalPayment, p_change,p_balance} = state;
     // const {p_paymentType, p_paidAmount} = state;
     const [sumData, setSumData] = useState([]);
     const dateToday = format(new Date(), 'EEE, MMM dd, yyyy h:mm aa');
@@ -84,12 +84,31 @@ const Payment = () => {
 
     const handleSubmit = (e) =>{
       e.preventDefault();
+
+      const sumProced = (Number(sumData.totalAmount)).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})
+      let p_totalProd = sumProced
+      const sumFee= (Number(data.totalAmount)).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})
+      let p_addFee = sumFee
+      const totalAmount = (Number((Number(sumData.totalAmount)).toFixed(2)) + Number((Number(data.totalAmount)).toFixed(2))).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})
+      let p_totalPayment = totalAmount
+      const change = (Number(p_paidAmount) - ((Number((Number(sumData.totalAmount)).toFixed(2)) + Number((Number(data.totalAmount)).toFixed(2))).toFixed(2))).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})
+      let p_change = change
+      const balance = (((Number((Number(sumData.totalAmount)).toFixed(2)) + Number((Number(data.totalAmount)).toFixed(2))).toFixed(2))- p_paidAmount).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})
+      let p_balance = balance
+
       if (!p_paidAmount || p_paidAmount){
   
           toast.error("Please provide value into each input field");
           toast.error(p_date)
-
+          toast.error(p_addFee)
           toast.error(p_totalProd)
+          toast.error(p_totalPayment)
+          toast.error(p_paymentType)
+          toast.error(p_paidAmount)
+          toast.error("change " + p_balance)
+          toast.error("balance " + p_change)
+
+
 
      
       } else{
@@ -115,8 +134,6 @@ const Payment = () => {
         }
       }
 
-      console.log("The date today is: " + p_date)
-      console.log("The p_totalProd today is: " + p_totalProd)
 
 
     const handleChange = (event) => {
@@ -172,24 +189,12 @@ const Payment = () => {
 
             <div className='book__row1'>
                     <label className='p_label' htmlFor='p_date'>DATE:  </label>
-                    <input 
-                      className='amount__total infos'
-                      type='text' 
-                      name='p_date' 
-                      id='p_date'
-                      value={setP_date} 
-
-                    />
-{/* 
-                    <input type='text' id="p_date" name="p_date" value={dateToday} className='amount__total infos' />
-                    <input className='b_payment payment__select' type='number' id="p_paidAmount" name="p_paidAmount" value={p_paidAmount} onChange={handleChange} placeholder="Enter Amount Paid" /> */}
-
+                    <div id="p_date" name="p_date" className='amount__total' >{dateToday}</div>
             </div>    
 
             <div className='book__row1'>
                 <label className='p_label' htmlFor='b_totProcedFee'>TOTAL PROCEDURAL FEE:  </label>
-                {/* <div id="p_totalProd" name="p_totalProd" className='amount__total' >{(Number(sumData.totalAmount)).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div> */}
-                <input type='text' id="p_totalProd" name="p_totalProd" value={( Number(sumData.totalAmount)).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}  className='amount__total infos' disabled/>
+                <div id="p_totalProd" name="p_totalProd" className='amount__total' >{(Number(sumData.totalAmount)).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
             </div>  
 
             <div className='book__row1'>
