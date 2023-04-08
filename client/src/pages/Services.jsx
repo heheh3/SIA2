@@ -95,7 +95,7 @@ const Services = () => {
                                     <td>{item.b_update}</td>
                                     <td>                        
                                         <Link to={`/admin/services/procedures/${item.a_ID}`}>
-                                            <button className='btn btn-view'>Proceed</button>
+                                            <button className='btn btn-view'>Next Step</button>
                                         </Link>
                                         <button className='btn btn-delete' onClick={() => deleteAppointment(item.a_ID)}>Delete</button>
 

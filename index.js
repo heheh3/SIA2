@@ -23,6 +23,7 @@ app.use(
         origin: "http://localhost:3000",
 }));
     app.use(cookieParser())
+    
 //routes
 
 app.use("/", authRoutes)

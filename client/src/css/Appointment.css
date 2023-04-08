@@ -260,6 +260,7 @@ option:disabled{
 }
 
 input[type="submit"]{
+    width: 100%;
     border: none;
     color: var(--blue-dark-teal);
     background-color: var(--white);

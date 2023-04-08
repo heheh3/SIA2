@@ -1,18 +1,21 @@
 import React, {useState, useEffect, useContext} from 'react';
-import {Link, useParams} from "react-router-dom";
+import {Link, useParams, useNavigate} from "react-router-dom";
 import axios from 'axios';
 import AdminNavbar from './AdminNavbar';
 import '../css/Home.css';
-import CancelledAppointment from './CancelledAppointment';
 import { toast } from 'react-toastify';
 
 
 
 const Procedures = () => {
+    const [b_status, setB_status] = useState("")
     const [data, setData] = useState([]);
     const [proceduresData, setProcedures] = useState([]);
     const [sumData, setSumData] = useState([]);
     const {id} = useParams();
+    const navigate = useNavigate();
+
+    
 
     const loadData = async () =>{
         const response = await axios.get(`http://localhost:5000/admin/appointment/get/${id}`);
@@ -44,6 +47,7 @@ const Procedures = () => {
         loadSum();   
     }, [id])
 
+    console.log(data)
     
     const deleteProcedure = (id)=>{
         if(window.confirm("Are you sure you wanted to delete this user?")){
@@ -54,6 +58,30 @@ const Procedures = () => {
        
         }
     }
+
+    const handleSubmit = (e) =>{
+        e.preventDefault();
+        axios.put(`http://localhost:5000/admin/appointment/update/${id}`, {
+            b_status 
+          }).then((response)=>{              
+              toast.success("Services Updated Successfully");
+              if(b_status === "Completed" || b_status === "R-Competed"){
+                setTimeout(()=> navigate(`/admin/completed/procedures/${id}`),500)
+              } else{
+                setTimeout(()=> navigate(`/admin/completed/procedures/${id}`),500)
+              }
+    
+          
+              
+          
+            
+            })
+            .catch((err) => toast.error(err.response.data));
+            
+          }
+        
+      
+    
     
     return (
         <div>
@@ -65,9 +93,14 @@ const Procedures = () => {
                     <Link to={`/admin/services`}>
                         <button className='back__procedures'>Back</button>
                     </Link>
-                    <Link to={`/admin/services/update/${id}`}>
+
+
+                    <form onSubmit={handleSubmit}>
+                            
+                    
+                    
                         <button className='back__procedures'>Next</button>
-                    </Link>
+                    </form>
                 </div>
              
                 <h1 className='h1__apppointment'>Services Details</h1>
