@@ -123,13 +123,13 @@ const handleChange = (event) => {
                     </select>
             </div>
 
-              <div className='book__row'>
+              <div className='book__row1'>
                 <label htmlFor='b_payment'>PAID AMOUNT: </label>
                 <input className='b_payment' type='number' id="b_payment" name="b_payment" value={amountPaid} onChange={handleChange} placeholder="Enter Amount Paid" />
  
               </div> 
             
-            {0 < (amountPaid - ((Number((Number(sumData.totalAmount)).toFixed(2)) + Number((Number(data.totalAmount)).toFixed(2))).toFixed(2))) ? (
+            {0 <= (amountPaid - ((Number((Number(sumData.totalAmount)).toFixed(2)) + Number((Number(data.totalAmount)).toFixed(2))).toFixed(2))) ? (
                 <>
                     <div className='book__row1'>
                         <label htmlFor='b_change'>CHANGE AMOUNT:  </label>

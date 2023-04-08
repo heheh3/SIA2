@@ -18,7 +18,6 @@ const initialState = {
 
   }
 
-
 const ProceduresAdd = () => {
     const [state, setState] = useState(initialState);
     const {a_ID, b_procedure, toothNo, toothType, procedFee} = state;
@@ -28,28 +27,17 @@ const ProceduresAdd = () => {
     const [selectedNote, setSelectedNote] = useState("");
     const [b_note, setBNote] = useState("");
     const {id} = useParams();
-    console.log(id)
     const navigate = useNavigate();
-
-    console.log(toothNo)
 
 
     const handleSubmit = (e) =>{
         e.preventDefault();
-        // console.log(typeof(selectedNumbers))
-        // console.log(selectedNumbers)
-        // console.log((selectedNumbers).toString())
         if (selectedNumbers != ''){
-            const toothNo = (selectedNumbers).toString()   
-            
+            const toothNo = (selectedNumbers).toString() 
+          
             if (!b_procedure || !procedFee){
                 toast.error("Please provide value into each input field");
-       
-                
-        
             } else{
-              
-    
                 axios.post(`http://localhost:5000/admin/appointment/procedure/post/${id}`, {
                     a_ID,
                     b_procedure,
