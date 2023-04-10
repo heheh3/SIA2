@@ -114,6 +114,17 @@ body{
     color: black;
    
 }
+.btn-receipt{
+    background-color: var(--blue-darker-teal);
+    color: white;
+   
+}
+
+.btn-receipt:hover{
+    background-color: var(--blue-darker-teal);
+    opacity: 0.7;
+   
+}
 
 
 .bookAppointment{

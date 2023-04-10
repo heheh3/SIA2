@@ -48,7 +48,7 @@ const Completed = () => {
 
 
     const deleteAppointment = (id)=>{
-        if(window.confirm("Are you sure you wanted to delete this appointment?")){
+        if(window.confirm("Are you sure you wanted to delete this transaction?")){
             axios.delete(`http://localhost:5000/appointment/delete/${id}`);
             toast.success("Appointment Deleted Successfully!");
             setTimeout(()=> loadData(), 500);
@@ -117,10 +117,10 @@ const Completed = () => {
                                     </td>
                                     <td>{item.b_update}</td>
                                     <td>
-                                        {item.b_paymentStatus === 'Fully-Paid' ? (
+                                        {item.b_paymentStatus === 'Fully-Paid' || item.b_paymentStatus === 'EMI'  ? (
                                         <>
                                              <Link to={`/admin/completed/receipt/${item.a_ID}`}>
-                                                <button className='btn btn-view'>Generate Receipt</button>
+                                                <button className='btn btn-receipt'>Generate Receipt</button>
                                             </Link>
                                         </>
                                         ) : (
