@@ -6,11 +6,6 @@ import AdminNavbar from './AdminNavbar';
 import '../css/Home.css';
 import { toast } from 'react-toastify';
 
-
-
-
-
-
 const Completed = () => {
 
     const [data, setData] = useState([]);
@@ -122,13 +117,20 @@ const Completed = () => {
                                     </td>
                                     <td>{item.b_update}</td>
                                     <td>
-                                    
-                                        <Link to={`/admin/completed/procedures/${item.a_ID}`}>
-                                            <button className='btn btn-view'>View/Edit</button>
-                                        </Link>
-                                        <button className='btn btn-delete' onClick={() => deleteAppointment(item.a_ID)}>Delete</button>
-                                        
-                                        
+                                        {item.b_paymentStatus === 'Fully-Paid' ? (
+                                        <>
+                                             <Link to={`/admin/completed/receipt/${item.a_ID}`}>
+                                                <button className='btn btn-view'>Generate Receipt</button>
+                                            </Link>
+                                        </>
+                                        ) : (
+                                        <>
+                                            <Link to={`/admin/completed/procedures/${item.a_ID}`}>
+                                                <button className='btn btn-view'>Payment</button>
+                                            </Link>
+                                            <button className='btn btn-delete' onClick={() => deleteAppointment(item.a_ID)}>Delete</button>
+                                        </>
+                                        )}  
                                     </td>
                                 </tr>
                                 
@@ -139,6 +141,7 @@ const Completed = () => {
                 </table> 
         </div>
         </body>
+
 
     </div>
   )

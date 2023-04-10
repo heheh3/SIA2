@@ -4,8 +4,9 @@ import "../css/Appointment.css";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import AdminNavbar from './AdminNavbar';
-import {format} from 'date-fns';
+import {parseISO, format} from 'date-fns';
 import {toast} from "react-toastify";
+
 
 
 
@@ -14,12 +15,24 @@ const initialState = {
   p_paidAmount: 0,
 };
 
+const initialState1 = {
+  b_date: "",
+  b_time: "",
+  b_procedure: "",
+  b_note: "",
+  b_status: "",
+  b_paymentStatus: "",
+  procedFee: "",
+  b_update: ""
+};
+
 
 const Payment = () => {
-    const [b_paymentStatus, setStatus] = useState("")
     const [data, setData] = useState([]);
     const [data1, setData1] = useState([]);
     const [state, setState] = useState(initialState);
+    const [state1, setState1] = useState(initialState1);
+    const {b_date, b_time, b_procedure, b_note, b_status, b_paymentStatus, procedFee, b_update} = state1;
     const [invoice_ID, setInvoice_ID] = useState(0);
     const {p_paymentType, p_paidAmount} = state;
     const [sumData, setSumData] = useState([]);
@@ -30,6 +43,15 @@ const Payment = () => {
 
     const loadData = async () =>{
         const response = await axios.get(`http://localhost:5000/admin/appointment/get/${id}`);
+        const { b_date, b_time, b_procedure, b_note, b_status, b_paymentStatus, procedFee, b_update} = response.data[0];
+        const isoDateString = format(new Date(b_date), 'yyyy-MM-dd');
+        const parsedDate = parseISO(isoDateString);
+        console.log(isoDateString)
+        console.log("parse:" + parsedDate)
+    
+        setState1({b_date: parsedDate, b_time: b_time, b_procedure: b_procedure, b_note: b_note, b_status: b_status, b_paymentStatus: b_paymentStatus, procedFee: procedFee, b_update: b_update}); 
+        
+
         setData1(response.data[0]);  
     }
 
@@ -38,6 +60,15 @@ const Payment = () => {
     useEffect(()=>{
         loadData();
     }, [id])
+
+    const cancelledSum = async () =>{
+      const response = await axios.get(`http://localhost:5000/admin/completedCancelled/sum/${data1.user_id}/${data1.a_ID}`);
+      setData(response.data[0]);  
+    }
+
+  useEffect(()=>{
+      cancelledSum();
+  }, [data1.user_id, data1.a_ID])
 
 
     const loadSum = async () =>{
@@ -50,15 +81,7 @@ const Payment = () => {
     }, [id])
 
 
-
-    const cancelledSum = async () =>{
-        const response = await axios.get(`http://localhost:5000/admin/completedCancelled/sum/${data1.user_id}/${data1.a_ID}`);
-        setData(response.data[0]);  
-    }
-
-    useEffect(()=>{
-        cancelledSum();
-    }, [id])
+    console.log(data.totalAmount)
 
     console.log(data1.b_paymentStatus)
 
@@ -78,16 +101,23 @@ const Payment = () => {
       let p_balance = balance
       if(p_balance < 0) p_balance = 0
       if(p_change < 0) p_change = 0
+      let paymentStatus = data1.b_paymentStatus
+      if(paymentStatus === "Not-Paid" && p_balance === 0) paymentStatus = "Fully-Paid" 
+      console.log(paymentStatus)
+      if(paymentStatus === "Not-Paid" && p_balance !== 0) paymentStatus = "EMI"
+      console.log(paymentStatus)
+      let b_paymentStatus = paymentStatus
 
       if (!p_paidAmount || !p_paidAmount){
+      
   
           toast.error("Please provide value into each input field");
-          toast.error(dateToday)
-
-          toast.error(p_paymentType)
-          toast.error(p_paidAmount)
-          toast.error(p_balance)
-          toast.error(p_change)
+          // toast.error(dateToday)
+          // toast.error(paymentStatus)
+          // toast.error(p_paymentType)
+          // toast.error(p_paidAmount)
+          // toast.error(p_balance)
+          // toast.error(p_change)
 
 
 
@@ -108,8 +138,14 @@ const Payment = () => {
             })
 
             axios.put(`http://localhost:5000/admin/appointment/update/${id}`, {
-              b_paymentStatus,  
- 
+                b_date,
+                b_time,
+                b_procedure,
+                b_note,
+                b_status,  
+                b_paymentStatus,
+                procedFee,
+                b_update
           })
           
           .then(()=>{

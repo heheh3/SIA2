@@ -43,7 +43,7 @@ const CompletedCancelledPaid = () => {
                                     <th style={{textAlign: "center"}}>Note</th>
                                     <th style={{textAlign: "center"}}>Status</th>
                                     <th style={{textAlign: "center"}}>Fee</th>
-                                    <th style={{textAlign: "center"}}>Payment Status</th>
+                               
                                 </tr>
                             </thead>
                             <tbody>
@@ -63,11 +63,7 @@ const CompletedCancelledPaid = () => {
                                             }>{item.b_status}</span>
                                             </td>
                                             <td>{item.procedFee}</td>
-                                            <td><span  style={
-                                                {backgroundColor: item.b_paymentStatus === "Not-Paid" ? 'red' : '' ||   item.b_paymentStatus === "Fully-Paid" ? 'green': '' ||
-                                                        item.b_paymentStatus === "EMI" ? 'pink': '' , padding: '5px 10px', color: 'white', borderRadius: '10px', fontSize: '0.8rem', letterSpacing: "1.5px",}
-                                                }>{item.b_paymentStatus}</span>
-                                            </td>
+                                        
                                         </tr>
                                     )})}
                             </tbody>
