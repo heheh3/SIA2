@@ -36,7 +36,7 @@ const Payment = () => {
 
     useEffect(()=>{
         loadData();
-    }, [id])
+    })
 
 
     const loadSum = async () =>{
@@ -46,7 +46,7 @@ const Payment = () => {
 
     useEffect(()=>{
         loadSum();   
-    }, [id])
+    })
 
     
 
@@ -59,7 +59,7 @@ const Payment = () => {
 
     useEffect(()=>{
         cancelledSum();
-    }, [data1.user_id, data1.a_ID])
+    })
 
 
 
@@ -110,7 +110,7 @@ const Payment = () => {
              
             })
           .then(()=>{
-              setState({p_paidAmount: "" , p_paidAmount: ""})
+              setState({p_paidAmount: "" , p_paymentType: ""})
               toast.success("Service Updated Successfully");
           }).catch((err) => toast.error(err.response.data) );
 
