@@ -16,6 +16,7 @@ const initialState = {
 
 
 const Payment = () => {
+    const [b_paymentStatus, setStatus] = useState("")
     const [data, setData] = useState([]);
     const [data1, setData1] = useState([]);
     const [state, setState] = useState(initialState);
@@ -36,7 +37,7 @@ const Payment = () => {
 
     useEffect(()=>{
         loadData();
-    })
+    }, [id])
 
 
     const loadSum = async () =>{
@@ -46,9 +47,7 @@ const Payment = () => {
 
     useEffect(()=>{
         loadSum();   
-    })
-
-    
+    }, [id])
 
 
 
@@ -59,9 +58,9 @@ const Payment = () => {
 
     useEffect(()=>{
         cancelledSum();
-    })
+    }, [id])
 
-
+    console.log(data1.b_paymentStatus)
 
 
     const handleSubmit = (e) =>{
@@ -73,13 +72,11 @@ const Payment = () => {
       let p_addFee = sumFee
       const totalAmount = (Number((Number(sumData.totalAmount)).toFixed(2)) + Number((Number(data.totalAmount)).toFixed(2)))
       let p_totalPayment = totalAmount
-      const balance = (Number(p_paidAmount) - ((Number((Number(sumData.totalAmount)).toFixed(2)) + Number((Number(data.totalAmount)).toFixed(2))).toFixed(2)))
+      const change = (Number(p_paidAmount) - ((Number((Number(sumData.totalAmount)).toFixed(2)) + Number((Number(data.totalAmount)).toFixed(2))).toFixed(2)))
+      let p_change = change
+      const balance = (((Number((Number(sumData.totalAmount)).toFixed(2)) + Number((Number(data.totalAmount)).toFixed(2))).toFixed(2)) - p_paidAmount)
       let p_balance = balance
       if(p_balance < 0) p_balance = 0
-
-      const change = (((Number((Number(sumData.totalAmount)).toFixed(2)) + Number((Number(data.totalAmount)).toFixed(2))).toFixed(2)) - p_paidAmount)
-      
-      let p_change = change
       if(p_change < 0) p_change = 0
 
       if (!p_paidAmount || !p_paidAmount){
@@ -109,6 +106,12 @@ const Payment = () => {
             p_balance
              
             })
+
+            axios.put(`http://localhost:5000/admin/appointment/update/${id}`, {
+              b_paymentStatus,  
+ 
+          })
+          
           .then(()=>{
               setState({p_paidAmount: "" , p_paymentType: ""})
               toast.success("Service Updated Successfully");

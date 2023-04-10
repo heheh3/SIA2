@@ -58,7 +58,7 @@ const ProceduresUpdate = () => {
     const handleSubmit = (e) =>{
         e.preventDefault();
 
-        if (selectedNumbers != ''){
+        if (selectedNumbers !== ''){
           const toothNo = (selectedNumbers).toString()   
           
           if (!b_procedure || !procedFee){
@@ -160,15 +160,7 @@ const ProceduresUpdate = () => {
 
           };
 
-
-    // const toothNumberAndNotes = Object.entries(notes)
-    // .filter(([n, note]) => note !== "")
-    // .map(([n, note]) => `${n} - "${note}"`)
-    // .join(', ');
-
-
     let selectedImage = toothType === "Adult" ? adultPNG : childPNG;
-    //let selectedNumbers = toothType === "Adult" ? adultNumbers : childNumbers;
 
     return (
         <div>
