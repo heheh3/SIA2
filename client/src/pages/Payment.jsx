@@ -198,7 +198,9 @@ const Payment = () => {
                 <select className=' payment__select' id="p_paymentType" name="p_paymentType" value={p_paymentType} onChange={handleChange} >
                   <option value="" disabled selected>Select your option</option>
                   <option value="Cash">Cash</option>
+                  <option value="GCash">GCash</option>
                   <option value="Card">Card</option>
+                  
               </select>
             </div>
 
