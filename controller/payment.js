@@ -1,4 +1,3 @@
-import {parseISO, format} from 'date-fns';
 import { db } from "../connection.js";
 
 export const payment_post = (req, res) =>{
@@ -14,18 +13,8 @@ export const payment_post = (req, res) =>{
     const p_change = req.body.p_change;
     const p_balance = req.body.p_balance;
 
-    const updated = parseISO(p_date);
-
-    console.log(updated)
-    console.log(invoice_ID)
-    console.log(p_totalPayment)
-    console.log(p_balance)
-
-
-
-
-    const sqlInsert = "INSERT INTO payment_db (service_ID, invoice_ID, p_date, p_totalProd, p_addFee, p_totalPayment, p_paidAmount, p_paymentType,  p_change, p_balance) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    db.query(sqlInsert, [service_ID, invoice_ID, updated, p_totalProd, p_addFee, p_totalPayment, p_paidAmount, p_paymentType, p_change, p_balance], (err, result) =>{
+    const sqlInsert = "INSERT INTO payment_db (service_ID, invoice_ID, p_date, p_totalProd, p_addFee, p_totalPayment, p_paidAmount, p_paymentType,  p_change, p_balance) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    db.query(sqlInsert, [service_ID, invoice_ID, p_date, p_totalProd, p_addFee, p_totalPayment, p_paidAmount, p_paymentType, p_change, p_balance], (err, result) =>{
         if (err){
             console.log(err);
         }else {

@@ -10,15 +10,8 @@ import {toast} from "react-toastify";
 
 
 const initialState = {
-  p_date: "",
-  p_totalProd: "",
-  p_addFee:"",
-  p_totalPayment: "",
   p_paymentType: "",
   p_paidAmount: 0,
-  p_change: "",
-  p_balance: ""
-  
 };
 
 
@@ -26,24 +19,13 @@ const Payment = () => {
     const [data, setData] = useState([]);
     const [data1, setData1] = useState([]);
     const [state, setState] = useState(initialState);
-    const [state1, setState1] = useState(initialState);
-
     const [invoice_ID, setInvoice_ID] = useState(0);
-    const {p_paymentType, p_paidAmount, p_addFee,p_totalProd, p_totalPayment, p_change,p_balance} = state;
-    // const {p_paymentType, p_paidAmount} = state;
+    const {p_paymentType, p_paidAmount} = state;
     const [sumData, setSumData] = useState([]);
     const dateToday = format(new Date(), 'EEE, MMM dd, yyyy h:mm aa');
     const navigate = useNavigate();
     const {id} = useParams();
     const [service_ID, setService_ID] = useState(id);
-    const [p_date, setP_date] = useState(dateToday);
-
-
-    
-
-
-    console.log(dateToday)
-
 
     const loadData = async () =>{
         const response = await axios.get(`http://localhost:5000/admin/appointment/get/${id}`);
@@ -100,9 +82,11 @@ const Payment = () => {
       let p_change = change
       if(p_change < 0) p_change = 0
 
-      if (!p_paidAmount || p_paidAmount){
+      if (!p_paidAmount || !p_paidAmount){
   
           toast.error("Please provide value into each input field");
+          toast.error(dateToday)
+
           toast.error(p_paymentType)
           toast.error(p_paidAmount)
           toast.error(p_balance)
@@ -112,10 +96,10 @@ const Payment = () => {
 
      
       } else{
-           axios.post("http://localhost:5000/appointment/post", {
+           axios.post(`http://localhost:5000/admin/completed/payment/${id}`, {
             invoice_ID,
             service_ID,
-            p_date,
+            p_date: dateToday,
             p_totalProd,
             p_addFee,
             p_totalPayment,
@@ -129,8 +113,8 @@ const Payment = () => {
               setState({p_paidAmount: "" , p_paidAmount: ""})
               toast.success("Service Updated Successfully");
           }).catch((err) => toast.error(err.response.data) );
-   
-          setTimeout(()=> navigate("/completed"), 300)
+
+          setTimeout(()=> navigate("/admin/completed"), 300)
         }
       }
 
