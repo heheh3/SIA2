@@ -85,17 +85,17 @@ const Payment = () => {
     const handleSubmit = (e) =>{
       e.preventDefault();
 
-      const sumProced = (Number(sumData.totalAmount)).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})
+      const sumProced = (Number(sumData.totalAmount))
       let p_totalProd = sumProced
-      const sumFee= (Number(data.totalAmount)).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})
+      const sumFee= (Number(data.totalAmount))
       let p_addFee = sumFee
-      const totalAmount = (Number((Number(sumData.totalAmount)).toFixed(2)) + Number((Number(data.totalAmount)).toFixed(2))).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})
+      const totalAmount = (Number((Number(sumData.totalAmount)).toFixed(2)) + Number((Number(data.totalAmount)).toFixed(2)))
       let p_totalPayment = totalAmount
-      const balance = (Number(p_paidAmount) - ((Number((Number(sumData.totalAmount)).toFixed(2)) + Number((Number(data.totalAmount)).toFixed(2))).toFixed(2))).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})
+      const balance = (Number(p_paidAmount) - ((Number((Number(sumData.totalAmount)).toFixed(2)) + Number((Number(data.totalAmount)).toFixed(2))).toFixed(2)))
       let p_balance = balance
       if(p_balance < 0) p_balance = 0
 
-      const change = (((Number((Number(sumData.totalAmount)).toFixed(2)) + Number((Number(data.totalAmount)).toFixed(2))).toFixed(2)) - p_paidAmount).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})
+      const change = (((Number((Number(sumData.totalAmount)).toFixed(2)) + Number((Number(data.totalAmount)).toFixed(2))).toFixed(2)) - p_paidAmount)
       
       let p_change = change
       if(p_change < 0) p_change = 0
@@ -105,8 +105,8 @@ const Payment = () => {
           toast.error("Please provide value into each input field");
           toast.error(p_paymentType)
           toast.error(p_paidAmount)
-          toast.error("change " + p_balance)
-          toast.error("balance " + p_change)
+          toast.error(p_balance)
+          toast.error(p_change)
 
 
 
