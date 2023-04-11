@@ -38,6 +38,7 @@ import Services from './pages/Services';
 import Payment from './pages/Payment';
 import PaymentPartly from './pages/PaymentPartly';
 import ShowDetails from './pages/ShowDetails';
+import ShowDetailsPatient from './pages/ShowDetailsPatient';
 
 
 
@@ -68,6 +69,8 @@ function App() {
           <Route path='/admin/user/profile-settings/:id' element={<UpdatePatient />} />
           <Route path='/admin/user/medical-history/:id' element={<AdminMedicalHistory />} />
           <Route path='/admin/user/appointment-history/:id' element={<AdminPatientHistory />} />
+          <Route path='/profile/appointment-history/show-details/:id' element={<ShowDetailsPatient />} />
+
           <Route path='/admin/user/book/:id' element={<PatientBook />} />
           
           <Route path='/admin/services/procedures/add/:id' element={<ProceduresAdd />} /> 
