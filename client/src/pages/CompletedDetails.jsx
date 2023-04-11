@@ -101,7 +101,7 @@ const CompletedDetails = () => {
                                     </td>
                                     <td><span  style={
                                         {backgroundColor: item.b_paymentStatus === "Not-Paid" ? 'red' : '' ||   item.b_paymentStatus === "Fully-Paid" ? 'green': '' ||
-                                                item.b_paymentStatus === "EMI" ? 'pink': '' , padding: '5px 10px', color: 'white', borderRadius: '10px', fontSize: '0.8rem', letterSpacing: "1.5px",}
+                                                item.b_paymentStatus === "EMI" ? 'pink': '' ||   item.b_paymentStatus === "Partly-Paid" ? 'blue': '' , padding: '5px 10px', color: 'white', borderRadius: '10px', fontSize: '0.8rem', letterSpacing: "1.5px",}
                                         }>{item.b_paymentStatus}</span>
                                     </td>
                                    

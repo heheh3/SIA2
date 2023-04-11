@@ -112,25 +112,41 @@ const Completed = () => {
                                     </td>
                                     <td><span  style={
                                         {backgroundColor: item.b_paymentStatus === "Not-Paid" ? 'red' : '' ||   item.b_paymentStatus === "Fully-Paid" ? 'green': '' ||
-                                                item.b_paymentStatus === "EMI" ? 'pink': '' , padding: '5px 10px', color: 'white', borderRadius: '10px', fontSize: '0.8rem', letterSpacing: "1.5px",}
+                                                item.b_paymentStatus === "EMI" ? 'pink': ''  ||   item.b_paymentStatus === "Partly-Paid" ? 'blue': ''  , padding: '5px 10px', color: 'white', borderRadius: '10px', fontSize: '0.8rem', letterSpacing: "1.5px",}
                                         }>{item.b_paymentStatus}</span>
                                     </td>
                                     <td>{item.b_update}</td>
                                     <td>
-                                        {item.b_paymentStatus === 'Fully-Paid' || item.b_paymentStatus === 'EMI'  ? (
+                               
+                                     {item.b_paymentStatus === 'Fully-Paid' || item.b_paymentStatus === 'Partly-Paid'  ? (
                                         <>
-                                             <Link to={`/admin/completed/receipt/${item.a_ID}`}>
-                                                <button className='btn btn-receipt'>Generate Receipt</button>
-                                            </Link>
+                                         {item.b_paymentStatus === 'Fully-Paid' ? (
+                                             <>
+                                                <Link to={`/admin/completed/receipt/${item.a_ID}`}>
+                                                    <button className='btn btn-receipt'>Generate Receipt</button>
+                                                </Link>
+                                             </>
+                                            ) : (
+                                            <>
+                                                <Link to={`/admin/completed/procedures/${item.a_ID}`}>
+                                                    <button className='btn btn-view'>Payment</button>
+                                                </Link>
+                                                <Link to={`/admin/completed/receipt/${item.a_ID}`}>
+                                                    <button className='btn btn-receipt'>Generate Receipt</button>
+                                                </Link>
+                                            </>
+                                        
+                                        )}
+                                            
                                         </>
                                         ) : (
                                         <>
                                             <Link to={`/admin/completed/procedures/${item.a_ID}`}>
                                                 <button className='btn btn-view'>Payment</button>
                                             </Link>
-                                            <button className='btn btn-delete' onClick={() => deleteAppointment(item.a_ID)}>Delete</button>
+                                           
                                         </>
-                                        )}  
+                                        )}   
                                     </td>
                                 </tr>
                                 

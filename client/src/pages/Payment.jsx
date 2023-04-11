@@ -104,7 +104,7 @@ const Payment = () => {
       let paymentStatus = data1.b_paymentStatus
       if(paymentStatus === "Not-Paid" && p_balance === 0) paymentStatus = "Fully-Paid" 
       console.log(paymentStatus)
-      if(paymentStatus === "Not-Paid" && p_balance !== 0) paymentStatus = "EMI"
+      if(paymentStatus === "Not-Paid" && p_balance !== 0) paymentStatus = "Partly-Paid"
       console.log(paymentStatus)
       let b_paymentStatus = paymentStatus
 
