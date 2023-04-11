@@ -4,10 +4,12 @@ import axios from 'axios';
 import AdminNavbar from './AdminNavbar';
 import '../css/Home.css';
 import CompletedCancelledPaid from './CompletedCancelledPaid';
+import BillTable from './BillTable';
 
 
 const ShowDetails = () => {
     const [data, setData] = useState([]);
+    const [userID, setUserID] = useState([]);
     const [proceduresData, setProcedures] = useState([]);
     const [sumData, setSumData] = useState([]);
     const [searchValue, setSearchValue] = useState('');
@@ -19,8 +21,20 @@ const ShowDetails = () => {
     }
 
 
+
     useEffect(()=>{
         loadData();
+    }, [id])
+
+    const loadData1 = async () =>{
+        const response = await axios.get(`http://localhost:5000/admin/appointment/get/${id}`);
+        setUserID(response.data[0]);  
+    }
+
+
+
+    useEffect(()=>{
+        loadData1();
     }, [id])
 
     const loadProcedures = async () =>{
@@ -32,7 +46,7 @@ const ShowDetails = () => {
         loadProcedures();   
     }, [id])
 
-    console.log(proceduresData)
+
 
     const loadSum = async () =>{
         const response = await axios.get(`http://localhost:5000/admin/appointment/procedure/sum/${id}`);
@@ -51,14 +65,11 @@ const ShowDetails = () => {
             </header>
             <body className='pending_body'>
             <div className='flex--links'> 
-                <Link to={`/admin/completed`}>
+                <Link to={`/admin/user/appointment-history/${userID.patientID}`}>
                         <button className='back__procedures'><span>Back</span></button>
                 </Link>
-                <Link to={`/admin/completed/payment/${id}`}>
-                        <button className='back__procedures'>Next</button>
-                </Link>
            </div>
-                <h1 className='h1__apppointment'>Apppointment Details</h1>
+                <h1 className='h1__apppointment'>Service Details</h1>
                 <div className='pending_body-flex'>
                     <table className='styled-table'>
                         <thead>
@@ -142,6 +153,7 @@ const ShowDetails = () => {
                         </tbody>
                     </table> 
                 </div>
+                <BillTable />
                 
             </body>
         </div>

@@ -100,7 +100,7 @@ const AdminPatientHistory = () => {
                                                 <Link to={`/admin/completed/receipt/${item.a_ID}`}>
                                                     <button className='btn btn-receipt'>Generate Receipt</button>
                                                 </Link>
-                                                <Link to={`/admin/completed/procedures/${item.a_ID}`}>
+                                                <Link to={`/admin/user/appointment-history/show-details/${item.a_ID}`}>
                                                     <button className='btn btn-view'>Show Details</button>
                                                 </Link>
                                              </>
@@ -112,7 +112,7 @@ const AdminPatientHistory = () => {
                                                 <Link to={`/admin/completed/receipt/${item.a_ID}`}>
                                                     <button className='btn btn-receipt'>Generate Receipt</button>
                                                 </Link>
-                                                <Link to={`/admin/completed/procedures/${item.a_ID}`}>
+                                                <Link to={`/admin/user/appointment-history/show-details/${item.a_ID}`}>
                                                     <button className='btn btn-view'>Show Details</button>
                                                 </Link>
                                             </>
@@ -122,7 +122,7 @@ const AdminPatientHistory = () => {
                                         </>
                                         ) : (
                                         <>
-                                            <Link to={`/admin/completed/procedures/${item.a_ID}`}>
+                                            <Link to={`/admin/completed/show-details/${item.a_ID}`}>
                                                 <button className='btn btn-view'>Show Details</button>
                                             </Link>
                                            

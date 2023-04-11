@@ -58,7 +58,7 @@ const CompletedDetails = () => {
                         <button className='back__procedures'>Next</button>
                 </Link>
            </div>
-                <h1 className='h1__apppointment'>Apppointment Details</h1>
+                <h1 className='h1__apppointment'>Service Details</h1>
                 <div className='pending_body-flex'>
                     <table className='styled-table'>
                         <thead>
