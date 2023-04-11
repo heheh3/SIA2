@@ -12,7 +12,7 @@ export const payment_get = (req, res) =>{
 
 export const payment_getOne = (req, res) =>{
     const {a_ID} = req.params;
-    const sqlGet = 'SELECT * FROM payment_db WHERE service_ID = ?';
+    const sqlGet = 'SELECT * FROM payment_db WHERE service_ID = ? ORDER BY p_balance ASC';
 
     db.query(sqlGet, a_ID, (error, result)=>{
         res.send(result);

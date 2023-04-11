@@ -148,7 +148,7 @@ const ShowDetails = () => {
                                 )})}
                                   <tr>
                                     <td colSpan="4" style={{textAlign:"right", fontWeight: "bold"}}>Total Amount: </td>  
-                                    <td colSpan="1" style={{textAlign:"center", fontWeight: "bold"}}>{sumData.totalAmount}</td>  
+                                    <td colSpan="1" style={{textAlign:"center", fontWeight: "bold"}}>PHP {sumData.totalAmount}</td>  
                                 </tr>      
                         </tbody>
                     </table> 

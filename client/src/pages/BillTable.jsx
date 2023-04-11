@@ -6,27 +6,17 @@ import '../css/Home.css';
 
 const BillTable = () => {
     const [data, setData] = useState([]);
-    const [data1, setData1] = useState([]);
-
     const {id} = useParams();
 
     const loadData = async () =>{
-        const response = await axios.get(`http://localhost:5000/admin/appointment/get/${id}`);
-        setData1(response.data[0]);  
+        const response = await axios.get(`http://localhost:5000/admin/payment/getOne/${id}`);
+        setData(response.data);  
     }
 
     useEffect(()=>{
         loadData();
     }, [id])
 
-    const LoadingData = async () =>{
-        const response = await axios.get(`http://localhost:5000/admin/completedCancelled/get/${data1.user_id}/${data1.a_ID}`);
-        setData(response.data);  
-    }
-
-    useEffect(()=>{
-        LoadingData();
-    }, [data1.user_id, data1.a_ID])
 
     return (
         <div>
@@ -36,33 +26,30 @@ const BillTable = () => {
                             <thead>
                                 <tr>
                                     <th style={{textAlign: "center"}}>No.</th>
-                                    <th style={{textAlign: "center"}}>Service ID</th>
-                                    <th style={{textAlign: "center"}}>Date</th>
-                                    <th style={{textAlign: "center"}}>Time</th>
-                                    <th style={{textAlign: "center"}}>Procedure</th>
-                                    <th style={{textAlign: "center"}}>Note</th>
-                                    <th style={{textAlign: "center"}}>Status</th>
-                                    <th style={{textAlign: "center"}}>Fee</th>
+                                    <th style={{textAlign: "center"}}>Invoice ID.</th>
+                                    <th style={{textAlign: "center"}}>Payment Logs</th>
+                                    <th style={{textAlign: "center"}}>Payment Type</th>
+                                    <th style={{textAlign: "center"}}>Total Bill</th>
+                                    <th style={{textAlign: "center"}}>Paid Amount</th>
+                                    <th style={{textAlign: "center"}}>Change</th>
+                                    <th style={{textAlign: "center"}}>Balance</th>
+          
                                
                                 </tr>
                             </thead>
                             <tbody>
                                 {data.map((item, index)=>{
                                     return(
-                                        <tr key={item.a_ID}>
+                                        <tr key={item.invoice_ID}>
                                             <th scope='row'>{index+1}</th>
-                                            <td>{item.a_ID}</td>
-                                            <td>{item.b_date}</td>
-                                            <td>{item.b_time}</td>
-                                            <td>{item.b_procedure}</td>
-                                            <td>{item.b_note}</td>
-                                            <td><span  style={
-                                            {backgroundColor: item.b_status === "In Progress" ? 'orange' : '' ||   item.b_status === "R-In Progress" ? 'violet': '' ||
-                                                    item.b_status === "Cancelled" ? 'red': '' ||  item.b_status === "Rescheduled" ? 'violet': '' ||  
-                                                    item.b_status === "Completed" ? 'green': '' || item.b_status === "Walk-In" ? 'gray': ''|| item.b_status === "R-Completed" ? 'lightgreen': '', padding: '5px 10px', color: 'white', borderRadius: '10px', fontSize: '0.8rem', letterSpacing: "1.5px",}
-                                            }>{item.b_status}</span>
-                                            </td>
-                                            <td>{item.procedFee}</td>
+                                            
+                                            <td>{item.invoice_ID}</td>
+                                            <td>{item.p_date}</td>
+                                            <td>{item.p_paymentType}</td>
+                                            <td>PHP {item.p_totalPayment}</td>   
+                                            <td>PHP {item.p_paidAmount}</td>
+                                            <td>PHP {item.p_change}</td>
+                                            <td>PHP {item.p_balance}</td>
                                         
                                         </tr>
                                     )})}
