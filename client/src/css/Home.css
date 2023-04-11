@@ -51,13 +51,13 @@ body{
 }
 
 .styled-table1 tbody tr{
-    border-bottom: 1px solid #dddddd;
+    border-bottom: 2px solid #dddddd;
 }
 
 
 
 .styled-table1 tbody tr:last-of-type{
-    border-bottom: 2px solid var(--blue-dark-teal);
+    border-bottom: 3px solid var(--blue-dark-teal);
 }
 
 

@@ -9,7 +9,6 @@ import AdminProfileNavbar from './AdminProfileNavbar';
 
 const AdminPatientHistory = () => {
     const [data, setData] = useState([]);
-    const [completed, setCompleted] = useState([]);
     const [searchValue, setSearchValue] = useState('');
     const { id } = useParams();
 
@@ -92,7 +91,7 @@ const AdminPatientHistory = () => {
                                         }>{item.b_paymentStatus}</span>
                                     </td>
                                     <td>{item.b_update}</td>
-                                    <td>
+                                    <td style={{width: '12%'}}>
                                
                                      {item.b_paymentStatus === 'Fully-Paid' || item.b_paymentStatus === 'Partly-Paid'  ? (
                                         <>
@@ -100,6 +99,9 @@ const AdminPatientHistory = () => {
                                              <>
                                                 <Link to={`/admin/completed/receipt/${item.a_ID}`}>
                                                     <button className='btn btn-receipt'>Generate Receipt</button>
+                                                </Link>
+                                                <Link to={`/admin/completed/procedures/${item.a_ID}`}>
+                                                    <button className='btn btn-view'>Show Details</button>
                                                 </Link>
                                              </>
                                             ) : (
