@@ -9,17 +9,20 @@ import AdminProfileNavbar from './AdminProfileNavbar';
 
 const AdminPatientHistory = () => {
     const [data, setData] = useState([]);
+    const [completed, setCompleted] = useState([]);
     const [searchValue, setSearchValue] = useState('');
     const { id } = useParams();
 
 
     const loadData = async () =>{
-        const response = await axios.get(`http://localhost:5000/appointment/completed/get/${id}`);
+        const response = await axios.get(`http://localhost:5000/appointment/fully-completed/get/${id}`);
         setData(response.data);  
     }
     useEffect(()=>{
         loadData();
     }, [id])
+
+
 
 
   return (

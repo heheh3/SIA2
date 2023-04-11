@@ -130,6 +130,15 @@ export const appointment_getCompleted = (req, res) =>{
     });
 }
 
+export const appointment_getFullyCompleted = (req, res) =>{
+    const { user_id } = req.params;
+    const sqlGet = "SELECT * FROM booking_db as b JOIN users_db as u ON b.patientId = u.user_id WHERE (b_status = 'Completed' OR b_status = 'R-Completed') AND (b_paymentStatus = 'Fully-Paid' or b_paymentStatus = 'Partly-Paid') AND user_id = ? ORDER BY STR_TO_DATE(b_date,'%a, %b %d, %Y') ASC , STR_TO_DATE(b_time, '%h:%i%p') ASC";
+    db.query(sqlGet ,user_id,(error, result)=>{
+        res.send(result);
+    });
+}
+
+
 export const appointment_getCompletedCancelled = (req, res) =>{
     const {user_id, a_ID}= req.params;
     const sqlGet = "SELECT * FROM booking_db as b JOIN users_db as u ON b.patientId = u.user_id WHERE ((b.b_status = 'Cancelled' OR b.b_status = 'R-Completed') AND b.b_paymentStatus = 'Not-Paid' OR b.b_paymentStatus = 'Partly-Paid') AND u.user_id = ? AND a_ID BETWEEN IFNULL((SELECT a_ID + 1 FROM booking_db as b JOIN users_db as u ON b.patientId = u.user_id WHERE (b.b_status = 'R-Completed' OR b.b_status = 'Completed') AND b.b_paymentStatus = 'Fully-Paid' AND u.user_id = ? AND a_ID < ? ORDER BY a_ID DESC LIMIT 1), 0) AND ?"

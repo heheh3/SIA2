@@ -10,6 +10,7 @@ import
         appointment_getDateTime,
         appointment_getPending,
         appointment_getCompletedHistory,
+        appointment_getFullyCompleted,
         appointment_getAppointmentCancel,
         appointment_getCompletedCancelled,
         appointment_addProcedures,
@@ -36,6 +37,7 @@ router.put("/admin/appointment/update/:a_ID", appointment_updateUser);
 router.get("/admin/appointment/cancelled/get/:user_id", appointment_getAppointmentCancel);
 
 router.get("/appointment/completed/get", appointment_getCompleted);
+router.get("/appointment/fully-completed/get/:user_id", appointment_getFullyCompleted);
 router.get("/admin/completedCancelled/get/:user_id/:a_ID", appointment_getCompletedCancelled);
 router.get("/admin/completedCancelled/sum/:user_id/:a_ID", appointment_CancelledSum);
 
