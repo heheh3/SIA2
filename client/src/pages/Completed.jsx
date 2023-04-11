@@ -128,7 +128,7 @@ const Completed = () => {
                                              </>
                                             ) : (
                                             <>
-                                                <Link to={`/admin/completed/procedures/${item.a_ID}`}>
+                                                <Link to={`/admin/completed/ff-payment/${item.a_ID}`}>
                                                     <button className='btn btn-view'>Payment</button>
                                                 </Link>
                                                 <Link to={`/admin/completed/receipt/${item.a_ID}`}>

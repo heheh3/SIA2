@@ -1,5 +1,26 @@
 import { db } from "../connection.js";
 
+
+export const payment_get = (req, res) =>{
+
+    const sqlGet = 'SELECT * FROM payment_db';
+
+    db.query(sqlGet, (error, result)=>{
+        res.send(result);
+    });
+}
+
+export const payment_getOne = (req, res) =>{
+    const {a_ID} = req.params;
+    const sqlGet = 'SELECT * FROM payment_db WHERE service_ID = ?';
+
+    db.query(sqlGet, a_ID, (error, result)=>{
+        res.send(result);
+    });
+}
+
+
+
 export const payment_post = (req, res) =>{
     const { a_ID } = req.params;
     const service_ID = a_ID;

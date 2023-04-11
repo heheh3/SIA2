@@ -14,7 +14,7 @@ const AdminProfileNavbar = () => {
                 <ul>
                     <li className='ProfileNavbar__list'><NavLink className='PNList' to={`/admin/user/profile-settings/${id}`}>PROFILE SETTINGS</NavLink></li>
                     <li className='ProfileNavbar__list'><NavLink className='PNList' to={`/admin/user/medical-history/${id}`}>MEDICAL HISTORY</NavLink></li>
-                    <li className='ProfileNavbar__list'><NavLink className='PNList' to={`/admin/user/appointment-history/${id}`}>APPOINTMENT HISTORY</NavLink></li>
+                    <li className='ProfileNavbar__list'><NavLink className='PNList' to={`/admin/user/appointment-history/${id}`}>SERVICE HISTORY</NavLink></li>
                 </ul>
             </nav> 
         </div>
