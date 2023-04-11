@@ -543,3 +543,7 @@ table.styled-table input:focus {
     display: flex;
     justify-content: space-between;
 }
+
+.first-child {
+   background-color: green;
+}

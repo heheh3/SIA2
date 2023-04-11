@@ -42,7 +42,6 @@ const BillTable = () => {
                                     return(
                                         <tr key={item.invoice_ID}>
                                             <th scope='row'>{index+1}</th>
-                                            
                                             <td>{item.invoice_ID}</td>
                                             <td>{item.p_date}</td>
                                             <td>{item.p_paymentType}</td>
