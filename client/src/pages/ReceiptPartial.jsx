@@ -114,7 +114,7 @@ const Receipt2 = () => {
                     <th style={{fontSize: "14px"}}>Procedure</th>
                     <th style={{fontSize: "14px"}}>Appointment Date</th>
                     <th style={{fontSize: "14px"}}>Appointment Time</th>
-                    <th style={{fontSize: "14px"}}>Price</th>
+                    <th style={{fontSize: "14px"}}>Fee</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -132,8 +132,6 @@ const Receipt2 = () => {
 
                 <div className="total-info">
                 <div className='payment__vflex'>
-                    <div className='payment__flex-mr'>Total Procedural Fee:</div>
-                    <div className='payment__flex-mr'>Cancellation/Reschedule Fee:</div>
                     <div className='payment__flex-mr'>Remaining Balance:</div>
                     <div className='payment__flex-mr'>Amount paid:</div>
                     <div className='payment__flex-mr'>Change:</div>
@@ -141,8 +139,6 @@ const Receipt2 = () => {
                 </div>
 
                 <div className='payment__vflex'>
-                    <p> {data.p_totalProd} </p>
-                    <p> {data.p_addFee} </p>
                     <p> PHP {data.p_totalPayment} </p>
                     <p>PHP {data.p_paidAmount} </p>
                     <p>PHP {data.p_change} </p>

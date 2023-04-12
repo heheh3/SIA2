@@ -13,6 +13,7 @@ import {toast} from "react-toastify";
 const initialState = {
   p_paymentType: "",
   p_paidAmount: 0,
+  p_status: ''
 };
 
 const initialState1 = {
@@ -35,7 +36,7 @@ const PaymentPartly = () => {
     const [state1, setState1] = useState(initialState1);
     const {b_date, b_time, b_procedure, b_note, b_status, b_paymentStatus, procedFee, b_update} = state1;
     const [invoice_ID, setInvoice_ID] = useState(0);
-    const {p_paymentType, p_paidAmount} = state;
+    const {p_paymentType, p_paidAmount, p_status} = state;
     const [sumData, setSumData] = useState([]);
     const dateToday = format(new Date(), 'EEE, MMM dd, yyyy h:mm aa');
     const navigate = useNavigate();
@@ -111,22 +112,30 @@ const PaymentPartly = () => {
       if(p_balance < 0) p_balance = 0
       if(p_change < 0) p_change = 0
       let paymentStatus = data1.b_paymentStatus
-      if(paymentStatus === "Partly-Paid" && p_balance === 0) paymentStatus = "Fully-Paid" 
-      console.log(paymentStatus)
-      if(paymentStatus === "Partly-Paid" && p_balance !== 0) paymentStatus = "Partly-Paid"
-      console.log(paymentStatus)
+      let p_stat = payment.p_status
+      if(paymentStatus === "Partly-Paid" && p_balance === 0){
+        paymentStatus = "Fully-Paid" 
+        p_stat = 'Full';
+      }
+      
+      if(paymentStatus === "Partly-Paid" && p_balance !== 0) {
+        paymentStatus = "Partly-Paid"  
+        p_stat = 'Partly';
+      }
       let b_paymentStatus = paymentStatus
+      let p_status = p_stat
 
-      if (!p_paidAmount || !p_paidAmount){
+      if (!p_paymentType || !p_paidAmount){
       
   
           toast.error("Please provide value into each input field");
-          // toast.error(dateToday)
-          // toast.error(paymentStatus)
-          // toast.error(p_paymentType)
-          // toast.error(p_paidAmount)
-          // toast.error(p_balance)
-          // toast.error(p_change)
+          toast.error(p_status)
+          toast.error(paymentStatus)
+          toast.error(p_paymentType)
+          toast.error(p_paidAmount)
+          toast.error(p_balance)
+          toast.error(p_change)
+
 
 
 
@@ -142,7 +151,8 @@ const PaymentPartly = () => {
             p_paymentType,
             p_paidAmount,
             p_change,
-            p_balance
+            p_balance, 
+            p_status
              
             })
 

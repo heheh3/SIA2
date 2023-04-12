@@ -33,9 +33,11 @@ export const payment_post = (req, res) =>{
     const p_paymentType = req.body.p_paymentType;
     const p_change = req.body.p_change;
     const p_balance = req.body.p_balance;
+    const p_status = req.body.p_status;
+    console.log(p_status)
 
-    const sqlInsert = "INSERT INTO payment_db (service_ID, invoice_ID, p_date, p_totalProd, p_addFee, p_totalPayment, p_paidAmount, p_paymentType,  p_change, p_balance) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    db.query(sqlInsert, [service_ID, invoice_ID, p_date, p_totalProd, p_addFee, p_totalPayment, p_paidAmount, p_paymentType, p_change, p_balance], (err, result) =>{
+    const sqlInsert = "INSERT INTO payment_db (service_ID, invoice_ID, p_date, p_totalProd, p_addFee, p_totalPayment, p_paidAmount, p_paymentType,  p_change, p_balance, p_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    db.query(sqlInsert, [service_ID, invoice_ID, p_date, p_totalProd, p_addFee, p_totalPayment, p_paidAmount, p_paymentType, p_change, p_balance, p_status], (err, result) =>{
         if (err){
             console.log(err);
         }else {
