@@ -53,7 +53,7 @@ const BillTable = () => {
                                             <td>PHP {item.p_change}</td>
                                             <td>PHP {item.p_balance}</td>
                                             <td>
-                                                <Link to={`/admin/completed/receipt/${item.service_ID}`}>
+                                                <Link to={`/admin/completed/receipt2/${item.service_ID}`}>
                                                     <button className='btn btn-receipt'>Generate Receipt</button>
                                                 </Link>
                                             </td>

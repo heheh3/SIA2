@@ -134,7 +134,7 @@ const Receipt2 = () => {
                 <div className='payment__vflex'>
                     <div className='payment__flex-mr'>Total Procedural Fee:</div>
                     <div className='payment__flex-mr'>Cancellation/Reschedule Fee:</div>
-                    <div className='payment__flex-mr'>Total:</div>
+                    <div className='payment__flex-mr'>Remaining Balance:</div>
                     <div className='payment__flex-mr'>Amount paid:</div>
                     <div className='payment__flex-mr'>Change:</div>
                     <div className='payment__flex-mr'> Balance:</div>
