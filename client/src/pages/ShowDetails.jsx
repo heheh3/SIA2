@@ -142,7 +142,7 @@ const ShowDetails = () => {
                                         <td>{item.b_procedure}</td>
                                         <td>{item.b_note}</td>
                                         <td>{item.toothNo}</td>
-                                        <td>{item.procedFee}</td>
+                                        <td>PHP {item.procedFee}</td>
                                       
                                     </tr>
                                 )})}
