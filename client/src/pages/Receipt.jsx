@@ -26,6 +26,7 @@ const Receipt = () => {
       }, [id]);
 
       
+    console.log(data.data)
 
     const loadAppointment = async () =>{
         const response = await axios.get(`http://localhost:5000/admin/appointment/get/${id}`);
