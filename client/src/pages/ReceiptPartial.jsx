@@ -29,15 +29,12 @@ const Receipt2 = () => {
     }, [id])
 
 
+
+
     const loadData = async () => {
-        try {
-            const response = await axios.get(`http://localhost:5000/admin/payment/getOne/${id}`);
-            const highestIndex = response.data.length - 1;
-            const lastPayment = response.data[highestIndex];
-            setData(lastPayment);
-        } catch (error) {
-            console.error(error);
-        }
+          const response = await axios.get(`http://localhost:5000/admin/payment/getOne/${id}`);
+        setData(response.data[0]);
+      
       };
     
       useEffect(() => {
@@ -46,7 +43,7 @@ const Receipt2 = () => {
 
     const loadAppointment = async () =>{
         const response = await axios.get(`http://localhost:5000/admin/appointment/get/${id}`);
-        setAppointmentData(response.data);  
+        setAppointmentData(response.data[0]);  
     }
 
     useEffect(()=>{
@@ -69,10 +66,8 @@ const Receipt2 = () => {
         window.print();
     }
 
-    console.log(data);
-    console.log(p_data);
-    console.log(a_data);
-    console.log(patientData);
+    console.log(a_data)
+
 
   return (
     <div>
@@ -106,39 +101,55 @@ const Receipt2 = () => {
                 </div>
                 <div className="bill-info-right">
                     <h3> Bill To: </h3>
-                    <p> Patient name: {patientData.p_fullname}</p>
-                    <p> Patient email: </p>
-                    <p> Patient address: </p>
+                    <p>{a_data.p_fullname}</p>
+                    <p>{a_data.p_contact}</p>
+                    <p>{a_data.p_email}</p>
+                
                 </div>
             </div>
 
             <table className='tableR'>
                 <thead>
                     <tr>
-                    <th>Procedure</th>
-                    <th>Appointment Date</th>
-                    <th>Appointment Time</th>
-                    <th>Price</th>
+                    <th style={{fontSize: "14px"}}>Procedure</th>
+                    <th style={{fontSize: "14px"}}>Appointment Date</th>
+                    <th style={{fontSize: "14px"}}>Appointment Time</th>
+                    <th style={{fontSize: "14px"}}>Price</th>
                     </tr>
                 </thead>
                 <tbody>
                     {Array.isArray(p_data) && p_data.length > 0 &&
-                    p_data.map((procedure) => (
+                    p_data.map((procedure, index) => (
                         <tr key={procedure._id}>
-                        <td>{procedure.b_procedure}</td>
-                        <td>{a_data[0].b_date}</td>
-                        <td>{a_data[0].b_time}</td>
-                        <td>PHP {procedure.procedFee}</td>
+                        <td style={{fontSize: "14px"}}>{procedure.b_procedure}</td>
+                        <td style={{fontSize: "14px"}}>{a_data.b_date}</td>
+                        <td style={{fontSize: "14px"}}>{a_data.b_time}</td>
+                        <td style={{fontSize: "14px"}}>PHP {procedure.procedFee}</td>
                         </tr>
                     ))}
                 </tbody>
                 </table>
 
-            <div className="total-info">
-                <p> Remaining Balance: PHP {data.p_totalPayment} </p>
-                <p> Amount paid: PHP {data.p_paidAmount} </p>
-                <p> Change: PHP {data.p_change} </p>
-                <p> BALANCE: PHP {(Number(data.p_totalPayment)  - Number(data.p_paidAmount)).toFixed(2)} </p>
+                <div className="total-info">
+                <div className='payment__vflex'>
+                    <div className='payment__flex-mr'>Total Procedural Fee:</div>
+                    <div className='payment__flex-mr'>Cancellation/Reschedule Fee:</div>
+                    <div className='payment__flex-mr'>Total:</div>
+                    <div className='payment__flex-mr'>Amount paid:</div>
+                    <div className='payment__flex-mr'>Change:</div>
+                    <div className='payment__flex-mr'> Balance:</div>
+                </div>
+
+                <div className='payment__vflex'>
+                    <p> {data.p_totalProd} </p>
+                    <p> {data.p_addFee} </p>
+                    <p> PHP {data.p_totalPayment} </p>
+                    <p>PHP {data.p_paidAmount} </p>
+                    <p>PHP {data.p_change} </p>
+                    <p className=''>PHP {data.p_balance} </p>
+                </div>
+
+                        
             </div>
 
 

@@ -20,8 +20,8 @@
 }
   
   .imgR{
-    width:200px;
-    height:200px;
+    width:150px;
+    height:150px;
     margin-left: -350px;
   }
   
@@ -48,17 +48,22 @@
   
   .bill-info-left{
     text-align: left;
+    width: 48%;
+    line-height: 25px;
   }
   
   .bill-info-right{
+    width: 48%;
     text-align: right;
+    line-height: 25px;
   }
-  
+
   .tableR {
-    margin-top: 40px;
+    width: 100%;
+    margin-top: 30px;
     border-collapse: collapse;
     background-color: #fff;
-    padding: 10px;
+
   }
   
   .tableR thead {
@@ -71,21 +76,25 @@
   }
 
   .total-info {
-    margin-top: 40px;
-    text-align: right;
+    display: flex;
+    margin-top: 20px;
     line-height: 25px;
+    justify-content: flex-end;
   }
   
-  .total-info p:nth-of-type(4) {
+  .total-info .payment__vflex p:nth-of-type(4), .total-info .payment__vflex div:nth-of-type(4) {
+
     font-weight: bold;
   }
   
-  .total-info p:nth-of-type(5) {
+  .total-info .payment__vflex p:nth-of-type(5), .total-info .payment__vflex div:nth-of-type(5){
     font-weight: bold;
+    
   }
 
-  .total-info p:nth-of-type(7) {
+  .total-info .payment__vflex p:nth-of-type(6), .total-info .payment__vflex div:nth-of-type(6){
     font-weight: bold;
+
   }
   
   .balance-container {
@@ -104,4 +113,22 @@
   .balance-container p {
     font-weight: bold;
     margin: 0;
+  }
+
+  .payment__flex{
+    margin-left: 30%;
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .payment__vflex{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .payment__flex-mr{
+    margin-right: 40px;
   }
