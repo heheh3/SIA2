@@ -1,5 +1,5 @@
 
-.container {
+.containerR {
     position: relative;
     font-family: Arial, sans-serif;
     overflow: auto;
@@ -19,9 +19,10 @@
    
 }
   
-  img{
+  .imgR{
     width:200px;
     height:200px;
+    margin-left: -350px;
   }
   
   .header-container {

@@ -80,9 +80,9 @@ const Receipt2 = () => {
             <AdminNavbar />
         </header>
 
-        <div class="container">
+        <div class="containerR">
         
-            <img src="https://freepngimg.com/save/171638-tooth-free-download-png-hq/878x1280"></img>
+            <img className='imgR' src="https://freepngimg.com/save/171638-tooth-free-download-png-hq/878x1280"></img>
 
             <div class="header-container">
                 <h1> Dental Invoice </h1>
