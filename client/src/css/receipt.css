@@ -1,0 +1,106 @@
+
+.container {
+    position: relative;
+    font-family: Arial, sans-serif;
+    overflow: auto;
+    width: 612px;
+    height: 791px;
+    margin: 40px auto;
+    padding: 40px;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .btn-receipt2{
+    background-color: var(--blue-darker-teal);
+    color: white;
+    width: 200px;
+   
+}
+  
+  img{
+    width:200px;
+    height:200px;
+  }
+  
+  .header-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 40px;
+  }
+  
+  .header-container_p {
+    margin-top: 10px;
+    line-height: 20px;
+    text-align: left;
+    display: block;
+  }
+  
+  .bill-info{
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  
+  .bill-info-left{
+    text-align: left;
+  }
+  
+  .bill-info-right{
+    text-align: right;
+  }
+  
+  .tableR {
+    margin-top: 40px;
+    border-collapse: collapse;
+    background-color: #fff;
+    padding: 10px;
+  }
+  
+  .tableR thead {
+    background-color: #ddd;
+  }
+  
+  .tableR td, .tableR th {
+    border: 1px solid #ccc;
+    padding: 8px;
+  }
+
+  .total-info {
+    margin-top: 40px;
+    text-align: right;
+    line-height: 25px;
+  }
+  
+  .total-info p:nth-of-type(4) {
+    font-weight: bold;
+  }
+  
+  .total-info p:nth-of-type(5) {
+    font-weight: bold;
+  }
+
+  .total-info p:nth-of-type(7) {
+    font-weight: bold;
+  }
+  
+  .balance-container {
+    position: absolute;
+    text-align: right;
+    width: 250px;
+    height: 25px;
+    padding: 3px;
+    background-color: #ddd;
+    font-size: 17px;
+    bottom: 80px;;
+    right: 40px;
+  
+  }
+  
+  .balance-container p {
+    font-weight: bold;
+    margin: 0;
+  }

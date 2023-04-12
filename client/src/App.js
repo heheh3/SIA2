@@ -39,6 +39,8 @@ import Payment from './pages/Payment';
 import PaymentPartly from './pages/PaymentPartly';
 import ShowDetails from './pages/ShowDetails';
 import ShowDetailsPatient from './pages/ShowDetailsPatient';
+import Receipt from './pages/Receipt';
+import Receipt2 from './pages/ReceiptPartial';
 
 
 
@@ -70,7 +72,8 @@ function App() {
           <Route path='/admin/user/medical-history/:id' element={<AdminMedicalHistory />} />
           <Route path='/admin/user/appointment-history/:id' element={<AdminPatientHistory />} />
           <Route path='/profile/appointment-history/show-details/:id' element={<ShowDetailsPatient />} />
-
+          <Route path='/admin/completed/receipt/:id' element={<Receipt/>} />
+          <Route path='/admin/completed/receipt2/:id' element={<Receipt2 />} />
           <Route path='/admin/user/book/:id' element={<PatientBook />} />
           
           <Route path='/admin/services/procedures/add/:id' element={<ProceduresAdd />} /> 
