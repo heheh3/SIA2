@@ -19,6 +19,19 @@ export const payment_getOne = (req, res) =>{
     });
 }
 
+export const payment_getPartial = (req, res) =>{
+    const {a_ID} = req.params;
+    const {invoice_ID} = req.params;
+    const sqlGet = 'SELECT * FROM payment_db WHERE service_ID = ? AND invoice_ID = ?';
+
+    db.query(sqlGet, [a_ID, invoice_ID], (error, result)=>{
+        res.send(result);
+    });
+}
+
+
+
+
 
 
 export const payment_post = (req, res) =>{

@@ -1,10 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import {useParams, Link} from "react-router-dom";
 import AdminNavbar from './AdminNavbar'
-import { FaSearch, FaPlusCircle  } from "react-icons/fa";
 import '../css/Home.css';
 import '../css/receipt.css';
-import { toast } from 'react-toastify';
 import axios from 'axios';
 
 
@@ -32,7 +30,7 @@ const Receipt2 = () => {
 
 
     const loadData = async () => {
-          const response = await axios.get(`http://localhost:5000/admin/payment/getOne/${id}`);
+        const response = await axios.get(`http://localhost:5000/admin/payment/getOne/${id}`);
         setData(response.data[0]);
       
       };
@@ -40,6 +38,8 @@ const Receipt2 = () => {
       useEffect(() => {
         loadData();
       }, [id]);
+
+    
 
     const loadAppointment = async () =>{
         const response = await axios.get(`http://localhost:5000/admin/appointment/get/${id}`);
