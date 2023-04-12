@@ -1,5 +1,5 @@
 import React, {useState, useEffect, } from 'react';
-import { useParams} from "react-router-dom";
+import { useParams, Link} from "react-router-dom";
 import axios from 'axios';
 import '../css/Home.css';
 
@@ -7,6 +7,8 @@ import '../css/Home.css';
 const BillTable = () => {
     const [data, setData] = useState([]);
     const {id} = useParams();
+
+
 
     const loadData = async () =>{
         const response = await axios.get(`http://localhost:5000/admin/payment/getOne/${id}`);
@@ -33,6 +35,7 @@ const BillTable = () => {
                                     <th style={{textAlign: "center"}}>Paid Amount</th>
                                     <th style={{textAlign: "center"}}>Change</th>
                                     <th style={{textAlign: "center"}}>Balance</th>
+                                    <th style={{textAlign: "center"}}>Action</th>
           
                                
                                 </tr>
@@ -49,6 +52,11 @@ const BillTable = () => {
                                             <td>PHP {item.p_paidAmount}</td>
                                             <td>PHP {item.p_change}</td>
                                             <td>PHP {item.p_balance}</td>
+                                            <td>
+                                                <Link to={`/admin/completed/receipt/${item.invoice_ID}`}>
+                                                    <button className='btn btn-receipt'>Generate Receipt</button>
+                                                </Link>
+                                            </td>
                                         
                                         </tr>
                                     )})}
