@@ -129,17 +129,7 @@ const PaymentPartly = () => {
       
   
           toast.error("Please provide value into each input field");
-          // toast.error(p_status)
-          // toast.error(paymentStatus)
-          // toast.error(p_paymentType)
-          // toast.error(p_paidAmount)
-          // toast.error(p_balance)
-          // toast.error(p_change)
 
-
-
-
-     
       } else{
            axios.post(`http://localhost:5000/admin/completed/payment/${id}`, {
             invoice_ID,
