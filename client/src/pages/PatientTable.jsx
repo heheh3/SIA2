@@ -1,10 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import { FaSearch  } from "react-icons/fa";
+import { FaSearch, FaPlusCircle } from "react-icons/fa";
 import {Link} from "react-router-dom";
 import axios from 'axios';
 import AdminNavbar from './AdminNavbar';
 import '../css/Home.css';
 import { toast } from 'react-toastify';
+
+
 
 
 const PatientTable = () => {
@@ -37,9 +39,17 @@ const PatientTable = () => {
         </header>
         <body className='pending_body'>
             <div className='pending_body-flex'>
-                <div className='search__bar-container'>
-                    <input type='text' className='search__bar' value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder="Search Here..."/>
-                    <span className='search__bar-icon'><FaSearch className="bar-icon"/></span>
+            <div className='employee__header'>
+                  <div className='add__ebutton'>
+                      <Link to="/admin/user/add">
+                        <button className='add__ebutton-style'><span>REGISTER NEW PATIENT</span> <FaPlusCircle className="add-icon"/></button>
+                      </Link>
+                     
+                  </div>
+                  <div className='search__bar-container'>
+                      <input type='text' className='search__bar' value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder="Search Here..."/>
+                      <span className='search__bar-icon'><FaSearch className="bar-icon"/></span>
+                  </div>
                 </div>
                 <table className='styled-table'>
                     <thead>

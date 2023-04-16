@@ -88,7 +88,7 @@ function App() {
           <Route path='/admin/inventory/add' element={<InventoryAdd />} />
 
 
-          <Route path='/admin/walk-in' element={<Walkin />} /> 
+          <Route path='/admin/user/add' element={<Walkin />} /> 
           <Route path='/admin/services' element={<Services />} /> 
 
 

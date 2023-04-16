@@ -1,4 +1,5 @@
 import React, {useRef, useState, useEffect } from 'react';
+import {Link} from 'react-router-dom'
 import "../css/Walkin.css";
 import AdminNavbar from './AdminNavbar';
 import {faCheck, faTimes, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
@@ -151,6 +152,9 @@ const Walkin = () => {
       </header>
 
       <body className='body-walkin'>
+      <Link to="/admin/user">
+                <button className='back__ebutton-style'><span>Back</span></button>
+          </Link>
         <section className="walkin">
             <div className="walkin__card">
                 <div className="walkin__right">
