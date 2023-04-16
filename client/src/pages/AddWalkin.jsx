@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {useNavigate, useParams, Link } from "react-router-dom"
 import "../css/Appointment.css";
 import AdminNavbar from './AdminNavbar';
@@ -21,24 +21,22 @@ const initialState = {
 
 
 
-const PatientBook = () => {
+const AddWalkin = () => {
 
-    const [state, setState] = useState(initialState);
-    const {b_date, b_status, b_time, b_procedure, b_note, b_patientType} = state;
-    const [dateTime, setDateTime] = useState([])
-    const [time, setTime] = useState([])
-    const {id} = useParams();
-    const [patientID, setPatientID] = useState(id)
+  const [state, setState] = useState(initialState);    
+  const {b_date, b_status, b_time, b_procedure, b_note, b_patientType} = state;
+  const [dateTime, setDateTime] = useState([])
+  const [time, setTime] = useState([])
+  const {id} = useParams();
+  const [patientID, setPatientID] = useState(id)
+  const minDate = new Date();
+  const dateToday = format(new Date(), 'EEE, MMM dd, yyyy');
+  const timeToday = format(new Date(), 'h:mm aa');
+  minDate.setDate(minDate.getDate() + 2);
 
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
-
-    const minDate = new Date();
-    minDate.setDate(minDate.getDate() + 2);
-
-
-
-    useEffect(() => {
+  useEffect(() => {
     axios.get('http://localhost:5000/appointment/date-time')
       .then(response => {
         response.data.forEach(item => {
@@ -71,26 +69,50 @@ const PatientBook = () => {
 
   const handleSubmit = (e) =>{
     e.preventDefault();
-    if (!b_date || !b_time || !b_procedure || !patientID){
-        toast.error("Please provide value into each input field");
 
-       
+    
+    if (!b_procedure){
+      if(!b_time || !b_date)
+        toast.error("Please provide value into each input field");
+      
     } else{
-        axios.post("http://localhost:5000/appointment/post", {
+
+        if(b_patientType === "WALK-IN"){
+          axios.post("http://localhost:5000/appointment/post", {
+            patientID,
+            b_date: dateToday,
+            b_time: timeToday,
+            b_procedure,
+            b_note,
+            b_status,
+            b_patientType,
+                })
+        .then(()=>{
+            setState({patientID: null , b_date: "", b_time: "", b_procedure: "", b_note: "", b_patientType: "",   b_patientType: ""})
+            toast.success("Appointment Added Successfully");
+        }).catch((err) => toast.error(err.response.data) );
+ 
+        setTimeout(()=> navigate("/admin/appointment"), 300)
+
+        }else{
+          axios.post("http://localhost:5000/appointment/post", {
             patientID,
             b_date,
             b_time,
             b_procedure,
             b_note,
             b_status,
-            b_patientType
-        })
+            b_patientType,
+                })
         .then(()=>{
-            setState({patientID: null , b_date: "", b_time: "", b_procedure: "", b_note: "", b_patientType: ""})
+            setState({patientID: null , b_date: "", b_time: "", b_procedure: "", b_note: "", b_patientType: "",   b_patientType: ""})
             toast.success("Appointment Added Successfully");
         }).catch((err) => toast.error(err.response.data) );
  
         setTimeout(()=> navigate("/admin/appointment"), 300)
+
+        }
+      
       }
     }
 
@@ -99,6 +121,8 @@ const PatientBook = () => {
     setState({...state, [name]: value});
   
   }
+
+
 
   return (
     
@@ -113,7 +137,7 @@ const PatientBook = () => {
         </Link>  
         <main className='display--flex'>
           <div className='home appointmentCard'>
-            <h3 className='book__title'>BOOK AN APPOINTMENT</h3>
+            <h3 className='book__title'>WALK-IN</h3>
             <p>As soon as you as you contact our expert team, 
                 we will get back to you <br /> as soon as possibe! Book
                 an appointment at the comfort of your home and <br/>
@@ -135,27 +159,39 @@ const PatientBook = () => {
 
                 {b_patientType === 'WALK-IN' ? (
                 <>
-                  <div className='book__row'>
-                      <label htmlFor='date'>DATE: </label>
-                      <div className='date__container'>
-                          <DatePicker
-                              id='b_date'
-                              name='b_date'
-                              className='datepicker__style'
-                              selected={b_date}
-                              onChange={b_date => handleChange({ 
-                                  target: { value: b_date, name: 'b_date' }
-                                  
-                              })}
-                              minDate={minDate}
-                              dateFormat="MMM-dd-yyyy"
-                              filterDate={date => date.getDay() !== 0}
-                              placeholderText="Select a date"
-                              value={b_date || ""}
-                          />
+            
+                    <div className='book__row'>
+                        <label htmlFor='b_date'>DATE: </label>
+                        <input type='text' className='addWalkIN' id="b_date" name="b_date" value={dateToday || "" }  onChange={handleChange} disabled />
+                  
                     </div>
-                  </div>
 
+                    <div className='book__row'>
+                        <label htmlFor='b_time'>TIME: </label>
+                        <input type='text' className='addWalkIN' id="b_time" name="b_time" value={timeToday || "" }  onChange={handleChange} disabled />
+                  
+                    </div>
+             
+                  
+                <div className='book__row'>
+                    <label htmlFor='procedure'>PROCEDURE: </label>
+                    <select id="b_procedure" name="b_procedure"  value={b_procedure || "" }  onChange={handleChange} >
+                            <option value="" disabled selected>Select your option</option>
+                            <option value="Fillings">Fillings</option>
+                            <option value="Root Canal">Root Canal</option>
+                            <option value="Consultation">Consultation</option>
+                            <option value="Fixing Bridge">Fixing Bridge</option>
+                            <option value="Dental Implant">Dental Implant</option>
+                            <option value="Dental Crown">Dental Crown</option>
+                            <option value="X-Ray">X-Ray</option>
+                            <option value="Teeth Whitening"> Teeth Whitening</option>
+                            <option value="Dental Brace">Dental Brace</option>
+                            <option value="Tooth Extraction">Tooth Extraction</option>
+                            <option value="Scaling">Scaling</option>						
+                            <option value="Others">Others</option>
+                    </select>
+                </div>
+                  <input type="submit" className='book-button' value="Add Service" />
                   
                 
                 </> 
@@ -234,11 +270,13 @@ const PatientBook = () => {
                     <label htmlFor='note'>NOTES: </label>
                     <textarea for="note" id="b_note" name="b_note" value={b_note || "" }  onChange={handleChange} placeholder='Add some notes... (optional)' />
                 </div> 
+
+                <input type="submit" className='book-button' value="Book" />
                 </>
                      
                      )}
      
-                <input type="submit" className='book-button' value="Book" />
+         
  
             </form>
    
@@ -251,4 +289,4 @@ const PatientBook = () => {
   )
 }
 
-export default PatientBook
+export default AddWalkin

@@ -155,7 +155,7 @@ const Walkin = () => {
             <div className="walkin__card">
                 <div className="walkin__right">
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-                    <h1 className='walkin__right-title'>Register a Walk-in Patient</h1>
+                    <h1 className='walkin__right-title'>Register a New Account Patient</h1>
                     <form className="walkin-form" onSubmit={handleSubmit}>
 
                     <div className='walkin-form__row'>

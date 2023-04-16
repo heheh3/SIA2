@@ -41,6 +41,7 @@ import ShowDetails from './pages/ShowDetails';
 import ShowDetailsPatient from './pages/ShowDetailsPatient';
 import Receipt from './pages/Receipt';
 import Receipt2 from './pages/ReceiptPartial';
+import AddWalkin from './pages/AddWalkin';
 
 
 
@@ -75,6 +76,7 @@ function App() {
           <Route path='/admin/completed/receipt/:id' element={<Receipt/>} />
           <Route path='/admin/completed/receipt2/:id' element={<Receipt2 />} />
           <Route path='/admin/user/book/:id' element={<PatientBook />} />
+          <Route path='/admin/user/walkin/:id' element={<AddWalkin />} />
           
           <Route path='/admin/services/procedures/add/:id' element={<ProceduresAdd />} /> 
           <Route path='/admin/services/procedures/update/:id' element={<ProceduresUpdate />} /> 

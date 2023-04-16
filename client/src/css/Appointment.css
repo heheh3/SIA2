@@ -201,6 +201,7 @@ label{
 }
 
 input[type="text"].toothNoStyle,
+input[type="text"].addWalkIN,
 input[type="number"].procedFee, 
 select, 
 textarea{
@@ -212,6 +213,10 @@ textarea{
     border: none;
 
     color: var(--gray);
+}
+
+.addWalkIN{
+    background-color: white;
 }
 
 input[type="text"].toothNoStyle,

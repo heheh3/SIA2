@@ -110,6 +110,7 @@ const PatientBook = () => {
                     <button className='back__procedures'><span>Back</span></button>
         </Link>  
         <main className='display--flex'>
+          
           <div className='home appointmentCard'>
             <h3 className='book__title'>BOOK AN APPOINTMENT</h3>
             <p>As soon as you as you contact our expert team, 

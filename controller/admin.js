@@ -1,6 +1,7 @@
 import {parseISO, format} from 'date-fns';
 import { db } from "../connection.js";
 import moment from 'moment'
+import { typeOf } from 'react-is';
 
 export const appointment_post = (req, res) =>{
 
@@ -9,36 +10,48 @@ export const appointment_post = (req, res) =>{
     const b_time = req.body.b_time;
     const b_procedure = req.body.b_procedure;
     const b_note = req.body.b_note;
-    const b_status = "Pending";
     const b_paymentStatus = "Not-Paid";
     const procedFee = 0;
     const b_update = (new Date()).toISOString();
+    const b_patientType = req.body.b_patientType
+
+
+    console.log(b_date)
+    console.log(b_time)
+    let status
+    if (b_patientType === "WALK-IN"){
+        status = "In Progress"
+        const updated = parseISO(b_update);
+        const formattedDate1 = format(updated, 'MMM dd, yyyy h:mm aa');
 
         
-    // console.log(formattedDate)
-    // console.log(formattedDate1)
+        const sqlInsert = "INSERT INTO booking_db (patientID, b_date, b_time, b_procedure, b_note, b_status, b_paymentStatus, procedFee, b_update, b_patientType) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        db.query(sqlInsert, [patientID, b_date, b_time, b_procedure, b_note, status, b_paymentStatus, procedFee, formattedDate1, b_patientType], (err, result) =>{
+            if (err){
+                console.log(err);
+            }else {
+                res.send("Values Added")
+            }
+        });
+    } else{
+        status = "Pending"
+
+        const date = parseISO(b_date);
+        const formattedDate = format(date, 'EEE, MMM dd, yyyy');
+        const updated = parseISO(b_update);
+        const formattedDate1 = format(updated, 'MMM dd, yyyy h:mm aa');
+
+        const sqlInsert = "INSERT INTO booking_db (patientID, b_date, b_time, b_procedure, b_note, b_status, b_paymentStatus, procedFee, b_update, b_patientType) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        db.query(sqlInsert, [patientID, formattedDate, b_time, b_procedure, b_note, status, b_paymentStatus, procedFee, formattedDate1, b_patientType], (err, result) =>{
+            if (err){
+                console.log(err);
+            }else {
+                res.send("Values Added")
+            }
+        });
+    }
 
 
-    const date = parseISO(b_date);
-    const formattedDate = format(date, 'EEE, MMM dd, yyyy');
-    const updated = parseISO(b_update);
-    const formattedDate1 = format(updated, 'MMM dd, yyyy h:mm aa');
-
-
-
-       
-    console.log(formattedDate)
-    console.log(formattedDate1)
-
-
-    const sqlInsert = "INSERT INTO booking_db (patientID, b_date, b_time, b_procedure, b_note, b_status, b_paymentStatus, procedFee, b_update) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    db.query(sqlInsert, [patientID, formattedDate, b_time, b_procedure, b_note, b_status, b_paymentStatus, procedFee, formattedDate1], (err, result) =>{
-        if (err){
-            console.log(err);
-        }else {
-            res.send("Values Added")
-        }
-    });
 
 
 }
