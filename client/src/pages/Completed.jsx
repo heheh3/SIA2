@@ -122,17 +122,26 @@ const Completed = () => {
                                         <>
                                          {item.b_paymentStatus === 'Fully-Paid' ? (
                                              <>
+                                              
                                                 <Link to={`/admin/completed/receipt/${item.a_ID}`}>
                                                     <button className='btn btn-receipt'>Generate Receipt</button>
+                                                </Link>
+                                                <Link to={`/admin/user/appointment-history/show-details/${item.a_ID}`}>
+                                                    <button style={{backgroundColor: 'orange'}} className='btn btn-view'>Show Details</button>
                                                 </Link>
                                              </>
                                             ) : (
                                             <>
+                                               
                                                 <Link to={`/admin/completed/ff-payment/${item.a_ID}`}>
                                                     <button className='btn btn-view'>Payment</button>
                                                 </Link>
+                                                
                                                 <Link to={`/admin/completed/receipt2/${item.a_ID}`}>
                                                     <button className='btn btn-receipt'>Generate Receipt</button>
+                                                </Link>
+                                                <Link to={`/admin/user/appointment-history/show-details/${item.a_ID}`}>
+                                                    <button style={{backgroundColor: 'orange'}} className='btn btn-view'>Show Details</button>
                                                 </Link>
                                             </>
                                         

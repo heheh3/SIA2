@@ -92,7 +92,7 @@ const AddWalkin = () => {
             toast.success("Appointment Added Successfully");
         }).catch((err) => toast.error(err.response.data) );
  
-        setTimeout(()=> navigate("/admin/appointment"), 300)
+        setTimeout(()=> navigate("/admin/services"), 300)
 
         }else{
           axios.post("http://localhost:5000/appointment/post", {
