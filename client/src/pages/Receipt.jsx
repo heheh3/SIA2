@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {useParams, } from "react-router-dom";
+import {useParams, Link } from "react-router-dom";
 import AdminNavbar from './AdminNavbar'
 import '../css/Home.css';
 import '../css/receipt.css';
@@ -59,6 +59,9 @@ const Receipt = () => {
         <header>
             <AdminNavbar />
         </header>
+        <Link to={`/admin/completed`}>
+            <button className='back__procedures'><span>Back</span></button>
+        </Link>
 
         <div class="containerR">
         

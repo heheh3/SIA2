@@ -74,8 +74,11 @@ const Receipt2 = () => {
         <header>
             <AdminNavbar />
         </header>
-
+        <Link to={`/admin/completed`}>
+            <button className='back__procedures'><span>Back</span></button>
+        </Link>
         <div class="containerR">
+            
         
             <img className='imgR' src="https://freepngimg.com/save/171638-tooth-free-download-png-hq/878x1280"></img>
 
