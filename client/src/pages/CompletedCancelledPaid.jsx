@@ -7,6 +7,8 @@ import '../css/Home.css';
 const CompletedCancelledPaid = () => {
     const [data, setData] = useState([]);
     const [data1, setData1] = useState([]);
+    const [sumCancel, setSumCancel] = useState([]);
+
 
     const {id} = useParams();
 
@@ -27,6 +29,16 @@ const CompletedCancelledPaid = () => {
     useEffect(()=>{
         LoadingData();
     }, [data1.user_id, data1.a_ID])
+
+    const cancelledSum = async () =>{
+        const response = await axios.get(`http://localhost:5000/admin/completedCancelled/sum/${data1.user_id}/${data1.a_ID}`);
+        setSumCancel(response.data[0]);  
+      }
+  
+    useEffect(()=>{
+        cancelledSum();
+    }, [data1.user_id, data1.a_ID])
+
 
     return (
         <div>
@@ -63,9 +75,16 @@ const CompletedCancelledPaid = () => {
                                             }>{item.b_status}</span>
                                             </td>
                                             <td>PHP {item.procedFee}</td>
+                               
                                         
                                         </tr>
+                                        
+                                        
                                     )})}
+                                    <tr>
+                                        <td colSpan="7" style={{textAlign:"right", fontWeight: "bold"}}>Total Cancellation/Rescheduling Fee: </td>  
+                                        <td colSpan="1" style={{textAlign:"center", fontWeight: "bold"}}>PHP {sumCancel.totalAmount}</td>  
+                                    </tr>     
                             </tbody>
                         </table> 
                     </div>
