@@ -29,9 +29,9 @@ const Appointment = () => {
   const [patientID, setPatientID] = useState(currentUser.user_id);
   const [state, setState] = useState(initialState);
   const { b_date, b_status, b_time, b_procedure, b_note, b_update, b_patientType} = state;
-  const [taken, setTaken] = useState(false)
   const [dateTime, setDateTime] = useState([])
   const [time, setTime] = useState([])
+
 
 
   
@@ -40,6 +40,9 @@ const Appointment = () => {
 
   const minDate = new Date();
   minDate.setDate(minDate.getDate() + 2);
+
+
+
 
 
   useEffect(() => {

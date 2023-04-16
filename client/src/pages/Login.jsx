@@ -27,7 +27,7 @@ const Login = () => {
         e.preventDefault();
         try {
           await login(inputs);
-            if(inputs.p_username === "admin"){
+            if(inputs.p_username === "admin" || inputs.p_username === "Admin"){
               setTimeout(()=> navigate("/admin/appointment"), 500)
             } else{
               setTimeout(()=> navigate("/appointment/"), 500)
