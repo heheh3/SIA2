@@ -124,7 +124,7 @@ const Completed = () => {
                                              <>
                                               
                                                 <Link to={`/admin/completed/receipt/${item.a_ID}`}>
-                                                    <button className='btn btn-receipt'>Generate Receipt</button>
+                                                    <button className='btn btn-receipt'>Receipt</button>
                                                 </Link>
                                                 <Link to={`/admin/user/appointment-history/show-details/${item.a_ID}`}>
                                                     <button style={{backgroundColor: 'orange'}} className='btn btn-view'>Show Details</button>
@@ -138,7 +138,7 @@ const Completed = () => {
                                                 </Link>
                                                 
                                                 <Link to={`/admin/completed/receipt2/${item.a_ID}`}>
-                                                    <button className='btn btn-receipt'>Generate Receipt</button>
+                                                    <button className='btn btn-receipt'>Receipt</button>
                                                 </Link>
                                                 <Link to={`/admin/user/appointment-history/show-details/${item.a_ID}`}>
                                                     <button style={{backgroundColor: 'orange'}} className='btn btn-view'>Show Details</button>

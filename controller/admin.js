@@ -180,7 +180,7 @@ export const appointment_CancelledSum = (req, res) =>{
 
 
 export const appointment_getDateTime = (req, res) =>{
-    const sqlGet = "SELECT b_date, b_time FROM booking_db";
+    const sqlGet = "SELECT b_date, b_time FROM booking_db where NOT b_status = 'Cancelled'";
     db.query(sqlGet, (error, result)=>{
         res.send(result);
     });

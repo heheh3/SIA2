@@ -17,7 +17,8 @@ const initialState = {
   b_procedure: "",
   b_note: "",
   b_status: "",
-  b_status: ""
+  b_status: "",
+  b_patientType: "BOOK"
   
 };
 
@@ -27,7 +28,7 @@ const Appointment = () => {
   const { currentUser } = useContext(AuthContext);
   const [patientID, setPatientID] = useState(currentUser.user_id);
   const [state, setState] = useState(initialState);
-  const { b_date, b_status, b_time, b_procedure, b_note, b_update} = state;
+  const { b_date, b_status, b_time, b_procedure, b_note, b_update, b_patientType} = state;
   const [taken, setTaken] = useState(false)
   const [dateTime, setDateTime] = useState([])
   const [time, setTime] = useState([])
@@ -91,14 +92,16 @@ const Appointment = () => {
             b_procedure,
             b_note,
             b_status,
-            b_update
+            b_update, 
+            b_patientType
           })
         .then(()=>{
-            setState({patientID: null , b_date: "", b_time: "", b_procedure: "", b_note: "", b_update: ""})
+            setState({patientID: null , b_date: "", b_time: "", b_procedure: "", b_note: "", b_update: "", b_patientType: ""})
             toast.success("Appointment Added Successfully");
+            setTimeout(()=> navigate("/reminder"), 300)
         }).catch((err) => toast.error(err.response.data) );
  
-        setTimeout(()=> navigate("/appointment"), 300)
+       
       }
     }
 
