@@ -137,12 +137,7 @@ const AddWalkin = () => {
         </Link>  
         <main className='display--flex'>
           <div className='home appointmentCard'>
-            <h3 className='book__title'>WALK-IN</h3>
-            <p>As soon as you as you contact our expert team, 
-                we will get back to you <br /> as soon as possibe! Book
-                an appointment at the comfort of your home and <br/>
-                we'll take care of the rest!
-            </p>
+            <h3 className='book__title'>WALK-IN TREATMENT/ BOOK</h3>
 
 
             <form onSubmit={handleSubmit} >

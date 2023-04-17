@@ -24,7 +24,7 @@ export default function AdminNavbar() {
             </ul>
             <ul>
                 <FaUserNurse className='User-Icon' />
-                <div className='username__navbar'> {currentUser.p_username} </div>
+                <div className='username__navbar'> Admin </div>
                 <Link to="/">
                     <li><button className='btn__logout'>LOGOUT</button></li>
                 </Link>

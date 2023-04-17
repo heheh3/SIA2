@@ -167,7 +167,7 @@ export const appointment_getCompletedCancelled = (req, res) =>{
 
 export const appointment_CancelledSum = (req, res) =>{
     const {user_id, a_ID}= req.params;
-    const sqlGet = "SELECT SUM(procedFee) as totalAmount FROM booking_db as b JOIN users_db as u ON b.patientId = u.user_id WHERE ((b.b_status = 'Cancelled' OR b.b_status = 'R-Completed') AND (b.b_paymentStatus = 'Not-Paid' || b.b_paymentStatus = 'Fully-Paid')) AND u.user_id = ? AND a_ID BETWEEN IFNULL((SELECT a_ID + 1 FROM booking_db as b JOIN users_db as u ON b.patientId = u.user_id WHERE (b.b_status = 'R-Completed' OR b.b_status = 'Completed') AND b.b_paymentStatus = 'Fully-Paid' AND u.user_id = ? AND a_ID < ? ORDER BY a_ID DESC LIMIT 1), 0) AND ?"
+    const sqlGet = "SELECT SUM(procedFee) as totalAmount FROM booking_db as b JOIN users_db as u ON b.patientId = u.user_id WHERE ((b.b_status = 'Cancelled' OR b.b_status = 'R-Completed') AND (b.b_paymentStatus = 'Not-Paid' OR b.b_paymentStatus = 'Fully-Paid' OR b.b_paymentStatus = 'Partly-Paid')) AND u.user_id = ? AND a_ID BETWEEN IFNULL((SELECT a_ID + 1 FROM booking_db as b JOIN users_db as u ON b.patientId = u.user_id WHERE (b.b_status = 'R-Completed' OR b.b_status = 'Completed') AND b.b_paymentStatus = 'Fully-Paid' AND u.user_id = ? AND a_ID < ? ORDER BY a_ID DESC LIMIT 1), 0) AND ?"
 
     
     db.query(sqlGet, [user_id, user_id, a_ID, a_ID] ,(error, result)=>{

@@ -132,6 +132,7 @@ const ShowDetails = () => {
                                 <th style={{textAlign: "center"}}>Note</th>
                                 <th style={{textAlign: "center"}}>Tooth Number</th>
                                 <th style={{textAlign: "center"}}>Procedure Fee</th>
+                               
                             </tr>
                         </thead>
                         <tbody>
@@ -143,6 +144,7 @@ const ShowDetails = () => {
                                         <td>{item.b_note}</td>
                                         <td>{item.toothNo}</td>
                                         <td>PHP {item.procedFee}</td>
+                                        
                                       
                                     </tr>
                                 )})}

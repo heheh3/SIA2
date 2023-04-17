@@ -42,6 +42,7 @@ import ShowDetailsPatient from './pages/ShowDetailsPatient';
 import Receipt from './pages/Receipt';
 import Receipt2 from './pages/ReceiptPartial';
 import AddWalkin from './pages/AddWalkin';
+import ShowToothChart from './pages/ShowToothChart';
 
 
 
