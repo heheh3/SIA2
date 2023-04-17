@@ -37,7 +37,7 @@ const AdminPatientHistory = () => {
             <main className='patient-settings'>
                 <div className='profileNavbar__container'>
                     <AdminProfileNavbar />
-                    <div className='profile__container'>
+                    <div className='profile__container' style={{overflow: 'scroll' }}>
                     <div className='pending_body'>
                         <div className='pending_body-flex'>
                         <div className='search__bar-container-history'>
