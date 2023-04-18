@@ -15,7 +15,7 @@ const ProfileNavbar = () => {
             <ul>
                 <li className='ProfileNavbar__list'><NavLink className='PNList' to={`/profile/profile-settings/${currentUser.user_id}`}>PROFILE SETTINGS</NavLink></li>
                 <li className='ProfileNavbar__list'><NavLink className='PNList' to={`/profile/medical-history/${currentUser.user_id}`}>MEDICAL HISTORY</NavLink></li>
-                <li className='ProfileNavbar__list'><NavLink className='PNList' to={`/profile/appointment-history/${currentUser.user_id}`}>APPOINTMENT HISTORY</NavLink></li>
+                <li className='ProfileNavbar__list'><NavLink className='PNList' to={`/profile/appointment-history/${currentUser.user_id}`}>SERVICE HISTORY</NavLink></li>
             </ul>
         </nav> 
     </div>
