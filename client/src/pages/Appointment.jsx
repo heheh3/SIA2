@@ -31,6 +31,7 @@ const Appointment = () => {
   const { b_date, b_status, b_time, b_procedure, b_note, b_update, b_patientType} = state;
   const [dateTime, setDateTime] = useState([])
   const [time, setTime] = useState([])
+  const [dateExist, setDateExist] = useState(true)
 
 
 
@@ -111,11 +112,9 @@ const Appointment = () => {
   const handleChange = (event) => {
     const {name, value} = event.target;
     setState({...state, [name]: value});
+    setDateExist(false);
+  };
 
-
-
-  
-  }
 
   return (
     
@@ -168,7 +167,8 @@ const Appointment = () => {
                   className='datepicker__style'
                   selected={b_date}
                   onChange={b_date => handleChange({ 
-                    target: { value: b_date, name: 'b_date' }
+                    target: { value: b_date, name: 'b_date' },
+                  
                     
                   })}
                   minDate={minDate}
@@ -177,8 +177,11 @@ const Appointment = () => {
                   placeholderText="Select a date"
                   value={b_date || ""}
               
+                 
+              
             
                 />
+                
                
                 </div>
            
@@ -187,7 +190,7 @@ const Appointment = () => {
 
             <div className='book__row'> 
                 <label htmlFor='time'>TIME: </label>
-                <select name="b_time" id="b_time" value={b_time || ""} onChange={handleChange} >
+                <select name="b_time" id="b_time" value={b_time || ""} onChange={handleChange} disabled={dateExist} >
                         <option value="" disabled selected>Select your option</option>
                         <option value="8:00AM" disabled={time.includes('8:00AM')} >08:00 AM</option>
                         <option value="9:00AM" disabled={time.includes('9:00AM')}>09:00 AM</option>
@@ -203,7 +206,7 @@ const Appointment = () => {
 
               <div className='book__row'>
                 <label htmlFor='procedure'>PROCEDURE: </label>
-                <select id="b_procedure" name="b_procedure"  value={b_procedure || "" }  onChange={handleChange} >
+                <select id="b_procedure" name="b_procedure"  value={b_procedure || "" }  onChange={handleChange} disabled={dateExist} >
                         <option value="" disabled selected>Select your option</option>
                         <option value="Fillings">Fillings</option>
                         <option value="Root Canal">Root Canal</option>
@@ -223,7 +226,7 @@ const Appointment = () => {
 
               <div className='book__row'>
                 <label htmlFor='note'>NOTES: </label>
-                <textarea for="note" id="b_note" name="b_note" value={b_note || "" }  onChange={handleChange} placeholder='Add some notes... (optional)' />
+                <textarea className='textarea-notes' for="note" id="b_note" name="b_note" value={b_note || "" }  onChange={handleChange} placeholder='Add some notes... (optional)'  />
  
               </div>
       
